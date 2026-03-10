@@ -21,14 +21,14 @@ export default function HomePage() {
     <>
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-brand-900 via-brand-800 to-brand-900 text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 opacity-40">
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&h=800&fit=crop')] bg-cover bg-center" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              The best vacation package deals on the internet
-              <span className="text-brand-300"> — all in one place.</span>
+              The best vacation package deals on the internet.
+              <span className="text-brand-300"> All in one place.</span>
             </h1>
             <p className="text-lg md:text-xl text-brand-100 mb-8 max-w-2xl">
               Discover all-inclusive escapes, flight + hotel bundles, cruise offers, luxury deals,
