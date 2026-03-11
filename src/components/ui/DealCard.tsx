@@ -39,7 +39,7 @@ export default function DealCard({ deal }: DealCardProps) {
         </div>
 
         {/* Content */}
-        <div className="p-5">
+        <div className="p-4 sm:p-5">
           {/* Category + Destination */}
           <div className="flex items-center gap-2 mb-2">
             <span className="text-xs font-medium text-brand-600 uppercase tracking-wide">{deal.category}</span>

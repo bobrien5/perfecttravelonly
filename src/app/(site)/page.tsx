@@ -35,57 +35,57 @@ export default async function HomePage() {
         <div className="absolute inset-0 opacity-40">
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&h=800&fit=crop')] bg-cover bg-center" />
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 md:py-28">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6">
               The best vacation package deals on the internet.
               <span className="text-brand-300"> All in one place.</span>
             </h1>
-            <p className="text-lg md:text-xl text-brand-100 mb-8 max-w-2xl">
+            <p className="text-base sm:text-lg md:text-xl text-brand-100 mb-6 sm:mb-8 max-w-2xl">
               Discover all-inclusive escapes, flight + hotel bundles, cruise offers, luxury deals,
               and limited-time vacation packages curated by our travel experts.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-row gap-3 sm:gap-4">
               <Link
                 href="/deals/all-inclusive"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-700 font-semibold rounded-xl hover:bg-brand-50 transition-colors text-lg"
+                className="inline-flex items-center justify-center px-5 sm:px-8 py-3 sm:py-4 bg-white text-brand-700 font-semibold rounded-xl hover:bg-brand-50 transition-colors text-sm sm:text-lg"
               >
                 Browse Deals
               </Link>
               <Link
                 href="/newsletter"
-                className="inline-flex items-center justify-center px-8 py-4 bg-brand-700 text-white font-semibold rounded-xl hover:bg-brand-600 transition-colors text-lg border border-brand-500"
+                className="inline-flex items-center justify-center px-5 sm:px-8 py-3 sm:py-4 bg-brand-700 text-white font-semibold rounded-xl hover:bg-brand-600 transition-colors text-sm sm:text-lg border border-brand-500"
               >
                 Get Deal Alerts
               </Link>
             </div>
           </div>
           {/* Quick stats */}
-          <div className="mt-12 flex flex-wrap gap-8">
+          <div className="mt-8 sm:mt-12 flex gap-6 sm:gap-8">
             <div>
-              <p className="text-3xl font-bold text-white">{allDeals.length * 10}+</p>
-              <p className="text-brand-200 text-sm">Active Deals</p>
+              <p className="text-2xl sm:text-3xl font-bold text-white">{allDeals.length * 10}+</p>
+              <p className="text-brand-200 text-xs sm:text-sm">Active Deals</p>
             </div>
             <div>
-              <p className="text-3xl font-bold text-white">{allDestinations.length}+</p>
-              <p className="text-brand-200 text-sm">Destinations</p>
+              <p className="text-2xl sm:text-3xl font-bold text-white">{allDestinations.length}+</p>
+              <p className="text-brand-200 text-xs sm:text-sm">Destinations</p>
             </div>
             <div>
-              <p className="text-3xl font-bold text-white">Up to 75%</p>
-              <p className="text-brand-200 text-sm">Savings</p>
+              <p className="text-2xl sm:text-3xl font-bold text-white">Up to 75%</p>
+              <p className="text-brand-200 text-xs sm:text-sm">Savings</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* How It Works */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-12 sm:py-16 bg-gray-50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8 sm:mb-12">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900">How VacationPro Works</h2>
-            <p className="text-gray-600 mt-2">Finding your dream vacation deal is simple.</p>
+            <p className="text-gray-600 mt-2 text-sm sm:text-base">Finding your dream vacation deal is simple.</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-3 gap-4 sm:gap-8 max-w-4xl mx-auto">
             {[
               {
                 step: '01',
@@ -104,11 +104,11 @@ export default async function HomePage() {
               },
             ].map((item) => (
               <div key={item.step} className="text-center">
-                <div className="w-12 h-12 rounded-full bg-brand-100 text-brand-700 font-bold flex items-center justify-center mx-auto mb-4 text-lg">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-brand-100 text-brand-700 font-bold flex items-center justify-center mx-auto mb-3 sm:mb-4 text-sm sm:text-lg">
                   {item.step}
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-600">{item.desc}</p>
+                <h3 className="text-sm sm:text-lg font-semibold text-gray-900 mb-1 sm:mb-2">{item.title}</h3>
+                <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -116,7 +116,7 @@ export default async function HomePage() {
       </section>
 
       {/* Featured Deals */}
-      <section className="py-16">
+      <section className="py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             title="Featured Deals"
@@ -124,7 +124,7 @@ export default async function HomePage() {
             viewAllHref="/deals/all-inclusive"
             viewAllText="View All Deals"
           />
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {featuredDeals.slice(0, 6).map((deal) => (
               <DealCard key={deal.id} deal={deal} />
             ))}
@@ -136,22 +136,24 @@ export default async function HomePage() {
       </section>
 
       {/* Trending Destinations */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-12 sm:py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             title="Trending Destinations"
             subtitle="The most popular vacation destinations right now."
           />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="flex gap-3 overflow-x-auto pb-4 snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 md:grid-cols-4 sm:gap-4 sm:overflow-visible sm:pb-0">
             {topDestinations.map((dest) => (
-              <DestinationCard key={dest.id} destination={dest} />
+              <div key={dest.id} className="min-w-[200px] sm:min-w-0 snap-start">
+                <DestinationCard destination={dest} />
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Categories */}
-      <section className="py-16">
+      <section className="py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             title="Browse by Category"
@@ -166,7 +168,7 @@ export default async function HomePage() {
       </section>
 
       {/* Timeshare / Preview Deals Section */}
-      <section className="py-16 bg-gradient-to-r from-amber-50 to-brand-50">
+      <section className="py-12 sm:py-16 bg-gradient-to-r from-amber-50 to-brand-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             title="Timeshare Preview Deals"
@@ -218,14 +220,14 @@ export default async function HomePage() {
       )}
 
       {/* Trust Section */}
-      <section className="py-16">
+      <section className="py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Why Travelers Trust VacationPro</h2>
-          <p className="text-gray-600 mb-12 max-w-2xl mx-auto">
+          <p className="text-gray-600 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
             We curate deals from trusted travel partners, provide transparent pricing, and always disclose
             when a deal includes affiliate links or promotional requirements.
           </p>
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
             {[
               { title: 'Curated Deals', desc: 'Every deal is reviewed by our editorial team before it\'s published.' },
               { title: 'Transparent Pricing', desc: 'We show you the real price, the original price, and exactly what\'s included.' },
