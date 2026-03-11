@@ -9,18 +9,25 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@sanity/client": "^7.17.0",
+    "@sanity/vision": "^4.22.0",
+    "groq": "^5.13.0",
     "next": "^15.5.12",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "next-sanity": "^11.6.12",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "sanity": "^4.22.0",
+    "styled-components": "^6.3.11"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
-    "@types/react": "^18.3.28",
-    "@types/react-dom": "^18.3.7",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }

@@ -4,20 +4,20 @@ import DealCard from '@/components/ui/DealCard';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import NewsletterSignup from '@/components/ui/NewsletterSignup';
 import AffiliateDisclosure from '@/components/ui/AffiliateDisclosure';
-import { getCategoryBySlug, categories } from '@/data/categories';
-import { getDealsByCategory, deals } from '@/data/deals';
+import { getCategoryBySlug, getAllCategoryParams } from '@/sanity/lib/fetch';
+import { getDealsByCategory, getRecentDeals } from '@/sanity/lib/fetch';
 
 interface Props {
   params: Promise<{ category: string }>;
 }
 
 export async function generateStaticParams() {
-  return categories.map((c) => ({ category: c.slug }));
+  return getAllCategoryParams();
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category: slug } = await params;
-  const category = getCategoryBySlug(slug);
+  const category = await getCategoryBySlug(slug);
   if (!category) return {};
   return {
     title: category.seoTitle,
@@ -28,13 +28,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CategoryPage({ params }: Props) {
   const { category: slug } = await params;
-  const category = getCategoryBySlug(slug);
+  const category = await getCategoryBySlug(slug);
   if (!category) notFound();
 
-  let categoryDeals = getDealsByCategory(slug);
-  // If no exact matches, show all deals for this page
+  let categoryDeals = await getDealsByCategory(slug);
+  // If no exact matches, show recent deals as fallback
   if (categoryDeals.length === 0) {
-    categoryDeals = deals.slice(0, 6);
+    categoryDeals = await getRecentDeals(6);
   }
 
   return (

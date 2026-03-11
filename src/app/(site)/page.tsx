@@ -6,16 +6,27 @@ import BlogCard from '@/components/ui/BlogCard';
 import NewsletterSignup from '@/components/ui/NewsletterSignup';
 import SectionHeader from '@/components/ui/SectionHeader';
 import AffiliateDisclosure from '@/components/ui/AffiliateDisclosure';
-import { getFeaturedDeals, deals } from '@/data/deals';
-import { destinations } from '@/data/destinations';
-import { categories } from '@/data/categories';
-import { blogPosts } from '@/data/blog-posts';
+import {
+  getFeaturedDeals,
+  getAllDeals,
+  getTimeshareDeals,
+} from '@/sanity/lib/fetch';
+import { getAllDestinations } from '@/sanity/lib/fetch';
+import { getAllCategories } from '@/sanity/lib/fetch';
+import { getRecentBlogPosts } from '@/sanity/lib/fetch';
 
-export default function HomePage() {
-  const featuredDeals = getFeaturedDeals();
-  const topDestinations = destinations.slice(0, 8);
-  const topCategories = categories.slice(0, 8);
-  const recentPosts = blogPosts.slice(0, 3);
+export default async function HomePage() {
+  const [featuredDeals, allDeals, allDestinations, allCategories, recentPosts, timeshareDeals] = await Promise.all([
+    getFeaturedDeals(),
+    getAllDeals(),
+    getAllDestinations(),
+    getAllCategories(),
+    getRecentBlogPosts(3),
+    getTimeshareDeals(),
+  ]);
+
+  const topDestinations = allDestinations.slice(0, 8);
+  const topCategories = allCategories.slice(0, 8);
 
   return (
     <>
@@ -52,11 +63,11 @@ export default function HomePage() {
           {/* Quick stats */}
           <div className="mt-12 flex flex-wrap gap-8">
             <div>
-              <p className="text-3xl font-bold text-white">{deals.length * 10}+</p>
+              <p className="text-3xl font-bold text-white">{allDeals.length * 10}+</p>
               <p className="text-brand-200 text-sm">Active Deals</p>
             </div>
             <div>
-              <p className="text-3xl font-bold text-white">{destinations.length}+</p>
+              <p className="text-3xl font-bold text-white">{allDestinations.length}+</p>
               <p className="text-brand-200 text-sm">Destinations</p>
             </div>
             <div>
@@ -163,12 +174,9 @@ export default function HomePage() {
             viewAllHref="/deals/timeshare"
           />
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {deals
-              .filter((d) => d.isTimeshare)
-              .slice(0, 3)
-              .map((deal) => (
-                <DealCard key={deal.id} deal={deal} />
-              ))}
+            {timeshareDeals.slice(0, 3).map((deal) => (
+              <DealCard key={deal.id} deal={deal} />
+            ))}
           </div>
           <div className="mt-6 bg-amber-50 border border-amber-200 rounded-lg p-4 max-w-2xl">
             <p className="text-sm text-amber-800">
@@ -191,21 +199,23 @@ export default function HomePage() {
       </section>
 
       {/* Blog Preview */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            title="From the Blog"
-            subtitle="Travel guides, deal tips, and destination insights from our editorial team."
-            viewAllHref="/blog"
-            viewAllText="Read the Blog"
-          />
-          <div className="grid md:grid-cols-3 gap-6">
-            {recentPosts.map((post) => (
-              <BlogCard key={post.id} post={post} />
-            ))}
+      {recentPosts.length > 0 && (
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <SectionHeader
+              title="From the Blog"
+              subtitle="Travel guides, deal tips, and destination insights from our editorial team."
+              viewAllHref="/blog"
+              viewAllText="Read the Blog"
+            />
+            <div className="grid md:grid-cols-3 gap-6">
+              {recentPosts.map((post) => (
+                <BlogCard key={post.id} post={post} />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Trust Section */}
       <section className="py-16">

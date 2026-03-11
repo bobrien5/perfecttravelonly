@@ -7,8 +7,8 @@ import TimeshareDisclosure from '@/components/ui/TimeshareDisclosure';
 import AffiliateDisclosure from '@/components/ui/AffiliateDisclosure';
 import DealCard from '@/components/ui/DealCard';
 import NewsletterSignup from '@/components/ui/NewsletterSignup';
-import { getDealBySlug, deals } from '@/data/deals';
-import { getCategoryBySlug } from '@/data/categories';
+import { getDealBySlug, getAllDealParams, getRelatedDeals } from '@/sanity/lib/fetch';
+import { getCategoryBySlug } from '@/sanity/lib/fetch';
 import { formatPrice } from '@/lib/utils';
 
 interface Props {
@@ -16,12 +16,12 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return deals.map((d) => ({ category: d.categorySlug, slug: d.slug }));
+  return getAllDealParams();
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category, slug } = await params;
-  const deal = getDealBySlug(category, slug);
+  const deal = await getDealBySlug(category, slug);
   if (!deal) return {};
   return {
     title: deal.seoTitle,
@@ -36,11 +36,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function DealPage({ params }: Props) {
   const { category: catSlug, slug } = await params;
-  const deal = getDealBySlug(catSlug, slug);
+  const deal = await getDealBySlug(catSlug, slug);
   if (!deal) notFound();
 
-  const category = getCategoryBySlug(catSlug);
-  const relatedDeals = deals.filter((d) => d.id !== deal.id && (d.categorySlug === catSlug || d.destinationSlug === deal.destinationSlug)).slice(0, 3);
+  const category = await getCategoryBySlug(catSlug);
+  const relatedDeals = await getRelatedDeals(deal.id, catSlug, deal.destinationSlug);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -134,7 +134,7 @@ export default async function DealPage({ params }: Props) {
           )}
 
           {/* FAQ */}
-          {deal.faq.length > 0 && (
+          {deal.faq && deal.faq.length > 0 && (
             <div className="mb-8">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">Frequently Asked Questions</h2>
               <FAQ items={deal.faq} />

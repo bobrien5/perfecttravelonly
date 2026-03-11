@@ -7,21 +7,26 @@ import FAQ from '@/components/ui/FAQ';
 import NewsletterSignup from '@/components/ui/NewsletterSignup';
 import AffiliateDisclosure from '@/components/ui/AffiliateDisclosure';
 import BlogCard from '@/components/ui/BlogCard';
-import { getDestinationBySlug, destinations } from '@/data/destinations';
-import { getDealsByDestination, deals } from '@/data/deals';
-import { blogPosts } from '@/data/blog-posts';
+import {
+  getDestinationBySlug,
+  getAllDestinations,
+  getAllDestinationParams,
+  getDealsByDestination,
+  getRecentDeals,
+  getRecentBlogPosts,
+} from '@/sanity/lib/fetch';
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-  return destinations.map((d) => ({ slug: d.slug }));
+  return getAllDestinationParams();
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const destination = getDestinationBySlug(slug);
+  const destination = await getDestinationBySlug(slug);
   if (!destination) return {};
   return {
     title: destination.seoTitle,
@@ -36,15 +41,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function DestinationPage({ params }: Props) {
   const { slug } = await params;
-  const destination = getDestinationBySlug(slug);
+  const destination = await getDestinationBySlug(slug);
   if (!destination) notFound();
 
-  let destDeals = getDealsByDestination(slug);
+  let destDeals = await getDealsByDestination(slug);
   if (destDeals.length === 0) {
-    destDeals = deals.slice(0, 4);
+    destDeals = await getRecentDeals(4);
   }
 
-  const relatedPosts = blogPosts.slice(0, 3);
+  const relatedPosts = await getRecentBlogPosts(3);
+  const allDestinations = await getAllDestinations();
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -101,7 +107,7 @@ export default async function DestinationPage({ params }: Props) {
       </div>
 
       {/* FAQ */}
-      {destination.faq.length > 0 && (
+      {destination.faq && destination.faq.length > 0 && (
         <div className="mt-16">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">{destination.name} Travel FAQ</h2>
           <FAQ items={destination.faq} />
@@ -109,22 +115,24 @@ export default async function DestinationPage({ params }: Props) {
       )}
 
       {/* Related Blog Posts */}
-      <div className="mt-16">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">
-          {destination.name} Travel Guides & Tips
-        </h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          {relatedPosts.map((post) => (
-            <BlogCard key={post.id} post={post} />
-          ))}
+      {relatedPosts.length > 0 && (
+        <div className="mt-16">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            {destination.name} Travel Guides & Tips
+          </h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {relatedPosts.map((post) => (
+              <BlogCard key={post.id} post={post} />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Other Destinations */}
       <div className="mt-16">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">Explore More Destinations</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {destinations
+          {allDestinations
             .filter((d) => d.slug !== slug)
             .slice(0, 4)
             .map((d) => (
