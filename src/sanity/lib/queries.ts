@@ -168,3 +168,31 @@ export const allBlogPostsQuery = groq`
 export const recentBlogPostsQuery = groq`
   *[_type == "blogPost" && (brand == "vacationpro" || !defined(brand))] | order(date desc) [0...$count] ${blogPostProjection}
 `;
+
+export const blogPostBySlugQuery = groq`
+  *[_type == "blogPost" && slug.current == $slug && (brand == "vacationpro" || !defined(brand))][0] {
+    "id": _id,
+    title,
+    "slug": slug.current,
+    excerpt,
+    image,
+    category,
+    author,
+    date,
+    readTime,
+    body,
+    bodyHtml,
+    featuredImage,
+    "blogCategory": blogCategory->{ name, "slug": slug.current },
+    "blogTags": blogTags[]->{ name, "slug": slug.current },
+    publishedAt,
+    status,
+    seoTitle,
+    metaDescription,
+    brand
+  }
+`;
+
+export const allBlogPostParamsQuery = groq`
+  *[_type == "blogPost" && (brand == "vacationpro" || !defined(brand))] { "slug": slug.current }
+`;

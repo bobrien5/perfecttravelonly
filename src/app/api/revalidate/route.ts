@@ -55,6 +55,10 @@ export async function POST(req: NextRequest) {
 
       case 'blogPost':
         revalidatePath('/');
+        revalidatePath('/blog');
+        if (body.slug?.current) {
+          revalidatePath(`/blog/${body.slug.current}`);
+        }
         break;
 
       default:

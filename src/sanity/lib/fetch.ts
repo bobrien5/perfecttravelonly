@@ -17,8 +17,10 @@ import {
   allDestinationParamsQuery,
   allBlogPostsQuery,
   recentBlogPostsQuery,
+  blogPostBySlugQuery,
+  allBlogPostParamsQuery,
 } from './queries';
-import type { Deal, Destination, Category, BlogPost } from '@/types';
+import type { Deal, Destination, Category, BlogPost, FullBlogPost } from '@/types';
 
 // Static data fallbacks (used when Sanity is not yet configured)
 import * as staticDeals from '@/data/deals';
@@ -129,4 +131,17 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
 export async function getRecentBlogPosts(count: number): Promise<BlogPost[]> {
   if (!isSanityConfigured) return staticBlogPosts.blogPosts.slice(0, count);
   return client.fetch<BlogPost[]>(recentBlogPostsQuery, { count });
+}
+
+export async function getBlogPostBySlug(slug: string): Promise<FullBlogPost | null> {
+  if (!isSanityConfigured) {
+    const post = staticBlogPosts.blogPosts.find(p => p.slug === slug);
+    return post ? { ...post, brand: 'vacationpro' } : null;
+  }
+  return client.fetch<FullBlogPost | null>(blogPostBySlugQuery, { slug });
+}
+
+export async function getAllBlogPostParams(): Promise<{ slug: string }[]> {
+  if (!isSanityConfigured) return staticBlogPosts.blogPosts.map(p => ({ slug: p.slug }));
+  return client.fetch(allBlogPostParamsQuery);
 }

@@ -79,9 +79,15 @@ export interface BlogPost {
   readTime: string;
 }
 
+export interface PortableTextBlock {
+  _type: string;
+  _key?: string;
+  [key: string]: unknown;
+}
+
 export interface FullBlogPost extends BlogPost {
   brand: 'allinclusivehq' | 'vacationpro';
-  body?: unknown[];
+  body?: PortableTextBlock[];
   bodyHtml?: string;
   featuredImageUrl?: string;
   blogCategory?: { name: string; slug: string; wpCategoryId?: number };

@@ -8,7 +8,7 @@ interface BlogCardProps {
 export default function BlogCard({ post }: BlogCardProps) {
   return (
     <article className="group bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-300">
-      <Link href={`/blog#${post.slug}`}>
+      <Link href={`/blog/${post.slug}`}>
         <div className="aspect-[16/10] overflow-hidden">
           <img
             src={post.image}
