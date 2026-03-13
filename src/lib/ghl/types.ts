@@ -53,7 +53,7 @@ export interface CreateContactInput {
   customFields?: GHLCustomField[];
 }
 
-export interface UpsertContactInput extends CreateContactInput {}
+export type UpsertContactInput = CreateContactInput;
 
 export interface SearchContactsParams {
   query?: string;
