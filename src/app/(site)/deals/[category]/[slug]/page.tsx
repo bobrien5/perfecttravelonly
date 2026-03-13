@@ -7,6 +7,7 @@ import TimeshareDisclosure from '@/components/ui/TimeshareDisclosure';
 import AffiliateDisclosure from '@/components/ui/AffiliateDisclosure';
 import DealCard from '@/components/ui/DealCard';
 import NewsletterSignup from '@/components/ui/NewsletterSignup';
+import ClaimOfferForm from '@/components/ui/ClaimOfferForm';
 import { getDealBySlug, getAllDealParams, getRelatedDeals } from '@/sanity/lib/fetch';
 import { getCategoryBySlug } from '@/sanity/lib/fetch';
 import { formatPrice } from '@/lib/utils';
@@ -165,22 +166,33 @@ export default async function DealPage({ params }: Props) {
                 </div>
               </div>
 
-              <a
-                href={deal.affiliateLink}
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                className="block w-full text-center px-6 py-4 bg-brand-600 text-white font-semibold rounded-xl hover:bg-brand-700 transition-colors text-lg mb-3"
-              >
-                {deal.ctaText}
-              </a>
-              <a
-                href={deal.affiliateLink}
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                className="block w-full text-center px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-xl hover:bg-gray-200 transition-colors"
-              >
-                Check Availability
-              </a>
+              {deal.isTimeshare ? (
+                <ClaimOfferForm
+                  dealTitle={deal.title}
+                  dealDestination={deal.destination}
+                  dealPrice={deal.price}
+                  ctaText={deal.ctaText}
+                />
+              ) : (
+                <>
+                  <a
+                    href={deal.affiliateLink}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    className="block w-full text-center px-6 py-4 bg-brand-600 text-white font-semibold rounded-xl hover:bg-brand-700 transition-colors text-lg mb-3"
+                  >
+                    {deal.ctaText}
+                  </a>
+                  <a
+                    href={deal.affiliateLink}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    className="block w-full text-center px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-xl hover:bg-gray-200 transition-colors"
+                  >
+                    Check Availability
+                  </a>
+                </>
+              )}
 
               <div className="mt-4 pt-4 border-t border-gray-100">
                 <p className="text-xs text-gray-400">via {deal.provider}</p>

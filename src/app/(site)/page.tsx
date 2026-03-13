@@ -33,7 +33,7 @@ export default async function HomePage() {
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-brand-900 via-brand-800 to-brand-900 text-white overflow-hidden">
         <div className="absolute inset-0 opacity-40">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&h=800&fit=crop')] bg-cover bg-center" />
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1920&h=800&fit=crop')] bg-cover bg-center" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 md:py-28">
           <div className="max-w-3xl">
@@ -136,7 +136,7 @@ export default async function HomePage() {
       </section>
 
       {/* Trending Destinations */}
-      <section className="py-12 sm:py-16 bg-gray-50">
+      <section className="py-12 sm:py-16 bg-gray-50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             title="Trending Destinations"
@@ -159,7 +159,7 @@ export default async function HomePage() {
             title="Browse by Category"
             subtitle="Find deals by the type of vacation you're looking for."
           />
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 gap-4 overflow-hidden">
             {topCategories.map((cat) => (
               <CategoryCard key={cat.id} category={cat} />
             ))}

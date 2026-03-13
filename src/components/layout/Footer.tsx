@@ -1,6 +1,8 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
+import { useNewsletterSubscribe } from '@/hooks/useNewsletterSubscribe';
 
 const footerLinks = {
   deals: [
@@ -37,6 +39,55 @@ const footerLinks = {
   ],
 };
 
+function FooterNewsletter() {
+  const [email, setEmail] = useState('');
+  const { status, message, subscribe } = useNewsletterSubscribe({
+    utmCampaign: 'footer_signup',
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await subscribe(email);
+  };
+
+  if (status === 'success') {
+    return (
+      <div className="text-center">
+        <p className="text-brand-400 font-medium">
+          ✓ {message}
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={handleSubmit}>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter your email"
+          required
+          disabled={status === 'loading'}
+          className="flex-1 px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-60"
+        />
+        <button
+          type="submit"
+          disabled={status === 'loading'}
+          className="px-6 py-3 bg-brand-600 text-white font-semibold rounded-lg hover:bg-brand-700 transition-colors whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed"
+        >
+          {status === 'loading' ? 'Subscribing...' : 'Subscribe Free'}
+        </button>
+      </form>
+      {status === 'error' && (
+        <p className="text-sm text-red-400 mt-2 text-center">{message}</p>
+      )}
+      <p className="text-xs text-gray-500 mt-3">No spam, ever. Unsubscribe anytime.</p>
+    </>
+  );
+}
+
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-300">
@@ -50,20 +101,7 @@ export default function Footer() {
             <p className="text-gray-400 mb-6">
               Join thousands of savvy travelers who never miss a deal.
             </p>
-            <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-              />
-              <button
-                type="submit"
-                className="px-6 py-3 bg-brand-600 text-white font-semibold rounded-lg hover:bg-brand-700 transition-colors whitespace-nowrap"
-              >
-                Subscribe Free
-              </button>
-            </form>
-            <p className="text-xs text-gray-500 mt-3">No spam, ever. Unsubscribe anytime.</p>
+            <FooterNewsletter />
           </div>
         </div>
       </div>
