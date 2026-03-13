@@ -58,7 +58,7 @@ export default async function BlogPage() {
       {/* Newsletter */}
       <NewsletterSignup
         heading="Get travel tips & deals in your inbox"
-        subheading="Join 25,000+ travelers who get our best content and deals every week."
+        subheading="Join 5,000+ travelers who get our best content and deals every week."
         utmCampaign="blog_page"
       />
     </div>

@@ -67,7 +67,7 @@ export default function AffiliateDisclosurePage() {
         <h2 className="text-xl font-semibold text-gray-900 mt-8">Questions?</h2>
         <p className="text-gray-600">
           If you have any questions about our affiliate relationships, please contact us at
-          disclosure@vacationpro.co.
+          Admin@vacationpro.co.
         </p>
       </div>
     </div>

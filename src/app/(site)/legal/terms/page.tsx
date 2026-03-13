@@ -63,7 +63,7 @@ export default function TermsPage() {
 
         <h2 className="text-xl font-semibold text-gray-900 mt-8">Contact</h2>
         <p className="text-gray-600">
-          For questions about these Terms of Use, contact us at legal@vacationpro.co.
+          For questions about these Terms of Use, contact us at Admin@vacationpro.co.
         </p>
       </div>
     </div>

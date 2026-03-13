@@ -28,15 +28,15 @@ export default function ContactPage() {
           <div className="space-y-6">
             <div>
               <h3 className="font-medium text-gray-900 mb-1">Email</h3>
-              <p className="text-gray-600">hello@vacationpro.co</p>
+              <p className="text-gray-600">Admin@vacationpro.co</p>
             </div>
             <div>
               <h3 className="font-medium text-gray-900 mb-1">Partnerships</h3>
-              <p className="text-gray-600">partners@vacationpro.co</p>
+              <p className="text-gray-600">Admin@vacationpro.co</p>
             </div>
             <div>
               <h3 className="font-medium text-gray-900 mb-1">Press & Media</h3>
-              <p className="text-gray-600">press@vacationpro.co</p>
+              <p className="text-gray-600">Admin@vacationpro.co</p>
             </div>
             <div className="bg-gray-50 rounded-xl p-6 mt-8">
               <h3 className="font-medium text-gray-900 mb-2">Response Time</h3>

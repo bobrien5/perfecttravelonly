@@ -14,7 +14,7 @@ export default function NewsletterPage() {
           Never Miss a Great Vacation Deal
         </h1>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          Join 25,000+ savvy travelers who get the best vacation deals delivered straight to their inbox.
+          Join 5,000+ savvy travelers who get the best vacation deals delivered straight to their inbox.
           Free, no spam, unsubscribe anytime.
         </p>
       </div>

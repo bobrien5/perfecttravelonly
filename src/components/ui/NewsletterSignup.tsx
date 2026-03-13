@@ -13,7 +13,7 @@ interface NewsletterSignupProps {
 export default function NewsletterSignup({
   variant = 'default',
   heading = 'Get the best vacation deals delivered to your inbox',
-  subheading = 'Join 25,000+ travelers who never miss a deal. Free, no spam, unsubscribe anytime.',
+  subheading = 'Join 5,000+ travelers who never miss a deal. Free, no spam, unsubscribe anytime.',
   utmCampaign,
 }: NewsletterSignupProps) {
   const [email, setEmail] = useState('');

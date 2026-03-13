@@ -56,7 +56,7 @@ export default function PartnerPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {[
             { stat: '50K+', label: 'Monthly Visitors' },
-            { stat: '25K+', label: 'Email Subscribers' },
+            { stat: '5K+', label: 'Email Subscribers' },
             { stat: '85%', label: 'U.S. Based' },
             { stat: '3.5min', label: 'Avg. Time on Site' },
           ].map((item) => (
@@ -82,10 +82,10 @@ export default function PartnerPage() {
             Contact Our Team
           </Link>
           <a
-            href="mailto:partners@vacationpro.co"
+            href="mailto:Admin@vacationpro.co"
             className="inline-flex items-center justify-center px-8 py-4 bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-gray-200 transition-colors"
           >
-            partners@vacationpro.co
+            Admin@vacationpro.co
           </a>
         </div>
       </div>

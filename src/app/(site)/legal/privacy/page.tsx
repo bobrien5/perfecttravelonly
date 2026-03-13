@@ -55,12 +55,12 @@ export default function PrivacyPage() {
         <p className="text-gray-600">
           You have the right to access, correct, or delete your personal data. You may unsubscribe
           from our newsletter at any time by clicking the unsubscribe link in any email. For data
-          requests, contact us at privacy@vacationpro.co.
+          requests, contact us at Admin@vacationpro.co.
         </p>
 
         <h2 className="text-xl font-semibold text-gray-900 mt-8">Contact Us</h2>
         <p className="text-gray-600">
-          If you have questions about this Privacy Policy, please contact us at privacy@vacationpro.co.
+          If you have questions about this Privacy Policy, please contact us at Admin@vacationpro.co.
         </p>
       </div>
     </div>
