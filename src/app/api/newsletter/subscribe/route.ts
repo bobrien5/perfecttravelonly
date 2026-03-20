@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
+import sgClient from '@sendgrid/client';
+import sgMail from '@sendgrid/mail';
 
-const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY;
-const BEEHIIV_PUBLICATION_ID = process.env.BEEHIIV_PUBLICATION_ID;
+const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY!;
+const FROM_EMAIL = process.env.SENDGRID_FROM_EMAIL || 'hello@vacationpro.co';
+const FROM_NAME = process.env.SENDGRID_FROM_NAME || 'VacationPro';
+
+sgClient.setApiKey(SENDGRID_API_KEY);
+sgMail.setApiKey(SENDGRID_API_KEY);
 
 interface SubscribeRequest {
   email: string;
@@ -12,12 +18,148 @@ interface SubscribeRequest {
   referringSite?: string;
 }
 
+// Add or update contact in SendGrid
+async function upsertContact(email: string, firstName?: string, utmCampaign?: string) {
+  const contactData: Record<string, unknown> = {
+    email: email.toLowerCase().trim(),
+    custom_fields: {
+      // e1_T = UTM campaign for segmentation
+      e1_T: utmCampaign || 'deal_alerts',
+      // e2_T = signup date for welcome sequence scheduling
+      e2_T: new Date().toISOString().split('T')[0],
+      // e3_T = welcome sequence step (1 = welcome sent)
+      e3_T: '1',
+    },
+  };
+
+  if (firstName) {
+    contactData.first_name = firstName;
+  }
+
+  const request = {
+    url: '/v3/marketing/contacts' as const,
+    method: 'PUT' as const,
+    body: {
+      contacts: [contactData],
+    },
+  };
+
+  await sgClient.request(request);
+}
+
+// Send welcome email (Email 1 of the sequence)
+async function sendWelcomeEmail(email: string, firstName?: string) {
+  const greeting = firstName ? `Hey ${firstName}` : 'Hey there';
+
+  const msg = {
+    to: email,
+    from: { email: FROM_EMAIL, name: FROM_NAME },
+    subject: "You're in! Here's what to expect from VacationPro 🌴",
+    html: getWelcomeEmailHtml(greeting),
+  };
+
+  await sgMail.send(msg);
+}
+
+function getWelcomeEmailHtml(greeting: string): string {
+  return `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to VacationPro</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f4f4f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f5;">
+    <tr>
+      <td align="center" style="padding:40px 16px;">
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:16px;overflow:hidden;max-width:600px;width:100%;">
+
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #0e7490 0%, #155e75 100%); padding:40px 32px;text-align:center;">
+              <h1 style="color:#ffffff;font-size:28px;margin:0 0 8px;font-weight:700;">VacationPro</h1>
+              <p style="color:#a5f3fc;font-size:14px;margin:0;">The best vacation deals on the internet</p>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding:32px;">
+              <h2 style="color:#111827;font-size:22px;margin:0 0 16px;font-weight:700;">${greeting}, welcome aboard! 🎉</h2>
+
+              <p style="color:#4b5563;font-size:16px;line-height:1.6;margin:0 0 16px;">
+                You just joined thousands of travelers who never overpay for vacation. Here's what you can expect from us:
+              </p>
+
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0;">
+                <tr>
+                  <td style="padding:12px 0;border-bottom:1px solid #f3f4f6;">
+                    <strong style="color:#0e7490;">🔔 Deal Alerts</strong>
+                    <p style="color:#6b7280;font-size:14px;margin:4px 0 0;">We'll send you the best vacation packages as soon as they drop — before they sell out.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:12px 0;border-bottom:1px solid #f3f4f6;">
+                    <strong style="color:#0e7490;">💰 Real Savings</strong>
+                    <p style="color:#6b7280;font-size:14px;margin:4px 0 0;">Every deal is vetted by our team. We show you the real price, the original price, and exactly what's included.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:12px 0;">
+                    <strong style="color:#0e7490;">📍 Curated Destinations</strong>
+                    <p style="color:#6b7280;font-size:14px;margin:4px 0 0;">From Cancun to Cabo, Punta Cana to Maui — we cover the destinations travelers love most.</p>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="color:#4b5563;font-size:16px;line-height:1.6;margin:0 0 24px;">
+                Ready to see what's available right now?
+              </p>
+
+              <!-- CTA Button -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td align="center">
+                    <a href="https://www.vacationpro.co/deals/all-inclusive" style="display:inline-block;background-color:#0e7490;color:#ffffff;font-size:16px;font-weight:600;padding:14px 32px;border-radius:10px;text-decoration:none;">
+                      Browse Today's Deals →
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="color:#9ca3af;font-size:13px;line-height:1.5;margin:24px 0 0;text-align:center;">
+                We'll never spam you. Expect 1–2 emails per week with our best finds. Unsubscribe anytime.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color:#f9fafb;padding:24px 32px;text-align:center;border-top:1px solid #e5e7eb;">
+              <p style="color:#9ca3af;font-size:12px;margin:0 0 8px;">
+                © ${new Date().getFullYear()} VacationPro · <a href="https://www.vacationpro.co" style="color:#0e7490;text-decoration:none;">vacationpro.co</a>
+              </p>
+              <p style="color:#9ca3af;font-size:12px;margin:0;">
+                <a href="<%asm_group_unsubscribe_raw_url%>" style="color:#9ca3af;text-decoration:underline;">Unsubscribe</a> · <a href="https://www.vacationpro.co/legal/privacy" style="color:#9ca3af;text-decoration:underline;">Privacy Policy</a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+}
+
 export async function POST(request: NextRequest) {
   try {
-    if (!BEEHIIV_API_KEY || !BEEHIIV_PUBLICATION_ID) {
-      console.error('Missing Beehiiv environment variables');
+    if (!SENDGRID_API_KEY) {
+      console.error('Missing SendGrid API key');
       return NextResponse.json(
-        { error: 'Newsletter service not configured' },
+        { error: 'Email service not configured' },
         { status: 500 }
       );
     }
@@ -31,58 +173,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Build custom fields array
-    const customFields: { name: string; value: string }[] = [];
-    if (body.firstName) {
-      customFields.push({ name: 'First Name', value: body.firstName });
-    }
+    // Add contact to SendGrid Marketing Contacts
+    await upsertContact(body.email, body.firstName, body.utmCampaign);
 
-    // Call Beehiiv API v2
-    const response = await fetch(
-      `https://api.beehiiv.com/v2/publications/${BEEHIIV_PUBLICATION_ID}/subscriptions`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${BEEHIIV_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: body.email.toLowerCase().trim(),
-          reactivate_existing: true,
-          send_welcome_email: true,
-          utm_source: body.utmSource || 'vacationpro',
-          utm_medium: body.utmMedium || 'website',
-          utm_campaign: body.utmCampaign || 'deal_alerts',
-          referring_site: body.referringSite || 'https://vacationpro.co',
-          custom_fields: customFields.length > 0 ? customFields : undefined,
-        }),
-      }
-    );
-
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => null);
-      console.error('Beehiiv API error:', response.status, errorData);
-
-      if (response.status === 429) {
-        return NextResponse.json(
-          { error: 'Too many requests. Please try again in a moment.' },
-          { status: 429 }
-        );
-      }
-
-      return NextResponse.json(
-        { error: 'Failed to subscribe. Please try again.' },
-        { status: response.status }
-      );
-    }
-
-    const data = await response.json();
+    // Send welcome email immediately
+    await sendWelcomeEmail(body.email, body.firstName);
 
     return NextResponse.json(
       {
         success: true,
         message: "You're subscribed! Check your inbox for a welcome email.",
-        subscriptionId: data.data?.id,
       },
       { status: 200 }
     );
