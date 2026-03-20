@@ -4,6 +4,18 @@ const FROM_EMAIL = process.env.SENDGRID_FROM_EMAIL || 'hello@vacationpro.co';
 const FROM_NAME = process.env.SENDGRID_FROM_NAME || 'VacationPro';
 const SITE_URL = 'https://www.vacationpro.co';
 const YEAR = new Date().getFullYear();
+const LOGO_URL = `${SITE_URL}/logo.svg`;
+
+// Brand colors (from globals.css)
+const BRAND = {
+  50: '#edfdf4',
+  100: '#d1fae2',
+  200: '#a6f4c8',
+  500: '#00bf63',
+  600: '#009b51',
+  700: '#007b41',
+  800: '#006135',
+};
 
 interface Deal {
   title: string;
@@ -33,8 +45,11 @@ function emailWrapper(content: string): string {
         <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:16px;overflow:hidden;max-width:600px;width:100%;">
           <!-- Header -->
           <tr>
-            <td style="background:linear-gradient(135deg,#0e7490 0%,#155e75 100%);padding:28px 32px;text-align:center;">
-              <a href="${SITE_URL}" style="color:#ffffff;font-size:24px;font-weight:700;text-decoration:none;">VacationPro</a>
+            <td style="background:linear-gradient(135deg,${BRAND[600]} 0%,${BRAND[700]} 100%);padding:24px 32px;text-align:center;">
+              <a href="${SITE_URL}" style="text-decoration:none;">
+                <img src="${LOGO_URL}" alt="VacationPro" width="44" height="44" style="display:inline-block;vertical-align:middle;margin-right:10px;border-radius:50%;background-color:#ffffff;" />
+                <span style="color:#ffffff;font-size:24px;font-weight:700;vertical-align:middle;">Vacation<span style="color:${BRAND[200]};">Pro</span></span>
+              </a>
             </td>
           </tr>
           <!-- Content -->
@@ -47,7 +62,7 @@ function emailWrapper(content: string): string {
           <tr>
             <td style="background-color:#f9fafb;padding:24px 32px;text-align:center;border-top:1px solid #e5e7eb;">
               <p style="color:#9ca3af;font-size:12px;margin:0 0 8px;">
-                © ${YEAR} VacationPro · <a href="${SITE_URL}" style="color:#0e7490;text-decoration:none;">vacationpro.co</a>
+                © ${YEAR} VacationPro · <a href="${SITE_URL}" style="color:${BRAND[600]};text-decoration:none;">vacationpro.co</a>
               </p>
               <p style="color:#9ca3af;font-size:12px;margin:0;">
                 <a href="<%asm_group_unsubscribe_raw_url%>" style="color:#9ca3af;text-decoration:underline;">Unsubscribe</a> ·
@@ -67,7 +82,7 @@ function ctaButton(text: string, href: string): string {
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0;">
     <tr>
       <td align="center">
-        <a href="${href}" style="display:inline-block;background-color:#0e7490;color:#ffffff;font-size:16px;font-weight:600;padding:14px 32px;border-radius:10px;text-decoration:none;">${text}</a>
+        <a href="${href}" style="display:inline-block;background-color:${BRAND[500]};color:#ffffff;font-size:16px;font-weight:600;padding:14px 32px;border-radius:10px;text-decoration:none;">${text}</a>
       </td>
     </tr>
   </table>`;
@@ -83,7 +98,7 @@ function dealCard(deal: Deal): string {
     </tr>
     <tr>
       <td style="padding:16px;">
-        <p style="color:#0e7490;font-size:12px;font-weight:600;text-transform:uppercase;margin:0 0 4px;">${deal.destination} · ${deal.duration}</p>
+        <p style="color:${BRAND[600]};font-size:12px;font-weight:600;text-transform:uppercase;margin:0 0 4px;">${deal.destination} · ${deal.duration}</p>
         <h3 style="color:#111827;font-size:18px;font-weight:700;margin:0 0 8px;">${deal.title}</h3>
         <p style="color:#6b7280;font-size:14px;line-height:1.5;margin:0 0 12px;">${deal.shortDescription.substring(0, 120)}...</p>
         <table role="presentation" cellpadding="0" cellspacing="0">
@@ -93,14 +108,14 @@ function dealCard(deal: Deal): string {
               <span style="color:#9ca3af;font-size:14px;text-decoration:line-through;margin-left:8px;">$${deal.originalPrice.toLocaleString()}</span>
             </td>
             <td>
-              <span style="background-color:#ecfdf5;color:#059669;font-size:12px;font-weight:600;padding:4px 10px;border-radius:20px;">Save ${deal.savingsPercent}%</span>
+              <span style="background-color:${BRAND[50]};color:${BRAND[700]};font-size:12px;font-weight:600;padding:4px 10px;border-radius:20px;">Save ${deal.savingsPercent}%</span>
             </td>
           </tr>
         </table>
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:12px;">
           <tr>
             <td>
-              <a href="${dealUrl}" style="display:inline-block;background-color:#0e7490;color:#ffffff;font-size:14px;font-weight:600;padding:10px 24px;border-radius:8px;text-decoration:none;">View Deal →</a>
+              <a href="${dealUrl}" style="display:inline-block;background-color:${BRAND[500]};color:#ffffff;font-size:14px;font-weight:600;padding:10px 24px;border-radius:8px;text-decoration:none;">View Deal →</a>
             </td>
           </tr>
         </table>
@@ -162,8 +177,8 @@ export function getEmail3Html(firstName?: string): string {
       ${destRows}
     </table>
 
-    <div style="background-color:#f0fdfa;border-radius:12px;padding:20px;margin:24px 0;text-align:center;">
-      <p style="color:#0e7490;font-size:14px;font-weight:600;margin:0 0 4px;">💬 What travelers are saying</p>
+    <div style="background-color:${BRAND[50]};border-radius:12px;padding:20px;margin:24px 0;text-align:center;">
+      <p style="color:${BRAND[700]};font-size:14px;font-weight:600;margin:0 0 4px;">💬 What travelers are saying</p>
       <p style="color:#374151;font-size:15px;font-style:italic;margin:0 0 8px;">
         "I saved over $800 on our Cancun trip just by waiting for a VacationPro deal alert. Literally the easiest way to find vacation packages."
       </p>
@@ -201,10 +216,10 @@ export function getEmail4Html(deals: Deal[], firstName?: string): string {
 
     <div style="background-color:#f9fafb;border-radius:12px;padding:20px;margin:24px 0;">
       <h4 style="color:#111827;font-size:15px;margin:0 0 8px;font-weight:700;">Quick links:</h4>
-      <p style="margin:4px 0;font-size:14px;">🌴 <a href="${SITE_URL}/deals/all-inclusive" style="color:#0e7490;text-decoration:none;">All-Inclusive Deals</a></p>
-      <p style="margin:4px 0;font-size:14px;">✈️ <a href="${SITE_URL}/deals/flight-hotel" style="color:#0e7490;text-decoration:none;">Flight + Hotel Bundles</a></p>
-      <p style="margin:4px 0;font-size:14px;">🚢 <a href="${SITE_URL}/deals/cruises" style="color:#0e7490;text-decoration:none;">Cruise Deals</a></p>
-      <p style="margin:4px 0;font-size:14px;">📖 <a href="${SITE_URL}/blog" style="color:#0e7490;text-decoration:none;">Travel Guides & Tips</a></p>
+      <p style="margin:4px 0;font-size:14px;">🌴 <a href="${SITE_URL}/deals/all-inclusive" style="color:${BRAND[600]};text-decoration:none;">All-Inclusive Deals</a></p>
+      <p style="margin:4px 0;font-size:14px;">✈️ <a href="${SITE_URL}/deals/flight-hotel" style="color:${BRAND[600]};text-decoration:none;">Flight + Hotel Bundles</a></p>
+      <p style="margin:4px 0;font-size:14px;">🚢 <a href="${SITE_URL}/deals/cruises" style="color:${BRAND[600]};text-decoration:none;">Cruise Deals</a></p>
+      <p style="margin:4px 0;font-size:14px;">📖 <a href="${SITE_URL}/blog" style="color:${BRAND[600]};text-decoration:none;">Travel Guides & Tips</a></p>
     </div>
 
     <p style="color:#6b7280;font-size:14px;line-height:1.6;margin:16px 0 0;text-align:center;">

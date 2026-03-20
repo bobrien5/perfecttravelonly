@@ -28,7 +28,7 @@ async function upsertContact(email: string, firstName?: string, utmCampaign?: st
       // e2_T = signup date for welcome sequence scheduling
       e2_T: new Date().toISOString().split('T')[0],
       // e3_T = welcome sequence step (1 = welcome sent)
-      e3_T: '1',
+      w3_T: '1',
     },
   };
 
@@ -62,6 +62,8 @@ async function sendWelcomeEmail(email: string, firstName?: string) {
 }
 
 function getWelcomeEmailHtml(greeting: string): string {
+  const SITE = 'https://www.vacationpro.co';
+  const yr = new Date().getFullYear();
   return `<!DOCTYPE html>
 <html>
 <head>
@@ -77,9 +79,11 @@ function getWelcomeEmailHtml(greeting: string): string {
 
           <!-- Header -->
           <tr>
-            <td style="background: linear-gradient(135deg, #0e7490 0%, #155e75 100%); padding:40px 32px;text-align:center;">
-              <h1 style="color:#ffffff;font-size:28px;margin:0 0 8px;font-weight:700;">VacationPro</h1>
-              <p style="color:#a5f3fc;font-size:14px;margin:0;">The best vacation deals on the internet</p>
+            <td style="background:linear-gradient(135deg,#009b51 0%,#007b41 100%);padding:24px 32px;text-align:center;">
+              <a href="${SITE}" style="text-decoration:none;">
+                <img src="${SITE}/logo.svg" alt="VacationPro" width="44" height="44" style="display:inline-block;vertical-align:middle;margin-right:10px;border-radius:50%;background-color:#ffffff;" />
+                <span style="color:#ffffff;font-size:24px;font-weight:700;vertical-align:middle;">Vacation<span style="color:#a6f4c8;">Pro</span></span>
+              </a>
             </td>
           </tr>
 
@@ -95,19 +99,19 @@ function getWelcomeEmailHtml(greeting: string): string {
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0;">
                 <tr>
                   <td style="padding:12px 0;border-bottom:1px solid #f3f4f6;">
-                    <strong style="color:#0e7490;">🔔 Deal Alerts</strong>
+                    <strong style="color:#009b51;">🔔 Deal Alerts</strong>
                     <p style="color:#6b7280;font-size:14px;margin:4px 0 0;">We'll send you the best vacation packages as soon as they drop — before they sell out.</p>
                   </td>
                 </tr>
                 <tr>
                   <td style="padding:12px 0;border-bottom:1px solid #f3f4f6;">
-                    <strong style="color:#0e7490;">💰 Real Savings</strong>
+                    <strong style="color:#009b51;">💰 Real Savings</strong>
                     <p style="color:#6b7280;font-size:14px;margin:4px 0 0;">Every deal is vetted by our team. We show you the real price, the original price, and exactly what's included.</p>
                   </td>
                 </tr>
                 <tr>
                   <td style="padding:12px 0;">
-                    <strong style="color:#0e7490;">📍 Curated Destinations</strong>
+                    <strong style="color:#009b51;">📍 Curated Destinations</strong>
                     <p style="color:#6b7280;font-size:14px;margin:4px 0 0;">From Cancun to Cabo, Punta Cana to Maui — we cover the destinations travelers love most.</p>
                   </td>
                 </tr>
@@ -121,7 +125,7 @@ function getWelcomeEmailHtml(greeting: string): string {
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td align="center">
-                    <a href="https://www.vacationpro.co/deals/all-inclusive" style="display:inline-block;background-color:#0e7490;color:#ffffff;font-size:16px;font-weight:600;padding:14px 32px;border-radius:10px;text-decoration:none;">
+                    <a href="${SITE}/deals/all-inclusive" style="display:inline-block;background-color:#00bf63;color:#ffffff;font-size:16px;font-weight:600;padding:14px 32px;border-radius:10px;text-decoration:none;">
                       Browse Today's Deals →
                     </a>
                   </td>
@@ -138,10 +142,10 @@ function getWelcomeEmailHtml(greeting: string): string {
           <tr>
             <td style="background-color:#f9fafb;padding:24px 32px;text-align:center;border-top:1px solid #e5e7eb;">
               <p style="color:#9ca3af;font-size:12px;margin:0 0 8px;">
-                © ${new Date().getFullYear()} VacationPro · <a href="https://www.vacationpro.co" style="color:#0e7490;text-decoration:none;">vacationpro.co</a>
+                © ${yr} VacationPro · <a href="${SITE}" style="color:#009b51;text-decoration:none;">vacationpro.co</a>
               </p>
               <p style="color:#9ca3af;font-size:12px;margin:0;">
-                <a href="<%asm_group_unsubscribe_raw_url%>" style="color:#9ca3af;text-decoration:underline;">Unsubscribe</a> · <a href="https://www.vacationpro.co/legal/privacy" style="color:#9ca3af;text-decoration:underline;">Privacy Policy</a>
+                <a href="<%asm_group_unsubscribe_raw_url%>" style="color:#9ca3af;text-decoration:underline;">Unsubscribe</a> · <a href="${SITE}/legal/privacy" style="color:#9ca3af;text-decoration:underline;">Privacy Policy</a>
               </p>
             </td>
           </tr>

@@ -33,7 +33,7 @@ export async function GET(request: NextRequest) {
     // Search for contacts that need sequence emails
     // We use custom fields to track sequence progress:
     // e2_T = signup_date (ISO string)
-    // e3_T = welcome_step (1, 2, 3, 4 = completed)
+    // w3_T = welcome_step (1, 2, 3, 4 = completed)
 
     const results = {
       processed: 0,
@@ -54,7 +54,7 @@ export async function GET(request: NextRequest) {
           url: '/v3/marketing/contacts/search' as const,
           method: 'POST' as const,
           body: {
-            query: `e3_T = '${previousStep}' AND e2_T <= '${cutoffDate.toISOString().split('T')[0]}'`,
+            query: `w3_T = '${previousStep}' AND e2_T <= '${cutoffDate.toISOString().split('T')[0]}'`,
           },
         };
 
@@ -73,7 +73,7 @@ export async function GET(request: NextRequest) {
                 contacts: [{
                   email: contact.email,
                   custom_fields: {
-                    e3_T: String(step),
+                    w3_T: String(step),
                   },
                 }],
               },
