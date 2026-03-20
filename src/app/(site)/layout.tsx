@@ -3,6 +3,11 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
+  alternates: {
+    types: {
+      'application/rss+xml': 'https://vacationpro.co/api/rss',
+    },
+  },
   keywords: [
     'vacation deals',
     'all-inclusive packages',

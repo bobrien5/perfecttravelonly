@@ -69,9 +69,8 @@ export default function DealCard({ deal }: DealCardProps) {
             </span>
           </div>
 
-          {/* Provider */}
-          <div className="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between">
-            <span className="text-xs text-gray-400">via {deal.provider}</span>
+          {/* Travel Dates */}
+          <div className="mt-3 pt-3 border-t border-gray-100">
             <span className="text-xs text-gray-400">{deal.travelDates}</span>
           </div>
         </div>

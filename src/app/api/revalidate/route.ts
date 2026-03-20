@@ -28,6 +28,7 @@ export async function POST(req: NextRequest) {
     switch (body._type) {
       case 'deal':
         revalidatePath('/');
+        revalidatePath('/api/rss');
         if (body.categorySlug) {
           revalidatePath(`/deals/${body.categorySlug}`);
         }

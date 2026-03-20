@@ -121,8 +121,8 @@ export default async function DealPage({ params }: Props) {
               <p className="text-lg font-semibold text-gray-900">{deal.travelDates}</p>
             </div>
             <div className="bg-gray-50 rounded-xl p-4 text-center">
-              <p className="text-sm text-gray-500">Provider</p>
-              <p className="text-lg font-semibold text-gray-900">{deal.provider}</p>
+              <p className="text-sm text-gray-500">Destination</p>
+              <p className="text-lg font-semibold text-gray-900">{deal.destination}</p>
             </div>
           </div>
 
@@ -176,17 +176,13 @@ export default async function DealPage({ params }: Props) {
               ) : (
                 <>
                   <a
-                    href={deal.affiliateLink}
-                    target="_blank"
-                    rel="noopener noreferrer nofollow"
+                    href={`/go?url=${encodeURIComponent(deal.affiliateLink)}&deal=${encodeURIComponent(deal.title)}`}
                     className="block w-full text-center px-6 py-4 bg-brand-600 text-white font-semibold rounded-xl hover:bg-brand-700 transition-colors text-lg mb-3"
                   >
                     {deal.ctaText}
                   </a>
                   <a
-                    href={deal.affiliateLink}
-                    target="_blank"
-                    rel="noopener noreferrer nofollow"
+                    href={`/go?url=${encodeURIComponent(deal.affiliateLink)}&deal=${encodeURIComponent(deal.title)}`}
                     className="block w-full text-center px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-xl hover:bg-gray-200 transition-colors"
                   >
                     Check Availability
@@ -194,12 +190,11 @@ export default async function DealPage({ params }: Props) {
                 </>
               )}
 
-              <div className="mt-4 pt-4 border-t border-gray-100">
-                <p className="text-xs text-gray-400">via {deal.provider}</p>
-                {deal.bookingWindow && (
-                  <p className="text-xs text-amber-600 font-medium mt-1">{deal.bookingWindow}</p>
-                )}
-              </div>
+              {deal.bookingWindow && (
+                <div className="mt-4 pt-4 border-t border-gray-100">
+                  <p className="text-xs text-amber-600 font-medium">{deal.bookingWindow}</p>
+                </div>
+              )}
             </div>
 
             {/* Tags */}
