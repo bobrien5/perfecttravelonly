@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import StatCard from '@/components/admin/StatCard';
 import PeriodSelector, { getPeriodDates, type Period } from '@/components/admin/PeriodSelector';
 import GrowthChart from '@/components/admin/charts/GrowthChart';
+import { getBaseUrl } from '@/lib/utils';
 
 interface EmailStat {
   date: string;
@@ -16,7 +17,7 @@ interface EmailStat {
 
 async function getEmailData(period: Period) {
   const { start, end } = getPeriodDates(period);
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const baseUrl = getBaseUrl();
   try {
     const res = await fetch(
       `${baseUrl}/api/admin/email?start=${start}&end=${end}`,

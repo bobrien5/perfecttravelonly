@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import StatCard from '@/components/admin/StatCard';
 import PeriodSelector, { getPeriodDates, type Period } from '@/components/admin/PeriodSelector';
 import RevenueChart from '@/components/admin/charts/RevenueChart';
+import { getBaseUrl } from '@/lib/utils';
 
 const SOURCE_LABELS: Record<string, string> = {
   facebook_creator: 'FB Creator',
@@ -14,7 +15,7 @@ const SOURCE_LABELS: Record<string, string> = {
 
 async function getRevenueData(period: Period) {
   const { start, end } = getPeriodDates(period);
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const baseUrl = getBaseUrl();
 
   try {
     const res = await fetch(
@@ -29,7 +30,7 @@ async function getRevenueData(period: Period) {
 }
 
 async function getLeadsSummary() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const baseUrl = getBaseUrl();
   try {
     const res = await fetch(`${baseUrl}/api/admin/leads`, {
       next: { revalidate: 300 },
@@ -42,7 +43,7 @@ async function getLeadsSummary() {
 }
 
 async function getEmailSummary() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const baseUrl = getBaseUrl();
   try {
     const res = await fetch(`${baseUrl}/api/admin/email`, {
       next: { revalidate: 900 },

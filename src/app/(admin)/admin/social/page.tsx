@@ -1,6 +1,7 @@
 import StatCard from '@/components/admin/StatCard';
 import GrowthChart from '@/components/admin/charts/GrowthChart';
 import SocialEntryForm from '@/components/admin/SocialEntryForm';
+import { getBaseUrl } from '@/lib/utils';
 
 interface SocialStat {
   id: string;
@@ -14,7 +15,7 @@ interface SocialStat {
 }
 
 async function getSocialData() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const baseUrl = getBaseUrl();
   try {
     const res = await fetch(`${baseUrl}/api/admin/social?limit=60`, {
       cache: 'no-store',

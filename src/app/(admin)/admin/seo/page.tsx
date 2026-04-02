@@ -6,10 +6,11 @@ import PeriodSelector, {
 } from '@/components/admin/PeriodSelector';
 import SEOChart from '@/components/admin/charts/SEOChart';
 import TrafficChart from '@/components/admin/charts/TrafficChart';
+import { getBaseUrl } from '@/lib/utils';
 
 async function getSearchConsoleData(period: Period) {
   const { start, end } = getPeriodDates(period);
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const baseUrl = getBaseUrl();
   try {
     const res = await fetch(
       `${baseUrl}/api/admin/search-console?start=${start}&end=${end}`,
@@ -24,7 +25,7 @@ async function getSearchConsoleData(period: Period) {
 
 async function getAnalyticsData(period: Period) {
   const { start, end } = getPeriodDates(period);
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const baseUrl = getBaseUrl();
   try {
     const res = await fetch(
       `${baseUrl}/api/admin/analytics?start=${start}&end=${end}`,
