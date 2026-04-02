@@ -17,6 +17,7 @@
   --color-danger: #ef4444;
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-serif, 'Playfair Display'), 'Georgia', serif;
 }
 
 body {
@@ -45,4 +46,107 @@ html {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+/* Editorial blog styles */
+.blog-article > p:first-of-type::first-letter,
+.blog-article > div > p:first-of-type::first-letter {
+  font-family: var(--font-serif);
+  float: left;
+  font-size: 3.5rem;
+  line-height: 0.8;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* Paragraph spacing — more breathing room */
+.blog-article p {
+  margin-bottom: 1.5em;
+}
+
+/* Bold labels ("What makes it luxury:", "Best for:", etc.) */
+.blog-article p > strong:first-child {
+  display: inline-block;
+  color: #111827;
+  font-size: 0.9em;
+  letter-spacing: 0.01em;
+}
+
+/* Price callouts — bold paragraphs that start with $ */
+.blog-article p > strong:only-child {
+  display: block;
+  font-size: 1.25em;
+  color: #009b51;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+/* Numbered deal headings (e.g. "1. Cabo San Lucas — ...") */
+.blog-article h2,
+.blog-article h3 {
+  margin-top: 2.5em;
+  margin-bottom: 0.75em;
+  padding-top: 2em;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* First heading shouldn't have top border */
+.blog-article h2:first-child,
+.blog-article h3:first-child,
+.blog-article > :first-child + h2,
+.blog-article > :first-child + h3 {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+/* Horizontal rules as section dividers */
+.blog-article hr {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 2.5em 0;
+}
+
+/* Lists inside articles */
+.blog-article ul,
+.blog-article ol {
+  margin-top: 1em;
+  margin-bottom: 1.75em;
+  padding-left: 1.5em;
+}
+
+.blog-article li {
+  margin-bottom: 0.5em;
+}
+
+/* Figures */
+.blog-article figure {
+  margin: 2.5rem -4rem;
+}
+
+@media (max-width: 768px) {
+  .blog-article figure {
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+}
+
+.blog-article figure img {
+  width: 100%;
+  height: auto;
+}
+
+.blog-article figure figcaption {
+  font-size: 0.8125rem;
+  color: #6b7280;
+  padding: 0.5rem 4rem 0;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .blog-article figure figcaption {
+    padding: 0.5rem 1rem 0;
+  }
 }
