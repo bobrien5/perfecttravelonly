@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import StatCard from '@/components/admin/StatCard';
 import FunnelChart from '@/components/admin/charts/FunnelChart';
 import RefreshButton from '@/components/admin/RefreshButton';

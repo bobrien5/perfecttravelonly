@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import StatCard from '@/components/admin/StatCard';
 import GrowthChart from '@/components/admin/charts/GrowthChart';
 import SocialEntryForm from '@/components/admin/SocialEntryForm';

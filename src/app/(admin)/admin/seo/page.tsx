@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { Suspense } from 'react';
 import StatCard from '@/components/admin/StatCard';
 import PeriodSelector, {
