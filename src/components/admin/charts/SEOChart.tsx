@@ -68,7 +68,7 @@ export default function SEOChart({ data }: { data: DailyRow[] }) {
           yAxisId="left"
           type="monotone"
           dataKey="clicks"
-          stroke="#00bf63"
+          stroke="#4ac850"
           strokeWidth={2}
           dot={false}
           name="Clicks"

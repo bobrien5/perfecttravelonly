@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VacationPro Carousel Template</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #1a1a1a; padding: 40px; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1080px); gap: 40px; }
+    .slide {
+      width: 1080px; height: 1080px;
+      position: relative; overflow: hidden;
+      color: #fff;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 80px;
+    }
+    .slide-photo {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+    }
+    .slide-photo::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(15,46,26,0) 0%, rgba(15,46,26,0.75) 100%);
+    }
+    .slide > * { position: relative; z-index: 1; }
+    .eyebrow {
+      font-size: 22px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 4px;
+      color: #4ac850;
+      position: absolute; top: 80px; left: 80px; z-index: 2;
+    }
+    .brand-footer {
+      position: absolute; bottom: 80px; right: 80px;
+      display: flex; align-items: center; gap: 16px;
+      font-size: 20px; font-weight: 700; z-index: 2;
+    }
+    .brand-dot {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: #4ac850;
+    }
+    h1 { font-size: 96px; font-weight: 900; letter-spacing: -0.03em; line-height: 1; margin-bottom: 32px; }
+    h2 { font-size: 64px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 24px; }
+    .price { font-size: 160px; font-weight: 900; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; color: #4ac850; line-height: 1; }
+    .body { font-size: 28px; font-weight: 500; line-height: 1.5; max-width: 800px; }
+    .pill { display: inline-block; padding: 12px 24px; border-radius: 999px; background: #4ac850; color: #fff; font-size: 20px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 24px; }
+    .pill-amber { background: #f59e0b; }
+    .pill-coral { background: #ef4444; }
+    .check-list { font-size: 28px; font-weight: 500; line-height: 1.8; }
+    .check-list li { list-style: none; padding-left: 48px; position: relative; }
+    .check-list li::before { content: '✓'; position: absolute; left: 0; color: #4ac850; font-weight: 900; }
+    .catch-box { background: rgba(15,46,26,0.85); padding: 40px; border-left: 8px solid #f59e0b; }
+    .catch-label { font-size: 18px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #f59e0b; margin-bottom: 16px; }
+    .comparison { display: flex; gap: 40px; align-items: flex-end; }
+    .comparison .col { flex: 1; }
+    .comparison .col-label { font-size: 20px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; margin-bottom: 12px; }
+    .comparison .col-price { font-size: 96px; font-weight: 900; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; line-height: 1; }
+    .strike { text-decoration: line-through; opacity: 0.6; }
+
+    /* Slide 1 alt: solid green hook */
+    .slide-green { background: #4ac850; }
+    .slide-green .slide-photo { display: none; }
+    .slide-green .price { color: #fff; }
+    .slide-green .eyebrow { color: #fff8ec; }
+  </style>
+</head>
+<body>
+  <div class="grid">
+
+    <!-- Slide 1: HOOK (solid green version) -->
+    <div class="slide slide-green">
+      <div class="eyebrow">DEAL DROP · CANCUN · APR 14</div>
+      <h1>Cancun for<br>$487 flat.</h1>
+      <div class="body">4 nights. All meals. Round-trip airfare. Here's what we found.</div>
+      <div class="brand-footer"><div class="brand-dot"></div>VacationPro</div>
+    </div>
+
+    <!-- Slide 2: SETUP -->
+    <div class="slide">
+      <div class="slide-photo" style="background-image: url('https://images.unsplash.com/photo-1552074284-5e88ef1aef18?w=1600')"></div>
+      <div class="eyebrow">THE DEAL</div>
+      <h2>Grand Palladium Riviera Maya</h2>
+      <div class="body">4 nights all-inclusive. Departures from 18 US cities. Valid through June 15, 2026.</div>
+      <div class="brand-footer"><div class="brand-dot"></div>VacationPro</div>
+    </div>
+
+    <!-- Slide 3: WHY WE CHECKED IT -->
+    <div class="slide">
+      <div class="slide-photo" style="background-image: url('https://images.unsplash.com/photo-1549294413-26f195200c16?w=1600')"></div>
+      <div class="eyebrow">WHY IT CAUGHT OUR EYE</div>
+      <h2>All-in under $500 is rare for Riviera Maya in April.</h2>
+      <div class="body">We checked 23 comparable packages this week. None landed below $620.</div>
+      <div class="brand-footer"><div class="brand-dot"></div>VacationPro</div>
+    </div>
+
+    <!-- Slide 4: WHAT'S INCLUDED -->
+    <div class="slide">
+      <div class="slide-photo" style="background-image: url('https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1600')"></div>
+      <div class="eyebrow">WHAT'S INCLUDED</div>
+      <ul class="check-list">
+        <li>Round-trip airfare</li>
+        <li>4 nights at Grand Palladium</li>
+        <li>All meals and drinks</li>
+        <li>Airport transfers</li>
+        <li>Resort fees and taxes</li>
+      </ul>
+      <div class="brand-footer"><div class="brand-dot"></div>VacationPro</div>
+    </div>
+
+    <!-- Slide 5: VERIFIED PROOF -->
+    <div class="slide">
+      <div class="slide-photo" style="background-image: url('https://images.unsplash.com/photo-1519046904884-53103b34b206?w=1600')"></div>
+      <div class="eyebrow">VERIFIED · APR 14</div>
+      <div class="pill pill-amber">VERIFIED PRICING</div>
+      <h2>Checked live on provider site April 14, 2026.</h2>
+      <div class="body">Screenshots archived. Price confirmed at checkout for dates shown.</div>
+      <div class="brand-footer"><div class="brand-dot"></div>VacationPro</div>
+    </div>
+
+    <!-- Slide 6: PER NIGHT -->
+    <div class="slide">
+      <div class="slide-photo" style="background-image: url('https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=1600')"></div>
+      <div class="eyebrow">THE MATH</div>
+      <div class="price">$121</div>
+      <div class="body" style="margin-top: 24px;">Per person, per night. All-inclusive. Airfare included.</div>
+      <div class="brand-footer"><div class="brand-dot"></div>VacationPro</div>
+    </div>
+
+    <!-- Slide 7: COMPARISON -->
+    <div class="slide">
+      <div class="slide-photo" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600')"></div>
+      <div class="eyebrow">THIS DEAL VS BOOKING DIRECT</div>
+      <div class="comparison">
+        <div class="col">
+          <div class="col-label">Booking direct</div>
+          <div class="col-price strike">$899</div>
+        </div>
+        <div class="col">
+          <div class="col-label">This package</div>
+          <div class="col-price" style="color: #4ac850;">$487</div>
+        </div>
+      </div>
+      <div class="body" style="margin-top: 32px;">You save $412 per person.</div>
+      <div class="brand-footer"><div class="brand-dot"></div>VacationPro</div>
+    </div>
+
+    <!-- Slide 8: THE CATCH -->
+    <div class="slide">
+      <div class="slide-photo" style="background-image: url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=1600')"></div>
+      <div class="eyebrow">THE CATCH</div>
+      <div class="catch-box">
+        <div class="catch-label">What to know</div>
+        <h2 style="font-size: 40px; margin-bottom: 16px;">Airfare only from 18 cities.</h2>
+        <div class="body">If you're not flying out of those, add $200-300 for positioning flights. Deal still works — just math it first.</div>
+      </div>
+      <div class="brand-footer"><div class="brand-dot"></div>VacationPro</div>
+    </div>
+
+    <!-- Slide 9: BEST FOR -->
+    <div class="slide">
+      <div class="slide-photo" style="background-image: url('https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1600')"></div>
+      <div class="eyebrow">BEST FOR</div>
+      <h2>Couples who want all-inclusive simplicity on a middle budget.</h2>
+      <div class="body">Skip this if you want adults-only or 5-star luxury. Grand Palladium is family-friendly 4-star.</div>
+      <div class="brand-footer"><div class="brand-dot"></div>VacationPro</div>
+    </div>
+
+    <!-- Slide 10: CTA -->
+    <div class="slide slide-green">
+      <div class="eyebrow">GET THE FULL BREAKDOWN</div>
+      <h1>vacationpro.co</h1>
+      <div class="body" style="margin-top: 24px;">Every deal we verify. Every catch we find. Monday and Thursday in your inbox.</div>
+      <div class="brand-footer"><div class="brand-dot"></div>VacationPro</div>
+    </div>
+
+  </div>
+</body>
+</html>

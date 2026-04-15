@@ -125,7 +125,7 @@ function getWelcomeEmailHtml(greeting: string): string {
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td align="center">
-                    <a href="${SITE}/deals/all-inclusive" style="display:inline-block;background-color:#00bf63;color:#ffffff;font-size:16px;font-weight:600;padding:14px 32px;border-radius:10px;text-decoration:none;">
+                    <a href="${SITE}/deals/all-inclusive" style="display:inline-block;background-color:#4ac850;color:#ffffff;font-size:16px;font-weight:600;padding:14px 32px;border-radius:10px;text-decoration:none;">
                       Browse Today's Deals →
                     </a>
                   </td>

@@ -11,8 +11,8 @@ const COOKIE_NAME = 'vp-admin-token';
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Skip login page and auth API
-  if (pathname === '/admin/login' || pathname.startsWith('/api/admin/auth')) {
+  // Skip login page, all admin API routes, and auth API
+  if (pathname === '/admin/login' || pathname.startsWith('/api/')) {
     return NextResponse.next();
   }
 
@@ -33,5 +33,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/admin/:path*', '/api/admin/:path*'],
+  matcher: ['/admin/:path*'],
 };

@@ -1,10 +1,9 @@
-export const dynamic = 'force-dynamic';
+'use client';
 
-import { Suspense } from 'react';
+import { useEffect, useState } from 'react';
 import StatCard from '@/components/admin/StatCard';
-import PeriodSelector, { getPeriodDates, type Period } from '@/components/admin/PeriodSelector';
 import RevenueChart from '@/components/admin/charts/RevenueChart';
-import { getBaseUrl } from '@/lib/utils';
+import { EmailQuickStats } from '@/components/admin/EmailStats';
 
 const SOURCE_LABELS: Record<string, string> = {
   facebook_creator: 'FB Creator',
@@ -15,87 +14,56 @@ const SOURCE_LABELS: Record<string, string> = {
   affiliate_awin: 'Awin',
 };
 
-async function getRevenueData(period: Period) {
-  const { start, end } = getPeriodDates(period);
-  const baseUrl = getBaseUrl();
-
-  try {
-    const res = await fetch(
-      `${baseUrl}/api/admin/revenue?start=${start}&end=${end}`,
-      { cache: 'no-store' }
-    );
-    if (!res.ok) return null;
-    return res.json();
-  } catch {
-    return null;
-  }
+function formatCurrency(n: number) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+  }).format(n);
 }
 
-async function getLeadsSummary() {
-  const baseUrl = getBaseUrl();
-  try {
-    const res = await fetch(`${baseUrl}/api/admin/leads`, {
-      next: { revalidate: 300 },
+interface RevenueData {
+  entries: Array<{ date: string; source: string; amount: number }>;
+  bySource: Record<string, number>;
+  wowRevenue: number;
+  webinarCount: number;
+  total: number;
+}
+
+interface LeadsData {
+  pipelines: Array<{ totalLeads: number }>;
+}
+
+export default function AdminDashboardPage() {
+  const [revenue, setRevenue] = useState<RevenueData | null>(null);
+  const [leads, setLeads] = useState<LeadsData | null>(null);
+
+  useEffect(() => {
+    const now = new Date();
+    const start = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('T')[0];
+    const end = now.toISOString().split('T')[0];
+
+    Promise.all([
+      fetch(`/api/admin/revenue?start=${start}&end=${end}`).then((r) => r.ok ? r.json() : null).catch(() => null),
+      fetch('/api/admin/leads').then((r) => r.ok ? r.json() : null).catch(() => null),
+    ]).then(([rev, ld]) => {
+      setRevenue(rev);
+      setLeads(ld);
     });
-    if (!res.ok) return null;
-    return res.json();
-  } catch {
-    return null;
-  }
-}
-
-async function getEmailSummary() {
-  const baseUrl = getBaseUrl();
-  try {
-    const res = await fetch(`${baseUrl}/api/admin/email`, {
-      next: { revalidate: 900 },
-    });
-    if (!res.ok) return null;
-    return res.json();
-  } catch {
-    return null;
-  }
-}
-
-export default async function AdminDashboardPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ period?: string }>;
-}) {
-  const params = await searchParams;
-  const period = (params.period as Period) || 'month';
-
-  const [revenue, leads, email] = await Promise.all([
-    getRevenueData(period),
-    getLeadsSummary(),
-    getEmailSummary(),
-  ]);
-
-  const formatCurrency = (n: number) =>
-    new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-    }).format(n);
+  }, []);
 
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-          <p className="text-sm text-gray-500 mt-1">VacationPro business overview</p>
-        </div>
-        <Suspense>
-          <PeriodSelector />
-        </Suspense>
+      <div>
+        <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
+        <p className="text-sm text-gray-500 mt-1">VacationPro business overview</p>
       </div>
 
       {/* Revenue Overview */}
       <section>
         <h2 className="text-lg font-semibold text-gray-900 mb-4">Revenue Overview</h2>
 
-        {/* Total Revenue Banner */}
         <div className="bg-brand-500 text-white rounded-xl p-6 mb-4">
           <p className="text-sm font-medium opacity-80">Total Revenue</p>
           <p className="text-4xl font-bold mt-1">
@@ -108,7 +76,6 @@ export default async function AdminDashboardPage({
           )}
         </div>
 
-        {/* Revenue Source Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           {Object.entries(SOURCE_LABELS).map(([key, label]) => (
             <StatCard
@@ -124,7 +91,6 @@ export default async function AdminDashboardPage({
           />
         </div>
 
-        {/* Revenue Chart */}
         <div className="bg-white rounded-xl border border-gray-200 p-5">
           <h3 className="text-sm font-medium text-gray-700 mb-4">Revenue by Source</h3>
           <RevenueChart
@@ -134,7 +100,7 @@ export default async function AdminDashboardPage({
         </div>
       </section>
 
-      {/* Quick Stats Row */}
+      {/* Quick Stats */}
       <section>
         <h2 className="text-lg font-semibold text-gray-900 mb-4">Quick Stats</h2>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -142,23 +108,12 @@ export default async function AdminDashboardPage({
             label="Total Leads"
             value={
               leads?.pipelines?.reduce(
-                (s: number, p: { totalLeads: number }) => s + p.totalLeads,
+                (s, p) => s + p.totalLeads,
                 0
               ) || 0
             }
           />
-          <StatCard
-            label="Email Subscribers"
-            value={email?.subscribers?.toLocaleString() || '—'}
-          />
-          <StatCard
-            label="Open Rate"
-            value={email?.rates?.openRate ? `${email.rates.openRate}%` : '—'}
-          />
-          <StatCard
-            label="Click Rate"
-            value={email?.rates?.clickRate ? `${email.rates.clickRate}%` : '—'}
-          />
+          <EmailQuickStats />
         </div>
       </section>
     </div>

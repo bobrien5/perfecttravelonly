@@ -13,7 +13,7 @@ import {
 
 const SOURCE_COLORS: Record<string, string> = {
   facebook_creator: '#1877F2',
-  sponsorship: '#00bf63',
+  sponsorship: '#4ac850',
   newsletter_ads: '#f59e0b',
   affiliate_expedia: '#003580',
   affiliate_travelpayouts: '#FF6B35',

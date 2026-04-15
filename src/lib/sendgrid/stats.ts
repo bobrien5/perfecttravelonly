@@ -24,7 +24,7 @@ export async function getGlobalStats(
   startDate: string,
   endDate: string
 ): Promise<EmailStats[]> {
-  const [response] = await sgClient.request({
+  const [, body] = await sgClient.request({
     url: '/v3/stats',
     method: 'GET',
     qs: {
@@ -34,7 +34,7 @@ export async function getGlobalStats(
     },
   });
 
-  const data = response.body as Array<{
+  const data = body as Array<{
     date: string;
     stats: Array<{
       metrics: Record<string, number>;
@@ -59,12 +59,12 @@ export async function getGlobalStats(
 }
 
 export async function getContactCount(): Promise<ContactCount> {
-  const [response] = await sgClient.request({
+  const [, contactBody] = await sgClient.request({
     url: '/v3/marketing/contacts/count',
     method: 'GET',
   });
 
-  const body = response.body as { contact_count: number; billable_count: number };
+  const body = contactBody as { contact_count: number; billable_count: number };
   return {
     contactCount: body.contact_count,
     billableCount: body.billable_count,

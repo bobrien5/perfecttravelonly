@@ -25,7 +25,7 @@ interface GrowthChartProps {
 
 export default function GrowthChart({
   data,
-  color = '#00bf63',
+  color = '#4ac850',
   valueLabel = 'Value',
   height = 250,
 }: GrowthChartProps) {

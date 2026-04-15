@@ -1,23 +1,29 @@
 @import "tailwindcss";
 
 @theme inline {
+  /* Brand Green (Hero Green = 500) */
   --color-brand-50: #edfdf4;
   --color-brand-100: #d1fae2;
   --color-brand-200: #a6f4c8;
   --color-brand-300: #6beaa6;
   --color-brand-400: #33d87e;
-  --color-brand-500: #00bf63;
+  --color-brand-500: #4ac850;
   --color-brand-600: #009b51;
   --color-brand-700: #007b41;
   --color-brand-800: #006135;
   --color-brand-900: #00502c;
+
+  /* Warm Beach supporting colors */
+  --color-forest: #0f2e1a;
+  --color-cream: #fff8ec;
   --color-accent-500: #f59e0b;
   --color-accent-600: #d97706;
-  --color-success: #00bf63;
   --color-danger: #ef4444;
+  --color-success: #4ac850;
+
+  /* Typography — Inter only */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-serif: var(--font-serif, 'Playfair Display'), 'Georgia', serif;
 }
 
 body {
@@ -51,14 +57,14 @@ html {
 /* Editorial blog styles */
 .blog-article > p:first-of-type::first-letter,
 .blog-article > div > p:first-of-type::first-letter {
-  font-family: var(--font-serif);
   float: left;
-  font-size: 3.5rem;
-  line-height: 0.8;
+  font-size: 4rem;
+  line-height: 0.85;
   padding-right: 0.5rem;
   padding-top: 0.25rem;
-  font-weight: 700;
-  color: #111827;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: #0f2e1a;
 }
 
 /* Paragraph spacing — more breathing room */
@@ -78,7 +84,7 @@ html {
 .blog-article p > strong:only-child {
   display: block;
   font-size: 1.25em;
-  color: #009b51;
+  color: #4ac850;
   margin-top: 0.25em;
   margin-bottom: 0.25em;
 }

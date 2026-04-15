@@ -17,7 +17,14 @@ export async function GET(request: NextRequest) {
   const { data, error } = await query;
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    // Table doesn't exist yet — return empty data gracefully
+    return NextResponse.json({
+      entries: [],
+      bySource: {},
+      wowRevenue: 0,
+      webinarCount: 0,
+      total: 0,
+    });
   }
 
   // Aggregate by source

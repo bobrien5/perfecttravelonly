@@ -38,8 +38,8 @@ export default function TrafficChart({ data }: { data: DailyRow[] }) {
       <AreaChart data={formatted}>
         <defs>
           <linearGradient id="colorUsers" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#00bf63" stopOpacity={0.15} />
-            <stop offset="95%" stopColor="#00bf63" stopOpacity={0} />
+            <stop offset="5%" stopColor="#4ac850" stopOpacity={0.15} />
+            <stop offset="95%" stopColor="#4ac850" stopOpacity={0} />
           </linearGradient>
           <linearGradient id="colorPageviews" x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor="#6366f1" stopOpacity={0.15} />
@@ -66,7 +66,7 @@ export default function TrafficChart({ data }: { data: DailyRow[] }) {
         <Area
           type="monotone"
           dataKey="users"
-          stroke="#00bf63"
+          stroke="#4ac850"
           strokeWidth={2}
           fill="url(#colorUsers)"
           name="Users"

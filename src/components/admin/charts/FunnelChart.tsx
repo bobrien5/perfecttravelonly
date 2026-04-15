@@ -20,7 +20,7 @@ interface FunnelChartProps {
   stages: StageData[];
 }
 
-const COLORS = ['#00bf63', '#33d87e', '#6beaa6', '#a6f4c8', '#d1fae2', '#edfdf4'];
+const COLORS = ['#4ac850', '#33d87e', '#6beaa6', '#a6f4c8', '#d1fae2', '#edfdf4'];
 
 export default function FunnelChart({ stages }: FunnelChartProps) {
   if (stages.length === 0) {
