@@ -1,0 +1,103 @@
+<!--
+DEAL ALERT — Weekly Beehiiv newsletter snippet (one deal, deep dive)
+Paste contents below into a Beehiiv HTML block.
+Replace every {{placeholder}} each week.
+White background regardless of Beehiiv publication page color.
+-->
+
+<div style="background:#ffffff;padding:32px 24px;border-radius:12px;">
+
+<!-- Hero photo -->
+<div style="padding:0 0 0;">
+  <div style="height:280px;background:#e5e7eb url('{{hero_image_url}}') center/cover no-repeat;border-radius:12px;"></div>
+</div>
+
+<!-- Title + eyebrow -->
+<div style="padding:24px 0;">
+  <div style="font-family:Inter,Arial,sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#4ac850;margin-bottom:8px;">
+    DEAL ALERT · {{destination}} · {{resort_name}}
+  </div>
+  <div style="font-family:Inter,Arial,sans-serif;font-weight:900;font-size:32px;letter-spacing:-0.03em;color:#0f2e1a;line-height:1.1;">
+    Is the ${{price}} {{resort_short_name}} deal worth it?
+  </div>
+</div>
+
+<!-- Verdict box -->
+<div style="padding:0 0 24px;">
+  <div style="background:#4ac850;border-radius:12px;padding:24px;font-family:Inter,Arial,sans-serif;color:#fff;">
+    <div style="font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:0.85;margin-bottom:8px;">OUR VERDICT</div>
+    <div style="font-weight:800;font-size:24px;line-height:1.2;">{{verdict_one_liner}}</div>
+  </div>
+</div>
+
+<!-- What we checked -->
+<div style="padding:0 0 24px;">
+  <div style="font-family:Inter,Arial,sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#4ac850;margin-bottom:12px;">WHAT WE CHECKED</div>
+  <ul style="font-family:Inter,Arial,sans-serif;font-size:15px;color:#0f2e1a;line-height:1.6;padding-left:24px;margin:0;">
+    <li>{{checked_1}}</li>
+    <li>{{checked_2}}</li>
+    <li>{{checked_3}}</li>
+    <li>{{checked_4}}</li>
+  </ul>
+</div>
+
+<!-- Included / Not Included -->
+<div style="padding:0 0 24px;">
+  <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+    <tr>
+      <td style="width:50%;padding:16px;background:#fff8ec;border:1px solid #e5e7eb;vertical-align:top;font-family:Inter,Arial,sans-serif;">
+        <div style="font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#4ac850;margin-bottom:12px;">✓ INCLUDED</div>
+        <ul style="font-size:14px;color:#0f2e1a;line-height:1.6;padding-left:20px;margin:0;">
+          <li>{{included_1}}</li>
+          <li>{{included_2}}</li>
+          <li>{{included_3}}</li>
+          <li>{{included_4}}</li>
+        </ul>
+      </td>
+      <td style="width:50%;padding:16px;background:#fff8ec;border:1px solid #e5e7eb;border-left:none;vertical-align:top;font-family:Inter,Arial,sans-serif;">
+        <div style="font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#ef4444;margin-bottom:12px;">✗ NOT INCLUDED</div>
+        <ul style="font-size:14px;color:#0f2e1a;line-height:1.6;padding-left:20px;margin:0;">
+          <li>{{excluded_1}}</li>
+          <li>{{excluded_2}}</li>
+          <li>{{excluded_3}}</li>
+          <li>{{excluded_4}}</li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!-- The Catch -->
+<div style="padding:0 0 24px;">
+  <div style="background:#0f2e1a;border-left:6px solid #f59e0b;border-radius:8px;padding:24px;font-family:Inter,Arial,sans-serif;color:#fff;">
+    <div style="font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#f59e0b;margin-bottom:8px;">THE CATCH</div>
+    <div style="font-weight:800;font-size:20px;line-height:1.2;margin-bottom:12px;">{{catch_headline}}</div>
+    <div style="font-size:15px;line-height:1.5;opacity:0.9;">{{catch_explanation}}</div>
+  </div>
+</div>
+
+<!-- Price breakdown -->
+<div style="padding:0 0 24px;">
+  <div style="font-family:Inter,Arial,sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#4ac850;margin-bottom:12px;">PRICE BREAKDOWN</div>
+  <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;font-family:Inter,Arial,sans-serif;font-size:15px;color:#0f2e1a;">
+    <tr><td style="padding:8px 0;border-bottom:1px solid #e5e7eb;">This package</td><td align="right" style="padding:8px 0;border-bottom:1px solid #e5e7eb;font-weight:700;color:#4ac850;">${{price}}</td></tr>
+    <tr><td style="padding:8px 0;border-bottom:1px solid #e5e7eb;">Booking direct</td><td align="right" style="padding:8px 0;border-bottom:1px solid #e5e7eb;text-decoration:line-through;color:#6b7280;">${{retail_price}}</td></tr>
+    <tr><td style="padding:8px 0;font-weight:700;">You save</td><td align="right" style="padding:8px 0;font-weight:900;color:#ef4444;">${{savings}}</td></tr>
+  </table>
+</div>
+
+<!-- Our Take -->
+<div style="padding:0 0 24px;">
+  <div style="border:1px solid #e5e7eb;border-radius:12px;padding:24px;font-family:Inter,Arial,sans-serif;color:#0f2e1a;font-size:16px;line-height:1.6;">
+    <div style="font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#4ac850;margin-bottom:12px;">OUR TAKE</div>
+    <p style="margin:0 0 12px;">{{take_paragraph_1}}</p>
+    <p style="margin:0;">{{take_paragraph_2}}</p>
+  </div>
+</div>
+
+<!-- CTA -->
+<div style="padding:8px 0 0;text-align:center;">
+  <a href="{{book_url}}" style="display:inline-block;background:#4ac850;color:#fff;text-decoration:none;font-family:Inter,Arial,sans-serif;font-weight:700;font-size:16px;padding:16px 32px;border-radius:8px;">Book this deal →</a>
+</div>
+
+</div>
