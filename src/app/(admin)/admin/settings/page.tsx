@@ -47,8 +47,8 @@ export default function SettingsPage() {
           </div>
           <div className="flex items-center justify-between py-2 border-t border-gray-100">
             <div>
-              <p className="text-sm font-medium text-gray-700">SendGrid</p>
-              <p className="text-xs text-gray-500">Email marketing & stats</p>
+              <p className="text-sm font-medium text-gray-700">Beehiiv</p>
+              <p className="text-xs text-gray-500">Newsletter, subscribers, stats</p>
             </div>
             <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-50 text-green-700">
               <span className="w-1.5 h-1.5 bg-green-500 rounded-full" />

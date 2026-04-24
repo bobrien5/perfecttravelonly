@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       utmCampaign: body.utmCampaign ?? 'deal_alerts',
       referringSite: body.referringSite,
       reactivateExisting: true,
-      sendWelcomeEmail: false,
+      sendWelcomeEmail: true,
     });
 
     return NextResponse.json(

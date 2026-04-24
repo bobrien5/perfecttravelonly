@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getGlobalStats, getContactCount } from '@/lib/sendgrid/stats';
+import { getGlobalStats, getContactCount } from '@/lib/beehiiv/stats';
 
 export const revalidate = 900; // 15-minute cache
 
