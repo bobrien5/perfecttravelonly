@@ -1,8 +1,1 @@
-{
-  "crons": [
-    {
-      "path": "/api/newsletter/welcome-sequence",
-      "schedule": "0 13 * * *"
-    }
-  ]
-}
+{}

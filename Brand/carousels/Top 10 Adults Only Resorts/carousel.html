@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Top 10 Adults-Only All-Inclusives in the Caribbean</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #1a1a1a; padding: 40px; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1080px); gap: 40px; }
+    .slide {
+      width: 1080px; height: 1080px;
+      position: relative; overflow: hidden;
+      color: #fff;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 80px;
+    }
+    img.slide-photo {
+      position: absolute; inset: 0; z-index: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+    }
+    .photo-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background:
+        linear-gradient(180deg, rgba(15,46,26,0) 35%, rgba(15,46,26,0.98) 85%),
+        linear-gradient(180deg, rgba(15,46,26,0.5) 0%, rgba(15,46,26,0) 25%);
+    }
+    .cover-overlay {
+      background:
+        linear-gradient(180deg, rgba(15,46,26,0.45) 0%, rgba(15,46,26,0.85) 100%) !important;
+    }
+    .slide > h1, .slide > h2, .slide > .body, .slide > .price-pill { position: relative; z-index: 2; }
+    .eyebrow {
+      font-size: 22px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 4px;
+      color: #4ac850;
+      position: absolute; top: 80px; left: 80px; z-index: 2;
+    }
+    .brand-footer {
+      position: absolute; bottom: 80px; right: 80px;
+      display: flex; align-items: center; gap: 16px;
+      font-size: 20px; font-weight: 700; z-index: 2;
+    }
+    .brand-logo { width: 44px; height: 44px; display: block; }
+    .brand-footer { align-items: center; }
+    h1 { font-size: 96px; font-weight: 900; letter-spacing: -0.03em; line-height: 1; margin-bottom: 32px; }
+    h2 { font-size: 64px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 16px; }
+    .body { font-size: 28px; font-weight: 500; line-height: 1.5; max-width: 800px; }
+    .slide-green { background: #4ac850; }
+    .slide-green .slide-photo { display: none; }
+    .slide-green .eyebrow { color: #fff8ec; }
+
+    /* Ranked listicle: Amber rank badge */
+    .rank-badge {
+      position: absolute; top: 80px; left: 80px; z-index: 2;
+      color: #f59e0b;
+      letter-spacing: -0.04em; line-height: 0.9;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.6);
+      font-weight: 900;
+    }
+    .rank-badge .rank-hash { font-size: 120px; opacity: 0.9; margin-right: 4px; }
+    .rank-badge .rank-num { font-size: 200px; }
+    .swipe-prompt {
+      position: absolute; bottom: 80px; left: 80px;
+      font-size: 20px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      opacity: 0.85; z-index: 2;
+    }
+    .price-pill {
+      align-self: flex-start;
+      padding: 10px 22px; border-radius: 999px;
+      background: #4ac850; color: #fff;
+      font-size: 20px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      margin-top: 20px; margin-bottom: 80px;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+
+    <!-- Slide 1: COVER (photo with overlay) -->
+    <div class="slide">
+      <img class="slide-photo" src="cover.png"><div class="photo-overlay cover-overlay"></div>
+      <div class="eyebrow">RANKED · ADULTS-ONLY · CARIBBEAN</div>
+      <h1 style="margin-bottom: 24px;">Top 10<br>adults-only<br>all-inclusives<br>in the Caribbean.</h1>
+      <div class="body" style="margin-bottom: 80px;">The resorts we'd actually book in 2026 →</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 2: #10 -->
+    <div class="slide">
+      <img class="slide-photo" src="10.webp"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">10</span></div>
+      <h2>Couples Tower Isle</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Ocho Rios, Jamaica</div>
+      <div class="body" style="margin-top:12px;">Private clothing-optional island for couples only. Nowhere else like it.</div>
+      <div class="price-pill">from $400/night</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 3: #9 -->
+    <div class="slide">
+      <img class="slide-photo" src="9.jpg"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">9</span></div>
+      <h2>Royalton CHIC Punta Cana</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Punta Cana, Dominican Republic</div>
+      <div class="body" style="margin-top:12px;">Party-forward adults-only with swim-up suites and a nightlife-first vibe.</div>
+      <div class="price-pill">from $380/night</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 4: #8 -->
+    <div class="slide">
+      <img class="slide-photo" src="8.jpg"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">8</span></div>
+      <h2>Secrets St. James</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Montego Bay, Jamaica</div>
+      <div class="body" style="margin-top:12px;">Preferred Club perks and a quiet beachfront — romance without the chaos.</div>
+      <div class="price-pill">from $420/night</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 5: #7 -->
+    <div class="slide">
+      <img class="slide-photo" src="7.webp"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">7</span></div>
+      <h2>Hyatt Zilara Cap Cana</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Cap Cana, Dominican Republic</div>
+      <div class="body" style="margin-top:12px;">Newest Cap Cana build. 5-star rooms, marina access, real luxury feel.</div>
+      <div class="price-pill">from $450/night</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 6: #6 -->
+    <div class="slide">
+      <img class="slide-photo" src="6.jpg"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">6</span></div>
+      <h2>Sandals Royal Bahamian</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Nassau, Bahamas</div>
+      <div class="body" style="margin-top:12px;">Private offshore island and 10 restaurants. Sandals flagship energy.</div>
+      <div class="price-pill">from $480/night</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 7: #5 -->
+    <div class="slide">
+      <img class="slide-photo" src="5.avif"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">5</span></div>
+      <h2>Excellence Oyster Bay</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Falmouth, Jamaica</div>
+      <div class="body" style="margin-top:12px;">Peninsula setting with butler-service suites. Feels private even at full capacity.</div>
+      <div class="price-pill">from $460/night</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 8: #4 -->
+    <div class="slide">
+      <img class="slide-photo" src="4.jpg"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">4</span></div>
+      <h2>Sandals Royal Barbados</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">St. Lawrence Gap, Barbados</div>
+      <div class="body" style="margin-top:12px;">Rooftop pool suites and the newest Sandals in the chain. Design wins here.</div>
+      <div class="price-pill">from $520/night</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 9: #3 -->
+    <div class="slide">
+      <img class="slide-photo" src="3.webp"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">3</span></div>
+      <h2>Jewel Grande Montego Bay</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Montego Bay, Jamaica</div>
+      <div class="body" style="margin-top:12px;">Residential-style two-bedroom suites. Perfect if you want space and service.</div>
+      <div class="price-pill">from $440/night</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 10: #2 -->
+    <div class="slide">
+      <img class="slide-photo" src="2.jpg"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">2</span></div>
+      <h2>Sandals Grande St. Lucian</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Gros Islet, St. Lucia</div>
+      <div class="body" style="margin-top:12px;">Over-water bungalows with glass floors. The Instagram shot of the Caribbean.</div>
+      <div class="price-pill">from $550/night</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 11: #1 -->
+    <div class="slide">
+      <img class="slide-photo" src="1.jpg"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">1</span></div>
+      <h2>Jade Mountain</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Soufrière, St. Lucia</div>
+      <div class="body" style="margin-top:12px;">Open-wall sanctuaries with private infinity pools facing the Pitons. The best there is.</div>
+      <div class="price-pill">from $1,400/night</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 12: CTA — Save -->
+    <div class="slide slide-green">
+      <div class="eyebrow">SAVE THIS POST</div>
+      <h1>Save this for<br>your next trip.</h1>
+      <div class="body" style="margin-top: 24px;">Follow @vacationpro for more all-inclusive finds every week.</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+  </div>
+</body>
+</html>

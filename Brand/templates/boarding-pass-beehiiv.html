@@ -1,0 +1,134 @@
+<!--
+BOARDING PASS — Weekly content newsletter (Mondays)
+Editorial / curated content with ONE highlighted deal at the bottom.
+Paste into a Beehiiv HTML block. Replace every {{placeholder}} each week.
+White background regardless of Beehiiv publication page color.
+-->
+
+<div style="background:#ffffff;padding:32px 24px;border-radius:12px;">
+
+<!-- Title block -->
+<div style="padding:0 0 16px;">
+  <div style="font-family:Inter,Arial,sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#4ac850;margin-bottom:12px;">
+    BOARDING PASS · {{issue_label}}
+  </div>
+  <div style="font-family:Inter,Arial,sans-serif;font-weight:900;font-size:32px;letter-spacing:-0.03em;color:#0f2e1a;line-height:1.1;">
+    {{issue_headline}}
+  </div>
+</div>
+
+<!-- Editor's letter -->
+<div style="padding:0 0 32px;">
+  <div style="font-family:Inter,Arial,sans-serif;color:#0f2e1a;font-size:16px;line-height:1.6;font-weight:500;">
+    <p style="margin:0 0 14px;">{{editors_letter_paragraph_1}}</p>
+    <p style="margin:0 0 14px;">{{editors_letter_paragraph_2}}</p>
+    <p style="margin:0;font-size:14px;color:#6b7280;">— Brendan, VacationPro</p>
+  </div>
+</div>
+
+<!-- Divider -->
+<div style="padding:0 0 32px;">
+  <div style="height:1px;background:#e5e7eb;"></div>
+</div>
+
+<!-- ───── FEATURED STORY ───── -->
+<div style="padding:0 0 12px;">
+  <div style="font-family:Inter,Arial,sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#4ac850;">
+    THIS WEEK'S READ
+  </div>
+</div>
+
+<div style="padding:0 0 32px;">
+  <div style="background:#fff8ec;border-radius:12px;overflow:hidden;">
+    <div style="height:240px;background:#e5e7eb url('{{featured_image_url}}') center/cover no-repeat;"></div>
+    <div style="padding:24px;font-family:Inter,Arial,sans-serif;">
+      <div style="font-weight:800;font-size:24px;color:#0f2e1a;letter-spacing:-0.02em;line-height:1.2;margin-bottom:12px;">
+        {{featured_headline}}
+      </div>
+      <div style="font-weight:500;font-size:15px;color:#0f2e1a;line-height:1.6;margin-bottom:16px;">
+        {{featured_dek}}
+      </div>
+      <a href="{{featured_url}}" style="font-family:Inter,Arial,sans-serif;color:#4ac850;text-decoration:none;font-weight:700;font-size:15px;">Read the full story →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ───── SHORTS / NEWS BITES (2-3 short cards) ───── -->
+<div style="padding:0 0 12px;">
+  <div style="font-family:Inter,Arial,sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#4ac850;">
+    SHORTS · WHAT WE'RE WATCHING
+  </div>
+</div>
+
+<!-- Short #1 -->
+<div style="padding:0 0 16px;">
+  <div style="background:#fff8ec;border-radius:10px;padding:20px 24px;font-family:Inter,Arial,sans-serif;">
+    <div style="font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#6b7280;margin-bottom:6px;">{{short_1_category}}</div>
+    <div style="font-weight:800;font-size:18px;color:#0f2e1a;line-height:1.3;margin-bottom:8px;">{{short_1_headline}}</div>
+    <div style="font-weight:500;font-size:14px;color:#0f2e1a;line-height:1.5;margin-bottom:10px;">{{short_1_body}}</div>
+    <a href="{{short_1_url}}" style="color:#4ac850;text-decoration:none;font-weight:700;font-size:13px;">More →</a>
+  </div>
+</div>
+
+<!-- Short #2 -->
+<div style="padding:0 0 16px;">
+  <div style="background:#fff8ec;border-radius:10px;padding:20px 24px;font-family:Inter,Arial,sans-serif;">
+    <div style="font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#6b7280;margin-bottom:6px;">{{short_2_category}}</div>
+    <div style="font-weight:800;font-size:18px;color:#0f2e1a;line-height:1.3;margin-bottom:8px;">{{short_2_headline}}</div>
+    <div style="font-weight:500;font-size:14px;color:#0f2e1a;line-height:1.5;margin-bottom:10px;">{{short_2_body}}</div>
+    <a href="{{short_2_url}}" style="color:#4ac850;text-decoration:none;font-weight:700;font-size:13px;">More →</a>
+  </div>
+</div>
+
+<!-- Short #3 (delete this block if only 2 shorts this week) -->
+<div style="padding:0 0 32px;">
+  <div style="background:#fff8ec;border-radius:10px;padding:20px 24px;font-family:Inter,Arial,sans-serif;">
+    <div style="font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#6b7280;margin-bottom:6px;">{{short_3_category}}</div>
+    <div style="font-weight:800;font-size:18px;color:#0f2e1a;line-height:1.3;margin-bottom:8px;">{{short_3_headline}}</div>
+    <div style="font-weight:500;font-size:14px;color:#0f2e1a;line-height:1.5;margin-bottom:10px;">{{short_3_body}}</div>
+    <a href="{{short_3_url}}" style="color:#4ac850;text-decoration:none;font-weight:700;font-size:13px;">More →</a>
+  </div>
+</div>
+
+<!-- ───── TIP OF THE WEEK ───── -->
+<div style="padding:0 0 32px;">
+  <div style="background:#0f2e1a;border-radius:12px;padding:24px;font-family:Inter,Arial,sans-serif;color:#fff;">
+    <div style="font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#4ac850;margin-bottom:8px;">TIP OF THE WEEK</div>
+    <div style="font-weight:800;font-size:20px;line-height:1.3;margin-bottom:10px;">{{tip_headline}}</div>
+    <div style="font-size:15px;line-height:1.6;opacity:0.9;">{{tip_body}}</div>
+  </div>
+</div>
+
+<!-- Divider -->
+<div style="padding:0 0 32px;">
+  <div style="height:1px;background:#e5e7eb;"></div>
+</div>
+
+<!-- ───── HIGHLIGHTED DEAL (single, at the bottom) ───── -->
+<div style="padding:0 0 12px;">
+  <div style="font-family:Inter,Arial,sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#4ac850;">
+    DEAL OF THE WEEK
+  </div>
+</div>
+
+<div style="padding:0 0 24px;">
+  <div style="background:#fff8ec;border-radius:12px;overflow:hidden;border:2px solid #4ac850;">
+    <div style="height:200px;background:#e5e7eb url('{{deal_image_url}}') center/cover no-repeat;"></div>
+    <div style="padding:24px;font-family:Inter,Arial,sans-serif;">
+      <div style="font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#4ac850;margin-bottom:8px;">{{deal_destination}} · {{deal_nights}} NIGHTS</div>
+      <div style="font-weight:800;font-size:22px;color:#0f2e1a;letter-spacing:-0.01em;margin-bottom:8px;">{{deal_resort}}</div>
+      <div style="font-weight:900;font-size:36px;color:#4ac850;letter-spacing:-0.02em;margin-bottom:12px;font-variant-numeric:tabular-nums;">${{deal_price}}<span style="font-size:14px;color:#6b7280;font-weight:500;letter-spacing:0;"> /person</span></div>
+      <div style="font-weight:500;font-size:15px;color:#0f2e1a;line-height:1.5;margin-bottom:20px;">{{deal_one_liner}}</div>
+      <a href="{{deal_url}}" style="display:inline-block;background:#4ac850;color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:14px 24px;border-radius:8px;">See the catch →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Sign-off note -->
+<div style="padding:8px 0 0;">
+  <div style="font-family:Inter,Arial,sans-serif;font-weight:500;font-size:14px;color:#6b7280;line-height:1.5;text-align:center;">
+    Thursday: a full Deal Alert deep dive. See you then.
+  </div>
+</div>
+
+</div>

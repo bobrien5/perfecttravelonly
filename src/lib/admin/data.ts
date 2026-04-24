@@ -1,6 +1,6 @@
 import { supabase } from '@/lib/supabase/client';
 import ghl from '@/lib/ghl/client';
-import { getGlobalStats, getContactCount } from '@/lib/sendgrid/stats';
+import { getGlobalStats, getContactCount } from '@/lib/beehiiv/stats';
 
 export async function getRevenueData(start: string, end: string) {
   try {

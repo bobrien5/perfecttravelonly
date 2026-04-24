@@ -551,30 +551,18 @@ export async function POST(request: NextRequest) {
 }
 ```
 
-- [ ] **Step 3: Local verification (without live webhook)**
+- [ ] **Step 3: Verification strategy — Vercel preview only**
 
-Simulate a signed Beehiiv event locally — use Svix's test-signature tool or temporarily bypass verification with a dev flag. Easiest path: deploy to preview and test end-to-end there. For local-only testing, post a mocked payload with signature disabled:
+Do not add any local dev bypass. Webhook signature verification must be on in every environment. Testing path:
 
-Temporarily add at the top of the route (remove before prod):
-```typescript
-if (process.env.NODE_ENV === 'development' && request.headers.get('x-dev-skip-svix') === '1') {
-  // dev bypass
-}
-```
+- Push this branch to GitHub; Vercel auto-creates a preview URL.
+- Register the preview URL as the Beehiiv webhook endpoint in Task 6 (temporarily pointing at preview instead of prod).
+- Use Beehiiv's dashboard "Test Endpoint" button to send a signed test event.
+- Verify Vercel function logs show `200` and `[beehiiv webhook] enrolled ...`.
 
-Then:
-```bash
-curl -X POST http://localhost:3000/api/webhooks/beehiiv \
-  -H "Content-Type: application/json" \
-  -H "x-dev-skip-svix: 1" \
-  -d '{"type":"subscription.created","data":{"id":"sub_test","email":"test+whook@example.com"}}'
-```
+This avoids leaving security-bypassing code paths in the repo.
 
-Expected: HTTP 200 `{"ok":true}`. SendGrid Marketing Contacts should now show the test email in `welcome_series` list.
-
-**Remove the dev bypass before Step 4.**
-
-- [ ] **Step 4: Checkpoint** — user reviews both files + local test output.
+- [ ] **Step 4: Checkpoint** — user reviews both files.
 
 ---
 
@@ -898,12 +886,17 @@ cat vacationpro/vercel.json
 
 If there's a `crons:` entry targeting the welcome-sequence path, remove it.
 
-- [ ] **Step 3: Delete the files**
+- [ ] **Step 3: Move legacy files to `_deleted/` (git-tracked soft-delete)**
+
+Instead of hard deletion, move the files so we have a graceful rollback path:
 
 ```bash
-rm vacationpro/src/lib/email/welcome-sequence.ts
-rm -r vacationpro/src/app/api/newsletter/welcome-sequence
+mkdir -p vacationpro/src/_deleted
+git mv vacationpro/src/lib/email/welcome-sequence.ts vacationpro/src/_deleted/welcome-sequence.ts.legacy
+git mv vacationpro/src/app/api/newsletter/welcome-sequence vacationpro/src/_deleted/api-welcome-sequence.legacy
 ```
+
+Note the `.legacy` suffix — this keeps them out of Next.js routing while preserving history.
 
 - [ ] **Step 4: Verify build still passes**
 

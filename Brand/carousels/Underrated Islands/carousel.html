@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>5 Underrated Caribbean Islands You've Never Heard Of</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #1a1a1a; padding: 40px; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1080px); gap: 40px; }
+    .slide {
+      width: 1080px; height: 1080px;
+      position: relative; overflow: hidden;
+      color: #fff;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 80px;
+    }
+    img.slide-photo {
+      position: absolute; inset: 0; z-index: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+    }
+    .photo-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background:
+        linear-gradient(180deg, rgba(15,46,26,0) 35%, rgba(15,46,26,0.98) 85%),
+        linear-gradient(180deg, rgba(15,46,26,0.5) 0%, rgba(15,46,26,0) 25%);
+    }
+    .cover-overlay {
+      background:
+        linear-gradient(180deg, rgba(15,46,26,0.45) 0%, rgba(15,46,26,0.85) 100%) !important;
+    }
+    .slide > h1, .slide > h2, .slide > .body, .slide > .price-pill { position: relative; z-index: 2; }
+    .eyebrow {
+      font-size: 22px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 4px;
+      color: #4ac850;
+      position: absolute; top: 80px; left: 80px; z-index: 2;
+    }
+    .brand-footer {
+      position: absolute; bottom: 80px; right: 80px;
+      display: flex; align-items: center; gap: 16px;
+      font-size: 20px; font-weight: 700; z-index: 2;
+    }
+    .brand-logo { width: 44px; height: 44px; display: block; }
+    h1 { font-size: 96px; font-weight: 900; letter-spacing: -0.03em; line-height: 1; margin-bottom: 32px; }
+    h2 { font-size: 64px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 16px; }
+    .body { font-size: 28px; font-weight: 500; line-height: 1.5; max-width: 800px; }
+    .rank-badge {
+      position: absolute; top: 80px; left: 80px; z-index: 2;
+      color: #f59e0b;
+      letter-spacing: -0.04em; line-height: 0.9;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.6);
+      font-weight: 900;
+    }
+    .rank-badge .rank-hash { font-size: 120px; opacity: 0.9; margin-right: 4px; }
+    .rank-badge .rank-num { font-size: 200px; }
+    .price-pill {
+      align-self: flex-start;
+      padding: 10px 22px; border-radius: 999px;
+      background: #4ac850; color: #fff;
+      font-size: 20px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      margin-top: 20px; margin-bottom: 80px;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+
+    <!-- Slide 1: COVER -->
+    <div class="slide">
+      <img class="slide-photo" src="cover.png"><div class="photo-overlay cover-overlay"></div>
+      <div class="eyebrow">HIDDEN CARIBBEAN · UNDISCOVERED</div>
+      <h1 style="margin-bottom: 24px;">5 underrated<br>Caribbean islands<br>you've never<br>heard of.</h1>
+      <div class="body" style="margin-bottom: 80px;">Zero crowds. Zero chains. Zero regret →</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 2: #5 -->
+    <div class="slide">
+      <img class="slide-photo" src="5.webp"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">5</span></div>
+      <h2>Nevis</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">St. Kitts & Nevis</div>
+      <div class="body" style="margin-top:12px;">The quiet sister-island of St. Kitts. One luxury resort, rainforest, and zero crowds.</div>
+      <div class="price-pill">36 sq miles</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 3: #4 -->
+    <div class="slide">
+      <img class="slide-photo" src="4.jpg"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">4</span></div>
+      <h2>Bequia</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">St. Vincent & the Grenadines</div>
+      <div class="body" style="margin-top:12px;">Sailboat culture, 7-mile beaches, and zero big chains. Feels like the 1970s Caribbean.</div>
+      <div class="price-pill">7 sq miles</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 4: #3 -->
+    <div class="slide">
+      <img class="slide-photo" src="3.jpg"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">3</span></div>
+      <h2>Dominica</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Dominica (not the DR)</div>
+      <div class="body" style="margin-top:12px;">The "Nature Island." Rainforests, waterfalls, hot springs, and a boiling lake.</div>
+      <div class="price-pill">Eco-travel</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 5: #2 -->
+    <div class="slide">
+      <img class="slide-photo" src="2.webp"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">2</span></div>
+      <h2>Anguilla</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Anguilla (British Overseas Territory)</div>
+      <div class="body" style="margin-top:12px;">33 beaches, zero high-rises, and one of the Caribbean's best fine-dining scenes.</div>
+      <div class="price-pill">Fine-dining capital</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 6: #1 -->
+    <div class="slide">
+      <img class="slide-photo" src="1.png"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">1</span></div>
+      <h2>Culebra</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Puerto Rico</div>
+      <div class="body" style="margin-top:12px;">Home to Flamenco Beach — consistently ranked top-3 beaches in the world. No passport needed.</div>
+      <div class="price-pill">No passport required</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 7: CTA — Save -->
+    <div class="slide" style="background: #4ac850;">
+      <div class="eyebrow" style="color: #fff8ec;">SAVE THIS POST</div>
+      <h1 style="margin-bottom: 24px;">Save this for<br>your next trip.</h1>
+      <div class="body" style="margin-bottom: 80px;">Follow @vacationpro for more Caribbean finds every week.</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ranked: 5 Best Overwater Bungalow Resorts in the Caribbean</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #1a1a1a; padding: 40px; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1080px); gap: 40px; }
+    .slide {
+      width: 1080px; height: 1080px;
+      position: relative; overflow: hidden;
+      color: #fff;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 80px;
+    }
+    img.slide-photo {
+      position: absolute; inset: 0; z-index: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+    }
+    .photo-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background:
+        linear-gradient(180deg, rgba(15,46,26,0) 35%, rgba(15,46,26,0.98) 85%),
+        linear-gradient(180deg, rgba(15,46,26,0.5) 0%, rgba(15,46,26,0) 25%);
+    }
+    .cover-overlay {
+      background:
+        linear-gradient(180deg, rgba(15,46,26,0.45) 0%, rgba(15,46,26,0.85) 100%) !important;
+    }
+    .slide > h1, .slide > h2, .slide > .body, .slide > .price-pill { position: relative; z-index: 2; }
+    .eyebrow {
+      font-size: 22px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 4px;
+      color: #4ac850;
+      position: absolute; top: 80px; left: 80px; z-index: 2;
+    }
+    .brand-footer {
+      position: absolute; bottom: 80px; right: 80px;
+      display: flex; align-items: center; gap: 16px;
+      font-size: 20px; font-weight: 700; z-index: 2;
+    }
+    .brand-logo { width: 44px; height: 44px; display: block; }
+    h1 { font-size: 96px; font-weight: 900; letter-spacing: -0.03em; line-height: 1; margin-bottom: 32px; }
+    h2 { font-size: 64px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 16px; }
+    .body { font-size: 28px; font-weight: 500; line-height: 1.5; max-width: 800px; }
+    .rank-badge {
+      position: absolute; top: 80px; left: 80px; z-index: 2;
+      color: #f59e0b;
+      letter-spacing: -0.04em; line-height: 0.9;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.6);
+      font-weight: 900;
+    }
+    .rank-badge .rank-hash { font-size: 120px; opacity: 0.9; margin-right: 4px; }
+    .rank-badge .rank-num { font-size: 200px; }
+    .price-pill {
+      align-self: flex-start;
+      padding: 10px 22px; border-radius: 999px;
+      background: #4ac850; color: #fff;
+      font-size: 20px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      margin-top: 20px; margin-bottom: 80px;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+
+    <!-- Slide 1: COVER -->
+    <div class="slide">
+      <img class="slide-photo" src="cover.png"><div class="photo-overlay cover-overlay"></div>
+      <div class="eyebrow">RANKED · OVERWATER · CARIBBEAN</div>
+      <h1 style="margin-bottom: 24px;">Ranked:<br>5 best overwater<br>bungalow resorts<br>in the Caribbean.</h1>
+      <div class="body" style="margin-bottom: 80px;">The rarest rooms in the region →</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 2: #5 -->
+    <div class="slide">
+      <img class="slide-photo" src="5.jpg"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">5</span></div>
+      <h2>Sandals South Coast</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Whitehouse, Jamaica</div>
+      <div class="body" style="margin-top:12px;">Overwater villas on a calm south-coast lagoon — quieter than the Montego Bay crowd.</div>
+      <div class="price-pill">from $750/night</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 3: #4 -->
+    <div class="slide">
+      <img class="slide-photo" src="4.webp"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">4</span></div>
+      <h2>Sandals Halcyon Beach</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Castries, St. Lucia</div>
+      <div class="body" style="margin-top:12px;">Overwater hammocks and bungalow suites tucked into a quiet cove. Boutique energy.</div>
+      <div class="price-pill">from $680/night</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 4: #3 -->
+    <div class="slide">
+      <img class="slide-photo" src="3.jpg"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">3</span></div>
+      <h2>Sandals Royal Caribbean</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Montego Bay, Jamaica</div>
+      <div class="body" style="margin-top:12px;">The original Caribbean overwater villas. Private offshore island access included.</div>
+      <div class="price-pill">from $850/night</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 5: #2 -->
+    <div class="slide">
+      <img class="slide-photo" src="2.jpg"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">2</span></div>
+      <h2>Sandals Grande St. Lucian</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Gros Islet, St. Lucia</div>
+      <div class="body" style="margin-top:12px;">Glass-floor bungalows with panoramic ocean views. The honeymoon shot of the Caribbean.</div>
+      <div class="price-pill">from $900/night</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 6: #1 -->
+    <div class="slide">
+      <img class="slide-photo" src="1.jpg"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">1</span></div>
+      <h2>Palafitos at El Dorado Maroma</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Riviera Maya, Mexico</div>
+      <div class="body" style="margin-top:12px;">The Caribbean's answer to Bora Bora. The only true overwater stilts on this coast.</div>
+      <div class="price-pill">from $1,100/night</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 7: CTA — Save -->
+    <div class="slide" style="background: #4ac850;">
+      <div class="eyebrow" style="color: #fff8ec;">SAVE THIS POST</div>
+      <h1 style="margin-bottom: 24px;">Save this for<br>your next trip.</h1>
+      <div class="body" style="margin-bottom: 80px;">Follow @vacationpro for more all-inclusive finds every week.</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+  </div>
+</body>
+</html>

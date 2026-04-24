@@ -62,6 +62,16 @@
     .slide-green .slide-photo { display: none; }
     .slide-green .price { color: #fff; }
     .slide-green .eyebrow { color: #fff8ec; }
+
+    /* Ranked listicle: Amber rank badge */
+    .rank-badge {
+      position: absolute; top: 80px; left: 80px; z-index: 2;
+      font-size: 200px; font-weight: 900; color: #f59e0b;
+      letter-spacing: -0.04em; line-height: 1;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    }
+    .rank-badge .rank-num { font-size: 200px; }
+    .rank-badge .rank-hash { font-size: 120px; vertical-align: top; margin-right: 4px; opacity: 0.9; }
   </style>
 </head>
 <body>
@@ -170,6 +180,37 @@
       <div class="eyebrow">GET THE FULL BREAKDOWN</div>
       <h1>vacationpro.co</h1>
       <div class="body" style="margin-top: 24px;">Every deal we verify. Every catch we find. Monday and Thursday in your inbox.</div>
+      <div class="brand-footer"><div class="brand-dot"></div>VacationPro</div>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- NEW VARIANTS (Apr 18) — Ranked listicle + CTA alternatives  -->
+    <!-- ========================================================== -->
+
+    <!-- Ranked entry variant (use for engagement listicle posts) -->
+    <div class="slide">
+      <div class="slide-photo" style="background-image: url('https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1600')"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">10</span></div>
+      <div class="eyebrow" style="left: auto; right: 80px;">CARIBBEAN · ADULTS-ONLY</div>
+      <h2>Sandals Royal Bahamian</h2>
+      <div class="body" style="color:#fff8ec; margin-bottom:12px; font-weight:700;">Nassau, Bahamas · from $412/night</div>
+      <div class="body">Private offshore island, 10 restaurants, and the best swim-up suites in the chain.</div>
+      <div class="brand-footer"><div class="brand-dot"></div>VacationPro</div>
+    </div>
+
+    <!-- CTA variant: Save (engagement posts) -->
+    <div class="slide slide-green">
+      <div class="eyebrow">SAVE THIS POST</div>
+      <h1>Save this for<br>your next trip.</h1>
+      <div class="body" style="margin-top: 24px;">Follow @vacationpro for more all-inclusive finds.</div>
+      <div class="brand-footer"><div class="brand-dot"></div>VacationPro</div>
+    </div>
+
+    <!-- CTA variant: ManyChat keyword (lead gen posts) -->
+    <div class="slide slide-green">
+      <div class="eyebrow">GET THE GUIDE</div>
+      <h1>Comment<br>"PARADISE"</h1>
+      <div class="body" style="margin-top: 24px;">We'll DM you the full breakdown — resorts, prices, and booking windows.</div>
       <div class="brand-footer"><div class="brand-dot"></div>VacationPro</div>
     </div>
 

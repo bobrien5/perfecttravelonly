@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VacationPro Newsletter Header</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #1a1a1a; padding: 40px; }
+    .grid { display: grid; grid-template-columns: 1280px; gap: 40px; }
+    .slide {
+      width: 1280px; height: 400px;
+      background: #4ac850;
+      position: relative; overflow: hidden;
+      color: #fff;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 0 80px;
+    }
+    .slide > * { position: relative; z-index: 2; }
+    .eyebrow {
+      font-size: 18px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 4px;
+      color: #fff8ec;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 80px; font-weight: 900;
+      letter-spacing: -0.03em; line-height: 1;
+      margin-bottom: 16px;
+    }
+    .tagline {
+      font-size: 22px; font-weight: 500; line-height: 1.4;
+      color: #fff8ec;
+      max-width: 800px;
+    }
+    .brand-corner {
+      position: absolute; top: 40px; right: 80px; z-index: 2;
+      display: flex; align-items: center; gap: 14px;
+      font-size: 22px; font-weight: 800;
+    }
+    .brand-logo { width: 48px; height: 48px; display: block; }
+    .accent-circle {
+      position: absolute;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      right: -180px; bottom: -280px;
+      z-index: 1;
+    }
+    .accent-circle-2 {
+      position: absolute;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      background: rgba(255, 248, 236, 0.12);
+      right: 40px; top: -100px;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+
+    <!-- Variant 1: Tagline-led -->
+    <div class="slide">
+      <div class="accent-circle"></div>
+      <div class="accent-circle-2"></div>
+      <div class="brand-corner"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+      <div class="eyebrow">VACATION PACKAGES · EVERY WEEK</div>
+      <h1>Paradise, packaged.</h1>
+      <div class="tagline">Hand-picked all-inclusive deals and Caribbean escapes delivered to your inbox — so you can stop scrolling and start booking.</div>
+    </div>
+
+    <!-- Variant 2: Big question hook -->
+    <div class="slide">
+      <div class="accent-circle"></div>
+      <div class="accent-circle-2"></div>
+      <div class="brand-corner"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+      <div class="eyebrow">THE VACATIONPRO WEEKLY</div>
+      <h1>Your next trip,<br>already researched.</h1>
+      <div class="tagline">Vacation packages, resort reviews, and Caribbean travel deals — curated weekly.</div>
+    </div>
+
+    <!-- Variant 3: Minimal + bold -->
+    <div class="slide" style="padding: 0 96px;">
+      <div class="accent-circle"></div>
+      <div class="brand-corner"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+      <div class="eyebrow">VACATION PACKAGES, CURATED</div>
+      <h1 style="font-size: 96px;">Book the trip.</h1>
+      <div class="tagline">All-inclusive deals, resort reviews, and travel hacks every week.</div>
+    </div>
+
+  </div>
+</body>
+</html>

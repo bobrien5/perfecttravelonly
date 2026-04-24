@@ -45,3 +45,8 @@ next-env.d.ts
 API Keys/
 Marketing/.keys
 *.key
+
+# Subscriber exports / imports (contain PII — never commit)
+SendGrid Data.csv
+*-beehiiv-import.csv
+*-sendgrid-export.csv
