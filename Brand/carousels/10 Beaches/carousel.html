@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Top 10 Caribbean Beaches Ranked</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #1a1a1a; padding: 40px; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1080px); gap: 40px; }
+    .slide { width: 1080px; height: 1080px; position: relative; overflow: hidden; color: #fff; display: flex; flex-direction: column; justify-content: flex-end; padding: 80px; }
+    img.slide-photo { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .photo-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(15,46,26,0) 35%, rgba(15,46,26,0.98) 85%), linear-gradient(180deg, rgba(15,46,26,0.5) 0%, rgba(15,46,26,0) 25%); }
+    .cover-overlay { background: linear-gradient(180deg, rgba(15,46,26,0.35) 0%, rgba(15,46,26,0.85) 100%) !important; }
+    .slide > h1, .slide > h2, .slide > .body, .slide > .tag-pill { position: relative; z-index: 2; }
+    .eyebrow { font-size: 22px; font-weight: 700; text-transform: uppercase; letter-spacing: 4px; color: #4ac850; position: absolute; top: 80px; left: 80px; z-index: 2; }
+    .brand-footer { position: absolute; bottom: 80px; right: 80px; display: flex; align-items: center; gap: 16px; font-size: 20px; font-weight: 700; z-index: 2; }
+    .brand-logo { width: 44px; height: 44px; display: block; }
+    h1 { font-size: 96px; font-weight: 900; letter-spacing: -0.03em; line-height: 1; margin-bottom: 32px; }
+    h2 { font-size: 64px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 16px; }
+    .body { font-size: 28px; font-weight: 500; line-height: 1.5; max-width: 840px; }
+    .rank-badge { position: absolute; top: 80px; left: 80px; z-index: 2; color: #f59e0b; letter-spacing: -0.04em; line-height: 0.9; text-shadow: 0 4px 24px rgba(0,0,0,0.7); font-weight: 900; }
+    .rank-badge .rank-hash { font-size: 120px; opacity: 0.9; margin-right: 4px; }
+    .rank-badge .rank-num { font-size: 200px; }
+    .tag-pill { align-self: flex-start; padding: 10px 22px; border-radius: 999px; background: #4ac850; color: #fff; font-size: 20px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: 20px; margin-bottom: 80px; }
+  </style>
+</head>
+<body>
+  <div class="grid">
+
+    <div class="slide">
+      <img class="slide-photo" src="cover.png"><div class="photo-overlay cover-overlay"></div>
+      <div class="eyebrow">RANKED · CARIBBEAN BEACHES</div>
+      <h1 style="margin-bottom: 24px;">Top 10<br>Caribbean beaches,<br>ranked.</h1>
+      <div class="body" style="margin-bottom: 80px;">The 10 best strips of sand in the region →</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <div class="slide">
+      <img class="slide-photo" src="10.png"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">10</span></div>
+      <h2>Shoal Bay East</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Anguilla</div>
+      <div class="body" style="margin-top:12px;">Two miles of powder-fine sand and neon-turquoise water. Reef-protected and almost always calm.</div>
+      <div class="tag-pill">Best for calm swimming</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <div class="slide">
+      <img class="slide-photo" src="9.png"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">9</span></div>
+      <h2>Trunk Bay</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">St. John, USVI</div>
+      <div class="body" style="margin-top:12px;">National Park protected, offshore snorkel trail, and the view from the overlook is unreal.</div>
+      <div class="tag-pill">Best for snorkeling</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <div class="slide">
+      <img class="slide-photo" src="8.png"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">8</span></div>
+      <h2>Eagle Beach</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Aruba</div>
+      <div class="body" style="margin-top:12px;">The iconic divi-divi trees. Wide soft-sand stretches. Outside hurricane belt, so it's a sure thing.</div>
+      <div class="tag-pill">Most iconic tree</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <div class="slide">
+      <img class="slide-photo" src="7.png"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">7</span></div>
+      <h2>Bottom Bay</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Barbados</div>
+      <div class="body" style="margin-top:12px;">Dramatic coral cliffs framing a hidden cove. Swimming isn't easy here — but the view is unmatched.</div>
+      <div class="tag-pill">Most dramatic</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <div class="slide">
+      <img class="slide-photo" src="6.png"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">6</span></div>
+      <h2>Pigeon Point</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Tobago</div>
+      <div class="body" style="margin-top:12px;">That iconic thatched jetty. Shallow protected water. The postcard of the southern Caribbean.</div>
+      <div class="tag-pill">Postcard famous</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <div class="slide">
+      <img class="slide-photo" src="5.png"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">5</span></div>
+      <h2>Orient Bay</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">St. Martin</div>
+      <div class="body" style="margin-top:12px;">Two miles of sand packed with colorful beach clubs. French Caribbean energy at its best.</div>
+      <div class="tag-pill">Best beach-club scene</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <div class="slide">
+      <img class="slide-photo" src="4.png"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">4</span></div>
+      <h2>Jumby Bay</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Antigua</div>
+      <div class="body" style="margin-top:12px;">Private-island beach only reachable by boat. Sea turtles nest here every summer.</div>
+      <div class="tag-pill">Private & secluded</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <div class="slide">
+      <img class="slide-photo" src="3.png"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">3</span></div>
+      <h2>Varadero</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Cuba</div>
+      <div class="body" style="margin-top:12px;">12 miles of sand that feels like flour. Vintage cars line the coast road. Nowhere else like it.</div>
+      <div class="tag-pill">Longest white sand</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <div class="slide">
+      <img class="slide-photo" src="2.png"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">2</span></div>
+      <h2>Pink Sand Beach</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Harbour Island, Bahamas</div>
+      <div class="body" style="margin-top:12px;">3 miles of rose-pink sand. The color comes from crushed red coral — a natural phenomenon.</div>
+      <div class="tag-pill">Only pink beach</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <div class="slide">
+      <img class="slide-photo" src="1.png"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">1</span></div>
+      <h2>Flamenco Beach</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Culebra, Puerto Rico</div>
+      <div class="body" style="margin-top:12px;">Consistently ranked top 3 beaches in the world. And no passport needed for US citizens.</div>
+      <div class="tag-pill">#1 in the Caribbean</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <div class="slide" style="background: #4ac850;">
+      <div class="eyebrow" style="color: #fff8ec;">SAVE THIS POST</div>
+      <h1 style="margin-bottom: 24px;">Save this for<br>your next trip.</h1>
+      <div class="body" style="margin-bottom: 80px;">Follow @vacationpro for more Caribbean finds every week.</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+  </div>
+</body>
+</html>

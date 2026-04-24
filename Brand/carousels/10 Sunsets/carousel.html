@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ranked: 10 Most Stunning Sunsets in the Caribbean</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #1a1a1a; padding: 40px; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1080px); gap: 40px; }
+    .slide {
+      width: 1080px; height: 1080px;
+      position: relative; overflow: hidden;
+      color: #fff;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 80px;
+    }
+    img.slide-photo {
+      position: absolute; inset: 0; z-index: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+    }
+    .photo-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background:
+        linear-gradient(180deg, rgba(15,46,26,0) 35%, rgba(15,46,26,0.98) 85%),
+        linear-gradient(180deg, rgba(15,46,26,0.5) 0%, rgba(15,46,26,0) 25%);
+    }
+    .cover-overlay {
+      background:
+        linear-gradient(180deg, rgba(15,46,26,0.35) 0%, rgba(15,46,26,0.85) 100%) !important;
+    }
+    .slide > h1, .slide > h2, .slide > .body, .slide > .tag-pill { position: relative; z-index: 2; }
+    .eyebrow {
+      font-size: 22px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 4px;
+      color: #4ac850;
+      position: absolute; top: 80px; left: 80px; z-index: 2;
+    }
+    .brand-footer {
+      position: absolute; bottom: 80px; right: 80px;
+      display: flex; align-items: center; gap: 16px;
+      font-size: 20px; font-weight: 700; z-index: 2;
+    }
+    .brand-logo { width: 44px; height: 44px; display: block; }
+    h1 { font-size: 96px; font-weight: 900; letter-spacing: -0.03em; line-height: 1; margin-bottom: 32px; }
+    h2 { font-size: 64px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 16px; }
+    .body { font-size: 28px; font-weight: 500; line-height: 1.5; max-width: 840px; }
+    .rank-badge {
+      position: absolute; top: 80px; left: 80px; z-index: 2;
+      color: #f59e0b;
+      letter-spacing: -0.04em; line-height: 0.9;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.7);
+      font-weight: 900;
+    }
+    .rank-badge .rank-hash { font-size: 120px; opacity: 0.9; margin-right: 4px; }
+    .rank-badge .rank-num { font-size: 200px; }
+    .tag-pill {
+      align-self: flex-start;
+      padding: 10px 22px; border-radius: 999px;
+      background: #4ac850; color: #fff;
+      font-size: 20px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      margin-top: 20px; margin-bottom: 80px;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+
+    <!-- Slide 1: COVER -->
+    <div class="slide">
+      <img class="slide-photo" src="cover.png"><div class="photo-overlay cover-overlay"></div>
+      <div class="eyebrow">RANKED · CARIBBEAN SUNSETS</div>
+      <h1 style="margin-bottom: 24px;">Ranked:<br>10 most stunning<br>sunsets in<br>the Caribbean.</h1>
+      <div class="body" style="margin-bottom: 80px;">The spots worth flying for just to watch the sky →</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 2: #10 -->
+    <div class="slide">
+      <img class="slide-photo" src="10.png"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">10</span></div>
+      <h2>Willemstad Harbor</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Curaçao</div>
+      <div class="body" style="margin-top:12px;">Pastel Dutch-colonial rowhouses reflected in a mirror-still harbor. Nowhere else looks like this.</div>
+      <div class="tag-pill">Cityscape sunset</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 3: #9 -->
+    <div class="slide">
+      <img class="slide-photo" src="9.png"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">9</span></div>
+      <h2>Cane Bay</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">St. Croix, USVI</div>
+      <div class="body" style="margin-top:12px;">Quiet cove on the north shore. Soft pastel skies and almost nobody on the beach.</div>
+      <div class="tag-pill">Quiet & secluded</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 4: #8 -->
+    <div class="slide">
+      <img class="slide-photo" src="8.png"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">8</span></div>
+      <h2>Drake's Seat</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">St. Thomas, USVI</div>
+      <div class="body" style="margin-top:12px;">Hilltop overlook of Magens Bay with the BVI islands stretching to the horizon.</div>
+      <div class="tag-pill">Panoramic viewpoint</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 5: #7 -->
+    <div class="slide">
+      <img class="slide-photo" src="7.png"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">7</span></div>
+      <h2>Grace Bay</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Turks & Caicos</div>
+      <div class="body" style="margin-top:12px;">12 miles of powder-white sand and impossibly clear water under a blush-pink sky.</div>
+      <div class="tag-pill">Best beach sunset</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 6: #6 -->
+    <div class="slide">
+      <img class="slide-photo" src="6.png"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">6</span></div>
+      <h2>Seven Mile Beach</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Grand Cayman</div>
+      <div class="body" style="margin-top:12px;">The classic Caribbean sunset — warm coral sky, gentle waves, and one leaning palm.</div>
+      <div class="tag-pill">Postcard perfect</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 7: #5 -->
+    <div class="slide">
+      <img class="slide-photo" src="5.png"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">5</span></div>
+      <h2>Magens Bay</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">St. Thomas, USVI</div>
+      <div class="body" style="margin-top:12px;">Horseshoe cove fringed with palms. The mountains behind turn gold at dusk.</div>
+      <div class="tag-pill">Iconic cove</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 8: #4 -->
+    <div class="slide">
+      <img class="slide-photo" src="4.png"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">4</span></div>
+      <h2>West Coast</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Barbados</div>
+      <div class="body" style="margin-top:12px;">Fiery orange skies nightly on the Platinum Coast. Catamaran sunset sails are a must.</div>
+      <div class="tag-pill">Most dramatic sky</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 9: #3 -->
+    <div class="slide">
+      <img class="slide-photo" src="3.png"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">3</span></div>
+      <h2>California Lighthouse</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Aruba</div>
+      <div class="body" style="margin-top:12px;">Rolling dunes, divi-divi trees, and a white lighthouse silhouetted against purple-orange skies.</div>
+      <div class="tag-pill">Unique landscape</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 10: #2 -->
+    <div class="slide">
+      <img class="slide-photo" src="2.png"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">2</span></div>
+      <h2>Seven Mile Beach</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Negril, Jamaica</div>
+      <div class="body" style="margin-top:12px;">The original "green flash" sunset spot. Cliff bars, fishing boats, and a sky that never disappoints.</div>
+      <div class="tag-pill">Cultural classic</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 11: #1 -->
+    <div class="slide">
+      <img class="slide-photo" src="1.png"><div class="photo-overlay"></div>
+      <div class="rank-badge"><span class="rank-hash">#</span><span class="rank-num">1</span></div>
+      <h2>The Pitons</h2>
+      <div class="body" style="color:#fff8ec; font-weight:700;">Soufrière, St. Lucia</div>
+      <div class="body" style="margin-top:12px;">Twin volcanic peaks silhouetted against a pink-and-orange sky. The most iconic sunset in the Caribbean.</div>
+      <div class="tag-pill">#1 in the Caribbean</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+    <!-- Slide 12: CTA — Save -->
+    <div class="slide" style="background: #4ac850;">
+      <div class="eyebrow" style="color: #fff8ec;">SAVE THIS POST</div>
+      <h1 style="margin-bottom: 24px;">Save this for<br>your next trip.</h1>
+      <div class="body" style="margin-bottom: 80px;">Follow @vacationpro for more Caribbean finds every week.</div>
+      <div class="brand-footer"><img src="logo-white.svg" class="brand-logo" alt="">VacationPro</div>
+    </div>
+
+  </div>
+</body>
+</html>
