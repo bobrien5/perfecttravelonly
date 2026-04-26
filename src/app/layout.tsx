@@ -9,12 +9,30 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.vacationpro.co'),
   title: {
-    default: 'VacationPro — The Best Vacation Package Deals in One Place',
+    default: 'VacationPro: The Best Vacation Package Deals in One Place',
     template: '%s | VacationPro',
   },
   description:
-    'Discover all-inclusive escapes, flight + hotel bundles, cruise offers, luxury deals, and limited-time vacation packages. The best vacation deals — all in one place.',
+    'Discover all-inclusive escapes, flight and hotel bundles, cruise offers, luxury deals, and limited-time vacation packages. The best vacation deals, all in one place.',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    siteName: 'VacationPro',
+    images: [
+      {
+        url: '/og-default.png',
+        width: 1200,
+        height: 630,
+        alt: 'VacationPro: The Best Vacation Package Deals in One Place',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/og-default.png'],
+  },
 };
 
 export default function RootLayout({

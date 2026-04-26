@@ -4,7 +4,7 @@ import GHLForm from '@/components/ui/GHLForm';
 const GHL_FORM_ID = 'UZXf7idNHC3qSQSS5YEF';
 
 export const metadata: Metadata = {
-  title: 'Free Webinar: Stop Overpaying for Vacations — VacationPro',
+  title: 'Free Webinar: Stop Overpaying for Vacations',
   description:
     'Discover how smart travelers are booking luxury all-inclusive resorts for a fraction of the public price. Free 60-minute webinar with live Q&A.',
   openGraph: {
@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     description:
       'Discover how smart travelers are booking luxury all-inclusive resorts for a fraction of the public price.',
   },
+  alternates: { canonical: '/webinar' },
 };
 
 export default function WebinarPage() {
@@ -24,7 +25,7 @@ export default function WebinarPage() {
         </div>
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 text-center">
           <p className="text-brand-300 text-sm font-semibold uppercase tracking-widest mb-4">
-            Free Webinar — Limited Spots
+            Free Webinar: Limited Spots
           </p>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
             Stop Overpaying
@@ -33,7 +34,7 @@ export default function WebinarPage() {
           </h1>
           <p className="text-lg text-brand-100 max-w-2xl mx-auto mb-8">
             Discover how smart travelers are booking luxury all-inclusive resorts for
-            a fraction of the public price — and how you can do the same.
+            a fraction of the public price, and how you can do the same.
           </p>
           <div className="flex justify-center gap-6 text-sm text-brand-200">
             <span>60 Minutes</span>
@@ -81,7 +82,7 @@ export default function WebinarPage() {
               {
                 num: '06',
                 title: 'Live Q&A',
-                desc: 'Ask anything — get real, unscripted answers from our team.',
+                desc: 'Ask anything. Get real, unscripted answers from our team.',
               },
             ].map((item) => (
               <div
@@ -107,7 +108,7 @@ export default function WebinarPage() {
               Reserve Your Free Spot
             </h2>
             <p className="text-gray-600">
-              Enter your details below and we&apos;ll send you everything you need —
+              Enter your details below and we&apos;ll send you everything you need:
               webinar time, link, and a reminder.
             </p>
           </div>
@@ -146,7 +147,7 @@ export default function WebinarPage() {
             Why Listen to Us
           </h2>
           <p className="text-gray-600 mb-4">
-            VacationPro grew out of All-Inclusive HQ — one of the web&apos;s most
+            VacationPro grew out of All-Inclusive HQ, one of the web&apos;s most
             trusted resources for all-inclusive travel. We&apos;re a media and education
             brand. Our job is to cut through the noise and share what genuinely works.
           </p>
@@ -173,7 +174,7 @@ export default function WebinarPage() {
             {[
               {
                 q: 'Is this a timeshare pitch?',
-                a: "No. This is an educational webinar about vacation club memberships — a different model than traditional timeshares. We'll explain exactly how it works. You won't be pressured into anything.",
+                a: "No. This is an educational webinar about vacation club memberships, a different model than traditional timeshares. We'll explain exactly how it works. You won't be pressured into anything.",
               },
               {
                 q: 'Is there a cost to attend?',
@@ -185,7 +186,7 @@ export default function WebinarPage() {
               },
               {
                 q: 'Will I be pressured to buy something?',
-                a: "You'll hear about the membership option — that's part of what we cover honestly. But there's no hard sell.",
+                a: "You'll hear about the membership option. That's part of what we cover honestly. But there's no hard sell.",
               },
               {
                 q: "What if I can't make the live time?",

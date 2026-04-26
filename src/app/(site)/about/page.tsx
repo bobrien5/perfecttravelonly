@@ -5,6 +5,7 @@ import NewsletterSignup from '@/components/ui/NewsletterSignup';
 export const metadata: Metadata = {
   title: 'About VacationPro',
   description: 'VacationPro helps travelers discover the best vacation package deals in one place. Learn about our mission, editorial standards, and team.',
+  alternates: { canonical: '/about' },
 };
 
 export default function AboutPage() {
@@ -15,14 +16,14 @@ export default function AboutPage() {
       <div className="prose prose-lg max-w-none">
         <p className="text-xl text-gray-600 mb-8">
           VacationPro is your trusted destination for finding the best vacation package deals on the
-          internet — all in one place.
+          internet, all in one place.
         </p>
 
         <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">Our Mission</h2>
         <p className="text-gray-600 leading-relaxed">
           We believe everyone deserves an incredible vacation, and finding the right deal shouldn&apos;t
           require hours of searching across dozens of websites. VacationPro curates the best vacation
-          packages from trusted travel partners and presents them in a clear, transparent way — so you
+          packages from trusted travel partners and presents them in a clear, transparent way, so you
           can compare deals, understand what&apos;s included, and book with confidence.
         </p>
 
@@ -46,7 +47,7 @@ export default function AboutPage() {
           Every deal on VacationPro is reviewed before it&apos;s published. We verify pricing, check what&apos;s
           included, and provide our honest editorial assessment. When a deal is an affiliate link, we
           say so. When a deal requires a timeshare presentation, we disclose it clearly. Transparency
-          isn&apos;t optional — it&apos;s foundational to how we operate.
+          isn&apos;t optional. It&apos;s foundational to how we operate.
         </p>
 
         <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">How We Make Money</h2>

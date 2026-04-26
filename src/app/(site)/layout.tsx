@@ -22,13 +22,13 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     siteName: 'VacationPro',
-    title: 'VacationPro — The Best Vacation Package Deals in One Place',
+    title: 'VacationPro: The Best Vacation Package Deals in One Place',
     description:
-      'Discover all-inclusive escapes, flight + hotel bundles, cruise offers, luxury deals, and limited-time vacation packages.',
+      'Discover all-inclusive escapes, flight and hotel bundles, cruise offers, luxury deals, and limited-time vacation packages.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'VacationPro — The Best Vacation Package Deals in One Place',
+    title: 'VacationPro: The Best Vacation Package Deals in One Place',
     description:
       'Discover all-inclusive escapes, flight + hotel bundles, cruise offers, luxury deals, and limited-time vacation packages.',
   },

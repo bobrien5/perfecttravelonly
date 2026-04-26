@@ -24,12 +24,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category, slug } = await params;
   const deal = await getDealBySlug(category, slug);
   if (!deal) return {};
+  const cleanTitle = deal.seoTitle.replace(/\s*\|\s*VacationPro\s*$/i, '').replace(/[—–]/g, ',');
+  const cleanDesc = deal.metaDescription.replace(/[—–]/g, ',');
   return {
-    title: deal.seoTitle,
-    description: deal.metaDescription,
+    title: { absolute: cleanTitle },
+    description: cleanDesc,
+    alternates: { canonical: `/deals/${category}/${slug}` },
     openGraph: {
-      title: deal.seoTitle,
-      description: deal.metaDescription,
+      title: cleanTitle,
+      description: cleanDesc,
       images: [{ url: deal.heroImage }],
     },
   };
@@ -116,10 +119,17 @@ export default async function DealPage({ params }: Props) {
               <p className="text-sm text-gray-500">Duration</p>
               <p className="text-lg font-semibold text-gray-900">{deal.duration}</p>
             </div>
-            <div className="bg-gray-50 rounded-xl p-4 text-center">
-              <p className="text-sm text-gray-500">Travel Dates</p>
-              <p className="text-lg font-semibold text-gray-900">{deal.travelDates}</p>
-            </div>
+            {deal.travelDates ? (
+              <div className="bg-gray-50 rounded-xl p-4 text-center">
+                <p className="text-sm text-gray-500">Travel Dates</p>
+                <p className="text-lg font-semibold text-gray-900">{deal.travelDates}</p>
+              </div>
+            ) : (
+              <div className="bg-gray-50 rounded-xl p-4 text-center">
+                <p className="text-sm text-gray-500">Booking Window</p>
+                <p className="text-lg font-semibold text-gray-900">Flexible</p>
+              </div>
+            )}
             <div className="bg-gray-50 rounded-xl p-4 text-center">
               <p className="text-sm text-gray-500">Destination</p>
               <p className="text-lg font-semibold text-gray-900">{deal.destination}</p>

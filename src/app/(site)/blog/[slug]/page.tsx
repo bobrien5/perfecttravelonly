@@ -23,12 +23,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
   if (!post) return {};
+  const rawTitle = post.seoTitle || post.title;
+  const rawDesc = post.metaDescription || post.excerpt;
+  const cleanTitle = rawTitle.replace(/\s*\|\s*VacationPro\s*$/i, '').replace(/[—–]/g, ',');
+  const cleanDesc = rawDesc.replace(/[—–]/g, ',');
   return {
-    title: post.seoTitle || post.title,
-    description: post.metaDescription || post.excerpt,
+    title: { absolute: cleanTitle },
+    description: cleanDesc,
+    alternates: { canonical: `/blog/${slug}` },
     openGraph: {
-      title: post.seoTitle || post.title,
-      description: post.metaDescription || post.excerpt,
+      title: cleanTitle,
+      description: cleanDesc,
       images: post.image ? [{ url: post.image }] : [],
     },
   };
@@ -83,7 +88,7 @@ export default async function BlogPostPage({ params }: Props) {
       </div>
 
       <article>
-        {/* Header — centered, narrow column */}
+        {/* Header: centered, narrow column */}
         <header className="max-w-2xl mx-auto px-4 sm:px-6 text-center pt-4 pb-8">
           {categoryName && (
             <p className="text-xs font-semibold text-brand-600 uppercase tracking-[0.2em] mb-4">
@@ -121,7 +126,7 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         </header>
 
-        {/* Hero Image — full width, no rounded corners */}
+        {/* Hero Image: full width, no rounded corners */}
         {post.image && (
           <div className="w-full max-w-5xl mx-auto mb-10">
             <img

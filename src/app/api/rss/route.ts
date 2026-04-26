@@ -48,9 +48,9 @@ function buildRssXml(deals: Deal[]): string {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>VacationPro — Latest Vacation Deals</title>
+    <title>VacationPro: Latest Vacation Deals</title>
     <link>${SITE_URL}</link>
-    <description>The best vacation package deals updated weekly — all-inclusive escapes, flight + hotel bundles, cruise offers, and more.</description>
+    <description>The best vacation package deals updated weekly. All-inclusive escapes, flight and hotel bundles, cruise offers, and more.</description>
     <language>en-us</language>
     <lastBuildDate>${now}</lastBuildDate>
     <atom:link href="${SITE_URL}/api/rss" rel="self" type="application/rss+xml" />

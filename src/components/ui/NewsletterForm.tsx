@@ -79,7 +79,7 @@ export default function NewsletterForm() {
             Subscribing...
           </span>
         ) : (
-          "Subscribe — It's Free"
+          "Subscribe. It's Free"
         )}
       </button>
       <p className="text-xs text-gray-400 text-center">

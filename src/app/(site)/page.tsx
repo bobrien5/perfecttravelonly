@@ -14,6 +14,11 @@ import {
 import { getAllDestinations } from '@/sanity/lib/fetch';
 import { getAllCategories } from '@/sanity/lib/fetch';
 import { getRecentBlogPosts } from '@/sanity/lib/fetch';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+};
 
 export default async function HomePage() {
   const [featuredDeals, allDeals, allDestinations, allCategories, recentPosts, timeshareDeals] = await Promise.all([

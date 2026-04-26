@@ -9,7 +9,7 @@ export default function TimeshareDisclosure() {
           <h4 className="font-semibold text-amber-800 text-sm">Timeshare Preview Offer</h4>
           <p className="text-sm text-amber-700 mt-1">
             This is a promotional vacation package. A timeshare or resort presentation (approximately 90 minutes)
-            is required during your stay. Eligibility restrictions apply — including age, income, and marital
+            is required during your stay. Eligibility restrictions apply, including age, income, and marital
             status requirements. There is no obligation to purchase. Please review all terms and conditions
             before booking.
           </p>

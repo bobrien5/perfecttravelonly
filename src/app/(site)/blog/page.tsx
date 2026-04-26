@@ -4,9 +4,10 @@ import NewsletterSignup from '@/components/ui/NewsletterSignup';
 import { getAllBlogPosts } from '@/sanity/lib/fetch';
 
 export const metadata: Metadata = {
-  title: 'Travel Blog — Guides, Tips & Deal Alerts',
+  title: 'Travel Blog: Guides, Tips, and Deal Alerts',
   description:
     'Expert travel guides, destination tips, deal breakdowns, and insider advice to help you plan the perfect vacation for less.',
+  alternates: { canonical: '/blog' },
 };
 
 export default async function BlogPage() {

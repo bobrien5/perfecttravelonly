@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Affiliate Disclosure',
   description: 'VacationPro affiliate disclosure. Learn how we earn revenue and how it affects the deals we feature.',
+  alternates: { canonical: '/legal/affiliate-disclosure' },
 };
 
 export default function AffiliateDisclosurePage() {

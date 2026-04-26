@@ -2,8 +2,9 @@ import { Metadata } from 'next';
 import NewsletterForm from '@/components/ui/NewsletterForm';
 
 export const metadata: Metadata = {
-  title: 'Get Vacation Deal Alerts — Subscribe to VacationPro',
+  title: 'Get Vacation Deal Alerts',
   description: 'Get the best vacation deals delivered to your inbox. All-inclusive packages, flight deals, cruise offers, and limited-time travel promotions.',
+  alternates: { canonical: '/newsletter' },
 };
 
 export default function NewsletterPage() {
@@ -31,7 +32,7 @@ export default function NewsletterPage() {
           {[
             {
               title: 'Weekly Deal Roundups',
-              desc: 'A curated selection of the best vacation deals each week — all-inclusive, cruises, flight bundles, and more.',
+              desc: 'A curated selection of the best vacation deals each week. All-inclusive, cruises, flight bundles, and more.',
             },
             {
               title: 'Flash Sale Alerts',
@@ -56,7 +57,7 @@ export default function NewsletterPage() {
           &ldquo;VacationPro&apos;s newsletter helped me find a Cancun all-inclusive deal for $799 that normally
           costs $1,500. Best vacation I&apos;ve ever booked.&rdquo;
         </p>
-        <p className="text-sm text-gray-500">— Sarah M., Newsletter Subscriber</p>
+        <p className="text-sm text-gray-500">Sarah M., Newsletter Subscriber</p>
       </div>
     </div>
   );

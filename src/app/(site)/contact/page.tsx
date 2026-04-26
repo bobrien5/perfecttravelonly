@@ -4,6 +4,7 @@ import ContactForm from '@/components/ui/ContactForm';
 export const metadata: Metadata = {
   title: 'Contact Us',
   description: 'Get in touch with the VacationPro team. Questions about deals, partnerships, or advertising? We\'d love to hear from you.',
+  alternates: { canonical: '/contact' },
 };
 
 export default function ContactPage() {
@@ -41,7 +42,7 @@ export default function ContactPage() {
             <div className="bg-gray-50 rounded-xl p-6 mt-8">
               <h3 className="font-medium text-gray-900 mb-2">Response Time</h3>
               <p className="text-sm text-gray-600">
-                We typically respond within 1–2 business days. For urgent partnership inquiries,
+                We typically respond within 1 to 2 business days. For urgent partnership inquiries,
                 please include &ldquo;URGENT&rdquo; in your subject line.
               </p>
             </div>

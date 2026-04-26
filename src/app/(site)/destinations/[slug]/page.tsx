@@ -28,12 +28,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const destination = await getDestinationBySlug(slug);
   if (!destination) return {};
+  const cleanTitle = destination.seoTitle.replace(/\s*\|\s*VacationPro\s*$/i, '').replace(/[—–]/g, ',');
+  const cleanDesc = destination.metaDescription.replace(/[—–]/g, ',');
   return {
-    title: destination.seoTitle,
-    description: destination.metaDescription,
+    title: { absolute: cleanTitle },
+    description: cleanDesc,
+    alternates: { canonical: `/destinations/${slug}` },
     openGraph: {
-      title: destination.seoTitle,
-      description: destination.metaDescription,
+      title: cleanTitle,
+      description: cleanDesc,
       images: [{ url: destination.heroImage }],
     },
   };

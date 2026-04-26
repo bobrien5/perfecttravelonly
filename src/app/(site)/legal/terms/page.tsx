@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Terms of Use',
   description: 'VacationPro terms of use. Review the terms and conditions for using our website.',
+  alternates: { canonical: '/legal/terms' },
 };
 
 export default function TermsPage() {

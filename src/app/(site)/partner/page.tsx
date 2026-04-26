@@ -2,8 +2,9 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Partner With Us — Advertise on VacationPro',
+  title: 'Partner With Us: Advertise on VacationPro',
   description: 'Reach engaged vacation shoppers. Feature your deals, resorts, and travel products on VacationPro.',
+  alternates: { canonical: '/partner' },
 };
 
 export default function PartnerPage() {
@@ -24,7 +25,7 @@ export default function PartnerPage() {
           },
           {
             title: 'Affiliate Partnerships',
-            desc: 'Join our affiliate program and have your deals listed on VacationPro. We drive qualified traffic to your booking page — you only pay for results.',
+            desc: 'Join our affiliate program and have your deals listed on VacationPro. We drive qualified traffic to your booking page. You only pay for results.',
           },
           {
             title: 'Sponsored Content',
@@ -36,7 +37,7 @@ export default function PartnerPage() {
           },
           {
             title: 'Lead Generation',
-            desc: 'Generate qualified leads for your resort, timeshare, or vacation ownership program. We handle the traffic — you handle the conversions.',
+            desc: 'Generate qualified leads for your resort, timeshare, or vacation ownership program. We handle the traffic. You handle the conversions.',
           },
           {
             title: 'Custom Landing Pages',

@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Disclaimer',
   description: 'VacationPro disclaimer. Important information about deal accuracy, timeshare offers, and third-party bookings.',
+  alternates: { canonical: '/legal/disclaimer' },
 };
 
 export default function DisclaimerPage() {
@@ -35,7 +36,7 @@ export default function DisclaimerPage() {
             preview or promotional offers. These deals may require the following:
           </p>
           <ul className="list-disc pl-6 space-y-1 text-amber-800 text-sm mt-3">
-            <li>Attendance at a timeshare or resort ownership presentation (typically 60–120 minutes)</li>
+            <li>Attendance at a timeshare or resort ownership presentation (typically 60 to 120 minutes)</li>
             <li>Meeting specific eligibility requirements (age, income, marital status)</li>
             <li>Presenting a valid ID and major credit card</li>
             <li>Married or cohabitating couples may be required to attend together</li>
