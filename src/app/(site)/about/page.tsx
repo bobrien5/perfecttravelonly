@@ -3,7 +3,7 @@ import Link from 'next/link';
 import NewsletterSignup from '@/components/ui/NewsletterSignup';
 
 export const metadata: Metadata = {
-  title: 'About VacationPro',
+  title: 'About',
   description: 'VacationPro helps travelers discover the best vacation package deals in one place. Learn about our mission, editorial standards, and team.',
   alternates: { canonical: '/about' },
 };

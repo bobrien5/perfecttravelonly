@@ -25,12 +25,21 @@ export const metadata: Metadata = {
     title: 'VacationPro: The Best Vacation Package Deals in One Place',
     description:
       'Discover all-inclusive escapes, flight and hotel bundles, cruise offers, luxury deals, and limited-time vacation packages.',
+    images: [
+      {
+        url: '/og-default.png',
+        width: 1200,
+        height: 630,
+        alt: 'VacationPro: The Best Vacation Package Deals in One Place',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'VacationPro: The Best Vacation Package Deals in One Place',
     description:
-      'Discover all-inclusive escapes, flight + hotel bundles, cruise offers, luxury deals, and limited-time vacation packages.',
+      'Discover all-inclusive escapes, flight and hotel bundles, cruise offers, luxury deals, and limited-time vacation packages.',
+    images: ['/og-default.png'],
   },
   robots: {
     index: true,
