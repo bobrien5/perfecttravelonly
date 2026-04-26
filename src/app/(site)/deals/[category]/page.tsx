@@ -19,13 +19,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category: slug } = await params;
   const category = await getCategoryBySlug(slug);
   if (!category) return {};
-  const cleanTitle = category.seoTitle.replace(/\s*\|\s*VacationPro\s*$/i, '').replace(/[—–]/g, ',');
-  const cleanDesc = category.metaDescription.replace(/[—–]/g, ',');
+  const cleanTitle = category.seoTitle.replace(/\s*\|\s*VacationPro\s*$/i, '').replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
+  const cleanDesc = category.metaDescription.replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
   return {
     title: { absolute: cleanTitle },
     description: cleanDesc,
     alternates: { canonical: `/deals/${slug}` },
-    openGraph: { title: cleanTitle, description: cleanDesc },
+    openGraph: {
+      title: cleanTitle,
+      description: cleanDesc,
+      images: [{ url: '/og-default.png', width: 1200, height: 630 }],
+    },
   };
 }
 

@@ -28,8 +28,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const destination = await getDestinationBySlug(slug);
   if (!destination) return {};
-  const cleanTitle = destination.seoTitle.replace(/\s*\|\s*VacationPro\s*$/i, '').replace(/[—–]/g, ',');
-  const cleanDesc = destination.metaDescription.replace(/[—–]/g, ',');
+  const cleanTitle = destination.seoTitle.replace(/\s*\|\s*VacationPro\s*$/i, '').replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
+  const cleanDesc = destination.metaDescription.replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
   return {
     title: { absolute: cleanTitle },
     description: cleanDesc,
