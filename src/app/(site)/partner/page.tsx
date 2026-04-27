@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Partner With Us: Advertise on VacationPro',
+  title: 'Partner With Us',
   description: 'Reach engaged vacation shoppers. Feature your deals, resorts, and travel products on VacationPro.',
   alternates: { canonical: '/partner' },
 };
