@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface GHLFormProps {
   formId: string;
@@ -18,22 +18,22 @@ interface GHLFormProps {
  */
 export default function GHLForm({ formId, className = '', height = 609 }: GHLFormProps) {
   const scriptLoaded = useRef(false);
-  const [trackingParams, setTrackingParams] = useState('');
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
-    const pageUrl = window.location.href;
-    const referrer = document.referrer || '';
-    const params = new URLSearchParams({
-      source_page_url: pageUrl,
-      referrer_url: referrer,
-    });
-    setTrackingParams(params.toString());
-  }, []);
+    if (!formId) return;
 
-  useEffect(() => {
-    if (!formId || scriptLoaded.current) return;
+    const iframe = iframeRef.current;
+    if (iframe) {
+      const params = new URLSearchParams({
+        source_page_url: window.location.href,
+        referrer_url: document.referrer || '',
+      });
+      iframe.src = `https://go.vacationpro.co/widget/form/${formId}?${params.toString()}`;
+    }
 
-    // Load the GHL form embed script once
+    if (scriptLoaded.current) return;
+
     const existingScript = document.querySelector(
       'script[src="https://go.vacationpro.co/js/form_embed.js"]'
     );
@@ -61,7 +61,8 @@ export default function GHLForm({ formId, className = '', height = 609 }: GHLFor
   return (
     <div className={className}>
       <iframe
-        src={`https://go.vacationpro.co/widget/form/${formId}${trackingParams ? `?${trackingParams}` : ''}`}
+        ref={iframeRef}
+        src={`https://go.vacationpro.co/widget/form/${formId}`}
         style={{
           width: '100%',
           height: `${height}px`,
