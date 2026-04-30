@@ -25,7 +25,7 @@ function formatCurrency(n: number) {
 interface RevenueData {
   entries: Array<{ date: string; source: string; amount: number }>;
   bySource: Record<string, number>;
-  wowRevenue: number;
+  tristarRevenue: number;
   webinarCount: number;
   total: number;
 }
@@ -71,7 +71,7 @@ export default function AdminDashboardPage() {
           </p>
           {revenue && (
             <p className="text-sm opacity-70 mt-1">
-              Including {revenue.webinarCount} billable webinar attendees ({formatCurrency(revenue.wowRevenue)})
+              Including {revenue.webinarCount} billable webinar attendees ({formatCurrency(revenue.tristarRevenue)})
             </p>
           )}
         </div>
@@ -85,8 +85,8 @@ export default function AdminDashboardPage() {
             />
           ))}
           <StatCard
-            label="WOW Lead Gen"
-            value={formatCurrency(revenue?.wowRevenue || 0)}
+            label="Tristar Lead Gen"
+            value={formatCurrency(revenue?.tristarRevenue || 0)}
             subtitle={`${revenue?.webinarCount || 0} webinars @ $250`}
           />
         </div>
@@ -95,7 +95,7 @@ export default function AdminDashboardPage() {
           <h3 className="text-sm font-medium text-gray-700 mb-4">Revenue by Source</h3>
           <RevenueChart
             entries={revenue?.entries || []}
-            wowRevenue={revenue?.wowRevenue || 0}
+            tristarRevenue={revenue?.tristarRevenue || 0}
           />
         </div>
       </section>

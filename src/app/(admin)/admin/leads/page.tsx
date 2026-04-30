@@ -78,8 +78,8 @@ export default async function LeadsPage() {
           value={data.webinarAttendance}
         />
         <StatCard
-          label="WOW Revenue"
-          value={`$${(data.wowRevenue || 0).toLocaleString()}`}
+          label="Tristar Revenue"
+          value={`$${(data.tristarRevenue || 0).toLocaleString()}`}
           subtitle={`${data.webinarAttendance} @ $250`}
         />
         <StatCard

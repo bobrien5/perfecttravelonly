@@ -56,7 +56,7 @@ export async function GET() {
       pipelines: pipelineData,
       recentOpportunities: recentOpps,
       webinarAttendance: webinarCount || 0,
-      wowRevenue: (webinarCount || 0) * 250,
+      tristarRevenue: (webinarCount || 0) * 250,
     });
   } catch (error) {
     console.error('Leads API error:', error);

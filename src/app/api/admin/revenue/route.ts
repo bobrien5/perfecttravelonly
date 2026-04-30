@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       entries: [],
       bySource: {},
-      wowRevenue: 0,
+      tristarRevenue: 0,
       webinarCount: 0,
       total: 0,
     });
@@ -43,14 +43,14 @@ export async function GET(request: NextRequest) {
   if (end) attendanceQuery = attendanceQuery.lte('attended_at', end);
 
   const { count: webinarCount } = await attendanceQuery;
-  const wowRevenue = (webinarCount || 0) * 250;
+  const tristarRevenue = (webinarCount || 0) * 250;
 
-  const total = Object.values(bySource).reduce((s, v) => s + v, 0) + wowRevenue;
+  const total = Object.values(bySource).reduce((s, v) => s + v, 0) + tristarRevenue;
 
   return NextResponse.json({
     entries: data || [],
     bySource,
-    wowRevenue,
+    tristarRevenue,
     webinarCount: webinarCount || 0,
     total,
   });

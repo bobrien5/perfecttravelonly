@@ -18,7 +18,7 @@ const SOURCE_COLORS: Record<string, string> = {
   affiliate_expedia: '#003580',
   affiliate_travelpayouts: '#FF6B35',
   affiliate_awin: '#2E3191',
-  wow_leads: '#8B5CF6',
+  tristar_leads: '#8B5CF6',
 };
 
 const SOURCE_LABELS: Record<string, string> = {
@@ -28,7 +28,7 @@ const SOURCE_LABELS: Record<string, string> = {
   affiliate_expedia: 'Expedia',
   affiliate_travelpayouts: 'Travelpayouts',
   affiliate_awin: 'Awin',
-  wow_leads: 'WOW Leads',
+  tristar_leads: 'Tristar Leads',
 };
 
 interface RevenueEntry {
@@ -39,10 +39,10 @@ interface RevenueEntry {
 
 interface RevenueChartProps {
   entries: RevenueEntry[];
-  wowRevenue: number;
+  tristarRevenue: number;
 }
 
-export default function RevenueChart({ entries, wowRevenue }: RevenueChartProps) {
+export default function RevenueChart({ entries, tristarRevenue }: RevenueChartProps) {
   // Group entries by week
   const weekMap: Record<string, Record<string, number>> = {};
 
@@ -57,13 +57,13 @@ export default function RevenueChart({ entries, wowRevenue }: RevenueChartProps)
       (weekMap[key][entry.source] || 0) + Number(entry.amount);
   }
 
-  // Add WOW revenue to the current week
+  // Add Tristar revenue to the current week
   const now = new Date();
   const thisWeekStart = new Date(now);
   thisWeekStart.setDate(now.getDate() - now.getDay());
   const currentWeekKey = thisWeekStart.toISOString().split('T')[0];
   if (!weekMap[currentWeekKey]) weekMap[currentWeekKey] = {};
-  weekMap[currentWeekKey].wow_leads = (weekMap[currentWeekKey].wow_leads || 0) + wowRevenue;
+  weekMap[currentWeekKey].tristar_leads = (weekMap[currentWeekKey].tristar_leads || 0) + tristarRevenue;
 
   const chartData = Object.entries(weekMap)
     .sort(([a], [b]) => a.localeCompare(b))
@@ -74,7 +74,7 @@ export default function RevenueChart({ entries, wowRevenue }: RevenueChartProps)
 
   const activeSources = new Set<string>();
   for (const entry of entries) activeSources.add(entry.source);
-  if (wowRevenue > 0) activeSources.add('wow_leads');
+  if (tristarRevenue > 0) activeSources.add('tristar_leads');
 
   if (chartData.length === 0) {
     return (

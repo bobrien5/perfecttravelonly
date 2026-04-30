@@ -29,10 +29,10 @@ export async function getRevenueData(start: string, end: string) {
     if (end) attendanceQuery = attendanceQuery.lte('attended_at', end);
 
     const { count: webinarCount } = await attendanceQuery;
-    const wowRevenue = (webinarCount || 0) * 250;
-    const total = Object.values(bySource).reduce((s, v) => s + v, 0) + wowRevenue;
+    const tristarRevenue = (webinarCount || 0) * 250;
+    const total = Object.values(bySource).reduce((s, v) => s + v, 0) + tristarRevenue;
 
-    return { entries: data || [], bySource, wowRevenue, webinarCount: webinarCount || 0, total };
+    return { entries: data || [], bySource, tristarRevenue, webinarCount: webinarCount || 0, total };
   } catch {
     return null;
   }
@@ -82,7 +82,7 @@ export async function getLeadsSummary() {
       pipelines: pipelineData,
       recentOpportunities: recentOpps,
       webinarAttendance: webinarCount || 0,
-      wowRevenue: (webinarCount || 0) * 250,
+      tristarRevenue: (webinarCount || 0) * 250,
     };
   } catch {
     return null;

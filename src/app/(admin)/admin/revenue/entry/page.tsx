@@ -216,7 +216,7 @@ export default function RevenueEntryPage() {
       {/* Webinar Attendance Form */}
       <div className="bg-white rounded-xl border border-gray-200 p-5">
         <h3 className="text-sm font-semibold text-gray-900 mb-1">Log Webinar Attendance</h3>
-        <p className="text-xs text-gray-500 mb-4">Each billable attendee = $250 WOW Vacations revenue</p>
+        <p className="text-xs text-gray-500 mb-4">Each billable attendee = $250 Tristar revenue</p>
         <form onSubmit={handleWebinarSubmit} className="space-y-4">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <div>

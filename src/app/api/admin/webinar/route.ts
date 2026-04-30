@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
       contact_name,
       contact_email,
       attended_at,
-      lead_source: lead_source || 'wow_vacations',
+      lead_source: lead_source || 'tristar',
       billable: billable !== false,
       notes,
     })
