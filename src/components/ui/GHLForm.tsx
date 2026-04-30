@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface GHLFormProps {
   formId: string;
@@ -18,6 +18,17 @@ interface GHLFormProps {
  */
 export default function GHLForm({ formId, className = '', height = 609 }: GHLFormProps) {
   const scriptLoaded = useRef(false);
+  const [trackingParams, setTrackingParams] = useState('');
+
+  useEffect(() => {
+    const pageUrl = window.location.href;
+    const referrer = document.referrer || '';
+    const params = new URLSearchParams({
+      source_page_url: pageUrl,
+      referrer_url: referrer,
+    });
+    setTrackingParams(params.toString());
+  }, []);
 
   useEffect(() => {
     if (!formId || scriptLoaded.current) return;
@@ -50,7 +61,7 @@ export default function GHLForm({ formId, className = '', height = 609 }: GHLFor
   return (
     <div className={className}>
       <iframe
-        src={`https://go.vacationpro.co/widget/form/${formId}`}
+        src={`https://go.vacationpro.co/widget/form/${formId}${trackingParams ? `?${trackingParams}` : ''}`}
         style={{
           width: '100%',
           height: `${height}px`,
