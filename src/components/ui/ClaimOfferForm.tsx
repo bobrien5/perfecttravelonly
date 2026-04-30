@@ -113,6 +113,14 @@ export default function ClaimOfferForm({
     setStatus('submitting');
     setServerError('');
 
+    const sourcePageUrl = typeof window !== 'undefined' ? window.location.href : '';
+    const referrerUrl = typeof document !== 'undefined' ? document.referrer : '';
+    const params =
+      typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;
+    const utmSource = params?.get('utm_source') || '';
+    const utmMedium = params?.get('utm_medium') || '';
+    const utmCampaign = params?.get('utm_campaign') || '';
+
     try {
       const res = await fetch('/api/ghl/claim-offer', {
         method: 'POST',
@@ -121,6 +129,11 @@ export default function ClaimOfferForm({
           ...formData,
           dealTitle,
           dealDestination,
+          sourcePageUrl,
+          referrerUrl,
+          utmSource,
+          utmMedium,
+          utmCampaign,
         }),
       });
 

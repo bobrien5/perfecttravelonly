@@ -10,6 +10,14 @@ const NEW_LEAD_STAGE_ID = 'cee31e33-19cc-4310-8d86-4ea743c3f5f6';
 // Existing fields from the "Marketing Form - Claim Offer":
 const CF_AGE_RANGE = 'HOpwlwfhgkXu2OfXCWIt';
 const CF_DESTINATION = 'wOKgs75uBGMUWHZwihEM';
+// Attribution / source-tracking fields — paste the IDs from GHL after
+// creating these custom fields in the sub-account (Settings → Custom Fields).
+// If left empty, the corresponding value is silently skipped.
+const CF_SOURCE_PAGE_URL = process.env.GHL_CF_SOURCE_PAGE_URL || '';
+const CF_REFERRER_URL = process.env.GHL_CF_REFERRER_URL || '';
+const CF_UTM_SOURCE = process.env.GHL_CF_UTM_SOURCE || '';
+const CF_UTM_MEDIUM = process.env.GHL_CF_UTM_MEDIUM || '';
+const CF_UTM_CAMPAIGN = process.env.GHL_CF_UTM_CAMPAIGN || '';
 
 interface ClaimOfferRequest {
   firstName: string;
@@ -22,6 +30,11 @@ interface ClaimOfferRequest {
   ownOrRent: string;
   dealTitle: string;
   dealDestination: string;
+  sourcePageUrl?: string;
+  referrerUrl?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
 }
 
 function validateRequest(body: Partial<ClaimOfferRequest>): string | null {
@@ -61,6 +74,26 @@ export async function POST(request: NextRequest) {
     }
 
     // Step 1: Upsert contact
+    const customFields: Array<{ id: string; field_value: string }> = [
+      { id: CF_AGE_RANGE, field_value: body.ageRange },
+      { id: CF_DESTINATION, field_value: body.dealDestination },
+    ];
+    if (CF_SOURCE_PAGE_URL && body.sourcePageUrl) {
+      customFields.push({ id: CF_SOURCE_PAGE_URL, field_value: body.sourcePageUrl });
+    }
+    if (CF_REFERRER_URL && body.referrerUrl) {
+      customFields.push({ id: CF_REFERRER_URL, field_value: body.referrerUrl });
+    }
+    if (CF_UTM_SOURCE && body.utmSource) {
+      customFields.push({ id: CF_UTM_SOURCE, field_value: body.utmSource });
+    }
+    if (CF_UTM_MEDIUM && body.utmMedium) {
+      customFields.push({ id: CF_UTM_MEDIUM, field_value: body.utmMedium });
+    }
+    if (CF_UTM_CAMPAIGN && body.utmCampaign) {
+      customFields.push({ id: CF_UTM_CAMPAIGN, field_value: body.utmCampaign });
+    }
+
     const contactResult = await contacts.upsert({
       firstName: body.firstName.trim(),
       lastName: body.lastName.trim(),
@@ -68,10 +101,7 @@ export async function POST(request: NextRequest) {
       phone: body.phone.trim(),
       source: 'VacationPro - Claim Offer',
       tags: ['claim-offer', 'timeshare-lead', 'vacationpro'],
-      customFields: [
-        { id: CF_AGE_RANGE, field_value: body.ageRange },
-        { id: CF_DESTINATION, field_value: body.dealDestination },
-      ],
+      customFields,
     });
 
     const contactId = contactResult.contact.id;
