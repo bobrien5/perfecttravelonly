@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { trackLead } from '@/lib/meta-pixel';
 
 // ─── Dropdown Options ────────────────────────────────────────
 
@@ -54,6 +55,7 @@ const errorClasses = 'text-xs text-red-600 mt-1';
 export default function ClaimOfferForm({
   dealTitle,
   dealDestination,
+  dealPrice,
   ctaText,
 }: ClaimOfferFormProps) {
   const [formData, setFormData] = useState<FormData>(initialFormData);
@@ -143,6 +145,13 @@ export default function ClaimOfferForm({
       }
 
       setStatus('success');
+      // Fire Meta Pixel Lead event
+      trackLead({
+        content_name: dealTitle,
+        content_category: dealDestination,
+        value: dealPrice || undefined,
+        currency: dealPrice ? 'USD' : undefined,
+      });
     } catch (err) {
       setStatus('error');
       setServerError(
