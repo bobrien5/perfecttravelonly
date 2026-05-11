@@ -13,10 +13,6 @@ declare global {
   }
 }
 
-/**
- * Fires Meta Pixel PageView events on client-side route changes.
- * Initial PageView is fired by the inline script in MetaPixelScripts.
- */
 function PixelPageviewTracker() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -29,31 +25,37 @@ function PixelPageviewTracker() {
   return null;
 }
 
-/**
- * Mount in the root layout. Loads the Meta Pixel and tracks PageViews
- * on every route change.
- */
 export default function MetaPixel() {
   if (!PIXEL_ID) return null;
 
   return (
     <>
       <Script
-        id="meta-pixel-base"
+        id="meta-pixel-loader"
         strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '${PIXEL_ID}');
-            fbq('track', 'PageView');
-          `,
+        src="https://connect.facebook.net/en_US/fbevents.js"
+        onLoad={() => {
+          if (typeof window === 'undefined') return;
+          if (!window.fbq) {
+            // Standard Meta Pixel queue shim, set up before the SDK installs its own fbq.
+            type FbqShim = ((...args: unknown[]) => void) & {
+              callMethod?: (...args: unknown[]) => void;
+              queue: unknown[][];
+              loaded: boolean;
+              version: string;
+            };
+            const fbq: FbqShim = ((...args: unknown[]) => {
+              if (fbq.callMethod) fbq.callMethod.apply(fbq, args);
+              else fbq.queue.push(args);
+            }) as FbqShim;
+            fbq.queue = [];
+            fbq.loaded = true;
+            fbq.version = '2.0';
+            window.fbq = fbq;
+            window._fbq = window._fbq || fbq;
+          }
+          window.fbq!('init', PIXEL_ID);
+          window.fbq!('track', 'PageView');
         }}
       />
       <noscript>
