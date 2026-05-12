@@ -45,3 +45,23 @@ next-env.d.ts
 API Keys/
 Marketing/.keys
 *.key
+
+# PII / customer data exports (NEVER commit)
+SendGrid Data.csv
+vacationpro-beehiiv-import.csv
+*sendgrid*.csv
+*beehiiv-import*.csv
+*subscribers*.csv
+*contacts*.csv
+
+# Large binary marketing assets (regenerate or store in cloud, not git)
+Brand/
+Marketing/_fb_images/
+Marketing/cheat-sheets/*.png
+Marketing/cheat-sheets/*.jpg
+Marketing/cheat-sheets/*.jpeg
+Marketing/Outbox/Deliverables/**/images/
+Marketing/Outbox/Deliverables/**/*.png
+Marketing/Outbox/Deliverables/**/*.jpg
+Marketing/Outbox/Deliverables/**/*.jpeg
+Analytics/*.csv
