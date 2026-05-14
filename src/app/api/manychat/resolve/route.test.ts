@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildResolveResponse } from './route';
+import { buildResolveResponse } from './utils';
 import type { DealKeyword } from '@/lib/deal-registry/types';
 
 const deal: DealKeyword = {
