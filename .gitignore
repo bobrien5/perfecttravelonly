@@ -55,7 +55,21 @@ vacationpro-beehiiv-import.csv
 *contacts*.csv
 
 # Large binary marketing assets (regenerate or store in cloud, not git)
-Brand/
+Brand/*
+!Brand/deal-posts/
+Brand/deal-posts/*
+!Brand/deal-posts/*.py
+!Brand/deal-posts/*.txt
+!Brand/deal-posts/templates/
+!Brand/deal-posts/tests/
+Brand/deal-posts/templates/*
+!Brand/deal-posts/templates/*.html
+!Brand/deal-posts/templates/*.css
+Brand/deal-posts/tests/*
+!Brand/deal-posts/tests/*.py
+!Brand/deal-posts/tests/fixtures/
+Brand/deal-posts/tests/fixtures/*
+!Brand/deal-posts/tests/fixtures/*.json
 Marketing/_fb_images/
 Marketing/cheat-sheets/*.png
 Marketing/cheat-sheets/*.jpg

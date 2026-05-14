@@ -1,0 +1,5 @@
+# Python deps for the deal-posts generators. Install: pip3 install -r requirements.txt
+jinja2>=3.1
+playwright>=1.40
+requests>=2.30
+pytest>=7.0
