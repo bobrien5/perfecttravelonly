@@ -32,6 +32,9 @@ describe('validateDealEntry', () => {
   it('rejects empty dm copy', () => {
     expect(validateDealEntry({ ...valid, dmCopy: '' })).toMatch(/dm copy/i);
   });
+  it('rejects a non-integer price', () => {
+    expect(validateDealEntry({ ...valid, price: 29.99 })).toMatch(/whole number/i);
+  });
 });
 
 describe('parseDealSheetCsv', () => {
