@@ -1,0 +1,66 @@
+{% macro brand() %}
+<div class="brand"><div class="mark">{{ logo_svg|safe }}</div><div class="wordmark">VacationPro</div></div>
+{% endmacro %}
+
+{% macro hook_frame(deal, keyword, images) %}
+<div class="frame">
+  <div class="photo" style="background-image:url(&quot;{{ images.hook }}&quot;)"></div>
+  {{ brand() }}
+  <div class="eyebrow">Deal Drop &middot; {{ deal.destination }}</div>
+  <h1>{{ deal.destination }},<br>{{ deal.duration or 'your escape' }}.</h1>
+  <div class="pricerow">
+    <span class="price-pill">${{ deal.price }}</span>
+    <span class="was">${{ deal.originalPrice }}</span>
+    <span class="off">{{ deal.savingsPercent }}% off</span>
+  </div>
+  <div class="cta-pill">Comment {{ keyword }} &rarr;</div>
+</div>
+{% endmacro %}
+
+{% macro included_frame(deal, images) %}
+<div class="frame">
+  <div class="photo" style="background-image:url(&quot;{{ images.included }}&quot;)"></div>
+  {{ brand() }}
+  <div class="eyebrow">What's Included</div>
+  <h2>Everything but<br>the sunscreen.</h2>
+  <ul class="checks">
+    {% for item in deal.whatsIncluded %}<li>{{ item }}</li>{% endfor %}
+  </ul>
+</div>
+{% endmacro %}
+
+{% macro details_frame(deal, images, flight_estimate) %}
+<div class="frame">
+  <div class="photo" style="background-image:url(&quot;{{ images.details }}&quot;)"></div>
+  {{ brand() }}
+  <div class="eyebrow">The Details</div>
+  <h2>Real dates,<br>real pricing.</h2>
+  <div class="rows">
+    {% if deal.travelDates %}<div class="row"><span class="label">Travel</span><span class="value">{{ deal.travelDates }}</span></div>{% endif %}
+    {% if deal.duration %}<div class="row"><span class="label">Length</span><span class="value">{{ deal.duration }}</span></div>{% endif %}
+    {% if flight_estimate %}<div class="row"><span class="label">Flights</span><span class="value">{{ flight_estimate }}</span></div>{% endif %}
+    {% if deal.bookingWindow %}<div class="row"><span class="label">Book by</span><span class="value">{{ deal.bookingWindow }}</span></div>{% endif %}
+  </div>
+</div>
+{% endmacro %}
+
+{% macro catch_frame(deal, images) %}
+<div class="frame">
+  <div class="photo" style="background-image:url(&quot;{{ images.details }}&quot;)"></div>
+  {{ brand() }}
+  <div class="eyebrow">The Catch</div>
+  <div class="catch-box">
+    <div class="catch-label">Before you book</div>
+    <div class="catch-body">{{ deal.disclaimer }}</div>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro cta_frame(deal, keyword) %}
+<div class="frame cta-frame">
+  {{ brand() }}
+  <div class="eyebrow">Your Move</div>
+  <h1>Comment<br>{{ keyword }}</h1>
+  <div class="sub">and I'll send you the link to book this deal. Real pricing, real dates, limited rooms.</div>
+</div>
+{% endmacro %}

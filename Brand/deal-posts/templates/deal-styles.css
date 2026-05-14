@@ -1,0 +1,63 @@
+/* VacationPro deal-post brand tokens. Single source of brand styling. */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; }
+
+.frame {
+  width: 1080px; height: 1350px; position: relative; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 80px; color: #fff8ec;
+}
+.photo { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.photo::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(15,46,26,0) 28%, rgba(15,46,26,0.55) 55%, rgba(15,46,26,0.95) 100%);
+}
+/* Lift content above the photo. MUST exclude the absolutely-positioned layers
+   (.photo, .brand) or it overrides their position:absolute (equal specificity,
+   later rule wins) -- this bug was caught in the design mockup. */
+.frame > *:not(.photo):not(.brand) { position: relative; z-index: 1; }
+
+.brand { position: absolute; top: 72px; left: 80px; display: flex; align-items: center; gap: 16px; z-index: 2; }
+.brand .mark { width: 56px; height: 56px; }
+.brand .mark svg { width: 100%; height: 100%; display: block; }
+.brand .wordmark { font-size: 26px; font-weight: 800; letter-spacing: 0.5px; color: #fff8ec; }
+
+.eyebrow { font-size: 24px; font-weight: 700; text-transform: uppercase; letter-spacing: 4px; color: #4ac850; margin-bottom: 24px; }
+h1 { font-size: 108px; font-weight: 900; letter-spacing: -0.03em; line-height: 0.98; margin-bottom: 36px; overflow-wrap: break-word; word-break: break-word; }
+h2 { font-size: 72px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 32px; }
+
+.pricerow { display: flex; align-items: center; gap: 24px; margin-bottom: 32px; flex-wrap: wrap; }
+.price-pill {
+  background: #f59e0b; color: #0f2e1a; font-size: 80px; font-weight: 900;
+  letter-spacing: -0.02em; font-variant-numeric: tabular-nums; padding: 14px 40px; border-radius: 999px;
+}
+.was { font-size: 38px; font-weight: 700; text-decoration: line-through; opacity: 0.75; }
+.off { font-size: 32px; font-weight: 800; color: #4ac850; text-transform: uppercase; letter-spacing: 1px; }
+
+.cta-pill {
+  display: inline-flex; align-items: center; gap: 14px; background: #4ac850; color: #fff;
+  font-size: 34px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+  padding: 22px 44px; border-radius: 999px; align-self: flex-start;
+}
+
+.checks { list-style: none; }
+.checks li { font-size: 40px; font-weight: 600; line-height: 1.55; padding-left: 60px; position: relative; }
+.checks li::before { content: '\2713'; position: absolute; left: 0; color: #4ac850; font-weight: 900; }
+
+.rows { display: flex; flex-direction: column; gap: 20px; }
+.row { display: flex; justify-content: space-between; gap: 32px; font-size: 34px; }
+.row .label { font-weight: 700; color: #4ac850; text-transform: uppercase; letter-spacing: 1px; }
+.row .value { font-weight: 500; text-align: right; }
+
+.catch-box { background: rgba(15,46,26,0.85); padding: 48px; border-left: 10px solid #f59e0b; border-radius: 8px; }
+.catch-label { font-size: 22px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #f59e0b; margin-bottom: 20px; }
+.catch-body { font-size: 36px; font-weight: 500; line-height: 1.45; }
+
+.sub { font-size: 36px; font-weight: 500; line-height: 1.45; max-width: 840px; margin-top: 8px; }
+
+/* Solid Hero Green CTA frame */
+.cta-frame { background: #4ac850; }
+.cta-frame .eyebrow { color: #0f2e1a; opacity: 0.85; }
+.cta-frame h1 { color: #fff; }
+.cta-frame .sub { color: #fff; opacity: 0.95; }
+.cta-frame .brand .wordmark { color: #fff; }
