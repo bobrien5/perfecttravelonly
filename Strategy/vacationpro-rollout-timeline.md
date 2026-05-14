@@ -24,7 +24,7 @@
 ## Week 1: Build & Soft Launch (May 14 - May 20)
 
 ### Day 1, Thu May 14: Setup blitz
-- [ ] Create the VacationPro TikTok account (bio, link, profile image)
+- [x] Create the VacationPro TikTok account (bio, link, profile image) — done: @vacationpro.co
 - [ ] Create a ManyChat account, connect VacationPro's Facebook page and Instagram
 - [ ] Decide the video pipeline for deal reels (Remotion / Hyperframes / Milo-style), document it
 - [ ] Pull 5-10 Jane & Gigi reference posts as format benchmarks

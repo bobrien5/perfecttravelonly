@@ -71,7 +71,7 @@ Everything is built to fit Instagram. Statics and carousels are 4:5. Reels are 9
 
 - **Instagram:** Carousels and statics heavy (ride the current algorithm), reels secondary.
 - **Facebook:** All three formats. Keep the established 4x/day cadence.
-- **TikTok:** Reels only. (Requires standing up a VacationPro TikTok account, see roadmap.)
+- **TikTok:** Reels only. (Account live at @vacationpro.co.)
 
 ### Cadence
 
@@ -181,7 +181,7 @@ The existing meta-ads MCP supports a separate paid acquisition path (`meta_creat
 
 - Build the 4:5 carousel and static templates, and the reel format spec.
 - Build the caption and keyword system.
-- Stand up a VacationPro TikTok account.
+- ~~Stand up a VacationPro TikTok account.~~ Done: @vacationpro.co.
 - Run the first weekly batch and start posting deal content.
 
 ### Track 2: Funnel automation (build now, no dependencies)
@@ -216,7 +216,7 @@ Weekly pull of comments, DMs, clicks, leads, and revenue per deal and per destin
 ## 8. Open items
 
 - **Video pipeline choice:** Confirm which existing pipeline (Remotion, Hyperframes, or the Milo-style setup) is reused for deal reels.
-- **TikTok account:** Needs to be created for VacationPro before Track 1 posting begins on that channel.
+- **TikTok account:** Resolved — live at @vacationpro.co.
 - **Deal source:** World Via Pro is the host agency for bookings. Until onboarding completes, Week 1 soft-launches on curated public deals as content hooks; exclusive bookable inventory comes online with World Via Pro.
 
 ---
