@@ -31,11 +31,13 @@ function rowToDealKeyword(row: Record<string, unknown>): DealKeyword {
 }
 
 export async function findByKeyword(keyword: string): Promise<DealKeyword | null> {
+  const today = new Date().toISOString().slice(0, 10);
   const { data, error } = await db()
     .from('deal_keywords')
     .select('*')
     .eq('keyword', normalizeKeyword(keyword))
     .eq('status', 'active')
+    .or(`expires_at.is.null,expires_at.gte.${today}`)
     .maybeSingle();
   if (error) throw new Error(`findByKeyword failed: ${error.message}`);
   return data ? rowToDealKeyword(data) : null;

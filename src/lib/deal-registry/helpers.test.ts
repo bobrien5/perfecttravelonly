@@ -35,6 +35,9 @@ describe('validateDealEntry', () => {
   it('rejects a non-integer price', () => {
     expect(validateDealEntry({ ...valid, price: 29.99 })).toMatch(/whole number/i);
   });
+  it('rejects a landingPath that does not start with a slash', () => {
+    expect(validateDealEntry({ ...valid, landingPath: 'd/aruba' })).toMatch(/landingpath/i);
+  });
 });
 
 describe('parseDealSheetCsv', () => {

@@ -12,6 +12,7 @@ export function validateDealEntry(entry: Partial<DealEntryInput>): string | null
   if (typeof entry.price !== 'number' || entry.price <= 0) return 'price must be a positive number';
   if (!Number.isInteger(entry.price)) return 'price must be a whole number (USD dollars)';
   if (!entry.landingPath?.trim()) return 'landingPath is required';
+  if (!entry.landingPath.startsWith('/')) return 'landingPath must start with /';
   if (!entry.dmCopy?.trim()) return 'dm copy is required';
   return null;
 }

@@ -1,7 +1,10 @@
 import { Metadata } from 'next';
+import { cache } from 'react';
 import { notFound } from 'next/navigation';
 import ClaimOfferForm from '@/components/ui/ClaimOfferForm';
 import { findByKeyword } from '@/lib/deal-registry';
+
+const getDeal = cache((keyword: string) => findByKeyword(keyword));
 
 interface PageProps {
   params: Promise<{ keyword: string }>;
@@ -9,7 +12,7 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { keyword } = await params;
-  const deal = await findByKeyword(keyword).catch(() => null);
+  const deal = await getDeal(keyword).catch(() => null);
   if (!deal) {
     return {
       title: 'Claim Your Vacation Deal',
@@ -28,7 +31,7 @@ export default async function DealLandingPage({ params }: PageProps) {
   const { keyword } = await params;
   // A registry failure is treated as a missing keyword at the user-facing layer:
   // the error is logged server-side, the user sees the 404 page rather than a 500.
-  const deal = await findByKeyword(keyword).catch((err) => {
+  const deal = await getDeal(keyword).catch((err) => {
     console.error('[DealLandingPage] findByKeyword error:', err);
     return null;
   });
