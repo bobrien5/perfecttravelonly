@@ -21,7 +21,10 @@ def pick_image_urls(deal: dict) -> dict:
     hook -> heroImage; included -> galleryImages[0] or hero; details -> galleryImages[1] or hero.
     Any role with no usable image is None (caller must Gemini-generate a fallback)."""
     hero = deal.get("heroImage")
-    gallery = deal.get("galleryImages") or []
+    # Filter out empty-string entries — Sanity sometimes returns [""] for an
+    # empty array, which would otherwise pass the len(gallery) >= 1 check and
+    # yield an empty URL that fails to download.
+    gallery = [g for g in (deal.get("galleryImages") or []) if g]
     return {
         "hook": hero,
         "included": (gallery[0] if len(gallery) >= 1 else hero),
@@ -91,7 +94,10 @@ def pick_reel_image_urls(deal: dict) -> dict:
     """Choose a source URL per reel slot from the deal's real photos.
     hook -> heroImage; beat1..4 -> galleryImages[0..3] or hero fallback."""
     hero = deal.get("heroImage")
-    gallery = deal.get("galleryImages") or []
+    # Filter out empty-string entries — Sanity sometimes returns [""] for an
+    # empty array, which would otherwise pass the len(gallery) >= 1 check and
+    # yield an empty URL that fails to download.
+    gallery = [g for g in (deal.get("galleryImages") or []) if g]
     return {
         "hook": hero,
         "beat1": gallery[0] if len(gallery) >= 1 else hero,
