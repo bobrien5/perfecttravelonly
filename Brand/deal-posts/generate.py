@@ -87,6 +87,12 @@ def generate_deal(slug: str, keyword: str, formats: list, flight_estimate: str =
                 slide_paths.append(str(out.relative_to(OUTPUT_ROOT)))
             outputs["carousel"] = slide_paths
 
+        if "reel" in formats:
+            from reels import builder as reel_builder  # local import to keep optional
+            reel_out = deal_dir / "reel-9x16.mp4"
+            reel_builder.build_reel(deal, keyword, Path(work), reel_out)
+            outputs["reel"] = str(reel_out.relative_to(OUTPUT_ROOT))
+
     meta = captions.build_meta(deal, keyword, formats, outputs)
     (deal_dir / "meta.json").write_text(json.dumps(meta, indent=2))
     return meta
