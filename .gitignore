@@ -60,6 +60,7 @@ Brand/*
 Brand/deal-posts/*
 !Brand/deal-posts/*.py
 !Brand/deal-posts/*.txt
+!Brand/deal-posts/*.md
 !Brand/deal-posts/templates/
 !Brand/deal-posts/tests/
 Brand/deal-posts/templates/*
