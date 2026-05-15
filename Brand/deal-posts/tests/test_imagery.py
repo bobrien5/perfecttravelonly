@@ -56,3 +56,35 @@ def test_to_data_uri_webp_mime(tmp_path):
     f = tmp_path / "x.webp"
     f.write_bytes(b"RIFFxxxxWEBP")
     assert imagery.to_data_uri(f).startswith("data:image/webp;base64,")
+
+
+def test_pick_reel_image_urls_uses_hero_and_gallery_in_order():
+    deal = {
+        "destination": "Punta Cana",
+        "heroImage": "https://cdn/h.jpg",
+        "galleryImages": ["https://cdn/g1.jpg", "https://cdn/g2.jpg", "https://cdn/g3.jpg", "https://cdn/g4.jpg"],
+    }
+    picks = imagery.pick_reel_image_urls(deal)
+    assert picks["hook"] == "https://cdn/h.jpg"
+    assert picks["beat1"] == "https://cdn/g1.jpg"
+    assert picks["beat2"] == "https://cdn/g2.jpg"
+    assert picks["beat3"] == "https://cdn/g3.jpg"
+    assert picks["beat4"] == "https://cdn/g4.jpg"
+
+
+def test_pick_reel_image_urls_falls_back_to_hero_when_gallery_short():
+    deal = {"destination": "X", "heroImage": "https://cdn/h.jpg", "galleryImages": ["https://cdn/g1.jpg"]}
+    picks = imagery.pick_reel_image_urls(deal)
+    assert picks["hook"] == "https://cdn/h.jpg"
+    assert picks["beat1"] == "https://cdn/g1.jpg"
+    # No gallery[1..3]: fall back to hero
+    assert picks["beat2"] == "https://cdn/h.jpg"
+    assert picks["beat3"] == "https://cdn/h.jpg"
+    assert picks["beat4"] == "https://cdn/h.jpg"
+
+
+def test_pick_reel_image_urls_flags_missing_when_no_hero():
+    deal = {"destination": "X", "heroImage": None, "galleryImages": []}
+    picks = imagery.pick_reel_image_urls(deal)
+    assert picks["hook"] is None
+    assert picks["beat1"] is None
