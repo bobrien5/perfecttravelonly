@@ -67,8 +67,14 @@ def generate_deal(slug: str, keyword: str, formats: list, flight_estimate: str =
     outputs = {}
 
     with tempfile.TemporaryDirectory() as work:
-        local = imagery.ensure_local_images(deal, Path(work))
-        images = {role: imagery.to_data_uri(path) for role, path in local.items()}
+        # Only fetch static/carousel images when those formats are actually requested.
+        # ensure_local_images requires gallery slots that reel-only jobs may not have.
+        needs_static_images = any(f in formats for f in ("static", "carousel"))
+        if needs_static_images:
+            local = imagery.ensure_local_images(deal, Path(work))
+            images = {role: imagery.to_data_uri(path) for role, path in local.items()}
+        else:
+            images = {}
 
         if "static" in formats:
             html = templating.render_static(deal, keyword, images)
