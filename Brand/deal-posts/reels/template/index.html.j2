@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1080, height=1920" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>{{ css|safe }}</style>
+</head>
+<body>
+  <div
+    id="root"
+    data-composition-id="main"
+    data-start="0"
+    data-duration="15"
+    data-width="1080"
+    data-height="1920"
+  >
+    <!-- Persistent logo lockup -->
+    <div class="logo-lockup">
+      <img class="logo-img" src="assets/logo-white.svg" alt="VacationPro" />
+      <div class="logo-text">VacationPro</div>
+    </div>
+
+    <!-- Hook scene (0 - 1.5s) -->
+    <div id="scene-hook" class="scene">
+      <div class="photo" style="background-image:url('assets/hook.jpg');"></div>
+      <div class="hook-eyebrow">Deal Drop &middot; {{ deal.destination }}</div>
+      <div class="hook-destination">{{ deal.destination }}</div>
+      <div class="hook-pricerow">
+        <span class="hook-price-pill">${{ deal.price }}</span>
+        {% if deal.originalPrice and deal.originalPrice > deal.price %}<span class="hook-was">${{ deal.originalPrice }}</span>{% endif %}
+        {% if deal.savingsPercent %}<span class="hook-off">{{ deal.savingsPercent }}% off</span>{% endif %}
+      </div>
+    </div>
+
+    <!-- Beat scenes (1.5 - 12s) -->
+    {% for b in beats %}
+    <div id="scene-beat-{{ loop.index }}" class="scene">
+      <div class="photo" style="background-image:url('assets/beat{{ loop.index }}.jpg');"></div>
+      <div class="beat-text">{{ b.text }}</div>
+    </div>
+    {% endfor %}
+
+    <!-- CTA scene (12 - 15s) -->
+    <div id="scene-cta" class="scene cta-scene">
+      <div class="cta-eyebrow">Your Move</div>
+      <div class="cta-headline">Comment {{ keyword }}</div>
+      <div class="cta-sub">and I'll send you the link to book this deal. Real pricing, limited rooms.</div>
+    </div>
+
+    <!-- Music track -->
+    <audio
+      src="assets/music.mp3"
+      data-start="0"
+      data-duration="15"
+      data-track-index="2"
+      data-volume="1"
+    ></audio>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+    /* Hook frame is visible at frame 0 (no fade-in, per Milo rule).
+       Cross-fade between scenes uses opacity ONLY (GSAP visual-only rule). */
+
+    /* Ken Burns on hook image: slow zoom from 1.00 to 1.06 over the hook window. */
+    tl.fromTo("#scene-hook .photo",
+      { scale: 1.00, transformOrigin: "50% 50%" },
+      { scale: 1.06, duration: 1.5, ease: "none" }, 0);
+
+    /* Exit hook into first beat at 1.5s (0.25s crossfade). */
+    tl.to("#scene-hook", { opacity: 0, duration: 0.25, ease: "power1.inOut" }, 1.25);
+    tl.to("#scene-beat-1", { opacity: 1, duration: 0.25, ease: "power1.inOut" }, 1.25);
+
+    /* Per-beat Ken Burns + crossfade to the next. */
+    {% for b in beats %}
+    tl.fromTo("#scene-beat-{{ loop.index }} .photo",
+      { scale: 1.00, transformOrigin: "50% 50%" },
+      { scale: 1.06, duration: {{ b.duration }}, ease: "none" }, {{ b.start }});
+    {% if not loop.last %}
+    tl.to("#scene-beat-{{ loop.index }}",  { opacity: 0, duration: 0.25, ease: "power1.inOut" }, {{ b.start + b.duration - 0.25 }});
+    tl.to("#scene-beat-{{ loop.index + 1 }}", { opacity: 1, duration: 0.25, ease: "power1.inOut" }, {{ b.start + b.duration - 0.25 }});
+    {% endif %}
+    {% endfor %}
+
+    /* Exit last beat into CTA at 12s. */
+    tl.to("#scene-beat-{{ beats|length }}", { opacity: 0, duration: 0.3, ease: "power1.inOut" }, 11.7);
+    tl.to("#scene-cta",                       { opacity: 1, duration: 0.3, ease: "power1.inOut" }, 11.7);
+
+    /* CTA pulse (gentle attention nudge). */
+    tl.fromTo("#scene-cta .cta-headline",
+      { scale: 1.00 }, { scale: 1.04, duration: 0.6, yoyo: true, repeat: 1, ease: "power1.inOut" }, 12.2);
+
+    window.__timelines["main"] = tl;
+  </script>
+</body>
+</html>
