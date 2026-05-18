@@ -118,7 +118,7 @@ export default function ConciergePlanningPage() {
             <p className="text-gray-600 mb-6 leading-relaxed">
               Tell me your dream trip. I find the resort, compare flights, and build a full
               itinerary with rooms, dining, and excursions. The $99 fee covers the research and
-              your travel advisor's time building the plan.
+              your travel advisor&apos;s time building the plan.
             </p>
 
             <div className="mb-6">
