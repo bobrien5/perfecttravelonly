@@ -8,11 +8,13 @@ from datetime import datetime, timezone
 MAX_CAPTION_WORDS = 45
 
 # Carousels and statics go to FB + IG; reels (a separate sub-project) go to all
-# three. Keyed by format so downstream schedulers never post a carousel to TikTok.
+# three; PDFs are uploaded to Beacons as a $6.99 digital product.
+# Keyed by format so downstream schedulers never post a carousel to TikTok.
 PLATFORMS_BY_FORMAT = {
     "static": ["facebook", "instagram"],
     "carousel": ["facebook", "instagram"],
     "reel": ["facebook", "instagram", "tiktok"],
+    "pdf": ["beacons"],
 }
 
 

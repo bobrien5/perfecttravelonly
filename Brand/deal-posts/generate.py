@@ -67,9 +67,10 @@ def generate_deal(slug: str, keyword: str, formats: list, flight_estimate: str =
     outputs = {}
 
     with tempfile.TemporaryDirectory() as work:
-        # Only fetch static/carousel images when those formats are actually requested.
-        # ensure_local_images requires gallery slots that reel-only jobs may not have.
-        needs_static_images = any(f in formats for f in ("static", "carousel"))
+        # Only fetch static/carousel/pdf images when those formats are requested.
+        # ensure_local_images requires the 3-role (hook/included/details) gallery
+        # slots that reel-only jobs may not have.
+        needs_static_images = any(f in formats for f in ("static", "carousel", "pdf"))
         if needs_static_images:
             local = imagery.ensure_local_images(deal, Path(work))
             images = {role: imagery.to_data_uri(path) for role, path in local.items()}
@@ -98,6 +99,12 @@ def generate_deal(slug: str, keyword: str, formats: list, flight_estimate: str =
             reel_out = deal_dir / "reel-9x16.mp4"
             reel_builder.build_reel(deal, keyword, Path(work), reel_out)
             outputs["reel"] = str(reel_out.relative_to(OUTPUT_ROOT))
+
+        if "pdf" in formats:
+            html = templating.render_pdf(deal, keyword, images)
+            out = deal_dir / "deal.pdf"
+            render.render_html_to_pdf(html, out)
+            outputs["pdf"] = str(out.relative_to(OUTPUT_ROOT))
 
     meta = captions.build_meta(deal, keyword, formats, outputs)
     (deal_dir / "meta.json").write_text(json.dumps(meta, indent=2))

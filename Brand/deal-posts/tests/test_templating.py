@@ -49,3 +49,26 @@ def test_render_static_equals_carousel_slide_one():
     for marker in ("Deal Drop", "Punta Cana", "$799", "Comment PUNTACANA", IMAGES["hook"]):
         assert marker in html_static
         assert marker in slides[0]
+
+
+def test_render_pdf_contains_core_content():
+    """PDF HTML must include destination, price, keyword, and all 5 page anchor IDs."""
+    html = templating.render_pdf(DEAL, "PUNTACANA", IMAGES)
+    assert "Punta Cana" in html
+    assert "799" in html
+    assert "PUNTACANA" in html
+    assert 'id="page-cover"' in html
+    assert 'id="page-deal"' in html
+    assert 'id="page-how-to-book"' in html
+    assert 'id="page-honest-details"' in html
+    assert 'id="page-about"' in html
+
+
+def test_render_pdf_skips_faq_section_when_absent():
+    """A deal with no faq key still renders; no empty FAQ list should appear."""
+    deal_no_faq = {k: v for k, v in DEAL.items() if k != "faq"}
+    html = templating.render_pdf(deal_no_faq, "PUNTACANA", IMAGES)
+    # Template renders the generic fallback FAQ items, not an empty list
+    assert "Is the price per person or per room?" in html
+    # No Jinja loop over deal.faq items means we hit the else branch -- no empty <li>
+    assert '<ul class="faq-list">' in html
