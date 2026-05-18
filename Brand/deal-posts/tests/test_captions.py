@@ -80,3 +80,18 @@ def test_build_meta_reel_omitted_when_format_not_present():
     meta = captions.build_meta(DEAL, "PUNTACANA", ["static"], {"static": "x.jpg"})
     assert "reel" not in meta["outputs"]
     assert "reel" not in meta["scheduling"]["platforms_by_format"]
+
+
+def test_build_meta_pdf_branch_includes_beacons():
+    meta = captions.build_meta(
+        DEAL,
+        "PUNTACANA",
+        ["static", "carousel", "pdf"],
+        {
+            "static": "punta-cana/static-4x5.jpg",
+            "carousel": ["punta-cana/carousel/slide-01.jpg"],
+            "pdf": "punta-cana/deal.pdf",
+        },
+    )
+    assert meta["outputs"]["pdf"] == "punta-cana/deal.pdf"
+    assert meta["scheduling"]["platforms_by_format"]["pdf"] == ["beacons"]

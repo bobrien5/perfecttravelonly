@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+/* ---------------------------------------------------------------
+   VacationPro Deal PDF -- 2-page US Letter sell-sheet
+   Page 1: Deal hero (price + booking link + amenities + photos)
+   Page 2: How to find similar pricing on other dates
+   Font: Inter via Google Fonts (Playwright fetches at render time).
+--------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+@page {
+  size: Letter portrait;
+  margin: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #fff8ec;
+  color: #0f2e1a;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* Each .pdf-page is exactly US Letter: 8.5in x 11in = 816px x 1056px at 96dpi */
+.pdf-page {
+  width: 816px;
+  height: 1056px;
+  position: relative;
+  overflow: hidden;
+  break-after: page;
+  page-break-after: always;
+}
+
+/* ---------------------------------------------------------------
+   SHARED: ADVISOR HEADER
+--------------------------------------------------------------- */
+.advisor-header {
+  background: #0f2e1a;
+  padding: 14px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.advisor-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.advisor-mark {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.advisor-mark svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.advisor-wordmark {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #fff8ec;
+}
+
+.advisor-tagline {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,248,236,0.6);
+  letter-spacing: 0.5px;
+}
+
+.advisor-contact {
+  font-size: 11px;
+  font-weight: 600;
+  color: #4ac850;
+  letter-spacing: 0.3px;
+  text-align: right;
+}
+
+/* ---------------------------------------------------------------
+   PAGE 1: DEAL HERO
+--------------------------------------------------------------- */
+.page1-body {
+  display: flex;
+  flex-direction: column;
+  height: calc(1056px - 56px); /* subtract header */
+  background: #fff8ec;
+  padding: 24px 40px 20px;
+  gap: 14px;
+}
+
+/* Photo gallery */
+.photo-gallery {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 180px 120px;
+  gap: 6px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.photo-main {
+  grid-row: 1 / 3;
+  background-size: cover;
+  background-position: center;
+}
+
+.photo-thumb {
+  background-size: cover;
+  background-position: center;
+}
+
+/* Accommodation link button */
+.booking-btn {
+  display: inline-block;
+  background: #4ac850;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.booking-fallback {
+  font-size: 13px;
+  font-weight: 600;
+  color: #3a5241;
+  padding: 10px 0;
+  flex-shrink: 0;
+}
+
+/* Amenities pipe-line */
+.amenities-line {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f2e1a;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  border-top: 2px solid #4ac850;
+  border-bottom: 2px solid #4ac850;
+  padding: 8px 0;
+  line-height: 1.5;
+  flex-shrink: 0;
+}
+
+/* Destination + dates */
+.destination-block {
+  flex-shrink: 0;
+}
+
+.destination-name {
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: #0f2e1a;
+  line-height: 1.05;
+}
+
+.destination-dates {
+  font-size: 13px;
+  font-weight: 600;
+  color: #3a5241;
+  margin-top: 4px;
+}
+
+.destination-disclaimer {
+  font-size: 11px;
+  font-weight: 500;
+  color: #7a9a82;
+  margin-top: 3px;
+  font-style: italic;
+}
+
+/* Price hero */
+.price-hero {
+  background: #0f2e1a;
+  border-radius: 12px;
+  padding: 20px 28px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-shrink: 0;
+}
+
+.price-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #4ac850;
+  margin-bottom: 4px;
+}
+
+.price-amount {
+  font-size: 84px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: #0f2e1a;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  background: #fff8ec;
+  padding: 4px 20px 6px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.price-party {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff8ec;
+  margin-top: 6px;
+  opacity: 0.85;
+}
+
+.price-was {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ef4444;
+  text-decoration: line-through;
+  margin-bottom: 6px;
+}
+
+.price-was-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255,248,236,0.5);
+  margin-bottom: 4px;
+}
+
+/* Concierge upsell */
+.concierge-blurb {
+  font-size: 12px;
+  font-weight: 500;
+  color: #3a5241;
+  line-height: 1.55;
+  flex-shrink: 0;
+}
+
+.concierge-blurb a {
+  color: #4ac850;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* ---------------------------------------------------------------
+   PAGE 2: FIND OTHER DATES
+--------------------------------------------------------------- */
+.page2-body {
+  display: flex;
+  flex-direction: column;
+  height: calc(1056px - 56px);
+  background: #fff8ec;
+  padding: 28px 40px 24px;
+  gap: 20px;
+}
+
+.p2-heading {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: #0f2e1a;
+  line-height: 1.1;
+  flex-shrink: 0;
+}
+
+.p2-intro {
+  font-size: 13px;
+  font-weight: 500;
+  color: #3a5241;
+  line-height: 1.6;
+  flex-shrink: 0;
+  margin-top: -8px;
+}
+
+.p2-section {
+  flex-shrink: 0;
+}
+
+.p2-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: #4ac850;
+  margin-bottom: 8px;
+}
+
+.p2-section-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0f2e1a;
+  margin-bottom: 8px;
+}
+
+.p2-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.p2-list li {
+  font-size: 13px;
+  font-weight: 500;
+  color: #0f2e1a;
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.45;
+}
+
+.p2-list li::before {
+  content: '\2713';
+  position: absolute;
+  left: 0;
+  color: #4ac850;
+  font-weight: 900;
+  font-size: 12px;
+}
+
+.p2-list li.bullet::before {
+  content: '\25CF';
+  font-size: 6px;
+  top: 5px;
+  color: #4ac850;
+}
+
+.p2-tip {
+  font-size: 11px;
+  font-weight: 600;
+  color: #7a9a82;
+  font-style: italic;
+  margin-top: 5px;
+  padding-left: 0;
+}
+
+.p2-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+</style>
+</head>
+<body>
+
+{# ============================================================
+   PAGE 1 -- DEAL HERO
+   ============================================================ #}
+<div class="pdf-page" id="page-deal">
+
+  {# Advisor signature header #}
+  <div class="advisor-header">
+    <div class="advisor-brand">
+      <div class="advisor-mark">{{ logo_svg|safe }}</div>
+      <div>
+        <div class="advisor-wordmark">VacationPro</div>
+        <div class="advisor-tagline">Independent Travel Advisors</div>
+      </div>
+    </div>
+    <div class="advisor-contact">concierge@vacationpro.co</div>
+  </div>
+
+  <div class="page1-body">
+
+    {# Photo gallery: hook large left, included + details right #}
+    <div class="photo-gallery">
+      <div class="photo-main" style="background-image:url(&quot;{{ images.hook }}&quot;)"></div>
+      <div class="photo-thumb" style="background-image:url(&quot;{{ images.included }}&quot;)"></div>
+      <div class="photo-thumb" style="background-image:url(&quot;{{ images.details }}&quot;)"></div>
+    </div>
+
+    {# Accommodation booking link #}
+    {% if booking_link %}
+    <a class="booking-btn" href="{{ booking_link }}">Accommodation: {{ deal.resortName or deal.destination }}</a>
+    {% else %}
+    <div class="booking-fallback">Contact our concierge to book: concierge@vacationpro.co</div>
+    {% endif %}
+
+    {# Amenities pipe-delimited line #}
+    {% if deal.whatsIncluded %}
+    <div class="amenities-line">{{ deal.whatsIncluded | join(" | ") }}</div>
+    {% endif %}
+
+    {# Destination + dates + disclaimer #}
+    <div class="destination-block">
+      <div class="destination-name">{{ deal.destination }}</div>
+      {% if deal.travelDates %}
+      <div class="destination-dates">{{ deal.travelDates }}</div>
+      {% endif %}
+      <div class="destination-disclaimer">(Prices shown are example dates and may vary depending on departure city and availability)</div>
+    </div>
+
+    {# Total Cost hero block #}
+    <div class="price-hero">
+      <div>
+        <div class="price-label">Total Cost</div>
+        <div class="price-amount">${{ deal.price }}</div>
+        <div class="price-party">for 2 adults</div>
+      </div>
+      <div>
+        {% if deal.originalPrice %}
+        <div class="price-was-label">Normally</div>
+        <div class="price-was">${{ deal.originalPrice }}</div>
+        {% endif %}
+        {% if deal.savingsPercent %}
+        <div style="font-size:18px;font-weight:800;color:#4ac850;text-transform:uppercase;letter-spacing:1px;">{{ deal.savingsPercent }}% off</div>
+        {% endif %}
+      </div>
+    </div>
+
+    {# Concierge upsell #}
+    <div class="concierge-blurb">
+      Want us to plan everything? If you would like us to find the best flights, compare resorts, and build a full trip for you, we also offer custom curated travel planning.
+      <a href="{{ concierge_link }}">Click here!</a>
+    </div>
+
+  </div>
+</div>
+
+{# ============================================================
+   PAGE 2 -- FIND OTHER DATES
+   ============================================================ #}
+<div class="pdf-page" id="page-booking-tips">
+
+  {# Advisor signature header #}
+  <div class="advisor-header">
+    <div class="advisor-brand">
+      <div class="advisor-mark">{{ logo_svg|safe }}</div>
+      <div>
+        <div class="advisor-wordmark">VacationPro</div>
+        <div class="advisor-tagline">Independent Travel Advisors</div>
+      </div>
+    </div>
+    <div class="advisor-contact">concierge@vacationpro.co</div>
+  </div>
+
+  <div class="page2-body">
+
+    <div class="p2-heading">Need other dates or departure airports?</div>
+
+    <div class="p2-intro">
+      The deal shown on the first page is based on the example dates shown. If those dates do not work for you, here is how to find similar pricing.
+    </div>
+
+    {# Best Travel Dates + Best Departure Airports side by side #}
+    <div class="p2-two-col">
+
+      <div class="p2-section">
+        <div class="p2-section-label">Best Times to Go</div>
+        <div class="p2-section-title">Best Travel Dates</div>
+        <ul class="p2-list">
+          {% for window in booking_tips.best_travel_dates %}
+          <li>{{ window }}</li>
+          {% endfor %}
+        </ul>
+        <div class="p2-tip">Avoid major holiday weeks when prices are typically higher.</div>
+      </div>
+
+      <div class="p2-section">
+        <div class="p2-section-label">Where to Fly From</div>
+        <div class="p2-section-title">Best Departure Airports</div>
+        <ul class="p2-list">
+          {% for airport in booking_tips.best_departure_airports %}
+          <li>{{ airport }}</li>
+          {% endfor %}
+        </ul>
+        <div class="p2-tip">If you live near a small airport, you may save money by flying from a nearby major city.</div>
+      </div>
+
+    </div>
+
+    {# Add Flights section #}
+    <div class="p2-section">
+      <div class="p2-section-label">Flight Tips</div>
+      <div class="p2-section-title">Add Flights</div>
+      <ul class="p2-list">
+        <li class="bullet">Search flexible dates if possible</li>
+        <li class="bullet">Compare nearby airports</li>
+        <li class="bullet">Morning flights are often cheaper</li>
+        <li class="bullet">Mid-week departures (Tue to Thu) usually have the lowest prices</li>
+      </ul>
+    </div>
+
+    {# Booking Tips section #}
+    <div class="p2-section">
+      <div class="p2-section-label">Before You Book</div>
+      <div class="p2-section-title">Booking Tips</div>
+      <ul class="p2-list">
+        <li class="bullet">Book early for the best room availability</li>
+        <li class="bullet">Prices may increase as the resort fills up</li>
+        <li class="bullet">Travel insurance is recommended for international trips</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

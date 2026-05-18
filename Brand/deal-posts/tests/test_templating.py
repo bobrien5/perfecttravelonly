@@ -49,3 +49,41 @@ def test_render_static_equals_carousel_slide_one():
     for marker in ("Deal Drop", "Punta Cana", "$799", "Comment PUNTACANA", IMAGES["hook"]):
         assert marker in html_static
         assert marker in slides[0]
+
+
+def test_render_pdf_contains_core_content():
+    """PDF HTML must include destination, price, and 2-page section anchors."""
+    html = templating.render_pdf(DEAL, "PUNTACANA", IMAGES)
+    assert "Punta Cana" in html
+    assert "799" in html
+    assert "Total Cost" in html
+    assert "Normally" in html
+    assert "Best Travel Dates" in html
+    assert "Best Departure Airports" in html
+    assert 'id="page-deal"' in html
+    assert 'id="page-booking-tips"' in html
+
+
+def test_render_pdf_uses_destination_booking_tips():
+    """PDF for a known destination uses destination-specific airports; unknown falls back."""
+    # Known destination: Punta Cana
+    html = templating.render_pdf(DEAL, "PUNTACANA", IMAGES)
+    assert "Miami (MIA)" in html
+
+    # Unknown destination: falls back to DEFAULT_BOOKING_TIPS
+    deal_unknown = dict(DEAL, destination="Bora Bora")
+    html_unknown = templating.render_pdf(deal_unknown, "BORABORA", IMAGES)
+    # DEFAULT_BOOKING_TIPS airports include Miami and Dallas
+    assert "Miami (MIA)" in html_unknown
+    assert "Dallas (DFW)" in html_unknown
+
+
+def test_render_pdf_with_booking_link_shows_button():
+    """When booking_link is provided the HTML contains the URL; when None shows fallback."""
+    link = "https://example.com/resort"
+    html_with_link = templating.render_pdf(DEAL, "PUNTACANA", IMAGES, booking_link=link)
+    assert link in html_with_link
+
+    html_no_link = templating.render_pdf(DEAL, "PUNTACANA", IMAGES, booking_link=None)
+    assert link not in html_no_link
+    assert "concierge@vacationpro.co" in html_no_link
