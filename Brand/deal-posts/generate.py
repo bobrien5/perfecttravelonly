@@ -29,6 +29,8 @@ def parse_cli_args(argv: list) -> dict:
     parser.add_argument("--keyword")
     parser.add_argument("--formats", default="static,carousel")
     parser.add_argument("--flight-estimate", dest="flight_estimate", default="")
+    parser.add_argument("--booking-link", dest="booking_link", default=None,
+                        help="Affiliate URL for the PDF accommodation button (optional).")
     parser.add_argument("--batch")
     ns = parser.parse_args(argv)
 
@@ -42,6 +44,7 @@ def parse_cli_args(argv: list) -> dict:
         "keyword": ns.keyword.strip().upper(),
         "formats": [f.strip() for f in ns.formats.split(",") if f.strip()],
         "flight_estimate": ns.flight_estimate,
+        "booking_link": ns.booking_link,
     }
 
 
@@ -59,7 +62,13 @@ def read_deal_sheet(csv_path) -> list:
     return rows
 
 
-def generate_deal(slug: str, keyword: str, formats: list, flight_estimate: str = "") -> dict:
+def generate_deal(
+    slug: str,
+    keyword: str,
+    formats: list,
+    flight_estimate: str = "",
+    booking_link: Optional[str] = None,
+) -> dict:
     """Generate the requested formats for one deal. Returns the meta.json dict."""
     deal = sanity_client.fetch_deal(slug)
     deal_dir = OUTPUT_ROOT / slug
@@ -101,7 +110,7 @@ def generate_deal(slug: str, keyword: str, formats: list, flight_estimate: str =
             outputs["reel"] = str(reel_out.relative_to(OUTPUT_ROOT))
 
         if "pdf" in formats:
-            html = templating.render_pdf(deal, keyword, images)
+            html = templating.render_pdf(deal, keyword, images, booking_link=booking_link)
             out = deal_dir / "deal.pdf"
             render.render_html_to_pdf(html, out)
             outputs["pdf"] = str(out.relative_to(OUTPUT_ROOT))
@@ -112,7 +121,13 @@ def generate_deal(slug: str, keyword: str, formats: list, flight_estimate: str =
 
 
 def run_single(args: dict) -> None:
-    meta = generate_deal(args["slug"], args["keyword"], args["formats"], args["flight_estimate"])
+    meta = generate_deal(
+        args["slug"],
+        args["keyword"],
+        args["formats"],
+        args["flight_estimate"],
+        booking_link=args.get("booking_link"),
+    )
     print(f"  done: {args['slug']} -> {meta['outputs']}")
 
 

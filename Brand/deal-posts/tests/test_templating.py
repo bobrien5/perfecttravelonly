@@ -52,23 +52,38 @@ def test_render_static_equals_carousel_slide_one():
 
 
 def test_render_pdf_contains_core_content():
-    """PDF HTML must include destination, price, keyword, and all 5 page anchor IDs."""
+    """PDF HTML must include destination, price, and 2-page section anchors."""
     html = templating.render_pdf(DEAL, "PUNTACANA", IMAGES)
     assert "Punta Cana" in html
     assert "799" in html
-    assert "PUNTACANA" in html
-    assert 'id="page-cover"' in html
+    assert "Total Cost" in html
+    assert "Normally" in html
+    assert "Best Travel Dates" in html
+    assert "Best Departure Airports" in html
     assert 'id="page-deal"' in html
-    assert 'id="page-how-to-book"' in html
-    assert 'id="page-honest-details"' in html
-    assert 'id="page-about"' in html
+    assert 'id="page-booking-tips"' in html
 
 
-def test_render_pdf_skips_faq_section_when_absent():
-    """A deal with no faq key still renders; no empty FAQ list should appear."""
-    deal_no_faq = {k: v for k, v in DEAL.items() if k != "faq"}
-    html = templating.render_pdf(deal_no_faq, "PUNTACANA", IMAGES)
-    # Template renders the generic fallback FAQ items, not an empty list
-    assert "Is the price per person or per room?" in html
-    # No Jinja loop over deal.faq items means we hit the else branch -- no empty <li>
-    assert '<ul class="faq-list">' in html
+def test_render_pdf_uses_destination_booking_tips():
+    """PDF for a known destination uses destination-specific airports; unknown falls back."""
+    # Known destination: Punta Cana
+    html = templating.render_pdf(DEAL, "PUNTACANA", IMAGES)
+    assert "Miami (MIA)" in html
+
+    # Unknown destination: falls back to DEFAULT_BOOKING_TIPS
+    deal_unknown = dict(DEAL, destination="Bora Bora")
+    html_unknown = templating.render_pdf(deal_unknown, "BORABORA", IMAGES)
+    # DEFAULT_BOOKING_TIPS airports include Miami and Dallas
+    assert "Miami (MIA)" in html_unknown
+    assert "Dallas (DFW)" in html_unknown
+
+
+def test_render_pdf_with_booking_link_shows_button():
+    """When booking_link is provided the HTML contains the URL; when None shows fallback."""
+    link = "https://example.com/resort"
+    html_with_link = templating.render_pdf(DEAL, "PUNTACANA", IMAGES, booking_link=link)
+    assert link in html_with_link
+
+    html_no_link = templating.render_pdf(DEAL, "PUNTACANA", IMAGES, booking_link=None)
+    assert link not in html_no_link
+    assert "concierge@vacationpro.co" in html_no_link
