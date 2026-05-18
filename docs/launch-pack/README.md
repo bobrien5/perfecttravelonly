@@ -2,6 +2,24 @@
 
 *Everything you need to launch the storefront today. Six PDFs ready in [`pdfs/`](pdfs/), product copy below, launch post drafts below, day-of checklist below.*
 
+**Format:** 2-page sell-sheets modeled on the actual Jane & Gigi product (verified at `janeandgigi.my.canva.site/travel-deal-st-lucia-royalton`). Page 1 = the deal (price hero + amenities + booking link). Page 2 = "how to book it yourself like a travel advisor" (best travel dates + best departure airports + flight tips + booking discipline). The Top 10 SKU is the only longer-format product in this batch — it's a curated list, not a deal sheet.
+
+---
+
+## One thing to do before uploading: add your affiliate booking links
+
+The 5 deal PDFs render with a "Contact concierge to book" fallback by default — that's so you can ship today. For each deal, once you have the affiliate URL ready (Booking.com / Expedia checkout pre-loaded with the room and dates), re-render that one deal with:
+
+```bash
+cd Brand/deal-posts
+python3 generate.py --slug <slug> --keyword <KEY> --formats pdf \
+  --booking-link "https://www.expedia.com/checkout/session/...your-affiliate-link..."
+```
+
+That bakes the tap-able **Accommodation: {resort}** button on page 1 into the PDF. Then re-upload to Beacons (Beacons supports product file updates without changing the URL). Same workflow J&G uses — direct affiliate revenue every time a buyer of the $6.99 PDF clicks through and books.
+
+The Top 10 PDF doesn't use a booking link (it's a curated list).
+
 ---
 
 ## The 6 launch SKUs
