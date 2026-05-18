@@ -260,8 +260,8 @@ export default function ConciergePlanningForm() {
           </div>
           <h3 className="text-xl font-bold text-gray-900 mb-2">Almost there. Lock it in with $99.</h3>
           <p className="text-sm text-gray-600 leading-relaxed max-w-sm mx-auto">
-            Pay your $99 concierge fee below. It is credited back when you book through VacationPro,
-            and fully refundable for 7 days if I cannot find you a trip you love.
+            Pay your $99 concierge fee below. This covers the research, resort and flight comparisons,
+            and your travel advisor's time building your itinerary.
           </p>
         </div>
 

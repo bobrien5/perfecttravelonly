@@ -5,7 +5,7 @@ import ConciergePlanningForm from '@/components/ui/ConciergePlanningForm';
 export const metadata: Metadata = {
   title: 'Plan My Trip, VacationPro Concierge',
   description:
-    'Two ways to book your next vacation. Pick a curated package for free or hire me to plan a custom trip for $99, credited back when you book.',
+    'Two ways to book your next vacation. Pick a curated package for free or hire a travel advisor to plan a custom trip for $99.',
   robots: { index: false, follow: true },
 };
 
@@ -113,12 +113,12 @@ export default function ConciergePlanningPage() {
             </h2>
             <div className="flex items-baseline gap-2 mb-4">
               <span className="text-4xl font-extrabold text-brand-600">$99</span>
-              <span className="text-sm text-gray-500">credited back when you book</span>
+              <span className="text-sm text-gray-500">research + advisor time</span>
             </div>
             <p className="text-gray-600 mb-6 leading-relaxed">
               Tell me your dream trip. I find the resort, compare flights, and build a full
-              itinerary with rooms, dining, and excursions. Refundable for 7 days if I cannot
-              find a trip you love.
+              itinerary with rooms, dining, and excursions. The $99 fee covers the research and
+              your travel advisor's time building the plan.
             </p>
 
             <div className="mb-6">
@@ -149,8 +149,7 @@ export default function ConciergePlanningPage() {
                 <li>Resort and flight comparison</li>
                 <li>Full itinerary with dining and activities</li>
                 <li>Direct WhatsApp access for trip questions</li>
-                <li>$99 credited toward your booking</li>
-                <li>Refundable for 7 days</li>
+                <li>Research and advisor time included</li>
               </ul>
             </div>
 
@@ -185,12 +184,12 @@ export default function ConciergePlanningPage() {
               <div className="text-xs text-gray-600 uppercase tracking-wide">Response time</div>
             </div>
             <div>
-              <div className="text-2xl font-extrabold text-brand-600">100%</div>
-              <div className="text-xs text-gray-600 uppercase tracking-wide">Refundable for 7 days</div>
+              <div className="text-2xl font-extrabold text-brand-600">1:1</div>
+              <div className="text-xs text-gray-600 uppercase tracking-wide">Real travel advisor</div>
             </div>
             <div>
               <div className="text-2xl font-extrabold text-brand-600">$99</div>
-              <div className="text-xs text-gray-600 uppercase tracking-wide">Credited back when you book</div>
+              <div className="text-xs text-gray-600 uppercase tracking-wide">Research + advisor time</div>
             </div>
           </div>
 
