@@ -119,6 +119,12 @@ export default function ConciergePlanningForm() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [serverError, setServerError] = useState('');
+  const [intakeResult, setIntakeResult] = useState<{
+    contactId?: string;
+    opportunityId?: string;
+  }>({});
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [checkoutError, setCheckoutError] = useState('');
 
   // ─── Handlers ────────────────────────────────────────────
 
@@ -218,11 +224,15 @@ export default function ConciergePlanningForm() {
         }),
       });
 
+      const intakeData = (await res.json()) as {
+        contactId?: string;
+        opportunityId?: string;
+        error?: string;
+      };
       if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || 'Something went wrong');
+        throw new Error(intakeData.error || 'Something went wrong');
       }
-
+      setIntakeResult(intakeData);
       setStatus('success');
       trackLead({
         content_name: 'Concierge Planning',
@@ -241,8 +251,34 @@ export default function ConciergePlanningForm() {
   // ─── Success State ───────────────────────────────────────
 
   if (status === 'success') {
-    const paymentLink = process.env.NEXT_PUBLIC_CONCIERGE_PAYMENT_LINK || '#';
-    const paymentLinkSet = !!process.env.NEXT_PUBLIC_CONCIERGE_PAYMENT_LINK;
+    async function startCheckout() {
+      setCheckoutError('');
+      setCheckoutLoading(true);
+      try {
+        const res = await fetch('/api/stripe/concierge-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contactId: intakeResult.contactId,
+            opportunityId: intakeResult.opportunityId,
+            email: formData.email.trim().toLowerCase(),
+            firstName: formData.firstName.trim(),
+            lastName: formData.lastName.trim(),
+            destination: formData.destination,
+          }),
+        });
+        const data = await res.json();
+        if (!res.ok || !data.url) {
+          throw new Error(data.error || 'Could not start checkout');
+        }
+        window.location.href = data.url;
+      } catch (err) {
+        setCheckoutError(
+          err instanceof Error ? err.message : 'Could not start checkout. Try again.'
+        );
+        setCheckoutLoading(false);
+      }
+    }
 
     return (
       <div className="py-4">
@@ -260,21 +296,27 @@ export default function ConciergePlanningForm() {
           </div>
           <h3 className="text-xl font-bold text-gray-900 mb-2">Almost there. Lock it in with $99.</h3>
           <p className="text-sm text-gray-600 leading-relaxed max-w-sm mx-auto">
-            Pay your $99 concierge fee below. It is credited back when you book through VacationPro,
-            and fully refundable for 7 days if I cannot find you a trip you love.
+            Pay your $99 concierge fee below. This covers the research, resort and flight comparisons,
+            and your travel advisor&apos;s time building your itinerary.
           </p>
         </div>
 
-        <a
-          href={paymentLink}
-          className="block w-full text-center px-6 py-4 bg-brand-600 text-white font-semibold rounded-xl hover:bg-brand-700 transition-colors text-lg"
+        <button
+          type="button"
+          onClick={startCheckout}
+          disabled={checkoutLoading}
+          className="block w-full text-center px-6 py-4 bg-brand-600 text-white font-semibold rounded-xl hover:bg-brand-700 transition-colors text-lg disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          Pay $99 Now
-        </a>
+          {checkoutLoading ? 'Redirecting to checkout...' : 'Pay $99 Now'}
+        </button>
 
-        {!paymentLinkSet && (
-          <p className="text-xs text-gray-400 text-center mt-2">Coming soon</p>
+        {checkoutError && (
+          <p className="text-xs text-red-600 text-center mt-2">{checkoutError}</p>
         )}
+
+        <p className="text-xs text-gray-400 text-center mt-3">
+          Secure checkout powered by Stripe.
+        </p>
 
         <p className="text-sm text-gray-500 text-center mt-4 leading-relaxed">
           After payment I will reach out within 24 hours to schedule your discovery call (30 min by
