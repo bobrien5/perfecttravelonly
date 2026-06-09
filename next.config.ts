@@ -14,6 +14,12 @@ const nextConfig: NextConfig = {
           "https://shop.beacons.ai/vacationpro/8ae28eb6-7b27-41b2-b793-1610183bf1b9",
         permanent: false,
       },
+      {
+        source: "/d/puntacana",
+        destination:
+          "https://shop.beacons.ai/vacationpro/8ab1b983-7218-490c-8afa-670356ee31f6",
+        permanent: false,
+      },
     ];
   },
 };
