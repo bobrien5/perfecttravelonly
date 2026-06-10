@@ -21,7 +21,10 @@ def pick_image_urls(deal: dict) -> dict:
     hook -> heroImage; included -> galleryImages[0] or hero; details -> galleryImages[1] or hero.
     Any role with no usable image is None (caller must Gemini-generate a fallback)."""
     hero = deal.get("heroImage")
-    gallery = deal.get("galleryImages") or []
+    # Filter out empty-string entries — Sanity sometimes returns [""] for an
+    # empty array, which would otherwise pass the len(gallery) >= 1 check and
+    # yield an empty URL that fails to download.
+    gallery = [g for g in (deal.get("galleryImages") or []) if g]
     return {
         "hook": hero,
         "included": (gallery[0] if len(gallery) >= 1 else hero),
@@ -82,6 +85,52 @@ def generate_fallback(prompt: str, out_path: Path, retries: int = 2) -> bool:
         if attempt < retries:
             time.sleep(2 * (attempt + 1))
     return False
+
+
+REEL_ROLES = ("hook", "beat1", "beat2", "beat3", "beat4")
+
+
+def pick_reel_image_urls(deal: dict) -> dict:
+    """Choose a source URL per reel slot from the deal's real photos.
+    hook -> heroImage; beat1..4 -> galleryImages[0..3] or hero fallback."""
+    hero = deal.get("heroImage")
+    # Filter out empty-string entries — Sanity sometimes returns [""] for an
+    # empty array, which would otherwise pass the len(gallery) >= 1 check and
+    # yield an empty URL that fails to download.
+    gallery = [g for g in (deal.get("galleryImages") or []) if g]
+    return {
+        "hook": hero,
+        "beat1": gallery[0] if len(gallery) >= 1 else hero,
+        "beat2": gallery[1] if len(gallery) >= 2 else hero,
+        "beat3": gallery[2] if len(gallery) >= 3 else hero,
+        "beat4": gallery[3] if len(gallery) >= 4 else hero,
+    }
+
+
+def ensure_local_reel_images(deal: dict, work_dir) -> dict:
+    """Download (or Gemini-generate) all reel images into work_dir.
+    Returns {role: Path}. work_dir must already exist."""
+    work_dir = Path(work_dir)
+    picks = pick_reel_image_urls(deal)
+    out = {}
+    for role in REEL_ROLES:
+        url = picks[role]
+        dest = work_dir / f"{role}.jpg"
+        if url:
+            resp = requests.get(url, timeout=60)
+            resp.raise_for_status()
+            dest.write_bytes(resp.content)
+        else:
+            prompt = (
+                f"A stunning, photorealistic travel photo of {deal['destination']}: "
+                f"tropical beach resort, golden hour, no text, no people in foreground."
+            )
+            png = work_dir / f"{role}.png"
+            if not generate_fallback(prompt, png):
+                raise RuntimeError(f"no image available for reel role '{role}' and Gemini fallback failed")
+            dest = png
+        out[role] = dest
+    return out
 
 
 def ensure_local_images(deal: dict, work_dir: Path) -> dict:

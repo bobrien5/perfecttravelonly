@@ -60,3 +60,23 @@ def test_build_meta_assembles_record():
     assert "generated_at" in meta
     assert meta["scheduling"]["platforms_by_format"]["carousel"] == ["facebook", "instagram"]
     assert meta["scheduling"]["platforms_by_format"]["static"] == ["facebook", "instagram"]
+
+
+def test_build_meta_reel_branch_includes_tiktok():
+    meta = captions.build_meta(
+        DEAL, "PUNTACANA", ["static", "carousel", "reel"],
+        {
+            "static": "punta-cana/static-4x5.jpg",
+            "carousel": ["punta-cana/carousel/slide-01.jpg"],
+            "reel": "punta-cana/reel-9x16.mp4",
+        },
+    )
+    assert meta["outputs"]["reel"] == "punta-cana/reel-9x16.mp4"
+    assert "tiktok" in meta["scheduling"]["platforms_by_format"]["reel"]
+    assert meta["scheduling"]["platforms_by_format"]["reel"] == ["facebook", "instagram", "tiktok"]
+
+
+def test_build_meta_reel_omitted_when_format_not_present():
+    meta = captions.build_meta(DEAL, "PUNTACANA", ["static"], {"static": "x.jpg"})
+    assert "reel" not in meta["outputs"]
+    assert "reel" not in meta["scheduling"]["platforms_by_format"]
