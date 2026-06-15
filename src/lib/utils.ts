@@ -29,3 +29,20 @@ export function getBaseUrl(): string {
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
   return 'http://localhost:3000';
 }
+
+/**
+ * Decode common HTML entities that sometimes sneak into CMS-authored SEO fields.
+ * Next escapes the resulting plain text exactly once when rendering metadata, so
+ * passing pre-escaped strings (e.g. "Resorts &amp; Packages") produces literal
+ * "&amp;amp;" in HTML. This normalizer fixes that case at the metadata boundary.
+ */
+export function decodeMetaEntities(input: string): string {
+  if (!input) return input;
+  return input
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&apos;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>');
+}

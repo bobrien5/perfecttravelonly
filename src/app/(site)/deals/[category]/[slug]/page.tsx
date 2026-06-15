@@ -10,7 +10,7 @@ import NewsletterSignup from '@/components/ui/NewsletterSignup';
 import ClaimOfferForm from '@/components/ui/ClaimOfferForm';
 import { getDealBySlug, getAllDealParams, getRelatedDeals } from '@/sanity/lib/fetch';
 import { getCategoryBySlug } from '@/sanity/lib/fetch';
-import { formatPrice } from '@/lib/utils';
+import { formatPrice, decodeMetaEntities } from '@/lib/utils';
 
 interface Props {
   params: Promise<{ category: string; slug: string }>;
@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category, slug } = await params;
   const deal = await getDealBySlug(category, slug);
   if (!deal) return {};
-  const cleanTitle = deal.seoTitle.replace(/\s*\|\s*VacationPro\s*$/i, '').replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
-  const cleanDesc = deal.metaDescription.replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
+  const cleanTitle = decodeMetaEntities(deal.seoTitle).replace(/\s*\|\s*VacationPro\s*$/i, '').replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
+  const cleanDesc = decodeMetaEntities(deal.metaDescription).replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
   return {
     title: { absolute: cleanTitle },
     description: cleanDesc,
