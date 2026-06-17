@@ -162,6 +162,20 @@ export default function LinksPage() {
           />
         </section>
 
+        {/* Amazon storefront */}
+        <section className="space-y-3">
+          <SectionLabel>Shop my picks</SectionLabel>
+          <LinkCard
+            external
+            href="https://amzn.to/4owVGZ7"
+            emoji="🧳"
+            title="My Amazon storefront"
+            subtitle="Travel essentials I actually pack and recommend"
+            badge="Amazon"
+            badgeTone="navy"
+          />
+        </section>
+
         {/* Free reads */}
         <section className="space-y-3">
           <SectionLabel>Free reads</SectionLabel>
