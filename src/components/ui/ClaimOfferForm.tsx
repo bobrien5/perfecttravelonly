@@ -197,6 +197,9 @@ export default function ClaimOfferForm({
           <input
             type="text"
             id="co-firstName"
+            name="firstName"
+            autoComplete="given-name"
+            required
             className={inputClasses}
             placeholder="First"
             value={formData.firstName}
@@ -210,6 +213,9 @@ export default function ClaimOfferForm({
           <input
             type="text"
             id="co-lastName"
+            name="lastName"
+            autoComplete="family-name"
+            required
             className={inputClasses}
             placeholder="Last"
             value={formData.lastName}
@@ -226,6 +232,9 @@ export default function ClaimOfferForm({
         <input
           type="email"
           id="co-email"
+          name="email"
+          autoComplete="email"
+          required
           className={inputClasses}
           placeholder="you@example.com"
           value={formData.email}
@@ -241,6 +250,9 @@ export default function ClaimOfferForm({
         <input
           type="tel"
           id="co-phone"
+          name="phone"
+          autoComplete="tel"
+          required
           className={inputClasses}
           placeholder="(555) 555-5555"
           value={formData.phone}
@@ -261,6 +273,7 @@ export default function ClaimOfferForm({
           <label htmlFor="co-age" className={labelClasses}>Age Range</label>
           <select
             id="co-age"
+            name="ageRange"
             className={inputClasses}
             value={formData.ageRange}
             onChange={(e) => handleChange('ageRange', e.target.value)}
@@ -277,6 +290,7 @@ export default function ClaimOfferForm({
           <label htmlFor="co-marital" className={labelClasses}>Marital Status</label>
           <select
             id="co-marital"
+            name="maritalStatus"
             className={inputClasses}
             value={formData.maritalStatus}
             onChange={(e) => handleChange('maritalStatus', e.target.value)}
@@ -297,6 +311,7 @@ export default function ClaimOfferForm({
           <label htmlFor="co-income" className={labelClasses}>Income</label>
           <select
             id="co-income"
+            name="householdIncome"
             className={inputClasses}
             value={formData.householdIncome}
             onChange={(e) => handleChange('householdIncome', e.target.value)}
@@ -313,6 +328,7 @@ export default function ClaimOfferForm({
           <label htmlFor="co-ownrent" className={labelClasses}>Own or Rent</label>
           <select
             id="co-ownrent"
+            name="ownOrRent"
             className={inputClasses}
             value={formData.ownOrRent}
             onChange={(e) => handleChange('ownOrRent', e.target.value)}
