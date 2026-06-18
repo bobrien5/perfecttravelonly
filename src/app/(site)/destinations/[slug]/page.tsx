@@ -15,6 +15,7 @@ import {
   getRecentDeals,
   getRecentBlogPosts,
 } from '@/sanity/lib/fetch';
+import { decodeMetaEntities } from '@/lib/utils';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -28,8 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const destination = await getDestinationBySlug(slug);
   if (!destination) return {};
-  const cleanTitle = destination.seoTitle.replace(/\s*\|\s*VacationPro\s*$/i, '').replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
-  const cleanDesc = destination.metaDescription.replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
+  const cleanTitle = decodeMetaEntities(destination.seoTitle).replace(/\s*\|\s*VacationPro\s*$/i, '').replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
+  const cleanDesc = decodeMetaEntities(destination.metaDescription).replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
   return {
     title: { absolute: cleanTitle },
     description: cleanDesc,

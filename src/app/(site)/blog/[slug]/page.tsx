@@ -10,6 +10,7 @@ import BlogCard from '@/components/ui/BlogCard';
 import NewsletterSignup from '@/components/ui/NewsletterSignup';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import { PortableText, PortableTextComponents } from '@portabletext/react';
+import { decodeMetaEntities } from '@/lib/utils';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -25,8 +26,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return {};
   const rawTitle = post.seoTitle || post.title;
   const rawDesc = post.metaDescription || post.excerpt;
-  const cleanTitle = rawTitle.replace(/\s*\|\s*VacationPro\s*$/i, '').replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
-  const cleanDesc = rawDesc.replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
+  const cleanTitle = decodeMetaEntities(rawTitle).replace(/\s*\|\s*VacationPro\s*$/i, '').replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
+  const cleanDesc = decodeMetaEntities(rawDesc).replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
   return {
     title: { absolute: cleanTitle },
     description: cleanDesc,

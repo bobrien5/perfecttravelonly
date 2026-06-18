@@ -6,6 +6,7 @@ import NewsletterSignup from '@/components/ui/NewsletterSignup';
 import AffiliateDisclosure from '@/components/ui/AffiliateDisclosure';
 import { getCategoryBySlug, getAllCategoryParams } from '@/sanity/lib/fetch';
 import { getDealsByCategory, getRecentDeals } from '@/sanity/lib/fetch';
+import { decodeMetaEntities } from '@/lib/utils';
 
 interface Props {
   params: Promise<{ category: string }>;
@@ -19,8 +20,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category: slug } = await params;
   const category = await getCategoryBySlug(slug);
   if (!category) return {};
-  const cleanTitle = category.seoTitle.replace(/\s*\|\s*VacationPro\s*$/i, '').replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
-  const cleanDesc = category.metaDescription.replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
+  const cleanTitle = decodeMetaEntities(category.seoTitle).replace(/\s*\|\s*VacationPro\s*$/i, '').replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
+  const cleanDesc = decodeMetaEntities(category.metaDescription).replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
   return {
     title: { absolute: cleanTitle },
     description: cleanDesc,
