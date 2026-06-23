@@ -88,26 +88,26 @@ export default async function BlogPostPage({ params }: Props) {
       </div>
 
       <article>
-        {/* Header: centered, narrow column */}
-        <header className="max-w-2xl mx-auto px-4 sm:px-6 text-center pt-4 pb-8">
+        {/* Header: single column, aligned to the reading width */}
+        <header className="max-w-[45rem] mx-auto px-4 sm:px-6 pt-4 pb-10">
           {categoryName && (
             <p className="text-xs font-semibold text-brand-600 uppercase tracking-[0.2em] mb-4">
               {categoryName}
             </p>
           )}
 
-          <h1 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl md:text-[2.75rem] lg:text-5xl font-bold text-gray-900 leading-[1.15] mb-5">
+          <h1 className="text-3xl sm:text-4xl md:text-[2.75rem] lg:text-[3.25rem] font-bold text-gray-900 leading-[1.12] tracking-tight mb-6">
             {post.title}
           </h1>
 
           {post.excerpt && (
-            <p className="text-lg sm:text-xl text-gray-500 leading-relaxed max-w-xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-500 leading-relaxed">
               {post.excerpt}
             </p>
           )}
 
           {/* Byline */}
-          <div className="mt-8 pt-5 border-t border-gray-200 flex items-center justify-center gap-3 text-sm text-gray-500">
+          <div className="mt-8 pt-6 border-t border-gray-200 flex items-center gap-3 text-sm text-gray-500">
             {post.author && (
               <span className="font-medium text-gray-900">
                 By {post.author}
@@ -126,20 +126,20 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         </header>
 
-        {/* Hero Image: full width, no rounded corners */}
+        {/* Hero Image: full reading width, gently rounded */}
         {post.image && (
-          <div className="w-full max-w-5xl mx-auto mb-10">
+          <div className="w-full max-w-[52rem] mx-auto px-4 sm:px-6 mb-12">
             <img
               src={post.image}
               alt={post.title}
-              className="w-full h-auto aspect-[16/9] object-cover"
+              className="w-full h-auto aspect-[16/9] object-cover rounded-xl"
             />
           </div>
         )}
 
         {/* Tags */}
         {post.blogTags && post.blogTags.length > 0 && (
-          <div className="max-w-2xl mx-auto px-4 sm:px-6 flex flex-wrap gap-2 mb-8">
+          <div className="max-w-[45rem] mx-auto px-4 sm:px-6 flex flex-wrap gap-2 mb-10">
             {post.blogTags.map((tag) => (
               <span
                 key={tag.slug}
@@ -152,8 +152,8 @@ export default async function BlogPostPage({ params }: Props) {
         )}
 
         {/* Body Content */}
-        <div className="max-w-2xl mx-auto px-4 sm:px-6">
-          <div className="blog-article prose prose-lg max-w-none prose-headings:font-[family-name:var(--font-serif)] prose-headings:text-gray-900 prose-headings:font-bold prose-h2:text-2xl sm:prose-h2:text-3xl prose-h3:text-xl sm:prose-h3:text-2xl prose-p:text-gray-700 prose-p:leading-[1.85] prose-p:text-[1.0625rem] sm:prose-p:text-lg prose-a:text-brand-600 prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-brand-600 prose-blockquote:text-gray-600 prose-blockquote:font-[family-name:var(--font-serif)] prose-blockquote:text-xl prose-blockquote:not-italic prose-img:rounded-none prose-strong:text-gray-900 prose-li:text-gray-700 prose-li:leading-[1.75]">
+        <div className="max-w-[45rem] mx-auto px-4 sm:px-6">
+          <div className="blog-article prose prose-lg max-w-none prose-headings:text-gray-900 prose-headings:font-bold prose-headings:tracking-tight prose-h2:text-[1.75rem] sm:prose-h2:text-[2rem] prose-h3:text-xl sm:prose-h3:text-2xl prose-p:text-gray-700 prose-p:leading-[1.8] prose-p:text-[1.0625rem] sm:prose-p:text-lg prose-a:text-brand-600 prose-a:font-medium prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-brand-600 prose-blockquote:text-gray-600 prose-blockquote:font-normal prose-blockquote:text-xl prose-blockquote:not-italic prose-img:rounded-lg prose-strong:text-gray-900 prose-li:text-gray-700 prose-li:leading-[1.7] prose-h2:scroll-mt-24 prose-h3:scroll-mt-24">
             {post.body && Array.isArray(post.body) && post.body.length > 0 ? (
               <PortableText
                 value={post.body}
@@ -197,7 +197,7 @@ export default async function BlogPostPage({ params }: Props) {
       {/* Related Posts */}
       {relatedPosts.length > 0 && (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20">
-          <h2 className="font-[family-name:var(--font-serif)] text-2xl font-bold text-gray-900 mb-8">
+          <h2 className="text-2xl font-bold tracking-tight text-gray-900 mb-8">
             More from the Blog
           </h2>
           <div className="grid md:grid-cols-3 gap-6">

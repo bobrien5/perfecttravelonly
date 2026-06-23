@@ -54,105 +54,81 @@ html {
   background: #94a3b8;
 }
 
-/* Editorial blog styles */
-.blog-article > p:first-of-type::first-letter,
-.blog-article > div > p:first-of-type::first-letter {
-  float: left;
-  font-size: 4rem;
-  line-height: 0.85;
-  padding-right: 0.5rem;
-  padding-top: 0.25rem;
-  font-weight: 900;
-  letter-spacing: -0.03em;
-  color: #0f2e1a;
-}
+/* Blog article styles — clean, airy, single column (The World Travel Guy feel) */
 
-/* Paragraph spacing — more breathing room */
+/* Even paragraph rhythm */
 .blog-article p {
-  margin-bottom: 1.5em;
+  margin-bottom: 1.6em;
 }
 
 /* Bold labels ("What makes it luxury:", "Best for:", etc.) */
 .blog-article p > strong:first-child {
-  display: inline-block;
   color: #111827;
-  font-size: 0.9em;
   letter-spacing: 0.01em;
 }
 
 /* Price callouts — bold paragraphs that start with $ */
 .blog-article p > strong:only-child {
   display: block;
-  font-size: 1.25em;
-  color: #4ac850;
+  font-size: 1.2em;
+  color: #009b51;
   margin-top: 0.25em;
   margin-bottom: 0.25em;
 }
 
-/* Numbered deal headings (e.g. "1. Cabo San Lucas — ...") */
-.blog-article h2,
-.blog-article h3 {
+/* Headings — generous, even whitespace, no borders or heavy padding */
+.blog-article h2 {
   margin-top: 2.5em;
-  margin-bottom: 0.75em;
-  padding-top: 2em;
-  border-top: 1px solid #e5e7eb;
+  margin-bottom: 0.6em;
+  line-height: 1.25;
 }
 
-/* First heading shouldn't have top border */
-.blog-article h2:first-child,
-.blog-article h3:first-child,
-.blog-article > :first-child + h2,
-.blog-article > :first-child + h3 {
-  border-top: none;
-  padding-top: 0;
+.blog-article h3 {
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+/* First heading shouldn't carry extra top space */
+.blog-article > :first-child {
   margin-top: 0;
 }
 
-/* Horizontal rules as section dividers */
+/* Horizontal rules as quiet section dividers */
 .blog-article hr {
   border: none;
   border-top: 1px solid #e5e7eb;
-  margin: 2.5em 0;
+  margin: 3em 0;
 }
 
 /* Lists inside articles */
 .blog-article ul,
 .blog-article ol {
   margin-top: 1em;
-  margin-bottom: 1.75em;
+  margin-bottom: 1.6em;
   padding-left: 1.5em;
 }
 
 .blog-article li {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.6em;
+  line-height: 1.7;
 }
 
-/* Figures */
+/* Figures — full width within the reading column, simple caption */
 .blog-article figure {
-  margin: 2.5rem -4rem;
-}
-
-@media (max-width: 768px) {
-  .blog-article figure {
-    margin-left: -1rem;
-    margin-right: -1rem;
-  }
+  margin: 2.75rem 0;
 }
 
 .blog-article figure img {
   width: 100%;
   height: auto;
+  border-radius: 0.5rem;
 }
 
 .blog-article figure figcaption {
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   color: #6b7280;
-  padding: 0.5rem 4rem 0;
+  padding-top: 0.625rem;
   font-style: italic;
-}
-
-@media (max-width: 768px) {
-  .blog-article figure figcaption {
-    padding: 0.5rem 1rem 0;
-  }
+  text-align: center;
 }
