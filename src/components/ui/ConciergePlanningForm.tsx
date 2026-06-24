@@ -74,6 +74,7 @@ interface FormData {
   adults: number;
   children: number;
   destination: string;
+  departureAirport: string;
   tripType: string;
   budgetPerPerson: string;
   // Section 2: What matters most
@@ -94,6 +95,7 @@ const initialFormData: FormData = {
   adults: 2,
   children: 0,
   destination: '',
+  departureAirport: '',
   tripType: '',
   budgetPerPerson: '',
   priorities: [],
@@ -225,6 +227,7 @@ export default function ConciergePlanningForm({ defaultDestination, sourceLabel 
         body: JSON.stringify({
           ...formData,
           priorities: formData.priorities.join(', '),
+          departureAirport: formData.departureAirport.trim(),
           sourcePageUrl,
           referrerUrl,
           utmSource,
@@ -361,6 +364,19 @@ export default function ConciergePlanningForm({ defaultDestination, sourceLabel 
           disabled={isSubmitting}
         />
         {errors.travelDates && <p className={errorClasses}>{errors.travelDates}</p>}
+      </div>
+
+      {/* Home Airport */}
+      <div>
+        <label htmlFor="cp-departureAirport" className={labelClasses}>Home airport</label>
+        <input
+          type="text"
+          id="cp-departureAirport"
+          className={inputClasses}
+          placeholder="e.g. Boston (BOS)"
+          value={formData.departureAirport}
+          onChange={(e) => handleChange('departureAirport', e.target.value)}
+        />
       </div>
 
       {/* Adults + Children */}

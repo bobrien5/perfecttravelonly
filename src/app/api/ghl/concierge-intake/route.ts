@@ -25,6 +25,7 @@ const CF_CONCIERGE_PARTY_CHILDREN = process.env.GHL_CF_CONCIERGE_PARTY_CHILDREN 
 const CF_CONCIERGE_BUDGET_RANGE = process.env.GHL_CF_CONCIERGE_BUDGET_RANGE || '';
 const CF_CONCIERGE_PRIORITIES = process.env.GHL_CF_CONCIERGE_PRIORITIES || '';
 const CF_CONCIERGE_NOTES = process.env.GHL_CF_CONCIERGE_NOTES || '';
+const CF_CONCIERGE_DEPARTURE_AIRPORT = process.env.GHL_CF_CONCIERGE_DEPARTURE_AIRPORT || '';
 
 interface ConciergeIntakeRequest {
   // Section 1: Trip basics
@@ -32,6 +33,7 @@ interface ConciergeIntakeRequest {
   adults: number;
   children: number;
   destination: string;
+  departureAirport?: string;
   tripType: string;
   budgetPerPerson: string;
   // Section 2: What matters most (comma-separated string)
@@ -88,6 +90,7 @@ function buildNotesBlock(body: ConciergeIntakeRequest): string {
     `Travel dates: ${body.travelDates}`,
     `Party: ${body.adults} adults, ${body.children ?? 0} children`,
     `Destination: ${body.destination}`,
+    `Home airport: ${body.departureAirport?.trim() || '(not provided)'}`,
     `Trip type: ${body.tripType}`,
     `Budget per person: ${body.budgetPerPerson}`,
     `Priorities: ${body.priorities}`,
@@ -143,6 +146,9 @@ export async function POST(request: NextRequest) {
     }
     if (CF_CONCIERGE_DESTINATION && body.destination) {
       customFields.push({ id: CF_CONCIERGE_DESTINATION, field_value: body.destination });
+    }
+    if (CF_CONCIERGE_DEPARTURE_AIRPORT && body.departureAirport) {
+      customFields.push({ id: CF_CONCIERGE_DEPARTURE_AIRPORT, field_value: body.departureAirport });
     }
     if (CF_CONCIERGE_TRIP_TYPE && body.tripType) {
       customFields.push({ id: CF_CONCIERGE_TRIP_TYPE, field_value: body.tripType });
