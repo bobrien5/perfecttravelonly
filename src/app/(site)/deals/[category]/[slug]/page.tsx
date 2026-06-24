@@ -8,6 +8,7 @@ import AffiliateDisclosure from '@/components/ui/AffiliateDisclosure';
 import DealCard from '@/components/ui/DealCard';
 import NewsletterSignup from '@/components/ui/NewsletterSignup';
 import ClaimOfferForm from '@/components/ui/ClaimOfferForm';
+import ConciergePlanningForm from '@/components/ui/ConciergePlanningForm';
 import { getDealBySlug, getAllDealParams, getRelatedDeals } from '@/sanity/lib/fetch';
 import { getCategoryBySlug } from '@/sanity/lib/fetch';
 import { formatPrice } from '@/lib/utils';
@@ -176,7 +177,12 @@ export default async function DealPage({ params }: Props) {
                 </div>
               </div>
 
-              {deal.isTimeshare ? (
+              {deal.isAdvisorPackage ? (
+                <ConciergePlanningForm
+                  defaultDestination={deal.destination}
+                  sourceLabel={`Advisor Package - ${deal.title}`}
+                />
+              ) : deal.isTimeshare ? (
                 <ClaimOfferForm
                   dealTitle={deal.title}
                   dealDestination={deal.destination}
