@@ -35,6 +35,7 @@ const dealProjection = groq`{
   disclaimer,
   editorialNotes,
   isTimeshare,
+  isAdvisorPackage,
   isFamilyFriendly,
   isAdultsOnly,
   isLuxury,

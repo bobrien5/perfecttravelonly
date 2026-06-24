@@ -19,7 +19,10 @@ const deal = {
     { name: 'heroImage', title: 'Hero Image URL', type: 'url', group: 'content', validation: (r: any) => r.required() },
     { name: 'galleryImages', title: 'Gallery Images', type: 'array', group: 'content', of: [{ type: 'url' }] },
     { name: 'provider', title: 'Provider', type: 'string', group: 'content' },
-    { name: 'affiliateLink', title: 'Affiliate Link', type: 'url', group: 'content', description: 'The monetization link — where the "Book This Deal" button goes.', validation: (r: any) => r.required().uri({ allowRelative: true, scheme: ['http', 'https'] }) },
+    { name: 'affiliateLink', title: 'Affiliate Link', type: 'url', group: 'content', description: 'Monetization link for affiliate/timeshare deals. Not required for advisor packages.', validation: (r: any) => r.uri({ allowRelative: true, scheme: ['http', 'https'] }).custom((value: string | undefined, context: any) => {
+      if (context?.document?.isAdvisorPackage) return true;
+      return value ? true : 'Affiliate link is required unless this is an advisor package';
+    }) },
     { name: 'ctaText', title: 'CTA Button Text', type: 'string', group: 'content', initialValue: 'View This Deal' },
     { name: 'duration', title: 'Duration', type: 'string', group: 'content' },
     { name: 'travelDates', title: 'Travel Dates', type: 'string', group: 'content' },
@@ -47,6 +50,7 @@ const deal = {
     // Flags & Tags
     { name: 'featured', title: 'Featured', type: 'boolean', group: 'flags', initialValue: false },
     { name: 'isTimeshare', title: 'Timeshare Preview', type: 'boolean', group: 'flags', initialValue: false },
+    { name: 'isAdvisorPackage', title: 'Advisor Package (host-agency bookable)', type: 'boolean', group: 'flags', initialValue: false, description: 'When true: shows a Claim This Deal trip-detail form instead of an affiliate link, and hides the timeshare disclosure.' },
     { name: 'isFamilyFriendly', title: 'Family-Friendly', type: 'boolean', group: 'flags', initialValue: false },
     { name: 'isAdultsOnly', title: 'Adults-Only', type: 'boolean', group: 'flags', initialValue: false },
     { name: 'isLuxury', title: 'Luxury', type: 'boolean', group: 'flags', initialValue: false },

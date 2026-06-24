@@ -29,6 +29,7 @@ export interface Deal {
   disclaimer: string;
   editorialNotes: string;
   isTimeshare: boolean;
+  isAdvisorPackage: boolean;
   isFamilyFriendly: boolean;
   isAdultsOnly: boolean;
   isLuxury: boolean;
