@@ -114,8 +114,17 @@ const errorClasses = 'text-xs text-red-600 mt-1';
 
 // ─── Component ───────────────────────────────────────────────
 
-export default function ConciergePlanningForm() {
-  const [formData, setFormData] = useState<FormData>(initialFormData);
+interface ConciergePlanningFormProps {
+  defaultDestination?: string;
+  sourceLabel?: string;
+}
+
+export default function ConciergePlanningForm({ defaultDestination, sourceLabel }: ConciergePlanningFormProps = {}) {
+  const [formData, setFormData] = useState<FormData>({
+    ...initialFormData,
+    destination: defaultDestination ?? initialFormData.destination,
+    source: sourceLabel ?? initialFormData.source,
+  });
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [serverError, setServerError] = useState('');
