@@ -134,6 +134,9 @@ export default function ConciergePlanningForm({ defaultDestination, sourceLabel 
     contactId?: string;
     opportunityId?: string;
   }>({});
+  const hasUnlistedDefault = Boolean(
+    defaultDestination && !DESTINATION_OPTIONS.includes(defaultDestination),
+  );
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [checkoutError, setCheckoutError] = useState('');
 
@@ -420,6 +423,9 @@ export default function ConciergePlanningForm({ defaultDestination, sourceLabel 
           disabled={isSubmitting}
         >
           <option value="" disabled>Select a destination</option>
+          {hasUnlistedDefault && (
+            <option value={defaultDestination}>{defaultDestination}</option>
+          )}
           {DESTINATION_OPTIONS.map((opt) => (
             <option key={opt} value={opt}>{opt}</option>
           ))}
