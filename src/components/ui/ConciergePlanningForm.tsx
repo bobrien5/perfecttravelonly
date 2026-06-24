@@ -376,6 +376,7 @@ export default function ConciergePlanningForm({ defaultDestination, sourceLabel 
           placeholder="e.g. Boston (BOS)"
           value={formData.departureAirport}
           onChange={(e) => handleChange('departureAirport', e.target.value)}
+          disabled={isSubmitting}
         />
       </div>
 
