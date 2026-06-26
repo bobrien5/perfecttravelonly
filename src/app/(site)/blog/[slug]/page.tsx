@@ -153,7 +153,7 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* Body Content */}
         <div className="max-w-[45rem] mx-auto px-4 sm:px-6">
-          <div className="blog-article prose prose-lg max-w-none prose-headings:text-gray-900 prose-headings:font-bold prose-headings:tracking-tight prose-h2:text-[1.75rem] sm:prose-h2:text-[2rem] prose-h3:text-xl sm:prose-h3:text-2xl prose-p:text-gray-700 prose-p:leading-[1.8] prose-p:text-[1.0625rem] sm:prose-p:text-lg prose-a:text-brand-600 prose-a:font-medium prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-brand-600 prose-blockquote:text-gray-600 prose-blockquote:font-normal prose-blockquote:text-xl prose-blockquote:not-italic prose-img:rounded-lg prose-strong:text-gray-900 prose-li:text-gray-700 prose-li:leading-[1.7] prose-h2:scroll-mt-24 prose-h3:scroll-mt-24">
+          <div className="blog-article">
             {post.body && Array.isArray(post.body) && post.body.length > 0 ? (
               <PortableText
                 value={post.body}
