@@ -52,6 +52,44 @@ const portableTextComponents: PortableTextComponents = {
       </figure>
     ),
   },
+  marks: {
+    link: ({ value, children }) => {
+      const href: string = value?.href || '';
+      if (!href) return <>{children}</>;
+      const external = /^https?:\/\//.test(href);
+      const isAffiliate = href.includes('prf.hn') || href.includes('expedia.');
+      const rel = isAffiliate
+        ? 'sponsored noopener noreferrer'
+        : external
+          ? 'noopener noreferrer'
+          : undefined;
+      const target = external ? '_blank' : undefined;
+      // Affiliate CTAs render as a prominent brand button; everything else as an inline link.
+      if (isAffiliate) {
+        return (
+          <a
+            href={href}
+            target={target}
+            rel={rel}
+            className="not-prose inline-flex items-center gap-2 my-2 px-5 py-2.5 rounded-lg bg-brand-600 text-white font-semibold no-underline hover:bg-brand-700 transition-colors"
+          >
+            {children}
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        );
+      }
+      return (
+        <a
+          href={href}
+          target={target}
+          rel={rel}
+          className="text-brand-600 underline underline-offset-2 hover:text-brand-700"
+        >
+          {children}
+        </a>
+      );
+    },
+  },
 };
 
 export default async function BlogPostPage({ params }: Props) {
