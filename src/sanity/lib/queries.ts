@@ -82,7 +82,7 @@ const blogPostProjection = groq`{
   "image": coalesce(image, featuredImage.asset->url),
   category,
   author,
-  date,
+  "date": coalesce(publishedAt, date),
   readTime
 }`;
 
@@ -163,11 +163,11 @@ export const allDestinationParamsQuery = groq`
 // ============================================================
 
 export const allBlogPostsQuery = groq`
-  *[_type == "blogPost" && (brand == "vacationpro" || !defined(brand))] | order(date desc) ${blogPostProjection}
+  *[_type == "blogPost" && (brand == "vacationpro" || !defined(brand))] | order(coalesce(publishedAt, date) desc) ${blogPostProjection}
 `;
 
 export const recentBlogPostsQuery = groq`
-  *[_type == "blogPost" && (brand == "vacationpro" || !defined(brand))] | order(date desc) [0...$count] ${blogPostProjection}
+  *[_type == "blogPost" && (brand == "vacationpro" || !defined(brand))] | order(coalesce(publishedAt, date) desc) [0...$count] ${blogPostProjection}
 `;
 
 export const blogPostBySlugQuery = groq`
