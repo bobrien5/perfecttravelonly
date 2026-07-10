@@ -1,11 +1,10 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
 import ConciergePlanningForm from '@/components/ui/ConciergePlanningForm';
 
 export const metadata: Metadata = {
   title: 'Plan My Trip, VacationPro Concierge',
   description:
-    'Two ways to book your next vacation. Pick a curated package for free or hire a travel advisor to plan a custom trip for $99.',
+    'Hire a travel advisor to plan a custom vacation for $99, research and advisor time included.',
   robots: { index: false, follow: true },
 };
 
@@ -24,77 +23,15 @@ export default function ConciergePlanningPage() {
         {/* Headline */}
         <div className="text-center mb-12 max-w-3xl mx-auto">
           <h1 className="text-3xl sm:text-5xl font-extrabold text-forest mb-4 leading-tight">
-            Two ways to book your next vacation.
+            Let&apos;s plan your next vacation.
           </h1>
           <p className="text-lg text-gray-600 leading-relaxed">
-            Browse a curated package and book it free, or hire me to plan a fully custom trip
-            from scratch. Either way, you get a real human checking the details before you pay
-            a hotel a dime.
+            Plan and book your trip with me. Custom itineraries available.
           </p>
         </div>
 
         {/* Tier cards */}
-        <div className="grid md:grid-cols-2 gap-6 mb-16">
-
-          {/* FREE PATH */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 border-2 border-gray-100 flex flex-col">
-            <div className="mb-4">
-              <span className="inline-block bg-gray-100 text-gray-700 text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full">
-                Free
-              </span>
-            </div>
-            <h2 className="text-2xl font-extrabold text-forest mb-2">
-              Book a Curated Package
-            </h2>
-            <div className="flex items-baseline gap-2 mb-4">
-              <span className="text-4xl font-extrabold text-forest">Free</span>
-              <span className="text-sm text-gray-500">no planning fee</span>
-            </div>
-            <p className="text-gray-600 mb-6 leading-relaxed">
-              Pre-vetted resorts, dates, and prices. Click the deal you want, confirm with me,
-              and I handle the booking. You pay the resort directly, I earn a commission on
-              the back end. You pay nothing extra.
-            </p>
-
-            <div className="mb-6">
-              <p className="text-sm font-bold text-forest mb-3 uppercase tracking-wide">
-                Perfect if:
-              </p>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex items-start gap-2">
-                  <span className="text-brand-600 font-bold mt-0.5">+</span>
-                  <span>You want a great deal without doing the research</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-brand-600 font-bold mt-0.5">+</span>
-                  <span>Flexible on resort, just want sun and a fair price</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-brand-600 font-bold mt-0.5">+</span>
-                  <span>Budget under $4k for a couples trip</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="mb-8">
-              <p className="text-sm font-bold text-forest mb-3 uppercase tracking-wide">
-                Includes:
-              </p>
-              <ul className="space-y-2 text-gray-700 text-sm">
-                <li>Curated all-inclusive and Caribbean deals</li>
-                <li>Booking handled by VacationPro</li>
-                <li>24h response on questions</li>
-                <li>Price-match if the same package drops</li>
-              </ul>
-            </div>
-
-            <Link
-              href="/deals/all-inclusive"
-              className="mt-auto block w-full text-center bg-forest hover:opacity-90 text-white font-bold py-4 px-6 rounded-xl transition-opacity"
-            >
-              Browse Packages
-            </Link>
-          </div>
+        <div className="grid gap-6 mb-16 max-w-xl mx-auto">
 
           {/* PAID PATH */}
           <div className="bg-white rounded-2xl shadow-xl p-8 border-2 border-brand-500 flex flex-col relative">
