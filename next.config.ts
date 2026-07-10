@@ -20,6 +20,21 @@ const nextConfig: NextConfig = {
           "https://www.perfecttravelonly.com/products/excellence-punta-cana-guide",
         permanent: false,
       },
+      {
+        source: "/deals/:category/:slug",
+        destination: "/destinations",
+        permanent: true,
+      },
+      {
+        source: "/deals/:category",
+        destination: "/destinations",
+        permanent: true,
+      },
+      {
+        source: "/deals",
+        destination: "/",
+        permanent: true,
+      },
     ];
   },
 };
