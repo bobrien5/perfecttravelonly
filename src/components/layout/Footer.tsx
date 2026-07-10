@@ -5,14 +5,10 @@ import Link from 'next/link';
 import { useNewsletterSubscribe } from '@/hooks/useNewsletterSubscribe';
 
 const footerLinks = {
-  deals: [
-    { name: 'All-Inclusive Deals', href: '/deals/all-inclusive' },
-    { name: 'Cruise Deals', href: '/deals/cruises' },
-    { name: 'Flight + Hotel', href: '/deals/flight-hotel' },
-    { name: 'Timeshare Deals', href: '/deals/timeshare' },
-    { name: 'Luxury Deals', href: '/deals/luxury' },
-    { name: 'Budget Vacations', href: '/deals/budget' },
-    { name: 'Weekend Getaways', href: '/deals/weekend-getaways' },
+  guides: [
+    { name: 'All Guides', href: '/blog' },
+    { name: 'Destinations', href: '/destinations/cancun' },
+    { name: 'Plan With Me', href: '/concierge-planning' },
   ],
   destinations: [
     { name: 'Cancun', href: '/destinations/cancun' },
@@ -96,10 +92,10 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="max-w-2xl mx-auto text-center">
             <h3 className="text-2xl font-bold text-white mb-2">
-              Get the best vacation deals in your inbox
+              Tropical travel guides and tips in your inbox
             </h3>
             <p className="text-gray-400 mb-6">
-              Join thousands of savvy travelers who never miss a deal.
+              Join thousands of savvy travelers who never miss a new guide.
             </p>
             <FooterNewsletter />
           </div>
@@ -110,9 +106,9 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div>
-            <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Deals</h4>
+            <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Guides</h4>
             <ul className="space-y-2">
-              {footerLinks.deals.map((link) => (
+              {footerLinks.guides.map((link) => (
                 <li key={link.name}>
                   <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">
                     {link.name}
