@@ -9,7 +9,6 @@
  */
 
 import { createClient } from '@sanity/client';
-import { deals } from '../src/data/deals';
 import { destinations } from '../src/data/destinations';
 import { categories } from '../src/data/categories';
 import { blogPosts } from '../src/data/blog-posts';
@@ -71,52 +70,6 @@ async function migrate() {
     console.log(`  ✅ ${dest.name}`);
   }
 
-  // --- Deals ---
-  console.log(`\n💰 Migrating ${deals.length} deals...`);
-  for (const deal of deals) {
-    await client.createOrReplace({
-      _type: 'deal',
-      _id: `deal-${deal.slug}`,
-      title: deal.title,
-      slug: { _type: 'slug', current: deal.slug },
-      shortDescription: deal.shortDescription,
-      fullDescription: deal.fullDescription,
-      heroImage: deal.heroImage,
-      galleryImages: deal.galleryImages,
-      destination: deal.destination,
-      destinationSlug: deal.destinationSlug,
-      region: deal.region,
-      country: deal.country,
-      category: deal.category,
-      categorySlug: deal.categorySlug,
-      provider: deal.provider,
-      affiliateLink: deal.affiliateLink,
-      ctaText: deal.ctaText,
-      price: deal.price,
-      originalPrice: deal.originalPrice,
-      savingsAmount: deal.savingsAmount,
-      savingsPercent: deal.savingsPercent,
-      duration: deal.duration,
-      travelDates: deal.travelDates,
-      bookingWindow: deal.bookingWindow,
-      whatsIncluded: deal.whatsIncluded,
-      tags: deal.tags,
-      featured: deal.featured,
-      expiresAt: deal.expiresAt,
-      disclaimer: deal.disclaimer,
-      editorialNotes: deal.editorialNotes,
-      isTimeshare: deal.isTimeshare,
-      isFamilyFriendly: deal.isFamilyFriendly,
-      isAdultsOnly: deal.isAdultsOnly,
-      isLuxury: deal.isLuxury,
-      isBudget: deal.isBudget,
-      seoTitle: deal.seoTitle,
-      metaDescription: deal.metaDescription,
-      faq: deal.faq,
-    });
-    console.log(`  ✅ ${deal.title}`);
-  }
-
   // --- Blog Posts ---
   console.log(`\n📝 Migrating ${blogPosts.length} blog posts...`);
   for (const post of blogPosts) {
@@ -138,7 +91,6 @@ async function migrate() {
   console.log('\n✨ Migration complete!');
   console.log(`   ${categories.length} categories`);
   console.log(`   ${destinations.length} destinations`);
-  console.log(`   ${deals.length} deals`);
   console.log(`   ${blogPosts.length} blog posts`);
   console.log('\nOpen your Sanity Studio to verify the data.');
 }

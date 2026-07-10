@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import DealCard from '@/components/ui/DealCard';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import FAQ from '@/components/ui/FAQ';
 import NewsletterSignup from '@/components/ui/NewsletterSignup';
@@ -11,8 +10,6 @@ import {
   getDestinationBySlug,
   getAllDestinations,
   getAllDestinationParams,
-  getDealsByDestination,
-  getRecentDeals,
   getRecentBlogPosts,
 } from '@/sanity/lib/fetch';
 
@@ -46,11 +43,6 @@ export default async function DestinationPage({ params }: Props) {
   const { slug } = await params;
   const destination = await getDestinationBySlug(slug);
   if (!destination) notFound();
-
-  let destDeals = await getDealsByDestination(slug);
-  if (destDeals.length === 0) {
-    destDeals = await getRecentDeals(4);
-  }
 
   const relatedPosts = await getRecentBlogPosts(3);
   const allDestinations = await getAllDestinations();
@@ -96,18 +88,6 @@ export default async function DestinationPage({ params }: Props) {
       </div>
 
       <AffiliateDisclosure variant="block" />
-
-      {/* Deals */}
-      <div className="mt-10">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">
-          Best Deals in {destination.name}
-        </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {destDeals.map((deal) => (
-            <DealCard key={deal.id} deal={deal} />
-          ))}
-        </div>
-      </div>
 
       {/* FAQ */}
       {destination.faq && destination.faq.length > 0 && (

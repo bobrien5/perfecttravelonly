@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import ClaimOfferForm from '@/components/ui/ClaimOfferForm';
 
 export const metadata: Metadata = {
   title: 'Get Your Verified Vacation Quote',
@@ -95,16 +94,6 @@ export default async function QuotePage({ searchParams }: PageProps) {
             <br />
             No spam, no commitment, no surprise fees.
           </p>
-        </div>
-
-        {/* Form card */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
-          <ClaimOfferForm
-            dealTitle={dealTitle}
-            dealDestination={destinationLabel}
-            dealPrice={Number(params.price?.replace(/[^0-9]/g, '')) || 0}
-            ctaText="Get My Quote"
-          />
         </div>
 
         {/* Trust strip */}
