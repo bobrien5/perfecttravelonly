@@ -4,20 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 const navigation = [
-  {
-    name: 'Deals',
-    href: '/deals/all-inclusive',
-    children: [
-      { name: 'All-Inclusive Deals', href: '/deals/all-inclusive' },
-      { name: 'Flight + Hotel Packages', href: '/deals/flight-hotel' },
-      { name: 'Cruise Deals', href: '/deals/cruises' },
-      { name: 'Timeshare Deals', href: '/deals/timeshare' },
-      { name: 'Luxury Deals', href: '/deals/luxury' },
-      { name: 'Budget Vacations', href: '/deals/budget' },
-      { name: 'Weekend Getaways', href: '/deals/weekend-getaways' },
-      { name: 'View All Deals', href: '/deals/all-inclusive' },
-    ],
-  },
+  { name: 'Guides', href: '/blog' },
   {
     name: 'Destinations',
     href: '/destinations/cancun',
@@ -32,23 +19,7 @@ const navigation = [
       { name: 'Maui', href: '/destinations/maui' },
     ],
   },
-  {
-    name: 'Categories',
-    href: '/deals/all-inclusive',
-    children: [
-      { name: 'All-Inclusive', href: '/deals/all-inclusive' },
-      { name: 'Caribbean', href: '/deals/caribbean' },
-      { name: 'Mexico', href: '/deals/mexico' },
-      { name: 'Beach Vacations', href: '/deals/beach' },
-      { name: 'Family Vacations', href: '/deals/family' },
-      { name: 'Adults-Only', href: '/deals/adults-only' },
-      { name: 'Golf Vacations', href: '/deals/golf' },
-      { name: 'Ski Vacations', href: '/deals/ski' },
-    ],
-  },
-  { name: 'Blog', href: '/blog' },
   { name: 'About', href: '/about' },
-  { name: 'Partner With Us', href: '/partner' },
 ];
 
 export default function Header() {
@@ -108,10 +79,10 @@ export default function Header() {
           {/* CTA + Mobile Toggle */}
           <div className="flex items-center gap-3">
             <Link
-              href="/newsletter"
+              href="/concierge-planning"
               className="hidden sm:inline-flex items-center px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 transition-colors"
             >
-              Get Deal Alerts
+              Plan With Me
             </Link>
             <button
               className="lg:hidden p-2 text-gray-600 hover:text-gray-900"
@@ -161,11 +132,11 @@ export default function Header() {
             ))}
             <div className="pt-3 px-3">
               <Link
-                href="/newsletter"
+                href="/concierge-planning"
                 className="block w-full text-center px-4 py-2 bg-brand-600 text-white font-medium rounded-lg hover:bg-brand-700 transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
-                Get Deal Alerts
+                Plan With Me
               </Link>
             </div>
           </div>
