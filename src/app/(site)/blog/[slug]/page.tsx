@@ -66,7 +66,7 @@ const portableTextComponents: PortableTextComponents = {
       const href: string = value?.href || '';
       if (!href) return <>{children}</>;
       const external = /^https?:\/\//.test(href);
-      const isAffiliate = href.includes('prf.hn') || href.includes('expedia.');
+      const isAffiliate = href.includes('expedia.');
       const rel = isAffiliate
         ? 'sponsored noopener noreferrer'
         : external
