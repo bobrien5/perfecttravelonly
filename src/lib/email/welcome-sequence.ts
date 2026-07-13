@@ -17,19 +17,6 @@ const BRAND = {
   800: '#006135',
 };
 
-interface Deal {
-  title: string;
-  destination: string;
-  price: number;
-  originalPrice: number;
-  savingsPercent: number;
-  duration: string;
-  heroImage: string;
-  categorySlug: string;
-  slug: string;
-  shortDescription: string;
-}
-
 // ─── Shared email wrapper ───────────────────────────────────────
 function emailWrapper(content: string): string {
   return `<!DOCTYPE html>
@@ -88,56 +75,18 @@ function ctaButton(text: string, href: string): string {
   </table>`;
 }
 
-function dealCard(deal: Deal): string {
-  const dealUrl = `${SITE_URL}/deals/${deal.categorySlug}/${deal.slug}`;
-  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:16px 0;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;">
-    <tr>
-      <td>
-        <img src="${deal.heroImage}" alt="${deal.destination}" width="600" style="width:100%;height:auto;display:block;" />
-      </td>
-    </tr>
-    <tr>
-      <td style="padding:16px;">
-        <p style="color:${BRAND[600]};font-size:12px;font-weight:600;text-transform:uppercase;margin:0 0 4px;">${deal.destination} · ${deal.duration}</p>
-        <h3 style="color:#111827;font-size:18px;font-weight:700;margin:0 0 8px;">${deal.title}</h3>
-        <p style="color:#6b7280;font-size:14px;line-height:1.5;margin:0 0 12px;">${deal.shortDescription.substring(0, 120)}...</p>
-        <table role="presentation" cellpadding="0" cellspacing="0">
-          <tr>
-            <td style="padding-right:12px;">
-              <span style="color:#111827;font-size:22px;font-weight:700;">$${deal.price.toLocaleString()}</span>
-              <span style="color:#9ca3af;font-size:14px;text-decoration:line-through;margin-left:8px;">$${deal.originalPrice.toLocaleString()}</span>
-            </td>
-            <td>
-              <span style="background-color:${BRAND[50]};color:${BRAND[700]};font-size:12px;font-weight:600;padding:4px 10px;border-radius:20px;">Save ${deal.savingsPercent}%</span>
-            </td>
-          </tr>
-        </table>
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:12px;">
-          <tr>
-            <td>
-              <a href="${dealUrl}" style="display:inline-block;background-color:${BRAND[500]};color:#ffffff;font-size:14px;font-weight:600;padding:10px 24px;border-radius:8px;text-decoration:none;">View Deal →</a>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>`;
-}
-
-// ─── Email 2: Best Deals (Day 3) ───────────────────────────────
-export function getEmail2Html(deals: Deal[], firstName?: string): string {
+// ─── Email 2: Travel Guides (Day 3) ─────────────────────────────
+export function getEmail2Html(firstName?: string): string {
   const greeting = firstName ? `${firstName}, check` : 'Check';
-  const dealCards = deals.slice(0, 3).map(dealCard).join('');
 
   return emailWrapper(`
-    <h2 style="color:#111827;font-size:22px;margin:0 0 8px;font-weight:700;">🔥 ${greeting} out our hottest deals right now</h2>
+    <h2 style="color:#111827;font-size:22px;margin:0 0 8px;font-weight:700;">📖 ${greeting} out our latest travel guides</h2>
     <p style="color:#4b5563;font-size:16px;line-height:1.6;margin:0 0 24px;">
-      These are the best vacation packages we have available today. Prices like these don't last — they update weekly and sell out fast.
+      Every week we publish new destination guides, packing tips, and trip planning advice to help you get more out of your next vacation. Take a look at what is new.
     </p>
-    ${dealCards}
-    ${ctaButton('See All Deals', `${SITE_URL}/deals/all-inclusive`)}
+    ${ctaButton('Browse Guides', `${SITE_URL}/blog`)}
     <p style="color:#9ca3af;font-size:13px;text-align:center;margin:0;">
-      Prices are per person, based on double occupancy. Subject to availability.
+      New guides are added every week, so check back often.
     </p>
   `);
 }
@@ -170,7 +119,7 @@ export function getEmail3Html(firstName?: string): string {
   return emailWrapper(`
     <h2 style="color:#111827;font-size:22px;margin:0 0 8px;font-weight:700;">${greeting} are you dreaming of going? ✈️</h2>
     <p style="color:#4b5563;font-size:16px;line-height:1.6;margin:0 0 8px;">
-      Over 5,000 travelers get our deal alerts every week. Here are the destinations they're booking most:
+      Over 5,000 travelers get our travel guides every week. Here are the destinations they're booking most:
     </p>
 
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:16px 0;">
@@ -180,50 +129,50 @@ export function getEmail3Html(firstName?: string): string {
     <div style="background-color:${BRAND[50]};border-radius:12px;padding:20px;margin:24px 0;text-align:center;">
       <p style="color:${BRAND[700]};font-size:14px;font-weight:600;margin:0 0 4px;">💬 What travelers are saying</p>
       <p style="color:#374151;font-size:15px;font-style:italic;margin:0 0 8px;">
-        "I saved over $800 on our Cancun trip just by waiting for a VacationPro deal alert. Literally the easiest way to find vacation packages."
+        "I planned our whole Cancun trip using VacationPro's guides. Literally the easiest way to figure out where to go and what to book."
       </p>
-      <p style="color:#9ca3af;font-size:13px;margin:0;">— Sarah M., VacationPro subscriber</p>
+      <p style="color:#9ca3af;font-size:13px;margin:0;">(Sarah M., VacationPro subscriber)</p>
     </div>
 
-    ${ctaButton('Explore Destinations', `${SITE_URL}/deals/all-inclusive`)}
+    ${ctaButton('Explore Destinations', `${SITE_URL}/blog`)}
   `);
 }
 
 // ─── Email 4: Final CTA + Timeshare Intro (Day 14) ─────────────
-export function getEmail4Html(deals: Deal[], firstName?: string): string {
+export function getEmail4Html(firstName?: string): string {
   const greeting = firstName ? `${firstName}, one` : 'One';
-  const topDeal = deals[0];
-  const topDealCard = topDeal ? dealCard(topDeal) : '';
 
   return emailWrapper(`
     <h2 style="color:#111827;font-size:22px;margin:0 0 8px;font-weight:700;">${greeting} more thing before we settle in 👋</h2>
     <p style="color:#4b5563;font-size:16px;line-height:1.6;margin:0 0 16px;">
-      You've been a subscriber for two weeks now — thanks for sticking with us! We wanted to share a few things to make sure you're getting the most out of VacationPro.
+      You've been a subscriber for two weeks now. Thanks for sticking with us! We wanted to share a few things to make sure you're getting the most out of VacationPro.
     </p>
 
-    <h3 style="color:#111827;font-size:18px;margin:24px 0 12px;font-weight:700;">🏷️ Our #1 deal right now:</h3>
-    ${topDealCard}
+    <h3 style="color:#111827;font-size:18px;margin:24px 0 12px;font-weight:700;">🧭 Let's plan your next trip together</h3>
+    <p style="color:#4b5563;font-size:15px;line-height:1.6;margin:0 0 16px;">
+      Tell us where you want to go and what matters most to you, and we'll put together a personalized vacation plan built around your budget and travel style. No pressure, just a plan.
+    </p>
 
     <h3 style="color:#111827;font-size:18px;margin:24px 0 12px;font-weight:700;">💡 Did you know?</h3>
     <p style="color:#4b5563;font-size:15px;line-height:1.6;margin:0 0 16px;">
-      We also feature <strong>timeshare preview packages</strong> — resort stays starting from $199/person where you attend a short presentation and enjoy the resort at a massive discount. No obligation to buy, ever.
+      We publish new <strong>travel guides</strong> every week (destination breakdowns, packing tips, and trip planning advice), so you always know where to look for your next trip.
     </p>
     <p style="color:#4b5563;font-size:15px;line-height:1.6;margin:0 0 16px;">
-      Thousands of savvy travelers use these packages every year to vacation for a fraction of the normal price. We always disclose terms upfront so you know exactly what to expect.
+      And when you are ready to book, our concierge service builds a personalized itinerary for you, research and advisor time included.
     </p>
 
-    ${ctaButton('Browse Timeshare Preview Deals', `${SITE_URL}/deals/timeshare`)}
+    ${ctaButton('Plan With Me', `${SITE_URL}/concierge-planning`)}
 
     <div style="background-color:#f9fafb;border-radius:12px;padding:20px;margin:24px 0;">
       <h4 style="color:#111827;font-size:15px;margin:0 0 8px;font-weight:700;">Quick links:</h4>
-      <p style="margin:4px 0;font-size:14px;">🌴 <a href="${SITE_URL}/deals/all-inclusive" style="color:${BRAND[600]};text-decoration:none;">All-Inclusive Deals</a></p>
-      <p style="margin:4px 0;font-size:14px;">✈️ <a href="${SITE_URL}/deals/flight-hotel" style="color:${BRAND[600]};text-decoration:none;">Flight + Hotel Bundles</a></p>
-      <p style="margin:4px 0;font-size:14px;">🚢 <a href="${SITE_URL}/deals/cruises" style="color:${BRAND[600]};text-decoration:none;">Cruise Deals</a></p>
+      <p style="margin:4px 0;font-size:14px;">🌴 <a href="${SITE_URL}/blog" style="color:${BRAND[600]};text-decoration:none;">All-Inclusive Guides</a></p>
+      <p style="margin:4px 0;font-size:14px;">✈️ <a href="${SITE_URL}/blog" style="color:${BRAND[600]};text-decoration:none;">Flight + Hotel Bundles</a></p>
+      <p style="margin:4px 0;font-size:14px;">🚢 <a href="${SITE_URL}/blog" style="color:${BRAND[600]};text-decoration:none;">Cruise Guides</a></p>
       <p style="margin:4px 0;font-size:14px;">📖 <a href="${SITE_URL}/blog" style="color:${BRAND[600]};text-decoration:none;">Travel Guides & Tips</a></p>
     </div>
 
     <p style="color:#6b7280;font-size:14px;line-height:1.6;margin:16px 0 0;text-align:center;">
-      From here on out, you'll get our regular deal alerts — 1 to 2 emails per week with the best vacation packages we find. Happy travels! 🌊
+      From here on out, you'll get our regular travel guides, 1 to 2 emails per week with new destinations and trip planning tips. Happy travels! 🌊
     </p>
   `);
 }
@@ -232,19 +181,18 @@ export function getEmail4Html(deals: Deal[], firstName?: string): string {
 export async function sendSequenceEmail(
   emailNumber: 2 | 3 | 4,
   to: string,
-  firstName: string | undefined,
-  deals: Deal[]
+  firstName: string | undefined
 ) {
   const subjects: Record<number, string> = {
-    2: '🔥 These vacation deals won\'t last long',
+    2: '📖 New travel guides you will want to read',
     3: '✈️ Where should your next vacation be?',
-    4: '👋 A quick note + our #1 deal right now',
+    4: '👋 A quick note + let\'s plan your trip',
   };
 
   const htmlGenerators: Record<number, () => string> = {
-    2: () => getEmail2Html(deals, firstName),
+    2: () => getEmail2Html(firstName),
     3: () => getEmail3Html(firstName),
-    4: () => getEmail4Html(deals, firstName),
+    4: () => getEmail4Html(firstName),
   };
 
   const msg = {

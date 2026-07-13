@@ -1,18 +1,16 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import DealCard from '@/components/ui/DealCard';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import FAQ from '@/components/ui/FAQ';
 import NewsletterSignup from '@/components/ui/NewsletterSignup';
 import AffiliateDisclosure from '@/components/ui/AffiliateDisclosure';
 import BlogCard from '@/components/ui/BlogCard';
+import Stay22Scripts from '@/components/monetization/Stay22Scripts';
 import {
   getDestinationBySlug,
   getAllDestinations,
   getAllDestinationParams,
-  getDealsByDestination,
-  getRecentDeals,
   getRecentBlogPosts,
 } from '@/sanity/lib/fetch';
 
@@ -47,11 +45,6 @@ export default async function DestinationPage({ params }: Props) {
   const destination = await getDestinationBySlug(slug);
   if (!destination) notFound();
 
-  let destDeals = await getDealsByDestination(slug);
-  if (destDeals.length === 0) {
-    destDeals = await getRecentDeals(4);
-  }
-
   const relatedPosts = await getRecentBlogPosts(3);
   const allDestinations = await getAllDestinations();
 
@@ -79,35 +72,7 @@ export default async function DestinationPage({ params }: Props) {
         <p className="text-gray-600 leading-relaxed text-lg">{destination.description}</p>
       </div>
 
-      {/* Categories for this destination */}
-      <div className="mb-10">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Popular Categories in {destination.name}</h2>
-        <div className="flex flex-wrap gap-2">
-          {destination.categories.map((cat) => (
-            <Link
-              key={cat}
-              href={`/deals/${cat}`}
-              className="px-4 py-2 bg-brand-50 text-brand-700 font-medium rounded-full text-sm hover:bg-brand-100 transition-colors capitalize"
-            >
-              {cat.replace(/-/g, ' ')}
-            </Link>
-          ))}
-        </div>
-      </div>
-
       <AffiliateDisclosure variant="block" />
-
-      {/* Deals */}
-      <div className="mt-10">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">
-          Best Deals in {destination.name}
-        </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {destDeals.map((deal) => (
-            <DealCard key={deal.id} deal={deal} />
-          ))}
-        </div>
-      </div>
 
       {/* FAQ */}
       {destination.faq && destination.faq.length > 0 && (
@@ -148,7 +113,7 @@ export default async function DestinationPage({ params }: Props) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute bottom-3 left-3">
                   <p className="text-white font-semibold">{d.name}</p>
-                  <p className="text-white/70 text-xs">{d.dealCount} deals</p>
+                  <p className="text-white/70 text-xs">{d.country}</p>
                 </div>
               </Link>
             ))}
@@ -158,10 +123,11 @@ export default async function DestinationPage({ params }: Props) {
       {/* Newsletter */}
       <div className="mt-16">
         <NewsletterSignup
-          heading={`Get ${destination.name} deal alerts`}
-          subheading={`Never miss a deal to ${destination.name}. Subscribe for free.`}
+          heading={`Get ${destination.name} travel guides`}
+          subheading={`Never miss a new guide to ${destination.name}. Subscribe for free.`}
         />
       </div>
+      <Stay22Scripts />
     </div>
   );
 }

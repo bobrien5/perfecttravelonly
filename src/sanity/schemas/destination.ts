@@ -11,7 +11,6 @@ const destination = {
     { name: 'heroImage', title: 'Hero Image URL', type: 'url' },
     { name: 'description', title: 'Description', type: 'text', rows: 6 },
     { name: 'shortDescription', title: 'Short Description', type: 'text', rows: 2 },
-    { name: 'dealCount', title: 'Deal Count', type: 'number', description: 'Number of deals to display' },
     { name: 'categories', title: 'Available Categories', type: 'array', of: [{ type: 'string' }] },
     { name: 'faq', title: 'FAQ', type: 'array', of: [{ type: 'object', fields: [{ name: 'question', title: 'Question', type: 'string' }, { name: 'answer', title: 'Answer', type: 'text' }] }] },
     { name: 'seoTitle', title: 'SEO Title', type: 'string' },

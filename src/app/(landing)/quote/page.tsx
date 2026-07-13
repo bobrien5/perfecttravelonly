@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
-import ClaimOfferForm from '@/components/ui/ClaimOfferForm';
+import ConciergePlanningForm from '@/components/ui/ConciergePlanningForm';
+import Stay22Guard from '@/components/monetization/Stay22Guard';
 
 export const metadata: Metadata = {
   title: 'Get Your Verified Vacation Quote',
@@ -72,11 +73,11 @@ export default async function QuotePage({ searchParams }: PageProps) {
   const destSlug = (params.dest || params.destination || params.deal || '').toLowerCase();
   const lookup = DESTINATION_LABELS[destSlug];
   const destinationLabel = lookup?.label || params.destination || 'Caribbean Vacation';
-  const dealTitle = params.title || lookup?.title || 'Vacation Package Quote';
   const priceLabel = params.price ? `from ${params.price}` : 'verified pricing';
 
   return (
     <main className="min-h-screen bg-cream-50 py-12 px-4 sm:px-6 lg:px-8">
+      <Stay22Guard />
       <div className="max-w-2xl mx-auto">
         {/* Trust badge */}
         <div className="text-center mb-6">
@@ -97,14 +98,9 @@ export default async function QuotePage({ searchParams }: PageProps) {
           </p>
         </div>
 
-        {/* Form card */}
+        {/* Concierge intake form */}
         <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
-          <ClaimOfferForm
-            dealTitle={dealTitle}
-            dealDestination={destinationLabel}
-            dealPrice={Number(params.price?.replace(/[^0-9]/g, '')) || 0}
-            ctaText="Get My Quote"
-          />
+          <ConciergePlanningForm defaultDestination={destinationLabel} sourceLabel="Quote landing page" />
         </div>
 
         {/* Trust strip */}

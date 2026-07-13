@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import sgClient from '@sendgrid/client';
 import sgMail from '@sendgrid/mail';
 import { sendSequenceEmail } from '@/lib/email/welcome-sequence';
-import { getFeaturedDeals } from '@/sanity/lib/fetch';
 
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY!;
 const CRON_SECRET = process.env.SANITY_REVALIDATE_SECRET; // reuse existing secret
@@ -27,9 +26,6 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    // Get featured deals for email content
-    const deals = await getFeaturedDeals();
-
     // Search for contacts that need sequence emails
     // We use custom fields to track sequence progress:
     // e2_T = signup_date (ISO string)
@@ -63,7 +59,7 @@ export async function GET(request: NextRequest) {
 
         for (const contact of contacts) {
           try {
-            await sendSequenceEmail(step, contact.email, contact.first_name, deals);
+            await sendSequenceEmail(step, contact.email, contact.first_name);
 
             // Update contact's welcome_step
             const updateRequest = {
@@ -119,8 +115,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const deals = await getFeaturedDeals();
-    await sendSequenceEmail(emailNumber as 2 | 3 | 4, email, firstName, deals);
+    await sendSequenceEmail(emailNumber as 2 | 3 | 4, email, firstName);
 
     return NextResponse.json({ success: true, message: `Email ${emailNumber} sent to ${email}` });
   } catch (error) {

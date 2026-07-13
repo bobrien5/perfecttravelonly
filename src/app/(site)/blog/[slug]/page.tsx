@@ -9,6 +9,8 @@ import {
 import BlogCard from '@/components/ui/BlogCard';
 import NewsletterSignup from '@/components/ui/NewsletterSignup';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
+import Stay22Scripts from '@/components/monetization/Stay22Scripts';
+import Stay22Map from '@/components/monetization/Stay22Map';
 import { PortableText, PortableTextComponents } from '@portabletext/react';
 
 interface Props {
@@ -51,13 +53,20 @@ const portableTextComponents: PortableTextComponents = {
         {value.caption && <figcaption>{value.caption}</figcaption>}
       </figure>
     ),
+    stay22Map: ({ value }) => (
+      <Stay22Map
+        address={value.address}
+        checkin={value.checkin}
+        checkout={value.checkout}
+      />
+    ),
   },
   marks: {
     link: ({ value, children }) => {
       const href: string = value?.href || '';
       if (!href) return <>{children}</>;
       const external = /^https?:\/\//.test(href);
-      const isAffiliate = href.includes('prf.hn') || href.includes('expedia.');
+      const isAffiliate = href.includes('expedia.');
       const rel = isAffiliate
         ? 'sponsored noopener noreferrer'
         : external
@@ -205,7 +214,7 @@ export default async function BlogPostPage({ params }: Props) {
                   Full article coming soon.
                 </p>
                 <p className="text-gray-400">
-                  In the meantime, check out our latest vacation deals below.
+                  In the meantime, check out the planning options below.
                 </p>
               </div>
             )}
@@ -215,17 +224,17 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="mt-14 pt-8 border-t border-gray-200">
             <div className="bg-brand-50 rounded-2xl p-8 text-center">
               <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Looking for vacation deals?
+                Planning a trip?
               </h3>
               <p className="text-gray-600 mb-4">
-                Browse our curated collection of the best travel deals available
-                right now.
+                Tell me where you want to go and I will put together a verified
+                itinerary and pricing for you, free of charge.
               </p>
               <Link
-                href="/deals/all-inclusive"
+                href="/concierge-planning"
                 className="inline-block px-6 py-3 bg-brand-600 text-white font-semibold rounded-lg hover:bg-brand-700 transition-colors"
               >
-                Browse Deals
+                Plan With Me
               </Link>
             </div>
           </div>
@@ -254,6 +263,7 @@ export default async function BlogPostPage({ params }: Props) {
           utmCampaign="blog_post"
         />
       </div>
+      <Stay22Scripts />
     </div>
   );
 }

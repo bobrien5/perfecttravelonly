@@ -10,7 +10,6 @@ export const destinations: Destination[] = [
     heroImage: 'https://images.unsplash.com/photo-1510097467424-192d713fd8b2?w=1200&h=600&fit=crop',
     description: 'Cancun is one of the world\'s most popular vacation destinations, known for its stunning turquoise waters, white-sand beaches, vibrant nightlife, and world-class all-inclusive resorts. Whether you\'re looking for a family beach getaway, a romantic couples retreat, or a spring break adventure, Cancun delivers unforgettable experiences at every price point.',
     shortDescription: 'Turquoise waters, white-sand beaches, and world-class resorts.',
-    dealCount: 15,
     categories: ['all-inclusive', 'beach', 'family', 'luxury', 'timeshare'],
     faq: [
       { question: 'When is the best time to visit Cancun?', answer: 'The best time to visit Cancun is from December to April when the weather is warm and dry. However, you can find great deals during the shoulder season (May–June and November).' },
@@ -29,7 +28,6 @@ export const destinations: Destination[] = [
     heroImage: 'https://images.unsplash.com/photo-1597466599360-3b9775841aec?w=1200&h=600&fit=crop',
     description: 'Orlando is the theme park capital of the world, home to Walt Disney World, Universal Studios, and SeaWorld. Beyond the parks, Orlando offers incredible dining, shopping, and resort experiences that make it a top family vacation destination year-round.',
     shortDescription: 'Theme parks, family fun, and resort experiences.',
-    dealCount: 12,
     categories: ['family', 'weekend-getaways', 'budget', 'timeshare'],
     faq: [
       { question: 'When is the cheapest time to visit Orlando?', answer: 'January, February, and September typically offer the lowest hotel rates and thinner crowds at theme parks.' },
@@ -47,7 +45,6 @@ export const destinations: Destination[] = [
     heroImage: 'https://images.unsplash.com/photo-1605833556294-ea5c7a74f57d?w=1200&h=600&fit=crop',
     description: 'Las Vegas is the entertainment capital of the world. From luxury resorts on the Strip to world-class dining, shows, nightlife, and nearby outdoor adventures like Red Rock Canyon and the Grand Canyon, Vegas offers something for every type of traveler.',
     shortDescription: 'Entertainment, luxury resorts, and unforgettable nightlife.',
-    dealCount: 10,
     categories: ['luxury', 'weekend-getaways', 'adults-only', 'flight-hotel'],
     faq: [
       { question: 'When is the best time to visit Las Vegas?', answer: 'Spring (March–May) and fall (September–November) offer the best weather and often the best deals.' },
@@ -65,7 +62,6 @@ export const destinations: Destination[] = [
     heroImage: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1200&h=600&fit=crop',
     description: 'Aruba — "One Happy Island" — is a Caribbean paradise known for its constant sunshine, pristine beaches, and vibrant culture. With world-class all-inclusive resorts, crystal-clear waters, and a welcoming atmosphere, Aruba is a top-tier vacation destination.',
     shortDescription: 'One Happy Island with pristine beaches and constant sunshine.',
-    dealCount: 8,
     categories: ['all-inclusive', 'beach', 'caribbean', 'luxury', 'adults-only'],
     faq: [
       { question: 'Do I need a passport to visit Aruba?', answer: 'Yes, U.S. citizens need a valid passport to travel to Aruba.' },
@@ -83,7 +79,6 @@ export const destinations: Destination[] = [
     heroImage: 'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=1200&h=600&fit=crop',
     description: 'Punta Cana is the Dominican Republic\'s premier beach destination, famous for its palm-lined beaches, all-inclusive megaresorts, and incredible value. It\'s one of the best places in the Caribbean for affordable luxury vacations.',
     shortDescription: 'Affordable luxury and palm-lined Caribbean beaches.',
-    dealCount: 14,
     categories: ['all-inclusive', 'beach', 'caribbean', 'budget', 'family'],
     faq: [
       { question: 'Is Punta Cana affordable?', answer: 'Yes! Punta Cana is one of the most affordable Caribbean destinations, especially for all-inclusive packages.' },
@@ -101,7 +96,6 @@ export const destinations: Destination[] = [
     heroImage: 'https://images.unsplash.com/photo-1512813195386-6cf811ad3542?w=1200&h=600&fit=crop',
     description: 'Cabo San Lucas sits at the tip of Mexico\'s Baja Peninsula and offers a stunning mix of desert landscapes and ocean views. Known for luxury resorts, deep-sea fishing, nightlife, and the iconic El Arco, Cabo is a favorite for couples and adventure seekers.',
     shortDescription: 'Luxury resorts where the desert meets the sea.',
-    dealCount: 9,
     categories: ['luxury', 'adults-only', 'mexico', 'beach', 'golf'],
     faq: [
       { question: 'What\'s the best time to visit Cabo?', answer: 'October through May offers the best weather. Winter months are peak season but also have the most events and whale watching.' },
@@ -118,7 +112,6 @@ export const destinations: Destination[] = [
     heroImage: 'https://images.unsplash.com/photo-1542259009477-d625272157b7?w=1200&h=600&fit=crop',
     description: 'Maui is Hawaii\'s most romantic island, offering dramatic landscapes, world-famous beaches, the Road to Hana, and some of the best snorkeling in the Pacific. From luxury beachfront resorts to charming upcountry towns, Maui is bucket-list worthy.',
     shortDescription: 'Hawaii\'s most romantic island with dramatic landscapes.',
-    dealCount: 7,
     categories: ['luxury', 'beach', 'adults-only', 'flight-hotel'],
     faq: [
       { question: 'Do I need a passport to visit Maui?', answer: 'No — Maui is part of the United States, so U.S. citizens only need a valid ID to fly there.' },
@@ -135,7 +128,6 @@ export const destinations: Destination[] = [
     heroImage: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&h=600&fit=crop',
     description: 'Jamaica is the Caribbean\'s most vibrant destination — rich in culture, music, cuisine, and natural beauty. From the all-inclusive resorts of Montego Bay to the cliffs of Negril, Jamaica offers incredible vacation value and unforgettable island energy.',
     shortDescription: 'Vibrant culture, reggae vibes, and all-inclusive resorts.',
-    dealCount: 11,
     categories: ['all-inclusive', 'caribbean', 'beach', 'family', 'adults-only'],
     faq: [
       { question: 'Is Jamaica safe for tourists?', answer: 'Resort areas like Montego Bay, Negril, and Ocho Rios are well-patrolled and very popular with tourists. Staying at established resorts is the safest option.' },

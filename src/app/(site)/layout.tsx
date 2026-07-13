@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import EmailPopup from '@/components/ui/EmailPopup';
 
 export const metadata: Metadata = {
   alternates: {
@@ -9,36 +10,36 @@ export const metadata: Metadata = {
     },
   },
   keywords: [
-    'vacation deals',
-    'all-inclusive packages',
-    'travel deals',
-    'flight hotel packages',
-    'cruise deals',
+    'tropical travel guides',
+    'all-inclusive resort guides',
+    'destination guides',
+    'travel planning',
+    'concierge travel booking',
     'beach vacations',
     'luxury travel',
-    'vacation packages',
+    'travel advisor',
   ],
   openGraph: {
     type: 'website',
     locale: 'en_US',
     siteName: 'VacationPro',
-    title: 'VacationPro: The Best Vacation Package Deals in One Place',
+    title: 'VacationPro: Tropical Travel Guides + Concierge Booking',
     description:
-      'Discover all-inclusive escapes, flight and hotel bundles, cruise offers, luxury deals, and limited-time vacation packages.',
+      'Expert guides to the best tropical and all-inclusive trips, plus concierge booking to plan and book your vacation with a real travel advisor.',
     images: [
       {
         url: '/og-default.png',
         width: 1200,
         height: 630,
-        alt: 'VacationPro: The Best Vacation Package Deals in One Place',
+        alt: 'VacationPro: Tropical Travel Guides + Concierge Booking',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'VacationPro: The Best Vacation Package Deals in One Place',
+    title: 'VacationPro: Tropical Travel Guides + Concierge Booking',
     description:
-      'Discover all-inclusive escapes, flight and hotel bundles, cruise offers, luxury deals, and limited-time vacation packages.',
+      'Expert guides to the best tropical and all-inclusive trips, plus concierge booking to plan and book your vacation with a real travel advisor.',
     images: ['/og-default.png'],
   },
   robots: {
@@ -57,6 +58,7 @@ export default function SiteLayout({
       <Header />
       <main className="flex-1">{children}</main>
       <Footer />
+      <EmailPopup />
     </div>
   );
 }

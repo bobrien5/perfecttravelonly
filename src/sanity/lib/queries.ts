@@ -4,47 +4,6 @@ import groq from 'groq';
 // Shared projections — flatten Sanity fields to match TypeScript types
 // ============================================================
 
-const dealProjection = groq`{
-  "id": _id,
-  title,
-  "slug": slug.current,
-  shortDescription,
-  fullDescription,
-  heroImage,
-  galleryImages,
-  destination,
-  destinationSlug,
-  region,
-  country,
-  category,
-  categorySlug,
-  provider,
-  affiliateLink,
-  ctaText,
-  price,
-  originalPrice,
-  savingsAmount,
-  savingsPercent,
-  duration,
-  travelDates,
-  bookingWindow,
-  whatsIncluded,
-  tags,
-  featured,
-  expiresAt,
-  disclaimer,
-  editorialNotes,
-  isTimeshare,
-  isAdvisorPackage,
-  isFamilyFriendly,
-  isAdultsOnly,
-  isLuxury,
-  isBudget,
-  seoTitle,
-  metaDescription,
-  faq
-}`;
-
 const categoryProjection = groq`{
   "id": _id,
   name,
@@ -53,7 +12,6 @@ const categoryProjection = groq`{
   shortDescription,
   icon,
   heroImage,
-  dealCount,
   seoTitle,
   metaDescription
 }`;
@@ -67,7 +25,6 @@ const destinationProjection = groq`{
   heroImage,
   description,
   shortDescription,
-  dealCount,
   categories,
   faq,
   seoTitle,
@@ -85,46 +42,6 @@ const blogPostProjection = groq`{
   "date": coalesce(publishedAt, date),
   readTime
 }`;
-
-// ============================================================
-// DEAL QUERIES
-// ============================================================
-
-export const dealBySlugQuery = groq`
-  *[_type == "deal" && categorySlug == $categorySlug && slug.current == $dealSlug][0] ${dealProjection}
-`;
-
-export const dealsByCategoryQuery = groq`
-  *[_type == "deal" && categorySlug == $categorySlug] | order(_createdAt desc) ${dealProjection}
-`;
-
-export const dealsByDestinationQuery = groq`
-  *[_type == "deal" && destinationSlug == $destinationSlug] | order(_createdAt desc) ${dealProjection}
-`;
-
-export const featuredDealsQuery = groq`
-  *[_type == "deal" && featured == true] | order(_createdAt desc) ${dealProjection}
-`;
-
-export const allDealsQuery = groq`
-  *[_type == "deal"] | order(_createdAt desc) ${dealProjection}
-`;
-
-export const recentDealsQuery = groq`
-  *[_type == "deal"] | order(_createdAt desc) [0...$count] ${dealProjection}
-`;
-
-export const timeshareDealsQuery = groq`
-  *[_type == "deal" && isTimeshare == true] | order(_createdAt desc) ${dealProjection}
-`;
-
-export const relatedDealsQuery = groq`
-  *[_type == "deal" && _id != $dealId && (categorySlug == $categorySlug || destinationSlug == $destinationSlug)] | order(_createdAt desc) [0...3] ${dealProjection}
-`;
-
-export const allDealParamsQuery = groq`
-  *[_type == "deal"] { "category": categorySlug, "slug": slug.current }
-`;
 
 // ============================================================
 // CATEGORY QUERIES

@@ -1,41 +1,30 @@
 import Link from 'next/link';
-import DealCard from '@/components/ui/DealCard';
 import DestinationCard from '@/components/ui/DestinationCard';
-import CategoryCard from '@/components/ui/CategoryCard';
 import BlogCard from '@/components/ui/BlogCard';
 import NewsletterSignup from '@/components/ui/NewsletterSignup';
 import SectionHeader from '@/components/ui/SectionHeader';
-import AffiliateDisclosure from '@/components/ui/AffiliateDisclosure';
-import {
-  getFeaturedDeals,
-  getAllDeals,
-  getTimeshareDeals,
-} from '@/sanity/lib/fetch';
-import { getAllDestinations } from '@/sanity/lib/fetch';
-import { getAllCategories } from '@/sanity/lib/fetch';
-import { getRecentBlogPosts } from '@/sanity/lib/fetch';
+import { getAllDestinations, getRecentBlogPosts } from '@/sanity/lib/fetch';
+import Stay22Guard from '@/components/monetization/Stay22Guard';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  title: 'VacationPro: Tropical Travel Guides + Concierge Booking',
+  description:
+    'Expert guides to the best tropical and all-inclusive trips, plus concierge booking to plan and book your vacation with a real travel advisor.',
   alternates: { canonical: '/' },
 };
 
 export default async function HomePage() {
-  const [featuredDeals, allDeals, allDestinations, allCategories, recentPosts, timeshareDeals] = await Promise.all([
-    getFeaturedDeals(),
-    getAllDeals(),
+  const [allDestinations, recentPosts] = await Promise.all([
     getAllDestinations(),
-    getAllCategories(),
-    getRecentBlogPosts(3),
-    getTimeshareDeals(),
+    getRecentBlogPosts(6),
   ]);
-
   const topDestinations = allDestinations.slice(0, 8);
-  const topCategories = allCategories.slice(0, 8);
 
   return (
     <>
-      {/* Hero Section */}
+      <Stay22Guard />
+      {/* Hero */}
       <section className="relative bg-gradient-to-br from-brand-900 via-brand-800 to-brand-900 text-white overflow-hidden">
         <div className="absolute inset-0 opacity-40">
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1920&h=800&fit=crop')] bg-cover bg-center" />
@@ -43,175 +32,38 @@ export default async function HomePage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 md:py-28">
           <div className="max-w-3xl">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6">
-              The best vacation package deals on the internet.
-              <span className="text-brand-300"> All in one place.</span>
+              Your guide to the best tropical trips.
+              <span className="text-brand-300"> Booked with a real advisor.</span>
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-brand-100 mb-6 sm:mb-8 max-w-2xl">
-              Discover all-inclusive escapes, flight + hotel bundles, cruise offers, luxury deals,
-              and limited-time vacation packages curated by our travel experts.
+              Honest guides to all-inclusive resorts, Caribbean beaches, and warm-weather escapes.
+              When you are ready to book, plan the whole trip with me.
             </p>
             <div className="flex flex-row gap-3 sm:gap-4">
               <Link
-                href="/deals/all-inclusive"
+                href="/blog"
                 className="inline-flex items-center justify-center px-5 sm:px-8 py-3 sm:py-4 bg-white text-brand-700 font-semibold rounded-xl hover:bg-brand-50 transition-colors text-sm sm:text-lg"
               >
-                Browse Deals
+                Browse Guides
               </Link>
               <Link
-                href="/newsletter"
+                href="/concierge-planning"
                 className="inline-flex items-center justify-center px-5 sm:px-8 py-3 sm:py-4 bg-brand-700 text-white font-semibold rounded-xl hover:bg-brand-600 transition-colors text-sm sm:text-lg border border-brand-500"
               >
-                Get Deal Alerts
+                Plan With Me
               </Link>
             </div>
           </div>
-          {/* Quick stats */}
-          <div className="mt-8 sm:mt-12 flex gap-6 sm:gap-8">
-            <div>
-              <p className="text-2xl sm:text-3xl font-bold text-white">{allDeals.length * 10}+</p>
-              <p className="text-brand-200 text-xs sm:text-sm">Active Deals</p>
-            </div>
-            <div>
-              <p className="text-2xl sm:text-3xl font-bold text-white">{allDestinations.length}+</p>
-              <p className="text-brand-200 text-xs sm:text-sm">Destinations</p>
-            </div>
-            <div>
-              <p className="text-2xl sm:text-3xl font-bold text-white">Up to 75%</p>
-              <p className="text-brand-200 text-xs sm:text-sm">Savings</p>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="py-12 sm:py-16 bg-gray-50 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">How VacationPro Works</h2>
-            <p className="text-gray-600 mt-2 text-sm sm:text-base">Finding your dream vacation deal is simple.</p>
-          </div>
-          <div className="grid grid-cols-3 gap-4 sm:gap-8 max-w-4xl mx-auto">
-            {[
-              {
-                step: '01',
-                title: 'Browse Deals',
-                desc: 'Explore curated vacation packages from trusted travel partners, sorted by destination, category, and price.',
-              },
-              {
-                step: '02',
-                title: 'Compare & Choose',
-                desc: "Review what's included, read our editorial notes, and pick the deal that fits your travel style and budget.",
-              },
-              {
-                step: '03',
-                title: 'Book & Save',
-                desc: "Click through to our partner's site to lock in your deal. We'll show you exactly how much you're saving.",
-              },
-            ].map((item) => (
-              <div key={item.step} className="text-center">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-brand-100 text-brand-700 font-bold flex items-center justify-center mx-auto mb-3 sm:mb-4 text-sm sm:text-lg">
-                  {item.step}
-                </div>
-                <h3 className="text-sm sm:text-lg font-semibold text-gray-900 mb-1 sm:mb-2">{item.title}</h3>
-                <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Deals */}
-      <section className="py-12 sm:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            title="Featured Deals"
-            subtitle="Hand-picked vacation packages with the best value right now."
-            viewAllHref="/deals/all-inclusive"
-            viewAllText="View All Deals"
-          />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {featuredDeals.slice(0, 6).map((deal) => (
-              <DealCard key={deal.id} deal={deal} />
-            ))}
-          </div>
-          <div className="mt-4">
-            <AffiliateDisclosure />
-          </div>
-        </div>
-      </section>
-
-      {/* Trending Destinations */}
-      <section className="py-12 sm:py-16 bg-gray-50 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            title="Trending Destinations"
-            subtitle="The most popular vacation destinations right now."
-          />
-          <div className="flex gap-3 overflow-x-auto pb-4 snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 md:grid-cols-4 sm:gap-4 sm:overflow-visible sm:pb-0">
-            {topDestinations.map((dest) => (
-              <div key={dest.id} className="min-w-[200px] sm:min-w-0 snap-start">
-                <DestinationCard destination={dest} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Categories */}
-      <section className="py-12 sm:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            title="Browse by Category"
-            subtitle="Find deals by the type of vacation you're looking for."
-          />
-          <div className="grid md:grid-cols-2 gap-4 overflow-hidden">
-            {topCategories.map((cat) => (
-              <CategoryCard key={cat.id} category={cat} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Timeshare / Preview Deals Section */}
-      <section className="py-12 sm:py-16 bg-gradient-to-r from-amber-50 to-brand-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            title="Timeshare Preview Deals"
-            subtitle="Deeply discounted stays with resort presentations. Transparent terms, real savings."
-            viewAllHref="/deals/timeshare"
-          />
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {timeshareDeals.slice(0, 3).map((deal) => (
-              <DealCard key={deal.id} deal={deal} />
-            ))}
-          </div>
-          <div className="mt-6 bg-amber-50 border border-amber-200 rounded-lg p-4 max-w-2xl">
-            <p className="text-sm text-amber-800">
-              <strong>Note:</strong> Timeshare preview packages require attendance at a resort
-              presentation. Eligibility restrictions may apply. We clearly disclose all terms on
-              every deal page.{' '}
-              <Link href="/legal/disclaimer" className="text-brand-600 hover:underline">
-                Learn more
-              </Link>.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Newsletter CTA */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <NewsletterSignup variant="hero" />
-        </div>
-      </section>
-
-      {/* Blog Preview */}
+      {/* Featured guides */}
       {recentPosts.length > 0 && (
-        <section className="py-16 bg-gray-50">
+        <section className="py-12 sm:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <SectionHeader
-              title="From the Blog"
-              subtitle="Travel guides, deal tips, and destination insights from our editorial team."
+              title="Latest Guides"
+              subtitle="Destination guides, resort breakdowns, and tropical travel tips."
               viewAllHref="/blog"
               viewAllText="Read the Blog"
             />
@@ -224,27 +76,44 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* Trust Section */}
-      <section className="py-12 sm:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Why Travelers Trust VacationPro</h2>
-          <p className="text-gray-600 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
-            We curate deals from trusted travel partners, provide transparent pricing, and always disclose
-            when a deal includes affiliate links or promotional requirements.
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
-            {[
-              { title: 'Curated Deals', desc: 'Every deal is reviewed by our editorial team before it\'s published.' },
-              { title: 'Transparent Pricing', desc: 'We show you the real price, the original price, and exactly what\'s included.' },
-              { title: 'Honest Disclosures', desc: 'Timeshare offers, affiliate links, and promotional terms are always clearly marked.' },
-              { title: 'Trusted Partners', desc: 'We work with established travel brands and verified deal providers.' },
-            ].map((item) => (
-              <div key={item.title}>
-                <h3 className="font-semibold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-600">{item.desc}</p>
+      {/* Destinations */}
+      <section className="py-12 sm:py-16 bg-gray-50 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            title="Explore Destinations"
+            subtitle="Guides to the most popular tropical destinations."
+          />
+          <div className="flex gap-3 overflow-x-auto pb-4 snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 md:grid-cols-4 sm:gap-4 sm:overflow-visible sm:pb-0">
+            {topDestinations.map((dest) => (
+              <div key={dest.id} className="min-w-[200px] sm:min-w-0 snap-start">
+                <DestinationCard destination={dest} />
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Concierge upsell band (placeholder copy; real two-tier component lands in Part 3) */}
+      <section className="py-14 sm:py-20 bg-gradient-to-r from-brand-600 to-brand-700 text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-2xl md:text-4xl font-bold mb-4">Ready to book? Let me plan it.</h2>
+          <p className="text-brand-50 text-base sm:text-lg mb-8 max-w-2xl mx-auto">
+            Tell me your dates, your group, and your home airport. I will build the trip and book it
+            for you as your travel advisor. No booking fees.
+          </p>
+          <Link
+            href="/concierge-planning"
+            className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-700 font-semibold rounded-xl hover:bg-brand-50 transition-colors text-lg"
+          >
+            Plan With Me
+          </Link>
+        </div>
+      </section>
+
+      {/* Newsletter */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <NewsletterSignup variant="hero" />
         </div>
       </section>
     </>

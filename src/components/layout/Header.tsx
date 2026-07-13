@@ -4,20 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 const navigation = [
-  {
-    name: 'Deals',
-    href: '/deals/all-inclusive',
-    children: [
-      { name: 'All-Inclusive Deals', href: '/deals/all-inclusive' },
-      { name: 'Flight + Hotel Packages', href: '/deals/flight-hotel' },
-      { name: 'Cruise Deals', href: '/deals/cruises' },
-      { name: 'Timeshare Deals', href: '/deals/timeshare' },
-      { name: 'Luxury Deals', href: '/deals/luxury' },
-      { name: 'Budget Vacations', href: '/deals/budget' },
-      { name: 'Weekend Getaways', href: '/deals/weekend-getaways' },
-      { name: 'View All Deals', href: '/deals/all-inclusive' },
-    ],
-  },
+  { name: 'Guides', href: '/blog' },
   {
     name: 'Destinations',
     href: '/destinations/cancun',
@@ -32,23 +19,7 @@ const navigation = [
       { name: 'Maui', href: '/destinations/maui' },
     ],
   },
-  {
-    name: 'Categories',
-    href: '/deals/all-inclusive',
-    children: [
-      { name: 'All-Inclusive', href: '/deals/all-inclusive' },
-      { name: 'Caribbean', href: '/deals/caribbean' },
-      { name: 'Mexico', href: '/deals/mexico' },
-      { name: 'Beach Vacations', href: '/deals/beach' },
-      { name: 'Family Vacations', href: '/deals/family' },
-      { name: 'Adults-Only', href: '/deals/adults-only' },
-      { name: 'Golf Vacations', href: '/deals/golf' },
-      { name: 'Ski Vacations', href: '/deals/ski' },
-    ],
-  },
-  { name: 'Blog', href: '/blog' },
   { name: 'About', href: '/about' },
-  { name: 'Partner With Us', href: '/partner' },
 ];
 
 export default function Header() {
@@ -59,7 +30,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
       {/* Main nav */}
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex items-center gap-10 h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
             <img src="/logo.svg" alt="VacationPro" className="w-9 h-9" />
@@ -68,8 +39,9 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-1">
+          {/* Desktop Nav: grouped beside the logo. With only three items a
+              justify-between layout strands them in the middle of the bar. */}
+          <div className="hidden lg:flex items-center gap-2">
             {navigation.map((item) => (
               <div
                 key={item.name}
@@ -79,7 +51,7 @@ export default function Header() {
               >
                 <Link
                   href={item.href}
-                  className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-brand-600 transition-colors rounded-md hover:bg-gray-50"
+                  className="inline-flex items-center px-3.5 py-2 text-[0.9375rem] font-medium text-gray-700 hover:text-brand-600 transition-colors rounded-md hover:bg-gray-50"
                 >
                   {item.name}
                   {item.children && (
@@ -105,13 +77,13 @@ export default function Header() {
             ))}
           </div>
 
-          {/* CTA + Mobile Toggle */}
-          <div className="flex items-center gap-3">
+          {/* CTA + Mobile Toggle, pushed to the right edge */}
+          <div className="flex items-center gap-3 ml-auto shrink-0">
             <Link
-              href="/newsletter"
-              className="hidden sm:inline-flex items-center px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 transition-colors"
+              href="/concierge-planning"
+              className="hidden sm:inline-flex items-center px-5 py-2.5 bg-brand-600 text-white text-[0.9375rem] font-semibold rounded-lg hover:bg-brand-700 transition-colors"
             >
-              Get Deal Alerts
+              Plan With Me
             </Link>
             <button
               className="lg:hidden p-2 text-gray-600 hover:text-gray-900"
@@ -161,11 +133,11 @@ export default function Header() {
             ))}
             <div className="pt-3 px-3">
               <Link
-                href="/newsletter"
+                href="/concierge-planning"
                 className="block w-full text-center px-4 py-2 bg-brand-600 text-white font-medium rounded-lg hover:bg-brand-700 transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
-                Get Deal Alerts
+                Plan With Me
               </Link>
             </div>
           </div>
