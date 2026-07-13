@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import BlogCard from '@/components/ui/BlogCard';
 import NewsletterSignup from '@/components/ui/NewsletterSignup';
+import Stay22Scripts from '@/components/monetization/Stay22Scripts';
 import { getAllBlogPosts } from '@/sanity/lib/fetch';
 
 export const metadata: Metadata = {
@@ -62,6 +63,7 @@ export default async function BlogPage() {
         subheading="Join 5,000+ travelers who get our best content and deals every week."
         utmCampaign="blog_page"
       />
+      <Stay22Scripts />
     </div>
   );
 }

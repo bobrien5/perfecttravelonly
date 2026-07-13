@@ -9,6 +9,7 @@ import {
 import BlogCard from '@/components/ui/BlogCard';
 import NewsletterSignup from '@/components/ui/NewsletterSignup';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
+import Stay22Scripts from '@/components/monetization/Stay22Scripts';
 import { PortableText, PortableTextComponents } from '@portabletext/react';
 
 interface Props {
@@ -254,6 +255,7 @@ export default async function BlogPostPage({ params }: Props) {
           utmCampaign="blog_post"
         />
       </div>
+      <Stay22Scripts />
     </div>
   );
 }

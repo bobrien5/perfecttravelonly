@@ -6,6 +6,7 @@ import FAQ from '@/components/ui/FAQ';
 import NewsletterSignup from '@/components/ui/NewsletterSignup';
 import AffiliateDisclosure from '@/components/ui/AffiliateDisclosure';
 import BlogCard from '@/components/ui/BlogCard';
+import Stay22Scripts from '@/components/monetization/Stay22Scripts';
 import {
   getDestinationBySlug,
   getAllDestinations,
@@ -126,6 +127,7 @@ export default async function DestinationPage({ params }: Props) {
           subheading={`Never miss a new guide to ${destination.name}. Subscribe for free.`}
         />
       </div>
+      <Stay22Scripts />
     </div>
   );
 }
