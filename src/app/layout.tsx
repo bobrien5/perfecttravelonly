@@ -14,11 +14,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.vacationpro.co'),
   title: {
-    default: 'VacationPro: The Best Vacation Package Deals in One Place',
+    default: 'VacationPro: Tropical Travel Guides + Concierge Booking',
     template: '%s | VacationPro',
   },
   description:
-    'Discover all-inclusive escapes, flight and hotel bundles, cruise offers, luxury deals, and limited-time vacation packages. The best vacation deals, all in one place.',
+    'Expert guides to the best tropical and all-inclusive trips, plus concierge booking to plan and book your vacation with a real travel advisor.',
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
         url: '/og-default.png',
         width: 1200,
         height: 630,
-        alt: 'VacationPro: The Best Vacation Package Deals in One Place',
+        alt: 'VacationPro: Tropical Travel Guides + Concierge Booking',
       },
     ],
   },

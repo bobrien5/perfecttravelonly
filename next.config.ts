@@ -31,6 +31,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/deals/:path*",
+        destination: "/destinations",
+        permanent: true,
+      },
+      {
         source: "/deals",
         destination: "/",
         permanent: true,

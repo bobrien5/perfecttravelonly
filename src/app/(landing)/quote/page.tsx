@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import ConciergePlanningForm from '@/components/ui/ConciergePlanningForm';
 
 export const metadata: Metadata = {
   title: 'Get Your Verified Vacation Quote',
@@ -93,6 +94,11 @@ export default async function QuotePage({ searchParams }: PageProps) {
             <br />
             No spam, no commitment, no surprise fees.
           </p>
+        </div>
+
+        {/* Concierge intake form */}
+        <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
+          <ConciergePlanningForm defaultDestination={destinationLabel} sourceLabel="Quote landing page" />
         </div>
 
         {/* Trust strip */}

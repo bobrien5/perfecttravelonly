@@ -122,8 +122,8 @@ export default async function DestinationPage({ params }: Props) {
       {/* Newsletter */}
       <div className="mt-16">
         <NewsletterSignup
-          heading={`Get ${destination.name} deal alerts`}
-          subheading={`Never miss a deal to ${destination.name}. Subscribe for free.`}
+          heading={`Get ${destination.name} travel guides`}
+          subheading={`Never miss a new guide to ${destination.name}. Subscribe for free.`}
         />
       </div>
     </div>

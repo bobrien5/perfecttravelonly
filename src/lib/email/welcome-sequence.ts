@@ -119,7 +119,7 @@ export function getEmail3Html(firstName?: string): string {
   return emailWrapper(`
     <h2 style="color:#111827;font-size:22px;margin:0 0 8px;font-weight:700;">${greeting} are you dreaming of going? ✈️</h2>
     <p style="color:#4b5563;font-size:16px;line-height:1.6;margin:0 0 8px;">
-      Over 5,000 travelers get our deal alerts every week. Here are the destinations they're booking most:
+      Over 5,000 travelers get our travel guides every week. Here are the destinations they're booking most:
     </p>
 
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:16px 0;">
@@ -129,9 +129,9 @@ export function getEmail3Html(firstName?: string): string {
     <div style="background-color:${BRAND[50]};border-radius:12px;padding:20px;margin:24px 0;text-align:center;">
       <p style="color:${BRAND[700]};font-size:14px;font-weight:600;margin:0 0 4px;">💬 What travelers are saying</p>
       <p style="color:#374151;font-size:15px;font-style:italic;margin:0 0 8px;">
-        "I saved over $800 on our Cancun trip just by waiting for a VacationPro deal alert. Literally the easiest way to find vacation packages."
+        "I planned our whole Cancun trip using VacationPro's guides. Literally the easiest way to figure out where to go and what to book."
       </p>
-      <p style="color:#9ca3af;font-size:13px;margin:0;">— Sarah M., VacationPro subscriber</p>
+      <p style="color:#9ca3af;font-size:13px;margin:0;">(Sarah M., VacationPro subscriber)</p>
     </div>
 
     ${ctaButton('Explore Destinations', `${SITE_URL}/blog`)}
@@ -145,7 +145,7 @@ export function getEmail4Html(firstName?: string): string {
   return emailWrapper(`
     <h2 style="color:#111827;font-size:22px;margin:0 0 8px;font-weight:700;">${greeting} more thing before we settle in 👋</h2>
     <p style="color:#4b5563;font-size:16px;line-height:1.6;margin:0 0 16px;">
-      You've been a subscriber for two weeks now — thanks for sticking with us! We wanted to share a few things to make sure you're getting the most out of VacationPro.
+      You've been a subscriber for two weeks now. Thanks for sticking with us! We wanted to share a few things to make sure you're getting the most out of VacationPro.
     </p>
 
     <h3 style="color:#111827;font-size:18px;margin:24px 0 12px;font-weight:700;">🧭 Let's plan your next trip together</h3>
@@ -155,10 +155,10 @@ export function getEmail4Html(firstName?: string): string {
 
     <h3 style="color:#111827;font-size:18px;margin:24px 0 12px;font-weight:700;">💡 Did you know?</h3>
     <p style="color:#4b5563;font-size:15px;line-height:1.6;margin:0 0 16px;">
-      We also feature <strong>timeshare preview packages</strong> — resort stays starting from $199/person where you attend a short presentation and enjoy the resort at a massive discount. No obligation to buy, ever.
+      We publish new <strong>travel guides</strong> every week (destination breakdowns, packing tips, and trip planning advice), so you always know where to look for your next trip.
     </p>
     <p style="color:#4b5563;font-size:15px;line-height:1.6;margin:0 0 16px;">
-      Thousands of savvy travelers use these packages every year to vacation for a fraction of the normal price. We always disclose terms upfront so you know exactly what to expect.
+      And when you are ready to book, our concierge service builds a personalized itinerary for you, research and advisor time included.
     </p>
 
     ${ctaButton('Plan With Me', `${SITE_URL}/concierge-planning`)}
@@ -172,7 +172,7 @@ export function getEmail4Html(firstName?: string): string {
     </div>
 
     <p style="color:#6b7280;font-size:14px;line-height:1.6;margin:16px 0 0;text-align:center;">
-      From here on out, you'll get our regular deal alerts — 1 to 2 emails per week with the best vacation packages we find. Happy travels! 🌊
+      From here on out, you'll get our regular travel guides, 1 to 2 emails per week with new destinations and trip planning tips. Happy travels! 🌊
     </p>
   `);
 }
