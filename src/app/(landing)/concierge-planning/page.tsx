@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import ConciergePlanningForm from '@/components/ui/ConciergePlanningForm';
+import Stay22Guard from '@/components/monetization/Stay22Guard';
 
 export const metadata: Metadata = {
   title: 'Plan My Trip, VacationPro Concierge',
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 export default function ConciergePlanningPage() {
   return (
     <main className="min-h-screen bg-cream-50 py-12 px-4 sm:px-6 lg:px-8">
+      <Stay22Guard />
       <div className="max-w-5xl mx-auto">
 
         {/* Eyebrow */}

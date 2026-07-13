@@ -4,6 +4,7 @@ import BlogCard from '@/components/ui/BlogCard';
 import NewsletterSignup from '@/components/ui/NewsletterSignup';
 import SectionHeader from '@/components/ui/SectionHeader';
 import { getAllDestinations, getRecentBlogPosts } from '@/sanity/lib/fetch';
+import Stay22Guard from '@/components/monetization/Stay22Guard';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -22,6 +23,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <Stay22Guard />
       {/* Hero */}
       <section className="relative bg-gradient-to-br from-brand-900 via-brand-800 to-brand-900 text-white overflow-hidden">
         <div className="absolute inset-0 opacity-40">

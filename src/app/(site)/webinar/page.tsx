@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import GHLForm from '@/components/ui/GHLForm';
+import Stay22Guard from '@/components/monetization/Stay22Guard';
 
 const GHL_FORM_ID = 'UZXf7idNHC3qSQSS5YEF';
 
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
 export default function WebinarPage() {
   return (
     <>
+      <Stay22Guard />
       {/* Hero */}
       <section className="relative bg-gradient-to-br from-brand-900 via-brand-800 to-brand-900 text-white overflow-hidden">
         <div className="absolute inset-0 opacity-30">
