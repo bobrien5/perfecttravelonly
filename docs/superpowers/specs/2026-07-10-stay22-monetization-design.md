@@ -1,24 +1,31 @@
 # VacationPro Stay22 Monetization — Design
 
-Date: 2026-07-10
-Status: Approved (pending spec review)
+Date: 2026-07-10 (refreshed 2026-07-13 after Part 1 landed)
+Status: Approved
 Branch: `feat/stay22-monetization`
 
 ## Goal
 
 Monetize VacationPro's guide/blog content with Stay22's affiliate suite, and retire
 the existing Expedia/Partnerize (prf.hn) links in favor of Stay22. Keep Stay22 entirely
-off the deal/package and agent-booking funnel so it never cannibalizes an advisor booking.
+off the concierge/agent-booking funnel so it never cannibalizes an advisor booking.
+
+## Context after Part 1
+
+Part 1 (remove deals + reframe as guides) is complete. This changes two things here:
+
+- The deals routes no longer exist, so they cannot leak Stay22. The exclusion list below
+  drops them.
+- **`/quote` now hosts the `ConciergePlanningForm`.** It is a live conversion page, so
+  keeping Stay22 off it is now MORE important, not less. Same for `/concierge-planning`.
 
 ## Decisions (locked)
 
-- **Sequence:** Stay22 first. The package/agent flow is a separate, later spec.
 - **Overlap:** Go all-in on Stay22; retire Partnerize. Unwrap prf.hn CTAs back to their
   raw Expedia URLs so Stay22's LMA monetizes them.
 - **Features:** All Stay22 products on — LMA (auto-monetize links), Spark (auto-insert
   affiliate links into guide text), Nova (AI intent popups), and embedded Maps.
-- **Scope:** Guide/blog pages only. Never on deals, concierge, quote, webinar, checkout,
-  home, or studio.
+- **Scope:** Guide/blog pages only. Never on concierge, quote, webinar, home, go, or studio.
 
 ## Stay22 account
 
@@ -42,12 +49,12 @@ ONLY by the guide routes:
 
 It is NOT added to the root layout or the `(site)` layout, and must NOT appear on:
 
-- `(site)/deals/[category]/page.tsx`, `(site)/deals/[category]/[slug]/page.tsx`
-- `(landing)/concierge-planning/*`, `(landing)/quote`, `(site)/webinar`
-- `(site)/page.tsx` (home), `(site)/go`, `(studio)/*`, admin
+- `(landing)/concierge-planning/*` and `(landing)/quote` — BOTH render the concierge
+  intake form. These are the money pages.
+- `(site)/page.tsx` (home), `(site)/webinar`, `(site)/go`, `(studio)/*`, admin
 
-Rationale: on package/deal pages the visitor should book through Brendan (advisor
-commission), so Nova must not redirect them to an OTA.
+Rationale: on the concierge pages the visitor should book through Brendan (advisor
+commission), so Nova must not intercept them and send them to an OTA.
 
 Implementation note: the injector Brendan supplied sets `window.Stay22.params = { lmaID }`
 before loading the script. In `Stay22Scripts` we set the params via a small inline
@@ -66,8 +73,13 @@ A one-time migration script, `scripts/unwrap-partnerize-links.mjs`, that:
 3. Leaves the visible CTA text/buttons unchanged.
 4. Runs dry-run by default; `--write` applies and reports counts per post.
 
-Expected scope: ~50 links across ~11 posts (per the 2026-07-09 link audit). After this,
+Actual scope (measured 2026-07-13): **98 prf.hn links across 60 posts** (every published
+post). There are currently **0** raw Expedia links and **0** other external links, so every
+external link on the blog is a Partnerize link and every one gets unwrapped. After this,
 every resort CTA points to a plain `expedia.com` URL, which Stay22 LMA auto-monetizes.
+
+Because this rewrites links on every post, the script must be dry-run first and the diff
+sanity-checked (count in == count out, host always `www.expedia.com`) before `--write`.
 
 Also update the blog-writer brief (`skills/vacationpro-content-writer` and the Monday
 brief) so new posts emit raw Expedia URLs, not prf.hn. The Partnerize
@@ -103,9 +115,12 @@ for this spec.
   `stay22.com`/`letmeallez` and that the outbound link is rewritten/monetized.
 - Nova: confirm the intent popup fires on a guide page.
 - Maps: confirm the iframe renders for a placed `stay22Map` block.
-- Unwrap: re-run the 2026-07-09 link audit; confirm 0 new 404s and 0 remaining prf.hn hrefs.
-- Isolation (critical): load a deal page, the concierge page, the home page, and the quote
-  page; confirm ZERO Stay22 script/network requests on each.
+- Unwrap: re-run the link audit; confirm 0 remaining prf.hn hrefs, 98 raw Expedia hrefs,
+  and no new 404s.
+- **Isolation (critical):** load `/concierge-planning`, `/quote`, `/` (home), and `/webinar`;
+  confirm ZERO Stay22 script tags and ZERO stay22.com network requests on each. A leak here
+  means Nova can poach a concierge lead and send them to an OTA, which is the single
+  highest-cost failure in this spec.
 
 ## Components / files
 
