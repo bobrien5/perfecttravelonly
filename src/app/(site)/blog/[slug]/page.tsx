@@ -10,6 +10,7 @@ import BlogCard from '@/components/ui/BlogCard';
 import NewsletterSignup from '@/components/ui/NewsletterSignup';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import Stay22Scripts from '@/components/monetization/Stay22Scripts';
+import Stay22Map from '@/components/monetization/Stay22Map';
 import { PortableText, PortableTextComponents } from '@portabletext/react';
 
 interface Props {
@@ -51,6 +52,13 @@ const portableTextComponents: PortableTextComponents = {
         />
         {value.caption && <figcaption>{value.caption}</figcaption>}
       </figure>
+    ),
+    stay22Map: ({ value }) => (
+      <Stay22Map
+        address={value.address}
+        checkin={value.checkin}
+        checkout={value.checkout}
+      />
     ),
   },
   marks: {

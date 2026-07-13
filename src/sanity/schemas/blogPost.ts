@@ -95,6 +95,7 @@ const blogPost = {
             { name: 'caption', type: 'string', title: 'Caption' },
           ],
         },
+        { type: 'stay22Map' },
       ],
     },
     {
