@@ -88,8 +88,8 @@ function ctaButton(text: string, href: string): string {
   </table>`;
 }
 
-function dealCard(deal: Deal): string {
-  const dealUrl = `${SITE_URL}/deals/${deal.categorySlug}/${deal.slug}`;
+function packageCard(deal: Deal): string {
+  const dealUrl = `${SITE_URL}/blog`;
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:16px 0;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;">
     <tr>
       <td>
@@ -127,15 +127,15 @@ function dealCard(deal: Deal): string {
 // ─── Email 2: Best Deals (Day 3) ───────────────────────────────
 export function getEmail2Html(deals: Deal[], firstName?: string): string {
   const greeting = firstName ? `${firstName}, check` : 'Check';
-  const dealCards = deals.slice(0, 3).map(dealCard).join('');
+  const packageCards = deals.slice(0, 3).map(packageCard).join('');
 
   return emailWrapper(`
     <h2 style="color:#111827;font-size:22px;margin:0 0 8px;font-weight:700;">🔥 ${greeting} out our hottest deals right now</h2>
     <p style="color:#4b5563;font-size:16px;line-height:1.6;margin:0 0 24px;">
       These are the best vacation packages we have available today. Prices like these don't last — they update weekly and sell out fast.
     </p>
-    ${dealCards}
-    ${ctaButton('See All Deals', `${SITE_URL}/deals/all-inclusive`)}
+    ${packageCards}
+    ${ctaButton('Browse Guides', `${SITE_URL}/blog`)}
     <p style="color:#9ca3af;font-size:13px;text-align:center;margin:0;">
       Prices are per person, based on double occupancy. Subject to availability.
     </p>
@@ -185,7 +185,7 @@ export function getEmail3Html(firstName?: string): string {
       <p style="color:#9ca3af;font-size:13px;margin:0;">— Sarah M., VacationPro subscriber</p>
     </div>
 
-    ${ctaButton('Explore Destinations', `${SITE_URL}/deals/all-inclusive`)}
+    ${ctaButton('Explore Destinations', `${SITE_URL}/blog`)}
   `);
 }
 
@@ -193,7 +193,7 @@ export function getEmail3Html(firstName?: string): string {
 export function getEmail4Html(deals: Deal[], firstName?: string): string {
   const greeting = firstName ? `${firstName}, one` : 'One';
   const topDeal = deals[0];
-  const topDealCard = topDeal ? dealCard(topDeal) : '';
+  const topPackageCard = topDeal ? packageCard(topDeal) : '';
 
   return emailWrapper(`
     <h2 style="color:#111827;font-size:22px;margin:0 0 8px;font-weight:700;">${greeting} more thing before we settle in 👋</h2>
@@ -202,7 +202,7 @@ export function getEmail4Html(deals: Deal[], firstName?: string): string {
     </p>
 
     <h3 style="color:#111827;font-size:18px;margin:24px 0 12px;font-weight:700;">🏷️ Our #1 deal right now:</h3>
-    ${topDealCard}
+    ${topPackageCard}
 
     <h3 style="color:#111827;font-size:18px;margin:24px 0 12px;font-weight:700;">💡 Did you know?</h3>
     <p style="color:#4b5563;font-size:15px;line-height:1.6;margin:0 0 16px;">
@@ -212,13 +212,13 @@ export function getEmail4Html(deals: Deal[], firstName?: string): string {
       Thousands of savvy travelers use these packages every year to vacation for a fraction of the normal price. We always disclose terms upfront so you know exactly what to expect.
     </p>
 
-    ${ctaButton('Browse Timeshare Preview Deals', `${SITE_URL}/deals/timeshare`)}
+    ${ctaButton('Plan With Me', `${SITE_URL}/concierge-planning`)}
 
     <div style="background-color:#f9fafb;border-radius:12px;padding:20px;margin:24px 0;">
       <h4 style="color:#111827;font-size:15px;margin:0 0 8px;font-weight:700;">Quick links:</h4>
-      <p style="margin:4px 0;font-size:14px;">🌴 <a href="${SITE_URL}/deals/all-inclusive" style="color:${BRAND[600]};text-decoration:none;">All-Inclusive Deals</a></p>
-      <p style="margin:4px 0;font-size:14px;">✈️ <a href="${SITE_URL}/deals/flight-hotel" style="color:${BRAND[600]};text-decoration:none;">Flight + Hotel Bundles</a></p>
-      <p style="margin:4px 0;font-size:14px;">🚢 <a href="${SITE_URL}/deals/cruises" style="color:${BRAND[600]};text-decoration:none;">Cruise Deals</a></p>
+      <p style="margin:4px 0;font-size:14px;">🌴 <a href="${SITE_URL}/blog" style="color:${BRAND[600]};text-decoration:none;">All-Inclusive Guides</a></p>
+      <p style="margin:4px 0;font-size:14px;">✈️ <a href="${SITE_URL}/blog" style="color:${BRAND[600]};text-decoration:none;">Flight + Hotel Bundles</a></p>
+      <p style="margin:4px 0;font-size:14px;">🚢 <a href="${SITE_URL}/blog" style="color:${BRAND[600]};text-decoration:none;">Cruise Guides</a></p>
       <p style="margin:4px 0;font-size:14px;">📖 <a href="${SITE_URL}/blog" style="color:${BRAND[600]};text-decoration:none;">Travel Guides & Tips</a></p>
     </div>
 

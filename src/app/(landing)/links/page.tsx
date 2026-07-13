@@ -203,9 +203,9 @@ export default function LinksPage() {
         <section className="space-y-3">
           <SectionLabel>Browse</SectionLabel>
           <LinkCard
-            href={`/deals/all-inclusive?${utm('deals_ai')}`}
+            href={`/blog?${utm('deals_ai')}`}
             emoji="💸"
-            title="All-Inclusive Deals"
+            title="All-Inclusive Guides"
             subtitle="The latest vetted packages"
           />
           <LinkCard

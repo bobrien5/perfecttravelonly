@@ -71,22 +71,6 @@ export default async function DestinationPage({ params }: Props) {
         <p className="text-gray-600 leading-relaxed text-lg">{destination.description}</p>
       </div>
 
-      {/* Categories for this destination */}
-      <div className="mb-10">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Popular Categories in {destination.name}</h2>
-        <div className="flex flex-wrap gap-2">
-          {destination.categories.map((cat) => (
-            <Link
-              key={cat}
-              href={`/deals/${cat}`}
-              className="px-4 py-2 bg-brand-50 text-brand-700 font-medium rounded-full text-sm hover:bg-brand-100 transition-colors capitalize"
-            >
-              {cat.replace(/-/g, ' ')}
-            </Link>
-          ))}
-        </div>
-      </div>
-
       <AffiliateDisclosure variant="block" />
 
       {/* FAQ */}
@@ -128,7 +112,7 @@ export default async function DestinationPage({ params }: Props) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute bottom-3 left-3">
                   <p className="text-white font-semibold">{d.name}</p>
-                  <p className="text-white/70 text-xs">{d.dealCount} deals</p>
+                  <p className="text-white/70 text-xs">{d.country}</p>
                 </div>
               </Link>
             ))}

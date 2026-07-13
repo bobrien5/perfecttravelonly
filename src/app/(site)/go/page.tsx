@@ -34,10 +34,10 @@ function GoContent() {
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Invalid Link</h1>
           <p className="text-gray-600 mb-6">This redirect link is missing a destination URL.</p>
           <Link
-            href="/deals/all-inclusive"
+            href="/blog"
             className="inline-flex items-center px-6 py-3 bg-brand-600 text-white font-semibold rounded-xl hover:bg-brand-700 transition-colors"
           >
-            Browse Deals
+            Browse Guides
           </Link>
         </div>
       </div>
@@ -89,10 +89,10 @@ function GoContent() {
             Go Now &rarr;
           </a>
           <Link
-            href="/deals/all-inclusive"
+            href="/blog"
             className="inline-flex items-center justify-center w-full px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-xl hover:bg-gray-200 transition-colors text-sm"
           >
-            &larr; Back to Deals
+            &larr; Back to Guides
           </Link>
         </div>
 

@@ -205,7 +205,7 @@ export default async function BlogPostPage({ params }: Props) {
                   Full article coming soon.
                 </p>
                 <p className="text-gray-400">
-                  In the meantime, check out our latest vacation deals below.
+                  In the meantime, check out the planning options below.
                 </p>
               </div>
             )}
@@ -215,17 +215,17 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="mt-14 pt-8 border-t border-gray-200">
             <div className="bg-brand-50 rounded-2xl p-8 text-center">
               <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Looking for vacation deals?
+                Planning a trip?
               </h3>
               <p className="text-gray-600 mb-4">
-                Browse our curated collection of the best travel deals available
-                right now.
+                Tell me where you want to go and I will put together a verified
+                itinerary and pricing for you, free of charge.
               </p>
               <Link
-                href="/deals/all-inclusive"
+                href="/concierge-planning"
                 className="inline-block px-6 py-3 bg-brand-600 text-white font-semibold rounded-lg hover:bg-brand-700 transition-colors"
               >
-                Browse Deals
+                Plan With Me
               </Link>
             </div>
           </div>

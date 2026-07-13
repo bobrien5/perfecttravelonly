@@ -10,7 +10,6 @@ const category = {
     { name: 'shortDescription', title: 'Short Description', type: 'text', rows: 2 },
     { name: 'icon', title: 'Icon (Emoji)', type: 'string' },
     { name: 'heroImage', title: 'Hero Image URL', type: 'url' },
-    { name: 'dealCount', title: 'Deal Count', type: 'number' },
     { name: 'seoTitle', title: 'SEO Title', type: 'string' },
     { name: 'metaDescription', title: 'Meta Description', type: 'text', rows: 2 },
   ],

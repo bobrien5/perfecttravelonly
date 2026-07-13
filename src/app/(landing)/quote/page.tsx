@@ -71,7 +71,6 @@ export default async function QuotePage({ searchParams }: PageProps) {
   const destSlug = (params.dest || params.destination || params.deal || '').toLowerCase();
   const lookup = DESTINATION_LABELS[destSlug];
   const destinationLabel = lookup?.label || params.destination || 'Caribbean Vacation';
-  const dealTitle = params.title || lookup?.title || 'Vacation Package Quote';
   const priceLabel = params.price ? `from ${params.price}` : 'verified pricing';
 
   return (

@@ -26,20 +26,6 @@ export async function POST(req: NextRequest) {
 
     // Revalidate affected paths based on content type
     switch (body._type) {
-      case 'deal':
-        revalidatePath('/');
-        revalidatePath('/api/rss');
-        if (body.categorySlug) {
-          revalidatePath(`/deals/${body.categorySlug}`);
-        }
-        if (body.slug?.current && body.categorySlug) {
-          revalidatePath(`/deals/${body.categorySlug}/${body.slug.current}`);
-        }
-        if (body.destinationSlug) {
-          revalidatePath(`/destinations/${body.destinationSlug}`);
-        }
-        break;
-
       case 'destination':
         revalidatePath('/');
         if (body.slug?.current) {
@@ -49,9 +35,6 @@ export async function POST(req: NextRequest) {
 
       case 'category':
         revalidatePath('/');
-        if (body.slug?.current) {
-          revalidatePath(`/deals/${body.slug.current}`);
-        }
         break;
 
       case 'blogPost':

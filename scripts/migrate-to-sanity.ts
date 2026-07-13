@@ -41,7 +41,6 @@ async function migrate() {
       shortDescription: cat.shortDescription,
       icon: cat.icon,
       heroImage: cat.heroImage,
-      dealCount: cat.dealCount,
       seoTitle: cat.seoTitle,
       metaDescription: cat.metaDescription,
     });
@@ -61,7 +60,6 @@ async function migrate() {
       heroImage: dest.heroImage,
       description: dest.description,
       shortDescription: dest.shortDescription,
-      dealCount: dest.dealCount,
       categories: dest.categories,
       faq: dest.faq,
       seoTitle: dest.seoTitle,

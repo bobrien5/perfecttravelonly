@@ -1,14 +1,5 @@
 import { client, isSanityConfigured } from './client';
 import {
-  dealBySlugQuery,
-  dealsByCategoryQuery,
-  dealsByDestinationQuery,
-  featuredDealsQuery,
-  allDealsQuery,
-  recentDealsQuery,
-  timeshareDealsQuery,
-  relatedDealsQuery,
-  allDealParamsQuery,
   categoryBySlugQuery,
   allCategoriesQuery,
   allCategoryParamsQuery,
@@ -20,61 +11,12 @@ import {
   blogPostBySlugQuery,
   allBlogPostParamsQuery,
 } from './queries';
-import type { Deal, Destination, Category, BlogPost, FullBlogPost } from '@/types';
+import type { Destination, Category, BlogPost, FullBlogPost } from '@/types';
 
 // Static data fallbacks (used when Sanity is not yet configured)
 import * as staticDestinations from '@/data/destinations';
 import * as staticCategories from '@/data/categories';
 import * as staticBlogPosts from '@/data/blog-posts';
-
-// ============================================================
-// DEAL FUNCTIONS
-// ============================================================
-
-export async function getDealBySlug(categorySlug: string, dealSlug: string): Promise<Deal | null> {
-  if (!isSanityConfigured) return null;
-  return client.fetch<Deal | null>(dealBySlugQuery, { categorySlug, dealSlug });
-}
-
-export async function getDealsByCategory(categorySlug: string): Promise<Deal[]> {
-  if (!isSanityConfigured) return [];
-  return client.fetch<Deal[]>(dealsByCategoryQuery, { categorySlug });
-}
-
-export async function getDealsByDestination(destinationSlug: string): Promise<Deal[]> {
-  if (!isSanityConfigured) return [];
-  return client.fetch<Deal[]>(dealsByDestinationQuery, { destinationSlug });
-}
-
-export async function getFeaturedDeals(): Promise<Deal[]> {
-  if (!isSanityConfigured) return [];
-  return client.fetch<Deal[]>(featuredDealsQuery);
-}
-
-export async function getAllDeals(): Promise<Deal[]> {
-  if (!isSanityConfigured) return [];
-  return client.fetch<Deal[]>(allDealsQuery);
-}
-
-export async function getRecentDeals(count: number): Promise<Deal[]> {
-  if (!isSanityConfigured) return [];
-  return client.fetch<Deal[]>(recentDealsQuery, { count });
-}
-
-export async function getTimeshareDeals(): Promise<Deal[]> {
-  if (!isSanityConfigured) return [];
-  return client.fetch<Deal[]>(timeshareDealsQuery);
-}
-
-export async function getRelatedDeals(dealId: string, categorySlug: string, destinationSlug: string): Promise<Deal[]> {
-  if (!isSanityConfigured) return [];
-  return client.fetch<Deal[]>(relatedDealsQuery, { dealId, categorySlug, destinationSlug });
-}
-
-export async function getAllDealParams(): Promise<{ category: string; slug: string }[]> {
-  if (!isSanityConfigured) return [];
-  return client.fetch(allDealParamsQuery);
-}
 
 // ============================================================
 // CATEGORY FUNCTIONS
