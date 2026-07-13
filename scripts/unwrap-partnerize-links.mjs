@@ -51,10 +51,14 @@ async function main() {
   const posts = await client.fetch(
     `*[_type=="blogPost" && defined(body)]{_id,"slug":slug.current,body}`
   );
+
+  // PASS 1 (validate): compute every unwrapped href in memory, collect
+  // destination hosts and any unparseable destinations. No writes yet.
   let changedPosts = 0;
   let changedLinks = 0;
   let unparseable = 0;
   const hosts = new Set();
+  const pendingPatches = [];
 
   for (const p of posts) {
     let touched = 0;
@@ -82,7 +86,7 @@ async function main() {
       changedPosts++;
       changedLinks += touched;
       console.log(`${WRITE ? "PATCH" : "would unwrap"} ${String(touched).padStart(2)}  ${p.slug}`);
-      if (WRITE) await client.patch(p._id).set({ body }).commit();
+      pendingPatches.push({ id: p._id, body });
     }
   }
 
@@ -94,6 +98,20 @@ async function main() {
   const nonExpedia = [...hosts].filter((h) => !/(^|\.)expedia\.com$/.test(h));
   if (nonExpedia.length > 0) {
     console.log(`WARNING: non-Expedia destination host(s) found: ${nonExpedia.join(", ")}`);
+  }
+
+  // GATE: block on any unparseable destination or any non-Expedia host,
+  // in both dry-run and --write mode. Nothing has been written yet.
+  if (unparseable > 0 || nonExpedia.length > 0) {
+    console.error("\nFAILED: validation gate did not pass. No writes were made.");
+    process.exit(1);
+  }
+
+  // PASS 2 (write): only after the gate has passed, and only if --write.
+  if (WRITE) {
+    for (const { id, body } of pendingPatches) {
+      await client.patch(id).set({ body }).commit();
+    }
   }
 }
 
