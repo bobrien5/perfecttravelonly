@@ -45,7 +45,7 @@ async function main() {
 
   for (const [slug, address] of Object.entries(PLACEMENTS)) {
     const post = await client.fetch(
-      `*[_type=="blogPost" && slug.current==$slug][0]{_id,"slug":slug.current,body}`,
+      `*[_type=="blogPost" && slug.current==$slug && !(_id in path("drafts.**"))][0]{_id,"slug":slug.current,body}`,
       { slug }
     );
     if (!post) {
@@ -58,11 +58,19 @@ async function main() {
       console.log(`skip     ${slug} (already has a map)`);
       continue;
     }
-    const block = { _type: "stay22Map", _key: nk(), address };
-    const newBody = [...body, block];
+    const existingKeys = new Set(body.map((b) => b._key).filter(Boolean));
+    let key = nk();
+    while (existingKeys.has(key)) key = nk();
+    const block = { _type: "stay22Map", _key: key, address };
     placed++;
     console.log(`${WRITE ? "PLACE   " : "would place"} ${slug} -> ${address}`);
-    if (WRITE) await client.patch(post._id).set({ body: newBody }).commit();
+    if (WRITE) {
+      await client
+        .patch(post._id)
+        .setIfMissing({ body: [] })
+        .append("body", [block])
+        .commit();
+    }
   }
 
   console.log(`\n${WRITE ? "Placed" : "Dry run:"} ${placed} map(s), skipped ${skipped}.`);
