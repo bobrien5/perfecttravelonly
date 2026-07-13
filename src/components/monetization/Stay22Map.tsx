@@ -1,4 +1,6 @@
-const MAP_AID = process.env.NEXT_PUBLIC_STAY22_MAP_AID || '6a4fa10b1b2dc574185e339d';
+// Stay22 account aid, confirmed from the aid= param in the links Stay22's own
+// letmeallez script generates on our guide pages. Override via env if it changes.
+const MAP_AID = process.env.NEXT_PUBLIC_STAY22_MAP_AID || 'vacationpr';
 
 interface Stay22MapProps {
   address: string;
