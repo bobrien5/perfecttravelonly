@@ -59,7 +59,7 @@ export async function GET(request: NextRequest) {
 
         for (const contact of contacts) {
           try {
-            await sendSequenceEmail(step, contact.email, contact.first_name, []);
+            await sendSequenceEmail(step, contact.email, contact.first_name);
 
             // Update contact's welcome_step
             const updateRequest = {
@@ -115,7 +115,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    await sendSequenceEmail(emailNumber as 2 | 3 | 4, email, firstName, []);
+    await sendSequenceEmail(emailNumber as 2 | 3 | 4, email, firstName);
 
     return NextResponse.json({ success: true, message: `Email ${emailNumber} sent to ${email}` });
   } catch (error) {
