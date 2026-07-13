@@ -30,7 +30,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
       {/* Main nav */}
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex items-center gap-10 h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
             <img src="/logo.svg" alt="VacationPro" className="w-9 h-9" />
@@ -39,8 +39,9 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-1">
+          {/* Desktop Nav: grouped beside the logo. With only three items a
+              justify-between layout strands them in the middle of the bar. */}
+          <div className="hidden lg:flex items-center gap-2">
             {navigation.map((item) => (
               <div
                 key={item.name}
@@ -50,7 +51,7 @@ export default function Header() {
               >
                 <Link
                   href={item.href}
-                  className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-brand-600 transition-colors rounded-md hover:bg-gray-50"
+                  className="inline-flex items-center px-3.5 py-2 text-[0.9375rem] font-medium text-gray-700 hover:text-brand-600 transition-colors rounded-md hover:bg-gray-50"
                 >
                   {item.name}
                   {item.children && (
@@ -76,11 +77,11 @@ export default function Header() {
             ))}
           </div>
 
-          {/* CTA + Mobile Toggle */}
-          <div className="flex items-center gap-3">
+          {/* CTA + Mobile Toggle, pushed to the right edge */}
+          <div className="flex items-center gap-3 ml-auto shrink-0">
             <Link
               href="/concierge-planning"
-              className="hidden sm:inline-flex items-center px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 transition-colors"
+              className="hidden sm:inline-flex items-center px-5 py-2.5 bg-brand-600 text-white text-[0.9375rem] font-semibold rounded-lg hover:bg-brand-700 transition-colors"
             >
               Plan With Me
             </Link>

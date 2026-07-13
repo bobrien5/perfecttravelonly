@@ -5,9 +5,9 @@ import Stay22Scripts from '@/components/monetization/Stay22Scripts';
 import { getAllBlogPosts } from '@/sanity/lib/fetch';
 
 export const metadata: Metadata = {
-  title: 'Travel Blog: Guides, Tips, and Deal Alerts',
+  title: 'Travel Guides: Tropical and All-Inclusive Trips',
   description:
-    'Expert travel guides, destination tips, deal breakdowns, and insider advice to help you plan the perfect vacation for less.',
+    'Expert guides to the best tropical and all-inclusive trips, with destination tips and resort picks to help you plan the perfect vacation.',
   alternates: { canonical: '/blog' },
 };
 
@@ -22,11 +22,11 @@ export default async function BlogPage() {
       {/* Hero */}
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-          The VacationPro Blog
+          Travel Guides
         </h1>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          Expert travel guides, destination tips, and deal breakdowns to help
-          you plan the perfect vacation for less.
+          Expert guides to the best tropical and all-inclusive trips, with
+          destination tips and resort picks to help you plan the perfect vacation.
         </p>
       </div>
 
