@@ -11,6 +11,7 @@ import NewsletterSignup from '@/components/ui/NewsletterSignup';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import Stay22Scripts from '@/components/monetization/Stay22Scripts';
 import Stay22Map from '@/components/monetization/Stay22Map';
+import { ArticleJsonLd } from '@/components/seo/JsonLd';
 import { PortableText, PortableTextComponents } from '@portabletext/react';
 
 interface Props {
@@ -127,6 +128,15 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <div>
+      <ArticleJsonLd
+        slug={slug}
+        headline={post.seoTitle || post.title}
+        description={post.metaDescription || post.excerpt}
+        image={post.image}
+        author={post.author}
+        datePublished={post.publishedAt || post.date}
+      />
+
       {/* Breadcrumbs */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
         <Breadcrumbs
@@ -224,17 +234,18 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="mt-14 pt-8 border-t border-gray-200">
             <div className="bg-brand-50 rounded-2xl p-8 text-center">
               <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Planning a trip?
+                Booking a group, or want a rate you will not find on Expedia?
               </h3>
               <p className="text-gray-600 mb-4">
-                Tell me where you want to go and I will put together a verified
-                itinerary and pricing for you, free of charge.
+                I book as a travel advisor with access to agent-only pricing,
+                resort credits, and group perks. Tell me your dates and I will
+                price it against whatever you just saw.
               </p>
               <Link
                 href="/concierge-planning"
                 className="inline-block px-6 py-3 bg-brand-600 text-white font-semibold rounded-lg hover:bg-brand-700 transition-colors"
               >
-                Plan With Me
+                Get my agent rate
               </Link>
             </div>
           </div>
