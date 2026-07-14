@@ -39,15 +39,44 @@ const NOT_HOTEL =
 /**
  * Pull the hotel name out of an H2 like:
  *   "Best Overall: Beaches Turks & Caicos"      -> "Beaches Turks & Caicos"
+ *   "Beaches Turks and Caicos: The Gold Standard for Every Age" -> "Beaches Turks and Caicos"
  *   "Hard Rock Hotel & Casino Punta Cana (Best All-Around)" -> "Hard Rock Hotel & Casino Punta Cana"
+ *   "Riu Republica (Punta Cana) - From About $115 Per Person, Per Night" -> "Riu Republica"
  *   "1. Sandals Royal Caribbean"                -> "Sandals Royal Caribbean"
+ *
+ * The heading can put the hotel name on either side of a colon, so both halves
+ * are tested against BRAND_HINT rather than assuming the name always trails.
  */
 function extractHotelName(heading) {
   let s = heading.trim();
-  s = s.replace(/^\s*\d+[.)]\s*/, "");        // leading "1." / "1)"
-  if (s.includes(":")) s = s.slice(s.indexOf(":") + 1); // drop "Best Overall:" label
-  s = s.replace(/\([^)]*\)\s*$/, "");          // drop trailing "(Best All-Around)"
-  return s.trim();
+  s = s.replace(/^\s*\d+[.)]\s*/, ""); // leading "1." / "1)"
+
+  // Drop a trailing pricing/tagline suffix, e.g. " - From About $115 Per Person, Per Night".
+  // Must run before the parenthetical strip below, since the pricing tail can push a
+  // location parenthetical like "(Punta Cana)" away from the end of the string.
+  const priceSplit = s.match(/^(.*)\s*[-–—]\s*([^-–—]*)$/);
+  if (priceSplit && /\$|Per Person|Per Night|From About/i.test(priceSplit[2])) {
+    s = priceSplit[1].trim();
+  }
+
+  // Drop a "Label:" prefix, keeping whichever half actually names a hotel.
+  if (s.includes(":")) {
+    const idx = s.indexOf(":");
+    const left = s.slice(0, idx).trim();
+    const right = s.slice(idx + 1).trim();
+    // A left half like "Best Luxury Family Resort" trips BRAND_HINT on the bare
+    // word "resort"/"hotel" even though it is a superlative label, not a property
+    // name. Treat that as a non-match so the real name on the right still wins.
+    const leftIsSuperlativeLabel = /^best\b/i.test(left);
+    const leftMatch = BRAND_HINT.test(left) && !leftIsSuperlativeLabel;
+    const rightMatch = BRAND_HINT.test(right);
+    if (leftMatch) s = left;           // both match, or only left matches: hotel is the subject
+    else if (rightMatch) s = right;    // only right matches
+    // neither matches: keep the whole string (minus the enumerator already stripped)
+  }
+
+  s = s.replace(/\s*\([^)]*\)\s*$/, ""); // drop trailing "(Best All-Around)" qualifier
+  return s.trim().replace(/[,:]\s*$/, "").trim();
 }
 
 const text = (b) => (b.children || []).map((c) => c.text || "").join("");
