@@ -1,62 +1,12 @@
 [
   {
-    "slug": "best-all-inclusive-resorts-bahamas",
-    "title": "The 6 Best All-Inclusive Resorts in the Bahamas (An Honest Ranking)",
-    "h2Index": 5,
-    "heading": "The 6 best all-inclusive resorts in the Bahamas, ranked",
-    "hotelName": "The 6 best all-inclusive resorts in the Bahamas, ranked",
-    "hasButton": false,
-    "expediaUrl": null,
-    "skip": null
-  },
-  {
-    "slug": "best-beaches-in-mexico",
-    "title": "The 6 Best Beaches in Mexico, Ranked by People Who Book These Trips",
-    "h2Index": 1,
-    "heading": "The 6 Best Beaches in Mexico, Ranked",
-    "hotelName": "The 6 Best Beaches in Mexico, Ranked",
-    "hasButton": false,
-    "expediaUrl": null,
-    "skip": null
-  },
-  {
-    "slug": "best-caribbean-island-for-couples",
-    "title": "The Best Caribbean Islands for Couples in 2026 (Romantic Resorts, Beaches, Sunsets)",
-    "h2Index": 42,
-    "heading": "Best couples resorts in the Caribbean",
-    "hotelName": "Best couples resorts in the Caribbean",
-    "hasButton": false,
-    "expediaUrl": null,
-    "skip": null
-  },
-  {
-    "slug": "best-caribbean-islands",
-    "title": "The Best Caribbean Islands in 2026, Ranked by Vibe (The Full Cheat Sheet)",
-    "h2Index": 5,
-    "heading": "Best beaches: Turks and Caicos, Aruba, Bahamas",
-    "hotelName": "Best beaches: Turks and Caicos, Aruba, Bahamas",
-    "hasButton": false,
-    "expediaUrl": null,
-    "skip": null
-  },
-  {
-    "slug": "best-caribbean-islands-to-visit",
-    "title": "Best Caribbean Islands to Visit in 2026: A Complete Guide",
-    "h2Index": 11,
-    "heading": "1. Turks & Caicos, Best Beaches in the Caribbean",
-    "hotelName": "Turks & Caicos, Best Beaches in the Caribbean",
-    "hasButton": false,
-    "expediaUrl": null,
-    "skip": null
-  },
-  {
     "slug": "best-couples-all-inclusive-resorts",
     "title": "Best Couples All-Inclusive Resorts (2026)",
     "h2Index": 7,
     "heading": "Sandals Royal Caribbean (Jamaica)",
     "hotelName": "Sandals Royal Caribbean",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Montego-Bay-Hotels-Sandals-Royal-Caribbean-ALL-INCLUSIVE-Couples-Only.h865599.Hotel-Information",
     "skip": null
   },
   {
@@ -66,7 +16,7 @@
     "heading": "Secrets Cap Cana (Punta Cana)",
     "hotelName": "Secrets Cap Cana",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Punta-Cana-Hotels-Secrets-Cap-Cana-Resort-Spa-Adults-Only.h15009329.Hotel-Information",
     "skip": null
   },
   {
@@ -76,7 +26,7 @@
     "heading": "Excellence Playa Mujeres (Cancun)",
     "hotelName": "Excellence Playa Mujeres",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Cancun-Hotels-Excellence-Playa-Mujeres-All-Inclusive-Adults-Only.h1672497.Hotel-Information",
     "skip": null
   },
   {
@@ -86,7 +36,7 @@
     "heading": "Sandals Grande St. Lucian (St. Lucia)",
     "hotelName": "Sandals Grande St. Lucian",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Gros-Islet-Hotels-Sandals-Grande-St-Lucian-ALL-INCLUSIVE-Couples-Only.h889966.Hotel-Information",
     "skip": null
   },
   {
@@ -96,7 +46,7 @@
     "heading": "Hyatt Zilara Cap Cana (Punta Cana)",
     "hotelName": "Hyatt Zilara Cap Cana",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Punta-Cana-Hotels-Hyatt-Zilara-Cap-Cana-Adults-Only-All-Inclusive.h33302741.Hotel-Information",
     "skip": null
   },
   {
@@ -106,7 +56,7 @@
     "heading": "Best Overall: Beaches Turks & Caicos",
     "hotelName": "Beaches Turks & Caicos",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Turks-And-Caicos-Hotels-Beaches-Turks-Caicos-Resort-Villages-Spa-All-Inclusive.h197859.Hotel-Information",
     "skip": null
   },
   {
@@ -116,7 +66,7 @@
     "heading": "Best for Toddlers and Young Kids: Hyatt Ziva Cancún",
     "hotelName": "Hyatt Ziva Cancún",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Cancun-Hotels-Hyatt-Ziva-Cancun-All-Inclusive.h11669114.Hotel-Information",
     "skip": null
   },
   {
@@ -126,7 +76,7 @@
     "heading": "Best for Teens: Hard Rock Hotel Riviera Maya",
     "hotelName": "Hard Rock Hotel Riviera Maya",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Puerto-Aventuras-Hotels-Hard-Rock-Hotel-Riviera-Maya-All-Inclusive.h447258.Hotel-Information",
     "skip": null
   },
   {
@@ -134,9 +84,9 @@
     "title": "Best Family All-Inclusive Resorts: Where to Take the Kids in 2026",
     "h2Index": 19,
     "heading": "Best Multi-Generational: Beaches Negril, Jamaica",
-    "hotelName": "Beaches Negril, Jamaica",
+    "hotelName": "Beaches Negril",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Negril-Hotels-Beaches-Negril-Resort-ALL-INCLUSIVE.h606140.Hotel-Information",
     "skip": null
   },
   {
@@ -144,9 +94,9 @@
     "title": "Best Family All-Inclusive Resorts: Where to Take the Kids in 2026",
     "h2Index": 22,
     "heading": "Best Value: Barceló Bávaro Palace, Punta Cana",
-    "hotelName": "Barceló Bávaro Palace, Punta Cana",
+    "hotelName": "Barceló Bávaro Palace",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Punta-Cana-Hotels-Barcelo-Bavaro-Palace-All-Inclusive.h2438582.Hotel-Information",
     "skip": null
   },
   {
@@ -157,7 +107,7 @@
     "hotelName": "Hyatt Zilara/Ziva Cap Cana",
     "hasButton": false,
     "expediaUrl": null,
-    "skip": null
+    "skip": "ambiguous: heading names two properties (Hyatt Zilara is adults-only, Hyatt Ziva is the family resort; cannot pick one without changing meaning)"
   },
   {
     "slug": "best-luxury-all-inclusive-resorts",
@@ -166,7 +116,7 @@
     "heading": "1. Jade Mountain, St. Lucia",
     "hotelName": "Jade Mountain, St. Lucia",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Soufriere-Hotels-Jade-Mountain-Resort.h1529727.Hotel-Information",
     "skip": null
   },
   {
@@ -176,7 +126,7 @@
     "heading": "2. Excellence Playa Mujeres, Mexico",
     "hotelName": "Excellence Playa Mujeres, Mexico",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Cancun-Hotels-Excellence-Playa-Mujeres-All-Inclusive-Adults-Only.h1672497.Hotel-Information",
     "skip": null
   },
   {
@@ -186,7 +136,7 @@
     "heading": "3. Sandals Royal Plantation, Jamaica",
     "hotelName": "Sandals Royal Plantation, Jamaica",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Montego-Bay-Hotels-Sandals-Royal-Plantation-ALL-INCLUSIVE-Couples-Only.h606141.Hotel-Information",
     "skip": null
   },
   {
@@ -196,7 +146,7 @@
     "heading": "4. Hotel Xcaret Arte, Mexico",
     "hotelName": "Hotel Xcaret Arte, Mexico",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Playa-Del-Carmen-Hotels-Hotel-Xcaret-Arte-All-Parks-And-Tours-All-Fun-Inclusive.h61500646.Hotel-Information",
     "skip": null
   },
   {
@@ -206,7 +156,7 @@
     "heading": "5. Secrets Moxché, Riviera Maya",
     "hotelName": "Secrets Moxché, Riviera Maya",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Playa-Del-Carmen-Hotels-Secrets-Moxche-Playa-Del-Carmen.h68897679.Hotel-Information",
     "skip": null
   },
   {
@@ -216,7 +166,7 @@
     "heading": "6. Curtain Bluff, Antigua",
     "hotelName": "Curtain Bluff, Antigua",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Carlisle-Bay-Hotels-Curtain-Bluff-Resort-All-Inclusive.h64434.Hotel-Information",
     "skip": null
   },
   {
@@ -226,7 +176,7 @@
     "heading": "Riu Republica (Punta Cana) — From About $115 Per Person, Per Night",
     "hotelName": "Riu Republica",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Punta-Cana-Hotels-Riu-Republica-Adults-Only-All-Inclusive.h12848883.Hotel-Information",
     "skip": null
   },
   {
@@ -236,7 +186,7 @@
     "heading": "Bahia Principe Grand Punta Cana — From About $120 Per Person, Per Night",
     "hotelName": "Bahia Principe Grand Punta Cana",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Punta-Cana-Hotels-Bahia-Principe-Grand-Punta-Cana-All-Inclusive.h1091208.Hotel-Information",
     "skip": null
   },
   {
@@ -246,7 +196,7 @@
     "heading": "Riu Ocho Rios (Jamaica) — From About $130 Per Person, Per Night",
     "hotelName": "Riu Ocho Rios",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Montego-Bay-Hotels-RIU-Ocho-Rios-All-Inclusive.h1279854.Hotel-Information",
     "skip": null
   },
   {
@@ -254,9 +204,9 @@
     "title": "Cheapest All-Inclusive Resorts in 2026 (Real Prices Inside)",
     "h2Index": 18,
     "heading": "Iberostar Selection Bavaro (Punta Cana) — From About $140 Per Person, Per Night",
-    "hotelName": "Iberostar Selection Bavaro",
+    "hotelName": "Iberostar Selection Bávaro Suites",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Punta-Cana-Hotels-Iberostar-Selection-Bavaro-Suites-All-Inclusive.h559708.Hotel-Information",
     "skip": null
   },
   {
@@ -266,47 +216,7 @@
     "heading": "Royalton Splash Riviera Cancun (Mexico) — From About $145 Per Person, Per Night",
     "hotelName": "Royalton Splash Riviera Cancun",
     "hasButton": false,
-    "expediaUrl": null,
-    "skip": null
-  },
-  {
-    "slug": "cheapest-caribbean-island",
-    "title": "The 7 Cheapest Caribbean Islands for an All-Inclusive Vacation in 2026",
-    "h2Index": 62,
-    "heading": "5 surprisingly great budget resorts",
-    "hotelName": "5 surprisingly great budget resorts",
-    "hasButton": false,
-    "expediaUrl": null,
-    "skip": null
-  },
-  {
-    "slug": "is-cancun-safe",
-    "title": "Is Cancun Safe? What Travelers Need to Know in 2026",
-    "h2Index": 6,
-    "heading": "The most important distinction: Hotel Zone vs downtown Cancun",
-    "hotelName": "Hotel Zone vs downtown Cancun",
-    "hasButton": false,
-    "expediaUrl": null,
-    "skip": null
-  },
-  {
-    "slug": "is-jamaica-safe",
-    "title": "Is Jamaica Safe? An Honest 2026 Guide for Resort Travelers",
-    "h2Index": 2,
-    "heading": "Jamaica's safety reputation vs the resort reality",
-    "hotelName": "Jamaica's safety reputation vs the resort reality",
-    "hasButton": false,
-    "expediaUrl": null,
-    "skip": null
-  },
-  {
-    "slug": "is-jamaica-safe",
-    "title": "Is Jamaica Safe? An Honest 2026 Guide for Resort Travelers",
-    "h2Index": 30,
-    "heading": "Excursions, transport, and staying smart off-resort",
-    "hotelName": "Excursions, transport, and staying smart off-resort",
-    "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Playa-Del-Carmen-Hotels-Royalton-Splash-Riviera-Cancun.h78626183.Hotel-Information",
     "skip": null
   },
   {
@@ -316,7 +226,7 @@
     "heading": "Beaches Turks and Caicos: The Gold Standard for Every Age",
     "hotelName": "Beaches Turks and Caicos",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Providenciales-Hotels-Beaches-Turks-Caicos-ALL-INCLUSIVE.h197859.Hotel-Information",
     "skip": null
   },
   {
@@ -324,9 +234,9 @@
     "title": "6 Kid-Friendly All-Inclusive Resorts Parents Actually Love (2026)",
     "h2Index": 12,
     "heading": "Nickelodeon Punta Cana: Slime, Characters, and a Real Water Park",
-    "hotelName": "Nickelodeon Punta Cana",
+    "hotelName": "Nickelodeon Hotels & Resorts Punta Cana",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Punta-Cana-Hotels-Nickelodeon-Hotels-Resorts-Punta-Cana.h13145542.Hotel-Information",
     "skip": null
   },
   {
@@ -336,7 +246,7 @@
     "heading": "Hyatt Ziva Cap Cana: Luxury All-Inclusive With a Real Kids Water Park",
     "hotelName": "Hyatt Ziva Cap Cana",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Punta-Cana-Hotels-Hyatt-Ziva-Cap-Cana-All-Inclusive.h33291189.Hotel-Information",
     "skip": null
   },
   {
@@ -346,7 +256,7 @@
     "heading": "Moon Palace Cancun: Massive Pools, a FlowRider, and a Kids Water Park",
     "hotelName": "Moon Palace Cancun",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Cancun-Hotels-Moon-Palace-Cancun-All-Inclusive.h428588.Hotel-Information",
     "skip": null
   },
   {
@@ -354,9 +264,9 @@
     "title": "6 Kid-Friendly All-Inclusive Resorts Parents Actually Love (2026)",
     "h2Index": 21,
     "heading": "Hard Rock Riviera Maya: Slides and a Lazy River Without Sacrificing the Food",
-    "hotelName": "Hard Rock Riviera Maya",
+    "hotelName": "Hard Rock Hotel Riviera Maya",
     "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Puerto-Aventuras-Hotels-Hard-Rock-Hotel-Riviera-Maya-All-Inclusive.h447258.Hotel-Information",
     "skip": null
   },
   {
@@ -364,69 +274,9 @@
     "title": "6 Kid-Friendly All-Inclusive Resorts Parents Actually Love (2026)",
     "h2Index": 24,
     "heading": "Franklyn D. Resort, Jamaica: A Vacation Nanny With Every Suite",
-    "hotelName": "Franklyn D. Resort, Jamaica",
+    "hotelName": "Franklyn D. Resort & Spa",
     "hasButton": false,
-    "expediaUrl": null,
-    "skip": null
-  },
-  {
-    "slug": "overwater-bungalows-caribbean",
-    "title": "Overwater Bungalows in the Caribbean (2026 Guide)",
-    "h2Index": 15,
-    "heading": "Overwater Bungalows in Jamaica: Why Sandals Dominates",
-    "hotelName": "Why Sandals Dominates",
-    "hasButton": false,
-    "expediaUrl": null,
-    "skip": null
-  },
-  {
-    "slug": "riviera-maya-vs-cancun",
-    "title": "Riviera Maya vs Cancun: Which Should You Book in 2026?",
-    "h2Index": 8,
-    "heading": "Beaches compared (and an honest word on sargassum)",
-    "hotelName": "Beaches compared",
-    "hasButton": false,
-    "expediaUrl": null,
-    "skip": null
-  },
-  {
-    "slug": "riviera-maya-vs-cancun",
-    "title": "Riviera Maya vs Cancun: Which Should You Book in 2026?",
-    "h2Index": 11,
-    "heading": "Resorts and all-inclusive options",
-    "hotelName": "Resorts and all-inclusive options",
-    "hasButton": false,
-    "expediaUrl": null,
-    "skip": null
-  },
-  {
-    "slug": "safest-caribbean-island",
-    "title": "The 10 Safest Caribbean Islands in 2026 (Ranked by Real Travel Data)",
-    "h2Index": 46,
-    "heading": "Resort areas vs. island-wide safety: what actually matters",
-    "hotelName": "Resort areas vs. island-wide safety",
-    "hasButton": false,
-    "expediaUrl": null,
-    "skip": null
-  },
-  {
-    "slug": "safest-caribbean-island",
-    "title": "The 10 Safest Caribbean Islands in 2026 (Ranked by Real Travel Data)",
-    "h2Index": 60,
-    "heading": "Best all-inclusive resorts in the safest islands",
-    "hotelName": "Best all-inclusive resorts in the safest islands",
-    "hasButton": false,
-    "expediaUrl": null,
-    "skip": null
-  },
-  {
-    "slug": "swim-up-suite-resorts-caribbean",
-    "title": "The 6 Best All-Inclusive Resorts With Swim-Up Rooms",
-    "h2Index": 1,
-    "heading": "The 6 Best Swim-Up Suite Resorts in the Caribbean and Mexico",
-    "hotelName": "The 6 Best Swim-Up Suite Resorts in the Caribbean and Mexico",
-    "hasButton": false,
-    "expediaUrl": null,
+    "expediaUrl": "https://www.expedia.com/Runaway-Bay-Hotels-Franklyn-D-Resort-Spa-All-Inclusive.h690644.Hotel-Information",
     "skip": null
   }
 ]
