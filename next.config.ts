@@ -9,6 +9,15 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        // ads.txt is managed by Mediavine/Journey. 301 (not Next's default 308)
+        // for IAB ads.txt crawler compatibility. Never edit ads.txt by hand;
+        // the partner list updates at the destination automatically.
+        source: "/ads.txt",
+        destination:
+          "https://adstxt.journeymv.com/sites/e826f3a3-1424-4081-9650-1fad60b84735/ads.txt",
+        statusCode: 301,
+      },
+      {
         source: "/d/aruba",
         destination:
           "https://www.perfecttravelonly.com/products/aruba-beach-getaway-guide",
