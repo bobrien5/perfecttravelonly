@@ -1,5 +1,11 @@
 import type { NextConfig } from "next";
 
+// Next's own redirect-rule type, so mixing `statusCode` and `permanent`
+// entries in one array does not trip TS's union inference.
+type RedirectRule = Awaited<
+  ReturnType<NonNullable<NextConfig["redirects"]>>
+>[number];
+
 const nextConfig: NextConfig = {
   // Branded short URLs for our paid guide products (now on Beehiiv, Stripe).
   // 302 (temporary) so the destination can swap again without invalidating
@@ -7,7 +13,7 @@ const nextConfig: NextConfig = {
   // to a Supabase-driven middleware that reads from the deal_keywords table
   // (see PR #2's resolve endpoint).
   async redirects() {
-    return [
+    const rules: RedirectRule[] = [
       {
         // ads.txt is managed by Mediavine/Journey. 301 (not Next's default 308)
         // for IAB ads.txt crawler compatibility. Never edit ads.txt by hand;
@@ -50,6 +56,7 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
     ];
+    return rules;
   },
 };
 
