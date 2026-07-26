@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import MetaPixel, { MetaPixelNoScript } from '@/components/analytics/MetaPixel';
+import { OrganizationJsonLd, WebSiteJsonLd } from '@/components/seo/JsonLd';
 import './globals.css';
 
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID?.trim();
@@ -46,6 +47,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} overflow-x-hidden`}>
       <head>
+        <OrganizationJsonLd />
+        <WebSiteJsonLd />
+        {/* Google AdSense */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4007298235908015"
+          crossOrigin="anonymous"
+        />
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-V8FQNXLJ7D"
@@ -77,6 +86,14 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `!(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","U2l0ZTpmMGUxZTFjOS05NTNmLTQzNDItOTAyMi1kNjk4NDMzNjgyMjY=");var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t);})();`,
           }}
+        />
+        {/* ScriptWrapper ad tag */}
+        <script
+          type="text/javascript"
+          async
+          data-noptimize="1"
+          data-cfasync="false"
+          src="https://scripts.scriptwrapper.com/tags/e826f3a3-1424-4081-9650-1fad60b84735.js"
         />
       </head>
       <body className="antialiased overflow-x-hidden">
