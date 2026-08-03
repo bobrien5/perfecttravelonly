@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     title: 'Free Webinar: Stop Overpaying for Vacations',
     description:
       'Discover how smart travelers are booking luxury all-inclusive resorts for a fraction of the public price.',
+    images: ['/og-default.png'],
   },
   alternates: { canonical: '/webinar' },
 };

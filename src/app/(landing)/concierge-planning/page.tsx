@@ -3,9 +3,10 @@ import ConciergePlanningForm from '@/components/ui/ConciergePlanningForm';
 import Stay22Guard from '@/components/monetization/Stay22Guard';
 
 export const metadata: Metadata = {
-  title: 'Plan My Trip, VacationPro Concierge',
+  title: { absolute: 'Plan My Trip, VacationPro Concierge' },
   description:
     'Hire a travel advisor to plan a custom vacation for $99, research and advisor time included.',
+  alternates: { canonical: '/concierge-planning' },
   robots: { index: false, follow: true },
 };
 

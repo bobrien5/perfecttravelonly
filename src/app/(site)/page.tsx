@@ -8,7 +8,7 @@ import Stay22Guard from '@/components/monetization/Stay22Guard';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'VacationPro: Tropical Travel Guides + Concierge Booking',
+  title: { absolute: 'Tropical Travel Guides + Concierge Booking | VacationPro' },
   description:
     'Expert guides to the best tropical and all-inclusive trips, plus concierge booking to plan and book your vacation with a real travel advisor.',
   alternates: { canonical: '/' },
