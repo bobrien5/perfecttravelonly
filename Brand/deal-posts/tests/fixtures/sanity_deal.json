@@ -1,0 +1,20 @@
+{
+  "result": {
+    "title": "Punta Cana All-Inclusive Escape",
+    "slug": "punta-cana-all-inclusive-escape",
+    "destination": "Punta Cana",
+    "price": 799,
+    "originalPrice": 1499,
+    "savingsPercent": 47,
+    "heroImage": "https://cdn.sanity.io/images/abc/production/hero.jpg",
+    "galleryImages": [
+      "https://cdn.sanity.io/images/abc/production/g1.jpg",
+      "https://cdn.sanity.io/images/abc/production/g2.jpg"
+    ],
+    "whatsIncluded": ["Round-trip airfare", "Airport transfers", "Oceanview room", "Unlimited meals & drinks"],
+    "travelDates": "May - September 2026",
+    "duration": "5 nights",
+    "bookingWindow": "Book by June 30, 2026",
+    "disclaimer": "Price is per person based on double occupancy. Resort fees not included."
+  }
+}

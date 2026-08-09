@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>{{ css|safe }}</style></head><body>
+{% import '_macros.html' as m with context %}
+{% if slide == 'hook' %}{{ m.hook_frame(deal, keyword, images) }}
+{% elif slide == 'included' %}{{ m.included_frame(deal, images) }}
+{% elif slide == 'details' %}{{ m.details_frame(deal, images, flight_estimate) }}
+{% elif slide == 'catch' %}{{ m.catch_frame(deal, images) }}
+{% elif slide == 'cta' %}{{ m.cta_frame(deal, keyword) }}
+{% endif %}
+</body></html>
