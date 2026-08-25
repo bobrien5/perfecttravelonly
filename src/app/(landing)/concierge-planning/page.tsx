@@ -1,11 +1,15 @@
 import { Metadata } from 'next';
 import ConciergePlanningForm from '@/components/ui/ConciergePlanningForm';
 import Stay22Guard from '@/components/monetization/Stay22Guard';
+import {
+  CONCIERGE_FEE_ENABLED,
+  CONCIERGE_META_DESCRIPTION,
+  CONCIERGE_PRICE_LABEL,
+} from '@/lib/concierge';
 
 export const metadata: Metadata = {
   title: { absolute: 'Plan My Trip, VacationPro Concierge' },
-  description:
-    'Hire a travel advisor to plan a custom vacation for $99, research and advisor time included.',
+  description: CONCIERGE_META_DESCRIPTION,
   alternates: { canonical: '/concierge-planning' },
   robots: { index: false, follow: true },
 };
@@ -52,13 +56,17 @@ export default function ConciergePlanningPage() {
               Plan it for me
             </h2>
             <div className="flex items-baseline gap-2 mb-4">
-              <span className="text-4xl font-extrabold text-brand-600">$99</span>
-              <span className="text-sm text-gray-500">research + advisor time</span>
+              <span className="text-4xl font-extrabold text-brand-600">{CONCIERGE_PRICE_LABEL}</span>
+              <span className="text-sm text-gray-500">
+                {CONCIERGE_FEE_ENABLED ? 'research + advisor time' : 'for a limited time'}
+              </span>
             </div>
             <p className="text-gray-600 mb-6 leading-relaxed">
               Tell me your dream trip. I find the resort, compare flights, and build a full
-              itinerary with rooms, dining, and excursions. The $99 fee covers the research and
-              your travel advisor&apos;s time building the plan.
+              itinerary with rooms, dining, and excursions.{' '}
+              {CONCIERGE_FEE_ENABLED
+                ? `The ${CONCIERGE_PRICE_LABEL} fee covers the research and your travel advisor's time building the plan.`
+                : 'Research and your travel advisor’s time are included, no planning fee while I open up spots.'}
             </p>
 
             <div className="mb-6">
@@ -97,7 +105,7 @@ export default function ConciergePlanningPage() {
               href="#plan-my-trip"
               className="mt-auto block w-full text-center bg-brand-500 hover:bg-brand-600 text-white font-bold py-4 px-6 rounded-xl transition-colors"
             >
-              Start Planning ($99)
+              {CONCIERGE_FEE_ENABLED ? `Start Planning (${CONCIERGE_PRICE_LABEL})` : 'Start planning, free'}
             </a>
           </div>
         </div>
@@ -128,8 +136,10 @@ export default function ConciergePlanningPage() {
               <div className="text-xs text-gray-600 uppercase tracking-wide">Real travel advisor</div>
             </div>
             <div>
-              <div className="text-2xl font-extrabold text-brand-600">$99</div>
-              <div className="text-xs text-gray-600 uppercase tracking-wide">Research + advisor time</div>
+              <div className="text-2xl font-extrabold text-brand-600">{CONCIERGE_PRICE_LABEL}</div>
+              <div className="text-xs text-gray-600 uppercase tracking-wide">
+                {CONCIERGE_FEE_ENABLED ? 'Research + advisor time' : 'No planning fee right now'}
+              </div>
             </div>
           </div>
 

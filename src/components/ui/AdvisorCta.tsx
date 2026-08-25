@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { CONCIERGE_CTA_NOTE } from '@/lib/concierge';
 
 interface AdvisorCtaProps {
   /** Destination name for a personalized headline, e.g. "Aruba". */
@@ -34,7 +35,7 @@ export default function AdvisorCta({ destination, source, className = '' }: Advi
       >
         Get my agent rate
       </Link>
-      <p className="text-xs text-gray-500 mt-3">Starts with a $99 planning fee. Proposal within 24 hours.</p>
+      <p className="text-xs text-gray-500 mt-3">{CONCIERGE_CTA_NOTE}</p>
     </div>
   );
 }

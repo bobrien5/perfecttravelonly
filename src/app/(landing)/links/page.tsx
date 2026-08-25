@@ -6,12 +6,12 @@ import NewsletterSignup from '@/components/ui/NewsletterSignup';
 export const metadata: Metadata = {
   title: 'VacationPro · Start Here',
   description:
-    'Exclusive vacation guides, the $99 concierge trip planning service, and the best all-inclusive deals from VacationPro.',
+    'Exclusive vacation guides, free concierge trip planning for a limited time, and the best all-inclusive deals from VacationPro.',
   alternates: { canonical: '/links' },
   openGraph: {
     title: 'VacationPro · Start Here',
     description:
-      'Exclusive guides, $99 concierge planning, and the best all-inclusive deals.',
+      'Exclusive guides, free concierge planning, and the best all-inclusive deals.',
     images: [{ url: '/og-default.png', width: 1200, height: 630 }],
   },
   robots: { index: true, follow: true },
@@ -156,7 +156,7 @@ export default function LinksPage() {
             href={`/concierge-planning?${utm('concierge')}`}
             emoji="🧳"
             title="Concierge Trip Planning"
-            subtitle="$99. Real research, real flights, real advisor time."
+            subtitle="Free for a limited time. Real research, real flights, real advisor time."
             badge="Most popular"
             badgeTone="amber"
           />

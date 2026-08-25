@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { trackLead } from '@/lib/meta-pixel';
+import { CONCIERGE_FEE, CONCIERGE_FEE_ENABLED } from '@/lib/concierge';
 
 // ─── Dropdown / Checkbox Options ─────────────────────────────
 
@@ -287,7 +288,7 @@ export default function ConciergePlanningForm({ defaultDestination, sourceLabel 
       trackLead({
         content_name: 'Concierge Planning',
         content_category: formData.destination,
-        value: 99,
+        value: CONCIERGE_FEE ?? 0,
         currency: 'USD',
       });
     } catch (err) {
@@ -328,6 +329,35 @@ export default function ConciergePlanningForm({ defaultDestination, sourceLabel 
         );
         setCheckoutLoading(false);
       }
+    }
+
+    if (!CONCIERGE_FEE_ENABLED) {
+      return (
+        <div className="py-4">
+          <div className="text-center">
+            <div className="w-14 h-14 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-4">
+              <svg
+                className="w-7 h-7 text-success"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2.5}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">You&apos;re in. I&apos;ll take it from here.</h3>
+            <p className="text-sm text-gray-600 leading-relaxed max-w-sm mx-auto">
+              I will reach out within 24 hours to confirm the details and schedule a quick discovery
+              call (30 minutes by Zoom or phone). Then I build your proposal: resort, flights, and a
+              full itinerary. No planning fee while I open up spots.
+            </p>
+            <p className="text-xs text-gray-400 mt-4">
+              Check your inbox for a confirmation from VacationPro.
+            </p>
+          </div>
+        </div>
+      );
     }
 
     return (
@@ -681,8 +711,10 @@ export default function ConciergePlanningForm({ defaultDestination, sourceLabel 
             </svg>
             Submitting...
           </>
+        ) : CONCIERGE_FEE_ENABLED ? (
+          `Continue to $${CONCIERGE_FEE} Payment`
         ) : (
-          'Continue to $99 Payment'
+          'Get my free trip plan'
         )}
       </button>
 
