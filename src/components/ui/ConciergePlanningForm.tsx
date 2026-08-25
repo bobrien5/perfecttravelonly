@@ -14,7 +14,7 @@ const DESTINATION_OPTIONS = [
   'St. Lucia',
   'Turks & Caicos',
   'Hawaii',
-  'Caribbean — I\'m flexible',
+  'Caribbean (I\'m flexible)',
   'Other / Surprise me',
 ];
 
@@ -89,6 +89,27 @@ interface FormData {
 }
 
 type FormErrors = Partial<Record<keyof FormData, string>>;
+
+// DOM ids of the inputs, in form order, so validation can scroll to the first problem.
+const FIELD_IDS: Partial<Record<keyof FormData, string>> = {
+  travelDates: 'cp-travelDates',
+  adults: 'cp-adults',
+  destination: 'cp-destination',
+  tripType: 'cp-tripType',
+  budgetPerPerson: 'cp-budget',
+  priorities: 'cp-priorities',
+  firstName: 'cp-firstName',
+  lastName: 'cp-lastName',
+  email: 'cp-email',
+  phone: 'cp-phone',
+};
+
+export function firstErrorFieldId(errs: FormErrors): string | null {
+  for (const key of Object.keys(FIELD_IDS) as (keyof FormData)[]) {
+    if (errs[key]) return FIELD_IDS[key] ?? null;
+  }
+  return null;
+}
 
 const initialFormData: FormData = {
   travelDates: '',
@@ -207,8 +228,22 @@ export default function ConciergePlanningForm({ defaultDestination, sourceLabel 
     e.preventDefault();
 
     const validationErrors = validate();
-    if (Object.keys(validationErrors).length > 0) {
+    const errorCount = Object.keys(validationErrors).length;
+    if (errorCount > 0) {
       setErrors(validationErrors);
+      setServerError(
+        errorCount === 1
+          ? 'One field above needs attention before you can continue.'
+          : `${errorCount} fields above need attention before you can continue.`
+      );
+      const targetId = firstErrorFieldId(validationErrors);
+      const target = targetId ? document.getElementById(targetId) : null;
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (target instanceof HTMLElement && typeof target.focus === 'function') {
+          target.focus({ preventScroll: true });
+        }
+      }
       return;
     }
 
@@ -480,7 +515,7 @@ export default function ConciergePlanningForm({ defaultDestination, sourceLabel 
             </span>
           )}
         </p>
-        <div className="flex flex-wrap gap-2">
+        <div id="cp-priorities" tabIndex={-1} className="flex flex-wrap gap-2 outline-none">
           {PRIORITY_OPTIONS.map((priority) => {
             const selected = formData.priorities.includes(priority);
             const atMax = formData.priorities.length >= MAX_PRIORITIES && !selected;

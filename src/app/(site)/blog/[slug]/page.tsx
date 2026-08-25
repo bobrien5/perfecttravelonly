@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import Link from 'next/link';
+import AdvisorCta from '@/components/ui/AdvisorCta';
 import {
   getBlogPostBySlug,
   getAllBlogPostParams,
@@ -232,22 +232,7 @@ export default async function BlogPostPage({ params }: Props) {
 
           {/* Share / CTA */}
           <div className="mt-14 pt-8 border-t border-gray-200">
-            <div className="bg-brand-50 rounded-2xl p-8 text-center">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Booking a group, or want a rate you will not find on Expedia?
-              </h3>
-              <p className="text-gray-600 mb-4">
-                I book as a travel advisor with access to agent-only pricing,
-                resort credits, and group perks. Tell me your dates and I will
-                price it against whatever you just saw.
-              </p>
-              <Link
-                href="/concierge-planning"
-                className="inline-block px-6 py-3 bg-brand-600 text-white font-semibold rounded-lg hover:bg-brand-700 transition-colors"
-              >
-                Get my agent rate
-              </Link>
-            </div>
+            <AdvisorCta source="blog" />
           </div>
         </div>
       </article>

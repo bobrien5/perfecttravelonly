@@ -7,6 +7,7 @@ import NewsletterSignup from '@/components/ui/NewsletterSignup';
 import AffiliateDisclosure from '@/components/ui/AffiliateDisclosure';
 import BlogCard from '@/components/ui/BlogCard';
 import Stay22Scripts from '@/components/monetization/Stay22Scripts';
+import AdvisorCta from '@/components/ui/AdvisorCta';
 import {
   getDestinationBySlug,
   getAllDestinations,
@@ -95,6 +96,11 @@ export default async function DestinationPage({ params }: Props) {
           </div>
         </div>
       )}
+
+      {/* Book it with me (advisor commission path) */}
+      <div className="mt-16">
+        <AdvisorCta destination={destination.name} source="destination" />
+      </div>
 
       {/* Other Destinations */}
       <div className="mt-16">
