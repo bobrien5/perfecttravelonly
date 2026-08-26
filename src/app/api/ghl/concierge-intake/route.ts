@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { contacts, opportunities, GHLError } from '@/lib/ghl';
+import { CONCIERGE_FEE_ENABLED } from '@/lib/concierge';
 
 // ─── GHL Pipeline & Stage IDs ────────────────────────────────
 const PIPELINE_ID = 'p9PU7opJfYkgYvL8mHhU';
@@ -132,7 +133,7 @@ export async function POST(request: NextRequest) {
     // Build tags
     const sourceSlug = body.source ? toSourceSlug(body.source) : 'unknown';
     const tags = [
-      'concierge-pending-payment',
+      CONCIERGE_FEE_ENABLED ? 'concierge-pending-payment' : 'concierge-free-intake',
       'concierge-vip',
       'vacationpro',
       `concierge-source-${sourceSlug}`,
