@@ -22,6 +22,13 @@ const KNOWN_TOTAL_STEPS = 4;
 export default function QuizWizard() {
   const [state, dispatch] = useReducer(quizReducer, { step: 0, answers: initialAnswers() });
   const isFirstRender = useRef(true);
+  // Steps whose quiz_step event has already fired this session, so mount
+  // (step 0) and the post-HYDRATE re-render onto a restored step don't
+  // double-fire the same step's event.
+  const firedStepsRef = useRef<Set<number>>(new Set());
+  // quiz_complete should fire once per session, not re-fire when a user
+  // backs off the matches screen (step 9) and returns to it.
+  const firedCompleteRef = useRef(false);
 
   // Hydrate from localStorage after mount only, so the client's first render
   // matches the server-rendered Welcome screen (no hydration mismatch), then
@@ -49,12 +56,15 @@ export default function QuizWizard() {
   const showProgress = step !== 0 && step !== 9;
 
   useEffect(() => {
+    if (firedStepsRef.current.has(step)) return;
+    firedStepsRef.current.add(step);
     track('quiz_step', { step, path: answers.path });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step]);
 
   useEffect(() => {
-    if (!isKnown && step === 9) {
+    if (!isKnown && step === 9 && !firedCompleteRef.current) {
+      firedCompleteRef.current = true;
       track('quiz_complete');
     }
   }, [step, isKnown]);

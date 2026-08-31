@@ -1,5 +1,7 @@
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+export const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+const MAX_TOP_MATCHES = 16;
+const MAX_EMAIL_LENGTH = 254;
 
 export interface SessionPayload {
   sessionId: string;
@@ -31,6 +33,10 @@ export function validateSessionPayload(body: unknown): ValidationResult {
     return { ok: false, error: 'topMatches must be an array.' };
   }
 
+  if (topMatches.length > MAX_TOP_MATCHES) {
+    return { ok: false, error: `topMatches must have at most ${MAX_TOP_MATCHES} entries.` };
+  }
+
   for (const match of topMatches) {
     if (
       typeof match !== 'object' ||
@@ -42,8 +48,13 @@ export function validateSessionPayload(body: unknown): ValidationResult {
     }
   }
 
-  if (email !== undefined && (typeof email !== 'string' || !EMAIL_RE.test(email))) {
-    return { ok: false, error: 'email must be a valid email address.' };
+  if (email !== undefined) {
+    if (typeof email !== 'string' || !EMAIL_RE.test(email)) {
+      return { ok: false, error: 'email must be a valid email address.' };
+    }
+    if (email.length > MAX_EMAIL_LENGTH) {
+      return { ok: false, error: `email must be at most ${MAX_EMAIL_LENGTH} characters.` };
+    }
   }
 
   return { ok: true };

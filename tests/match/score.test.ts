@@ -43,4 +43,15 @@ describe('scoreDestination', () => {
       if (m) { expect(m.pct).toBeGreaterThanOrEqual(40); expect(m.pct).toBeLessThanOrEqual(99); }
     }
   });
+  it('de-duplicates reason text so a family selecting kids/kidsclub/waterpark gets one bullet, not three', () => {
+    const family: QuizAnswers = {
+      ...base,
+      party: 'family',
+      vibes: ['kids', 'kidsclub', 'waterpark'],
+    };
+    const m = scoreDestination(family, puntaCana, NOW);
+    expect(m).not.toBeNull();
+    const texts = m!.reasons.map((r) => r.text);
+    expect(new Set(texts).size).toBe(texts.length);
+  });
 });

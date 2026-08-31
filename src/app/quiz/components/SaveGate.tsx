@@ -1,20 +1,22 @@
 import { FormEvent, useState } from 'react';
 import { track } from '@vercel/analytics';
 import { trackLead } from '@/lib/meta-pixel';
-
-const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+import { EMAIL_RE } from '@/app/api/quiz-session/validate';
 
 interface SaveGateProps {
   onClose: () => void;
-  onSubmit: (email: string) => void;
+  onSubmit: (email: string) => Promise<boolean>;
 }
+
+const SUBMIT_ERROR = 'Something went wrong. Try again.';
 
 export default function SaveGate({ onClose, onSubmit }: SaveGateProps) {
   const [email, setEmail] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     const trimmed = email.trim();
 
@@ -24,10 +26,18 @@ export default function SaveGate({ onClose, onSubmit }: SaveGateProps) {
     }
 
     setError(null);
+    setSubmitting(true);
     track('quiz_save', { hasEmail: true });
     trackLead({ content_name: 'Quiz Save Matches' });
-    onSubmit(trimmed);
-    setSaved(true);
+
+    const ok = await onSubmit(trimmed);
+
+    setSubmitting(false);
+    if (ok) {
+      setSaved(true);
+    } else {
+      setError(SUBMIT_ERROR);
+    }
   }
 
   return (
@@ -50,7 +60,7 @@ export default function SaveGate({ onClose, onSubmit }: SaveGateProps) {
 
         {saved ? (
           <div className="text-center py-6">
-            <p className="text-lg font-extrabold text-gray-900 mb-2">Saved. We&apos;ll email you a link to your matches.</p>
+            <p className="text-lg font-extrabold text-gray-900 mb-2">Saved. We&apos;ll be in touch with your matches.</p>
           </div>
         ) : (
           <>
@@ -70,9 +80,10 @@ export default function SaveGate({ onClose, onSubmit }: SaveGateProps) {
               {error && <p className="text-sm text-red-600 mb-2">{error}</p>}
               <button
                 type="submit"
-                className="bg-brand-500 hover:bg-brand-600 text-white rounded-xl py-3.5 font-bold w-full mb-3"
+                disabled={submitting}
+                className="bg-brand-500 hover:bg-brand-600 disabled:opacity-50 text-white rounded-xl py-3.5 font-bold w-full mb-3"
               >
-                Save my matches
+                {submitting ? 'Saving...' : 'Save my matches'}
               </button>
             </form>
 

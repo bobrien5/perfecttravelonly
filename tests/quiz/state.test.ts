@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { quizReducer, initialAnswers, QuizState } from '@/lib/quiz/state';
+import { describe, it, expect, afterEach } from 'vitest';
+import { quizReducer, initialAnswers, loadQuiz, QuizState } from '@/lib/quiz/state';
 
 const s0: QuizState = { step: 1, answers: initialAnswers() };
 
@@ -86,5 +86,53 @@ describe('quizReducer', () => {
       s = quizReducer(s, { type: 'NEXT' }); // budget -> 5 vibes, proving NEXT advances past the known-path cap of 4
       expect(s.step).toBe(5);
     });
+  });
+});
+
+describe('loadQuiz', () => {
+  const STORAGE_KEY = 'vacationpro.quiz.v1';
+
+  function withStoredValue(raw: string | null): QuizState | null {
+    const store = new Map<string, string>();
+    if (raw !== null) store.set(STORAGE_KEY, raw);
+
+    const fakeLocalStorage = {
+      getItem: (key: string) => store.get(key) ?? null,
+      setItem: (key: string, value: string) => { store.set(key, value); },
+    };
+
+    // node test environment has no `window`; stub just enough for loadQuiz.
+    (globalThis as unknown as { window: unknown }).window = { localStorage: fakeLocalStorage };
+    try {
+      return loadQuiz();
+    } finally {
+      delete (globalThis as unknown as { window?: unknown }).window;
+    }
+  }
+
+  afterEach(() => {
+    delete (globalThis as unknown as { window?: unknown }).window;
+  });
+
+  it('returns null when nothing is stored', () => {
+    expect(withStoredValue(null)).toBeNull();
+  });
+
+  it('returns null for malformed JSON', () => {
+    expect(withStoredValue('not json{{{')).toBeNull();
+  });
+
+  it('returns null when the shape does not match QuizState (missing arrays, bad step)', () => {
+    expect(withStoredValue(JSON.stringify({ step: 1, answers: { vibes: [], styles: [] } }))).toBeNull(); // missing dealbreakers
+    expect(withStoredValue(JSON.stringify({ step: 'oops', answers: { vibes: [], styles: [], dealbreakers: [] } }))).toBeNull();
+    expect(withStoredValue(JSON.stringify({ step: 999, answers: { vibes: [], styles: [], dealbreakers: [] } }))).toBeNull();
+    expect(withStoredValue(JSON.stringify({ step: 1, answers: null }))).toBeNull();
+    expect(withStoredValue('null')).toBeNull();
+    expect(withStoredValue('"a string"')).toBeNull();
+  });
+
+  it('returns the parsed state for a well-formed value', () => {
+    const valid: QuizState = { step: 2, answers: initialAnswers() };
+    expect(withStoredValue(JSON.stringify(valid))).toEqual(valid);
   });
 });

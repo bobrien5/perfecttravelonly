@@ -4,7 +4,7 @@ import { QuizAnswers } from '@/lib/match/types';
 import { rankMatches } from '@/lib/match/score';
 import MatchCard from '../components/MatchCard';
 import SaveGate from '../components/SaveGate';
-import { getSessionId } from '../lib/session';
+import { getSessionId, postSession } from '../lib/session';
 
 interface MatchesProps {
   answers: QuizAnswers;
@@ -86,16 +86,6 @@ export default function Matches({ dispatch, answers }: MatchesProps) {
   return <MatchReveal matches={matches} answers={answers} />;
 }
 
-function postSession(payload: { sessionId: string; answers: QuizAnswers; topMatches: { slug: string; pct: number }[]; email?: string }) {
-  fetch('/api/quiz-session', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  }).catch((err) => {
-    console.error('quiz-session post failed:', err);
-  });
-}
-
 function MatchReveal({
   matches,
   answers,
@@ -117,12 +107,12 @@ function MatchReveal({
   useEffect(() => {
     if (firedRef.current) return;
     firedRef.current = true;
-    postSession({ sessionId: getSessionId(), answers, topMatches });
+    void postSession({ sessionId: getSessionId(), answers, topMatches });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function handleSaveEmail(email: string) {
-    postSession({ sessionId: getSessionId(), answers, topMatches, email });
+  function handleSaveEmail(email: string): Promise<boolean> {
+    return postSession({ sessionId: getSessionId(), answers, topMatches, email });
   }
 
   return (

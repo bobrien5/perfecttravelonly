@@ -199,12 +199,43 @@ export function saveQuiz(state: QuizState): void {
   }
 }
 
+const MIN_STEP = 0;
+const MAX_STEP = DISCOVER_PATH_MAX_STEP;
+
+/**
+ * Cheap shape guard for JSON parsed out of localStorage: not a full schema
+ * validation, just enough to keep a corrupted/foreign value from being cast
+ * straight into QuizState and blowing up the reducer or the UI downstream.
+ */
+function isValidQuizState(value: unknown): value is QuizState {
+  if (typeof value !== 'object' || value === null) return false;
+
+  const state = value as Record<string, unknown>;
+
+  if (typeof state.step !== 'number' || state.step < MIN_STEP || state.step > MAX_STEP) {
+    return false;
+  }
+
+  const answers = state.answers;
+  if (typeof answers !== 'object' || answers === null || Array.isArray(answers)) {
+    return false;
+  }
+
+  const a = answers as Record<string, unknown>;
+  if (!Array.isArray(a.vibes) || !Array.isArray(a.styles) || !Array.isArray(a.dealbreakers)) {
+    return false;
+  }
+
+  return true;
+}
+
 export function loadQuiz(): QuizState | null {
   if (typeof window === 'undefined') return null;
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
-    return JSON.parse(raw) as QuizState;
+    const parsed: unknown = JSON.parse(raw);
+    return isValidQuizState(parsed) ? parsed : null;
   } catch {
     return null;
   }

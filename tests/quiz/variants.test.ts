@@ -1,5 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { vibeTilesFor, dealbreakersFor, stylesFor } from '@/lib/quiz/variants';
+import { vibeTilesFor, dealbreakersFor, stylesFor, travelerLabel } from '@/lib/quiz/variants';
+import { QuizAnswers } from '@/lib/match/types';
+
+const baseAnswers: QuizAnswers = {
+  path: 'discover', party: 'couple', origin: null, dates: null, budget: null,
+  vibes: [], styles: [], dealbreakers: [], pace: 50, exploration: 50,
+};
 
 describe('variants', () => {
   it('family tiles swap romantic and nightlife for kid tiles', () => {
@@ -36,5 +42,12 @@ describe('variants', () => {
   it('family styles hide adultsonly, honeymoon hides familyresort', () => {
     expect(stylesFor('family').map(s => s.style)).not.toContain('adultsonly');
     expect(stylesFor('honeymoon').map(s => s.style)).not.toContain('familyresort');
+  });
+  it('travelerLabel prefixes "Total trip budget for" for a headcount party', () => {
+    expect(travelerLabel({ ...baseAnswers, party: 'couple' })).toBe('Total trip budget for 2 travelers · 5 nights');
+  });
+  it('travelerLabel uses "Total trip budget per person" (no "for") for friends/celebration', () => {
+    expect(travelerLabel({ ...baseAnswers, party: 'friends' })).toBe('Total trip budget per person · 5 nights');
+    expect(travelerLabel({ ...baseAnswers, party: 'celebration' })).toBe('Total trip budget per person · 5 nights');
   });
 });

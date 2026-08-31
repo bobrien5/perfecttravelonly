@@ -2,10 +2,17 @@ import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase/client';
 import { validateSessionPayload, SessionPayload } from './validate';
 
+const MAX_BODY_BYTES = 10 * 1024; // 10KB
+
 export async function POST(req: NextRequest) {
+  const raw = await req.text();
+  if (new TextEncoder().encode(raw).length > MAX_BODY_BYTES) {
+    return NextResponse.json({ ok: false, error: 'Request body too large.' }, { status: 400 });
+  }
+
   let body: unknown;
   try {
-    body = await req.json();
+    body = JSON.parse(raw);
   } catch {
     return NextResponse.json({ ok: false, error: 'Invalid request body.' }, { status: 400 });
   }

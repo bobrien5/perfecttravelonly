@@ -6,7 +6,7 @@ import { vibeTilesFor } from '@/lib/quiz/variants';
 import { DESTINATION_PROFILES } from '@/lib/match/destinations';
 import OptionCard from '../components/OptionCard';
 import SaveGate from '../components/SaveGate';
-import { getSessionId } from '../lib/session';
+import { getSessionId, postSession } from '../lib/session';
 
 interface VibesProps {
   answers: QuizAnswers;
@@ -14,16 +14,6 @@ interface VibesProps {
 }
 
 const MAX_VIBES = 5;
-
-function postSession(payload: { sessionId: string; answers: QuizAnswers; topMatches: { slug: string; pct: number }[]; email?: string }) {
-  fetch('/api/quiz-session', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  }).catch((err) => {
-    console.error('quiz-session post failed:', err);
-  });
-}
 
 export default function Vibes({ answers, dispatch }: VibesProps) {
   const tiles = vibeTilesFor(answers.party ?? 'couple');
@@ -47,7 +37,7 @@ export default function Vibes({ answers, dispatch }: VibesProps) {
     if (!firedRef.current) {
       firedRef.current = true;
       track('quiz_complete');
-      postSession({
+      void postSession({
         sessionId: getSessionId(),
         answers,
         topMatches: destination ? [{ slug: destination.slug, pct: 100 }] : [],
@@ -55,8 +45,8 @@ export default function Vibes({ answers, dispatch }: VibesProps) {
     }
   }
 
-  function handleSaveEmail(email: string) {
-    postSession({
+  function handleSaveEmail(email: string): Promise<boolean> {
+    return postSession({
       sessionId: getSessionId(),
       answers,
       topMatches: destination ? [{ slug: destination.slug, pct: 100 }] : [],

@@ -172,9 +172,14 @@ export function travelerLabel(answers: QuizAnswers): string {
     const total = 2 + kidsCount;
     travelers = `${total} travelers`;
   } else {
-    // friends, celebration
+    // friends, celebration (or party still null pre-selection)
     travelers = 'per person';
   }
 
-  return `${travelers} · ${nights} nights`;
+  // "for per person" reads oddly, so the per-person variant drops "for":
+  // "Total trip budget per person · 5 nights" vs.
+  // "Total trip budget for 2 travelers · 5 nights".
+  const prefix = travelers === 'per person' ? 'Total trip budget' : 'Total trip budget for';
+
+  return `${prefix} ${travelers} · ${nights} nights`;
 }

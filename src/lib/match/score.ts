@@ -254,7 +254,20 @@ export function scoreDestination(
 
   const pct = Math.max(40, Math.min(99, Math.round(score)));
 
-  const reasons = scoredReasons
+  // Several vibes (kids/kidsclub/waterpark, etc.) map to the same human-readable
+  // label. Keep only the highest-contribution instance of each text before the
+  // top-5 cap, so a family who picks all three "kids" vibes doesn't burn the
+  // whole reason budget on one repeated bullet (and doesn't collide React keys
+  // downstream, since reason text is used as the list key).
+  const bestByText = new Map<string, ScoredReason>();
+  for (const r of scoredReasons) {
+    const existing = bestByText.get(r.text);
+    if (!existing || r.points > existing.points) {
+      bestByText.set(r.text, r);
+    }
+  }
+
+  const reasons = Array.from(bestByText.values())
     .sort((a, b) => b.points - a.points)
     .slice(0, 5)
     .map(({ text, source }) => ({ text, source }));
@@ -262,10 +275,33 @@ export function scoreDestination(
   return { profile, pct, reasons };
 }
 
+/**
+ * Deterministic sort order for ranked matches: pct desc, then exact
+ * budget-band fit first, then more best months (bestMonths.length desc),
+ * then slug asc for stability. Deliberately does NOT add synthetic reasons;
+ * the fewer-than-3-reasons rule for `reasons` is unaffected by ranking order.
+ * Exported (rather than kept inline in rankMatches) so the tie-break rules
+ * can be unit tested against fabricated Match objects, independent of the
+ * live DESTINATION_PROFILES dataset.
+ */
+export function compareMatches(a: Match, b: Match, answers: QuizAnswers): number {
+  if (b.pct !== a.pct) return b.pct - a.pct;
+
+  const aExactBudget = answers.budget ? a.profile.budgetBands.includes(answers.budget.band) : false;
+  const bExactBudget = answers.budget ? b.profile.budgetBands.includes(answers.budget.band) : false;
+  if (aExactBudget !== bExactBudget) return aExactBudget ? -1 : 1;
+
+  if (b.profile.bestMonths.length !== a.profile.bestMonths.length) {
+    return b.profile.bestMonths.length - a.profile.bestMonths.length;
+  }
+
+  return a.profile.slug.localeCompare(b.profile.slug);
+}
+
 export function rankMatches(answers: QuizAnswers, now: Date = new Date()): Match[] {
   return DESTINATION_PROFILES
     .map((p) => scoreDestination(answers, p, now))
     .filter((m): m is Match => m !== null)
-    .sort((a, b) => b.pct - a.pct)
+    .sort((a, b) => compareMatches(a, b, answers))
     .slice(0, 8);
 }

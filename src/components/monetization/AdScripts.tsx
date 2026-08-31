@@ -11,7 +11,7 @@ import { usePathname } from 'next/navigation';
  * far more in lost bookings than it earns in RPM. Add any future checkout or
  * quote route to AD_FREE_PREFIXES.
  */
-export const AD_FREE_PREFIXES = ['/concierge-planning', '/quote', '/links', '/studio', '/admin'];
+export const AD_FREE_PREFIXES = ['/concierge-planning', '/quote', '/links', '/studio', '/admin', '/quiz'];
 
 export function isAdFreePath(pathname: string | null): boolean {
   if (!pathname) return false;
