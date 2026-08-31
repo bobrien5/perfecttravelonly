@@ -38,7 +38,7 @@ export default function Dates({ answers, dispatch }: DatesProps) {
 
   return (
     <div>
-      <h1 className="text-2xl font-extrabold text-gray-900 mb-6 text-center">When do you want to go?</h1>
+      <h1 className="text-2xl font-extrabold text-gray-900 mb-6 text-center">When are you thinking?</h1>
 
       <div className="grid grid-cols-2 gap-3 mb-6">
         <OptionCard

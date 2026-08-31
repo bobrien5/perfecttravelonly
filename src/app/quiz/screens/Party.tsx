@@ -1,4 +1,4 @@
-import { Dispatch, useState } from 'react';
+import { Dispatch } from 'react';
 import { QuizAction } from '@/lib/quiz/state';
 import { Party as PartyType, QuizAnswers } from '@/lib/match/types';
 import OptionCard from '../components/OptionCard';
@@ -33,8 +33,6 @@ const KIDS_AGE_OPTIONS: { age: 'under5' | '5-12' | 'teens'; label: string }[] = 
 const OCCASION_OPTIONS = ['Birthday', 'Anniversary', 'Bachelorette', 'Girls trip', 'Guys trip', 'Reunion'];
 
 export default function Party({ answers, dispatch }: PartyProps) {
-  const [occasion, setOccasion] = useState<string | null>(null);
-
   const needsExtraStep = answers.party === 'family' || answers.party === 'celebration';
 
   function selectParty(party: PartyType) {
@@ -52,7 +50,7 @@ export default function Party({ answers, dispatch }: PartyProps) {
 
   return (
     <div>
-      <h1 className="text-2xl font-extrabold text-gray-900 mb-6 text-center">Who&apos;s traveling?</h1>
+      <h1 className="text-2xl font-extrabold text-gray-900 mb-6 text-center">Who&apos;s coming along?</h1>
 
       <div className="grid grid-cols-2 gap-3">
         {PARTY_OPTIONS.map((opt) => (
@@ -102,8 +100,8 @@ export default function Party({ answers, dispatch }: PartyProps) {
               <Chip
                 key={label}
                 label={label}
-                selected={occasion === label}
-                onClick={() => setOccasion(label)}
+                selected={answers.occasion === label}
+                onClick={() => dispatch({ type: 'SET_OCCASION', occasion: label })}
               />
             ))}
           </div>

@@ -19,7 +19,9 @@ export type QuizAction =
   | { type: 'SET_SLIDERS'; pace: number; exploration: number }
   | { type: 'NEXT' }
   | { type: 'BACK' }
-  | { type: 'SET_PATH'; path: 'discover' | 'known'; destinationSlug?: string };
+  | { type: 'SET_PATH'; path: 'discover' | 'known'; destinationSlug?: string }
+  | { type: 'SET_OCCASION'; occasion?: string }
+  | { type: 'HYDRATE'; state: QuizState };
 
 const MAX_VIBES = 5;
 const STORAGE_KEY = 'vacationpro.quiz.v1';
@@ -148,6 +150,12 @@ export function quizReducer(state: QuizState, action: QuizAction): QuizState {
         ...state,
         answers: { ...answers, path: action.path, destinationSlug: action.destinationSlug },
       };
+
+    case 'SET_OCCASION':
+      return { ...state, answers: { ...answers, occasion: action.occasion } };
+
+    case 'HYDRATE':
+      return action.state;
 
     default:
       return state;

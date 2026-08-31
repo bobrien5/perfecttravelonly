@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useRef } from 'react';
 import { quizReducer, initialAnswers, saveQuiz, loadQuiz } from '@/lib/quiz/state';
 import ProgressBar from './components/ProgressBar';
 import Welcome from './screens/Welcome';
@@ -12,13 +12,26 @@ import Budget from './screens/Budget';
 const TOTAL_STEPS = 8;
 
 export default function QuizWizard() {
-  const [state, dispatch] = useReducer(
-    quizReducer,
-    undefined,
-    () => loadQuiz() ?? { step: 0, answers: initialAnswers() }
-  );
+  const [state, dispatch] = useReducer(quizReducer, { step: 0, answers: initialAnswers() });
+  const isFirstRender = useRef(true);
+
+  // Hydrate from localStorage after mount only, so the client's first render
+  // matches the server-rendered Welcome screen (no hydration mismatch), then
+  // snaps to the restored step.
+  useEffect(() => {
+    const loaded = loadQuiz();
+    if (loaded) {
+      dispatch({ type: 'HYDRATE', state: loaded });
+    }
+  }, []);
 
   useEffect(() => {
+    // Skip the very first commit: it's the pre-hydration state, and saving it
+    // here would clobber a previously saved mid-quiz state before HYDRATE runs.
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     saveQuiz(state);
   }, [state]);
 

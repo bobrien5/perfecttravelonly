@@ -26,4 +26,16 @@ describe('quizReducer', () => {
     s = quizReducer(s, { type: 'TOGGLE_STYLE', style: 'nopref' });
     expect(s.answers.styles).toEqual(['nopref']);
   });
+  it('HYDRATE replaces step and answers wholesale', () => {
+    const restored: QuizState = {
+      step: 4,
+      answers: { ...initialAnswers(), party: 'family' as const, budget: { band: 3 as const, includesFlights: true } },
+    };
+    const s = quizReducer(s0, { type: 'HYDRATE', state: restored });
+    expect(s).toEqual(restored);
+  });
+  it('SET_OCCASION sets answers.occasion', () => {
+    const s = quizReducer(s0, { type: 'SET_OCCASION', occasion: 'Birthday' });
+    expect(s.answers.occasion).toBe('Birthday');
+  });
 });
