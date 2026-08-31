@@ -1,4 +1,5 @@
-import { DestinationProfile, Match, QuizAnswers } from './types';
+import { BUDGET_BANDS, DestinationProfile, Match, MatchReason, QuizAnswers } from './types';
+import { DESTINATION_PROFILES } from './destinations';
 
 type Dates = QuizAnswers['dates'];
 
@@ -67,6 +68,47 @@ export function targetMonths(dates: Dates, now: Date = new Date()): number[] {
   return [];
 }
 
+const VIBE_LABELS: Record<string, string> = {
+  beach: 'Beautiful beaches',
+  nightlife: 'Plenty of nightlife',
+  food: 'Standout food scene',
+  luxury: 'True luxury resorts',
+  value: 'Strong value for money',
+  snorkeling: 'Great snorkeling',
+  relaxing: 'Easy to fully unwind',
+  romantic: 'Built for a romantic trip',
+  kids: 'Great for kids',
+  kidsclub: 'Great for kids',
+  waterpark: 'Great for kids',
+  explore: 'Lots to explore nearby',
+  nature: 'Beautiful nature',
+  pool: 'Lively pool scene',
+  entertainment: 'Entertainment every night',
+  easytravel: 'Easy to get to and around',
+  seclusion: 'Feels secluded',
+  privatepools: 'Private pool suites',
+  familysuites: 'Rooms that fit the family',
+};
+
+const STYLE_LABELS: Record<string, string> = {
+  allinclusive: 'all-inclusive',
+  luxuryresort: 'luxury resort',
+  boutique: 'boutique hotel',
+  beachfront: 'beachfront',
+  adultsonly: 'adults-only',
+  familyresort: 'family resort',
+  nearnightlife: 'near the nightlife',
+};
+
+const MONTH_NAMES = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December',
+];
+
+interface ScoredReason extends MatchReason {
+  points: number;
+}
+
 function hitsDealbreaker(answers: QuizAnswers, profile: DestinationProfile): boolean {
   for (const db of answers.dealbreakers) {
     switch (db) {
@@ -118,17 +160,32 @@ export function scoreDestination(
   if (hitsDealbreaker(answers, profile)) return null;
 
   let score = 50;
+  const scoredReasons: ScoredReason[] = [];
 
   // Vibes: up to 6 points per selected vibe, scaled by the profile's fit strength (0-3).
   for (const v of answers.vibes) {
-    score += (6 * (profile.vibes[v] ?? 0)) / 3;
+    const weight = profile.vibes[v] ?? 0;
+    const points = (6 * weight) / 3;
+    score += points;
+    if (weight > 0) {
+      const label = VIBE_LABELS[v];
+      if (label) scoredReasons.push({ text: label, source: 'vibes', points });
+    }
   }
 
   // Resort style: +5 per selected style the profile offers. Skip entirely on 'nopref'.
+  let styleHitLogged = false;
   if (!answers.styles.includes('nopref')) {
     for (const s of answers.styles) {
       if (profile.styles.includes(s as DestinationProfile['styles'][number])) {
         score += 5;
+        if (!styleHitLogged) {
+          const label = STYLE_LABELS[s];
+          if (label) {
+            scoredReasons.push({ text: `Strong ${label} options`, source: 'styles', points: 5 });
+            styleHitLogged = true;
+          }
+        }
       }
     }
   }
@@ -138,6 +195,10 @@ export function scoreDestination(
     const band = answers.budget.band;
     if (profile.budgetBands.includes(band)) {
       score += 8;
+      const bandInfo = BUDGET_BANDS.find((b) => b.band === band);
+      if (bandInfo) {
+        scoredReasons.push({ text: `Fits your ${bandInfo.label} budget`, source: 'budget', points: 8 });
+      }
     } else if (profile.budgetBands.some((b) => Math.abs(b - band) === 1)) {
       score += 3;
     } else {
@@ -148,14 +209,35 @@ export function scoreDestination(
   // Season: bonus for landing in the destination's best months, penalty for hurricane months.
   const months = targetMonths(answers.dates, now);
   if (months.length > 0) {
-    if (months.some((m) => profile.bestMonths.includes(m))) score += 6;
+    const bestHits = months.filter((m) => profile.bestMonths.includes(m));
+    if (bestHits.length > 0) {
+      score += 6;
+      let label: string;
+      if (answers.dates && 'season' in answers.dates && answers.dates.season !== 'next3') {
+        label = answers.dates.season.charAt(0).toUpperCase() + answers.dates.season.slice(1);
+      } else {
+        label = MONTH_NAMES[bestHits[0] - 1];
+      }
+      scoredReasons.push({ text: `Great ${label} weather`, source: 'dates', points: 6 });
+    }
     if (months.some((m) => profile.hurricaneMonths.includes(m))) score -= 8;
   }
 
   // Flights: only relevant when an origin airport was given.
   if (answers.origin && answers.origin !== 'flexible') {
-    if (profile.nonstopEastCoast) score += 5;
-    if (profile.typicalFlightHours <= 4) score += 3;
+    let flightPoints = 0;
+    const isNonstop = profile.nonstopEastCoast;
+    if (isNonstop) {
+      score += 5;
+      flightPoints += 5;
+    }
+    if (profile.typicalFlightHours <= 4) {
+      score += 3;
+      flightPoints += 3;
+    }
+    if (isNonstop) {
+      scoredReasons.push({ text: 'Easy flight options', source: 'origin', points: flightPoints });
+    }
   }
 
   // Sliders: pace and exploration nudge the score toward matching vibe strengths.
@@ -172,5 +254,18 @@ export function scoreDestination(
 
   const pct = Math.max(40, Math.min(99, Math.round(score)));
 
-  return { profile, pct, reasons: [] };
+  const reasons = scoredReasons
+    .sort((a, b) => b.points - a.points)
+    .slice(0, 5)
+    .map(({ text, source }) => ({ text, source }));
+
+  return { profile, pct, reasons };
+}
+
+export function rankMatches(answers: QuizAnswers, now: Date = new Date()): Match[] {
+  return DESTINATION_PROFILES
+    .map((p) => scoreDestination(answers, p, now))
+    .filter((m): m is Match => m !== null)
+    .sort((a, b) => b.pct - a.pct)
+    .slice(0, 8);
 }
