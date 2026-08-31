@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { BUDGET_BANDS, ALL_VIBES, ALL_DEALBREAKERS } from '@/lib/match/types';
+import { BUDGET_BANDS, ALL_VIBES, ALL_DEALBREAKERS } from '@vacationpro/engine';
 
 describe('match types', () => {
   it('exposes 5 budget bands with labels', () => {

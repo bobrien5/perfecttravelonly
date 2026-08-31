@@ -1,7 +1,5 @@
 import { Dispatch, useState } from 'react';
-import { QuizAction } from '@/lib/quiz/state';
-import { QuizAnswers, BUDGET_BANDS } from '@/lib/match/types';
-import { travelerLabel } from '@/lib/quiz/variants';
+import { QuizAction, QuizAnswers, BUDGET_BANDS, travelerLabel } from '@vacationpro/engine';
 
 interface BudgetProps {
   answers: QuizAnswers;

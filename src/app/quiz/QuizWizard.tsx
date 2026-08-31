@@ -2,7 +2,7 @@
 
 import { useEffect, useReducer, useRef } from 'react';
 import { track } from '@vercel/analytics';
-import { quizReducer, initialAnswers, saveQuiz, loadQuiz } from '@/lib/quiz/state';
+import { quizReducer, initialAnswers, saveQuiz, loadQuiz } from '@vacationpro/engine';
 import ProgressBar from './components/ProgressBar';
 import Welcome from './screens/Welcome';
 import Destination from './screens/Destination';

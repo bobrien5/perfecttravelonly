@@ -1,6 +1,5 @@
 import { Dispatch, useMemo, useRef, useState } from 'react';
-import { QuizAction } from '@/lib/quiz/state';
-import { QuizAnswers } from '@/lib/match/types';
+import { QuizAction, QuizAnswers } from '@vacationpro/engine';
 
 interface OriginProps {
   answers: QuizAnswers;

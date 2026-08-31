@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { vibeTilesFor, dealbreakersFor, stylesFor, travelerLabel } from '@/lib/quiz/variants';
-import { QuizAnswers } from '@/lib/match/types';
+import { vibeTilesFor, dealbreakersFor, stylesFor, travelerLabel, QuizAnswers } from '@vacationpro/engine';
 
 const baseAnswers: QuizAnswers = {
   path: 'discover', party: 'couple', origin: null, dates: null, budget: null,

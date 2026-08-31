@@ -1,6 +1,5 @@
 import { Dispatch } from 'react';
-import { QuizAction } from '@/lib/quiz/state';
-import { Party as PartyType, QuizAnswers } from '@/lib/match/types';
+import { QuizAction, Party as PartyType, QuizAnswers } from '@vacationpro/engine';
 import OptionCard from '../components/OptionCard';
 import Chip from '../components/Chip';
 

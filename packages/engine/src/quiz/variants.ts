@@ -1,4 +1,4 @@
-import { Dealbreaker, Party, QuizAnswers, ResortStyle, Vibe } from '@/lib/match/types';
+import { Dealbreaker, Party, QuizAnswers, ResortStyle, Vibe } from '../match/types';
 
 export interface VibeTile { vibe: Vibe; emoji: string; label: string; }
 export interface DealbreakerTile { db: Dealbreaker; label: string; }

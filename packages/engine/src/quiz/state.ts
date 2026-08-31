@@ -1,5 +1,5 @@
-import { Dealbreaker, Party, QuizAnswers, ResortStyle, Vibe } from '@/lib/match/types';
-import { dealbreakersFor, stylesFor, vibeTilesFor } from '@/lib/quiz/variants';
+import { Dealbreaker, Party, QuizAnswers, ResortStyle, Vibe } from '../match/types';
+import { dealbreakersFor, stylesFor, vibeTilesFor } from './variants';
 
 export interface QuizState {
   step: number; // 0 = welcome, 1..8 = questions, 9 = matches

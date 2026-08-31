@@ -1,7 +1,5 @@
 import { Dispatch, useEffect, useMemo, useRef, useState } from 'react';
-import { QuizAction } from '@/lib/quiz/state';
-import { QuizAnswers } from '@/lib/match/types';
-import { rankMatches } from '@/lib/match/score';
+import { QuizAction, QuizAnswers, rankMatches } from '@vacationpro/engine';
 import MatchCard from '../components/MatchCard';
 import SaveGate from '../components/SaveGate';
 import { getSessionId, postSession } from '../lib/session';

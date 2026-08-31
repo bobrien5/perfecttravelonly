@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach } from 'vitest';
-import { quizReducer, initialAnswers, loadQuiz, QuizState } from '@/lib/quiz/state';
+import { quizReducer, initialAnswers, loadQuiz, QuizState } from '@vacationpro/engine';
 
 const s0: QuizState = { step: 1, answers: initialAnswers() };
 

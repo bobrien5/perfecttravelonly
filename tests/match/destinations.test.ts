@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { DESTINATION_PROFILES } from '@/lib/match/destinations';
-import { ALL_VIBES } from '@/lib/match/types';
+import { DESTINATION_PROFILES, ALL_VIBES } from '@vacationpro/engine';
 
 describe('destination profiles', () => {
   it('has 25 unique destinations', () => {

@@ -1,7 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { scoreDestination } from '@/lib/match/score';
-import { DESTINATION_PROFILES } from '@/lib/match/destinations';
-import { QuizAnswers } from '@/lib/match/types';
+import { scoreDestination, DESTINATION_PROFILES, QuizAnswers } from '@vacationpro/engine';
 
 const aruba = DESTINATION_PROFILES.find(d => d.slug === 'aruba')!;
 const puntaCana = DESTINATION_PROFILES.find(d => d.slug === 'punta-cana')!;

@@ -1,7 +1,5 @@
 import { Dispatch, useMemo, useState } from 'react';
-import { QuizAction } from '@/lib/quiz/state';
-import { QuizAnswers } from '@/lib/match/types';
-import { DESTINATION_PROFILES } from '@/lib/match/destinations';
+import { QuizAction, QuizAnswers, DESTINATION_PROFILES } from '@vacationpro/engine';
 import OptionCard from '../components/OptionCard';
 
 interface DestinationProps {

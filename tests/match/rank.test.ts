@@ -1,7 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { rankMatches, compareMatches } from '@/lib/match/score';
-import { Match, QuizAnswers } from '@/lib/match/types';
-import { DESTINATION_PROFILES } from '@/lib/match/destinations';
+import { rankMatches, compareMatches, Match, QuizAnswers, DESTINATION_PROFILES } from '@vacationpro/engine';
 
 const answers: QuizAnswers = {
   path: 'discover', party: 'couple', origin: { code: 'BOS', label: 'Boston, MA - BOS' },

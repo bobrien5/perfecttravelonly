@@ -25,6 +25,9 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@vacationpro/engine": [
+        "./packages/engine/src/index.ts"
       ]
     }
   },

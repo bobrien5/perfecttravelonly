@@ -7,6 +7,7 @@ type RedirectRule = Awaited<
 >[number];
 
 const nextConfig: NextConfig = {
+  transpilePackages: ["@vacationpro/engine"],
   // Branded short URLs for our paid guide products (now on Beehiiv, Stripe).
   // 302 (temporary) so the destination can swap again without invalidating
   // any DM links already in the wild. When we reach 5+ guides, migrate this

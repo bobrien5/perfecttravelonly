@@ -1,4 +1,4 @@
-import { Match } from '@/lib/match/types';
+import { Match } from '@vacationpro/engine';
 
 interface MatchCardProps {
   match: Match;

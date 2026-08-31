@@ -1,9 +1,6 @@
 import { Dispatch, useRef, useState } from 'react';
 import { track } from '@vercel/analytics';
-import { QuizAction } from '@/lib/quiz/state';
-import { QuizAnswers } from '@/lib/match/types';
-import { vibeTilesFor } from '@/lib/quiz/variants';
-import { DESTINATION_PROFILES } from '@/lib/match/destinations';
+import { QuizAction, QuizAnswers, vibeTilesFor, DESTINATION_PROFILES } from '@vacationpro/engine';
 import OptionCard from '../components/OptionCard';
 import SaveGate from '../components/SaveGate';
 import { getSessionId, postSession } from '../lib/session';

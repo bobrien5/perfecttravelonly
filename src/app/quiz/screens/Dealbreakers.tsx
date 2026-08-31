@@ -1,7 +1,5 @@
 import { Dispatch } from 'react';
-import { QuizAction } from '@/lib/quiz/state';
-import { QuizAnswers } from '@/lib/match/types';
-import { dealbreakersFor } from '@/lib/quiz/variants';
+import { QuizAction, QuizAnswers, dealbreakersFor } from '@vacationpro/engine';
 import Chip from '../components/Chip';
 
 interface DealbreakersProps {

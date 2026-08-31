@@ -1,4 +1,4 @@
-import { QuizAnswers } from '@/lib/match/types';
+import { QuizAnswers } from '@vacationpro/engine';
 
 const SESSION_STORAGE_KEY = 'vacationpro.quiz.session.v1';
 

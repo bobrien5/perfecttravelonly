@@ -1,6 +1,5 @@
 import { Dispatch, useState } from 'react';
-import { QuizAction } from '@/lib/quiz/state';
-import { QuizAnswers } from '@/lib/match/types';
+import { QuizAction, QuizAnswers } from '@vacationpro/engine';
 
 interface SlidersProps {
   answers: QuizAnswers;

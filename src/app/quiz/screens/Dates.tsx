@@ -1,6 +1,5 @@
 import { Dispatch, useState } from 'react';
-import { QuizAction } from '@/lib/quiz/state';
-import { QuizAnswers, Season } from '@/lib/match/types';
+import { QuizAction, QuizAnswers, Season } from '@vacationpro/engine';
 import OptionCard from '../components/OptionCard';
 import Chip from '../components/Chip';
 
