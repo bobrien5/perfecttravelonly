@@ -168,7 +168,15 @@ export function quizReducer(state: QuizState, action: QuizAction): QuizState {
     case 'SET_PATH':
       return {
         ...state,
-        answers: { ...answers, path: action.path, destinationSlug: action.destinationSlug },
+        answers: {
+          ...answers,
+          path: action.path,
+          // Discover path never carries a chosen destination; always clear it
+          // (even if a stale one lingers from a prior known-path detour) so
+          // NEXT's step cap and isScreenComplete cannot mistake this for the
+          // known-path sequence.
+          destinationSlug: action.path === 'discover' ? undefined : action.destinationSlug,
+        },
       };
 
     case 'SET_OCCASION':

@@ -62,5 +62,29 @@ describe('quizReducer', () => {
       s = quizReducer(s, { type: 'NEXT' }); // caps at 4, no matches phase for known path
       expect(s.step).toBe(4);
     });
+
+    it('backing out of the known path and choosing discover resets path and destinationSlug, and NEXT can advance past step 4', () => {
+      let s: QuizState = { step: 0, answers: initialAnswers() };
+      s = quizReducer(s, { type: 'SET_PATH', path: 'known', destinationSlug: 'aruba' });
+      s = quizReducer(s, { type: 'NEXT' }); // welcome -> step 1 (destination)
+      expect(s.step).toBe(1);
+      s = quizReducer(s, { type: 'BACK' }); // destination -> welcome (path is still stale 'known' here)
+      expect(s.step).toBe(0);
+
+      s = quizReducer(s, { type: 'SET_PATH', path: 'discover' }); // Welcome's "Find My Vacation"
+      expect(s.answers.path).toBe('discover');
+      expect(s.answers.destinationSlug).toBeUndefined();
+
+      s = quizReducer(s, { type: 'NEXT' }); // welcome -> step 1 (party, discover sequence)
+      expect(s.step).toBe(1);
+
+      s = quizReducer(s, { type: 'SET_PARTY', party: 'couple' });
+      s = quizReducer(s, { type: 'NEXT' }); // party -> 2 origin
+      s = quizReducer(s, { type: 'NEXT' }); // origin -> 3 dates
+      s = quizReducer(s, { type: 'NEXT' }); // dates -> 4 budget
+      s = quizReducer(s, { type: 'SET_BUDGET', budget: { band: 3, includesFlights: true } });
+      s = quizReducer(s, { type: 'NEXT' }); // budget -> 5 vibes, proving NEXT advances past the known-path cap of 4
+      expect(s.step).toBe(5);
+    });
   });
 });

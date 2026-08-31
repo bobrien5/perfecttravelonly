@@ -20,7 +20,10 @@ export default function Welcome({ dispatch }: WelcomeProps) {
 
       <button
         type="button"
-        onClick={() => dispatch({ type: 'NEXT' })}
+        onClick={() => {
+          dispatch({ type: 'SET_PATH', path: 'discover' });
+          dispatch({ type: 'NEXT' });
+        }}
         className="bg-brand-500 hover:bg-brand-600 text-white rounded-xl py-3.5 font-bold w-full max-w-xs mx-auto block"
       >
         Find My Vacation
