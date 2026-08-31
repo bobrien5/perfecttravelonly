@@ -8,6 +8,10 @@ import Party from './screens/Party';
 import Origin from './screens/Origin';
 import Dates from './screens/Dates';
 import Budget from './screens/Budget';
+import Vibes from './screens/Vibes';
+import Styles from './screens/Styles';
+import Dealbreakers from './screens/Dealbreakers';
+import Sliders from './screens/Sliders';
 
 const TOTAL_STEPS = 8;
 
@@ -49,7 +53,11 @@ export default function QuizWizard() {
       {step === 2 && <Origin answers={answers} dispatch={dispatch} />}
       {step === 3 && <Dates answers={answers} dispatch={dispatch} />}
       {step === 4 && <Budget answers={answers} dispatch={dispatch} />}
-      {step >= 5 && <div className="text-center text-gray-500 py-16">Continue building...</div>}
+      {step === 5 && <Vibes answers={answers} dispatch={dispatch} />}
+      {step === 6 && <Styles answers={answers} dispatch={dispatch} />}
+      {step === 7 && <Dealbreakers answers={answers} dispatch={dispatch} />}
+      {step === 8 && <Sliders answers={answers} dispatch={dispatch} />}
+      {step === 9 && <div className="text-center text-gray-500 py-16">Continue building...</div>}
     </div>
   );
 }
