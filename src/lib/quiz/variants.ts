@@ -97,12 +97,23 @@ const BASE_DEALBREAKERS: Dealbreaker[] = [
 ];
 
 export function dealbreakersFor(party: Party): DealbreakerTile[] {
-  let order = BASE_DEALBREAKERS;
+  let order: Dealbreaker[] = BASE_DEALBREAKERS;
 
   if (party === 'family') {
-    // Hide "lots of kids" as a dealbreaker for families, and lead with "party resort".
+    // Hide "lots of kids" as a dealbreaker for families; lead with
+    // "party resort" then "long airport transfer".
+    const rest = BASE_DEALBREAKERS.filter(
+      (db) => db !== 'kids' && db !== 'party' && db !== 'longtransfer'
+    );
+    order = ['party', 'longtransfer', ...rest];
+  } else if (party === 'honeymoon') {
+    // Lead with "lots of kids" then "party resort".
     const rest = BASE_DEALBREAKERS.filter((db) => db !== 'kids' && db !== 'party');
-    order = ['party', ...rest];
+    order = ['kids', 'party', ...rest];
+  } else if (party === 'friends' || party === 'celebration') {
+    // Lead with "too quiet".
+    const rest = BASE_DEALBREAKERS.filter((db) => db !== 'tooquiet');
+    order = ['tooquiet', ...rest];
   }
 
   return order.map((db) => ({ db, label: DEALBREAKER_LABELS[db] }));

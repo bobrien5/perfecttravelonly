@@ -13,10 +13,25 @@ describe('variants', () => {
     const vibes = vibeTilesFor('honeymoon').map(t => t.vibe);
     expect(vibes.slice(0, 5)).toEqual(['romantic', 'privatepools', 'beach', 'luxury', 'seclusion']);
   });
-  it('family dealbreakers hide kids and lead with party', () => {
+  it('family dealbreakers hide kids and lead with party, then longtransfer', () => {
     const dbs = dealbreakersFor('family').map(d => d.db);
     expect(dbs).not.toContain('kids');
     expect(dbs[0]).toBe('party');
+    expect(dbs[1]).toBe('longtransfer');
+  });
+  it('honeymoon dealbreakers lead with kids then party', () => {
+    const dbs = dealbreakersFor('honeymoon').map(d => d.db);
+    expect(dbs[0]).toBe('kids');
+    expect(dbs[1]).toBe('party');
+  });
+  it('friends and celebration dealbreakers lead with tooquiet', () => {
+    expect(dealbreakersFor('friends').map(d => d.db)[0]).toBe('tooquiet');
+    expect(dealbreakersFor('celebration').map(d => d.db)[0]).toBe('tooquiet');
+  });
+  it('couple and solo dealbreakers keep default spec order', () => {
+    const defaultOrder = ['tooquiet', 'party', 'kids', 'longtransfer', 'seaweed', 'mega', 'remote', 'connection', 'cruise', 'touristy'];
+    expect(dealbreakersFor('couple').map(d => d.db)).toEqual(defaultOrder);
+    expect(dealbreakersFor('solo').map(d => d.db)).toEqual(defaultOrder);
   });
   it('family styles hide adultsonly, honeymoon hides familyresort', () => {
     expect(stylesFor('family').map(s => s.style)).not.toContain('adultsonly');
