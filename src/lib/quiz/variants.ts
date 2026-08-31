@@ -126,7 +126,7 @@ const STYLE_LABELS: Record<ResortStyle, { emoji: string; label: string }> = {
   beachfront: { emoji: '🌊', label: 'Beachfront' },
   adultsonly: { emoji: '🍸', label: 'Adults-only' },
   familyresort: { emoji: '👨‍👩‍👧‍👦', label: 'Family resort' },
-  nearnightlife: { emoji: '🏙️', label: 'Hotel near restaurants and nightlife' },
+  nearnightlife: { emoji: '🏙️', label: 'Near restaurants and nightlife' },
 };
 
 const BASE_STYLES: ResortStyle[] = [

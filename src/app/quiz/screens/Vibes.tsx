@@ -1,4 +1,5 @@
 import { Dispatch, useRef, useState } from 'react';
+import { track } from '@vercel/analytics';
 import { QuizAction } from '@/lib/quiz/state';
 import { QuizAnswers } from '@/lib/match/types';
 import { vibeTilesFor } from '@/lib/quiz/variants';
@@ -45,6 +46,7 @@ export default function Vibes({ answers, dispatch }: VibesProps) {
     setGateOpen(true);
     if (!firedRef.current) {
       firedRef.current = true;
+      track('quiz_complete');
       postSession({
         sessionId: getSessionId(),
         answers,

@@ -1,4 +1,6 @@
 import { FormEvent, useState } from 'react';
+import { track } from '@vercel/analytics';
+import { trackLead } from '@/lib/meta-pixel';
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
@@ -22,6 +24,8 @@ export default function SaveGate({ onClose, onSubmit }: SaveGateProps) {
     }
 
     setError(null);
+    track('quiz_save', { hasEmail: true });
+    trackLead({ content_name: 'Quiz Save Matches' });
     onSubmit(trimmed);
     setSaved(true);
   }

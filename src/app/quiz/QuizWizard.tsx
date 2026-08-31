@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useReducer, useRef } from 'react';
+import { track } from '@vercel/analytics';
 import { quizReducer, initialAnswers, saveQuiz, loadQuiz } from '@/lib/quiz/state';
 import ProgressBar from './components/ProgressBar';
 import Welcome from './screens/Welcome';
@@ -46,6 +47,17 @@ export default function QuizWizard() {
   const isKnown = answers.path === 'known';
   const totalSteps = isKnown ? KNOWN_TOTAL_STEPS : DISCOVER_TOTAL_STEPS;
   const showProgress = step !== 0 && step !== 9;
+
+  useEffect(() => {
+    track('quiz_step', { step, path: answers.path });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step]);
+
+  useEffect(() => {
+    if (!isKnown && step === 9) {
+      track('quiz_complete');
+    }
+  }, [step, isKnown]);
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">

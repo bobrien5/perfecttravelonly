@@ -12,10 +12,10 @@ interface PartyProps {
 const PARTY_OPTIONS: { party: PartyType; emoji: string; label: string }[] = [
   { party: 'couple', emoji: '💑', label: 'Couple' },
   { party: 'family', emoji: '👨‍👩‍👧‍👦', label: 'Family' },
-  { party: 'friends', emoji: '🎉', label: 'Friends' },
+  { party: 'friends', emoji: '🥂', label: 'Friends' },
   { party: 'solo', emoji: '🧳', label: 'Solo' },
   { party: 'honeymoon', emoji: '💍', label: 'Honeymoon' },
-  { party: 'celebration', emoji: '🥳', label: 'Celebration' },
+  { party: 'celebration', emoji: '🎉', label: 'Celebration or group' },
 ];
 
 const KIDS_COUNT_OPTIONS: { count: '1' | '2' | '3+'; label: string }[] = [
