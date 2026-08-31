@@ -12,6 +12,7 @@ import Vibes from './screens/Vibes';
 import Styles from './screens/Styles';
 import Dealbreakers from './screens/Dealbreakers';
 import Sliders from './screens/Sliders';
+import Matches from './screens/Matches';
 
 const TOTAL_STEPS = 8;
 
@@ -57,7 +58,7 @@ export default function QuizWizard() {
       {step === 6 && <Styles answers={answers} dispatch={dispatch} />}
       {step === 7 && <Dealbreakers answers={answers} dispatch={dispatch} />}
       {step === 8 && <Sliders answers={answers} dispatch={dispatch} />}
-      {step === 9 && <div className="text-center text-gray-500 py-16">Continue building...</div>}
+      {step === 9 && <Matches answers={answers} dispatch={dispatch} />}
     </div>
   );
 }
