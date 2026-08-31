@@ -1,8 +1,10 @@
-import { Dispatch, useEffect, useMemo, useState } from 'react';
+import { Dispatch, useEffect, useMemo, useRef, useState } from 'react';
 import { QuizAction } from '@/lib/quiz/state';
 import { QuizAnswers } from '@/lib/match/types';
 import { rankMatches } from '@/lib/match/score';
 import MatchCard from '../components/MatchCard';
+import SaveGate from '../components/SaveGate';
+import { getSessionId } from '../lib/session';
 
 interface MatchesProps {
   answers: QuizAnswers;
@@ -81,19 +83,61 @@ export default function Matches({ dispatch, answers }: MatchesProps) {
     );
   }
 
-  return <MatchReveal matches={matches} />;
+  return <MatchReveal matches={matches} answers={answers} />;
 }
 
-function MatchReveal({ matches }: { matches: ReturnType<typeof rankMatches> }) {
+function postSession(payload: { sessionId: string; answers: QuizAnswers; topMatches: { slug: string; pct: number }[]; email?: string }) {
+  fetch('/api/quiz-session', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  }).catch((err) => {
+    console.error('quiz-session post failed:', err);
+  });
+}
+
+function MatchReveal({
+  matches,
+  answers,
+}: {
+  matches: ReturnType<typeof rankMatches>;
+  answers: QuizAnswers;
+}) {
   const [heroIndex, setHeroIndex] = useState(0);
+  const [gateOpen, setGateOpen] = useState(false);
+  const firedRef = useRef(false);
   const hero = matches[heroIndex];
   const runnerUps = matches.filter((_, i) => i !== heroIndex).slice(0, 3);
+
+  const topMatches = useMemo(
+    () => matches.map((m) => ({ slug: m.profile.slug, pct: m.pct })),
+    [matches]
+  );
+
+  useEffect(() => {
+    if (firedRef.current) return;
+    firedRef.current = true;
+    postSession({ sessionId: getSessionId(), answers, topMatches });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  function handleSaveEmail(email: string) {
+    postSession({ sessionId: getSessionId(), answers, topMatches, email });
+  }
 
   return (
     <div>
       <h1 className="text-2xl font-extrabold text-gray-900 mb-6 text-center">Your Vacation Matches</h1>
 
-      <MatchCard match={hero} />
+      <MatchCard
+        match={hero}
+        onSeeTrip={() => setGateOpen(true)}
+        onSaveMatches={() => setGateOpen(true)}
+      />
+
+      {gateOpen && (
+        <SaveGate onClose={() => setGateOpen(false)} onSubmit={handleSaveEmail} />
+      )}
 
       {runnerUps.length > 0 && (
         <div className="mt-6">

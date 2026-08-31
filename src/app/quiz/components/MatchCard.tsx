@@ -45,20 +45,16 @@ export default function MatchCard({ match, onSeeTrip, onSaveMatches }: MatchCard
 
       <button
         type="button"
-        disabled
-        title="Coming next"
         onClick={onSeeTrip}
-        className="bg-brand-500 disabled:opacity-50 text-white rounded-xl py-3.5 font-bold w-full mb-3"
+        className="bg-brand-500 hover:bg-brand-600 text-white rounded-xl py-3.5 font-bold w-full mb-3"
       >
         See Your {profile.name} Trip
       </button>
 
       <button
         type="button"
-        disabled
-        title="Coming next"
         onClick={onSaveMatches}
-        className="text-gray-500 disabled:opacity-50 text-sm font-semibold w-full text-center"
+        className="text-gray-500 hover:text-gray-700 text-sm font-semibold w-full text-center"
       >
         Save my matches
       </button>
