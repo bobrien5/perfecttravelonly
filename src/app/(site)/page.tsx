@@ -93,6 +93,25 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Quiz CTA */}
+      <section className="py-12 sm:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeader title="Not sure where to go?" />
+          <div className="bg-gray-50 rounded-2xl p-8 sm:p-12 text-center">
+            <p className="text-gray-600 text-base sm:text-lg mb-6 max-w-2xl mx-auto">
+              Answer a few quick questions about your group, dates, and vibe and we will match you
+              with the destinations that fit you best.
+            </p>
+            <Link
+              href="/quiz"
+              className="inline-flex items-center justify-center px-8 py-4 bg-brand-500 text-white font-semibold rounded-xl hover:bg-brand-600 transition-colors text-lg"
+            >
+              Take the 2-minute vacation quiz
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Concierge upsell band (placeholder copy; real two-tier component lands in Part 3) */}
       <section className="py-14 sm:py-20 bg-gradient-to-r from-brand-600 to-brand-700 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

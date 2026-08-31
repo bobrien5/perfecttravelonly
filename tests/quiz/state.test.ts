@@ -38,4 +38,29 @@ describe('quizReducer', () => {
     const s = quizReducer(s0, { type: 'SET_OCCASION', occasion: 'Birthday' });
     expect(s.answers.occasion).toBe('Birthday');
   });
+
+  describe('known path', () => {
+    it('NEXT from destination (step 1) goes to dates (step 2)', () => {
+      let s: QuizState = { step: 0, answers: initialAnswers() };
+      s = quizReducer(s, { type: 'SET_PATH', path: 'known', destinationSlug: 'aruba' });
+      s = quizReducer(s, { type: 'NEXT' }); // welcome -> step 1 (destination)
+      expect(s.step).toBe(1);
+      s = quizReducer(s, { type: 'NEXT' }); // destination -> step 2 (dates)
+      expect(s.step).toBe(2);
+    });
+
+    it('known path completes at the vibes step (caps at 4, does not run to matches)', () => {
+      let s: QuizState = { step: 0, answers: initialAnswers() };
+      s = quizReducer(s, { type: 'SET_PATH', path: 'known', destinationSlug: 'aruba' });
+      s = quizReducer(s, { type: 'NEXT' }); // -> 1 destination
+      s = quizReducer(s, { type: 'NEXT' }); // -> 2 dates
+      s = quizReducer(s, { type: 'NEXT' }); // -> 3 party (dates skippable)
+      s = quizReducer(s, { type: 'SET_PARTY', party: 'couple' });
+      s = quizReducer(s, { type: 'NEXT' }); // -> 4 vibes
+      expect(s.step).toBe(4);
+      s = quizReducer(s, { type: 'TOGGLE_VIBE', vibe: 'beach' });
+      s = quizReducer(s, { type: 'NEXT' }); // caps at 4, no matches phase for known path
+      expect(s.step).toBe(4);
+    });
+  });
 });

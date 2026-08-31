@@ -56,6 +56,21 @@ function pruneForParty(answers: QuizAnswers, party: Party): QuizAnswers {
 }
 
 function isScreenComplete(step: number, answers: QuizAnswers): boolean {
+  if (answers.path === 'known') {
+    // Known-path screen order (1..4): 1 destination, 2 dates, 3 party, 4 vibes.
+    // Required: destination, party, vibes. Skippable: dates (consistent with discover path).
+    switch (step) {
+      case 1:
+        return answers.destinationSlug != null;
+      case 3:
+        return answers.party !== null;
+      case 4:
+        return answers.vibes.length > 0;
+      default:
+        return true;
+    }
+  }
+
   // Required: party, budget, vibes, styles. Skippable: origin, dates, dealbreakers, sliders.
   // Screen order (1..8) maps to: 1 party, 2 origin, 3 dates, 4 budget, 5 vibes, 6 styles, 7 dealbreakers, 8 sliders.
   switch (step) {
@@ -71,6 +86,9 @@ function isScreenComplete(step: number, answers: QuizAnswers): boolean {
       return true;
   }
 }
+
+const KNOWN_PATH_MAX_STEP = 4;
+const DISCOVER_PATH_MAX_STEP = 9;
 
 export function quizReducer(state: QuizState, action: QuizAction): QuizState {
   const { step, answers } = state;
@@ -138,9 +156,11 @@ export function quizReducer(state: QuizState, action: QuizAction): QuizState {
     case 'SET_SLIDERS':
       return { ...state, answers: { ...answers, pace: action.pace, exploration: action.exploration } };
 
-    case 'NEXT':
+    case 'NEXT': {
       if (!isScreenComplete(step, answers)) return state;
-      return { ...state, step: Math.min(step + 1, 9) };
+      const maxStep = answers.path === 'known' ? KNOWN_PATH_MAX_STEP : DISCOVER_PATH_MAX_STEP;
+      return { ...state, step: Math.min(step + 1, maxStep) };
+    }
 
     case 'BACK':
       return { ...state, step: Math.max(step - 1, 0) };
