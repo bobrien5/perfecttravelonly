@@ -109,10 +109,6 @@ function MatchReveal({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function handleSaveEmail(email: string): Promise<boolean> {
-    return postSession({ sessionId: getSessionId(), answers, topMatches, email });
-  }
-
   return (
     <div>
       <h1 className="text-2xl font-extrabold text-gray-900 mb-6 text-center">Your Vacation Matches</h1>
@@ -123,9 +119,7 @@ function MatchReveal({
         onSaveMatches={() => setGateOpen(true)}
       />
 
-      {gateOpen && (
-        <SaveGate onClose={() => setGateOpen(false)} onSubmit={handleSaveEmail} />
-      )}
+      {gateOpen && <SaveGate onClose={() => setGateOpen(false)} />}
 
       {runnerUps.length > 0 && (
         <div className="mt-6">

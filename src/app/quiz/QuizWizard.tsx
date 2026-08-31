@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useReducer, useRef } from 'react';
+import { useCallback, useEffect, useReducer, useRef, useState } from 'react';
 import { track } from '@vercel/analytics';
 import { quizReducer, initialAnswers, saveQuiz, loadQuiz } from '@vacationpro/engine';
+import { getSessionId } from './lib/session';
 import ProgressBar from './components/ProgressBar';
 import Welcome from './screens/Welcome';
 import Destination from './screens/Destination';
@@ -29,6 +30,9 @@ export default function QuizWizard() {
   // quiz_complete should fire once per session, not re-fire when a user
   // backs off the matches screen (step 9) and returns to it.
   const firedCompleteRef = useRef(false);
+  // The /quiz?claim=1 effect below runs once per mount, guarded by this ref.
+  const claimFiredRef = useRef(false);
+  const [claimError, setClaimError] = useState(false);
 
   // Hydrate from localStorage after mount only, so the client's first render
   // matches the server-rendered Welcome screen (no hydration mismatch), then
@@ -69,10 +73,65 @@ export default function QuizWizard() {
     }
   }, [step, isKnown]);
 
+  const runClaim = useCallback(async () => {
+    setClaimError(false);
+    try {
+      const res = await fetch('/api/claim-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId: getSessionId() }),
+      });
+
+      if (res.status === 401) {
+        window.location.assign('/auth/signin?next=' + encodeURIComponent('/quiz?claim=1'));
+        return;
+      }
+
+      if (!res.ok) {
+        setClaimError(true);
+        return;
+      }
+
+      const data = (await res.json()) as { ok: boolean; tripId?: string };
+      if (data.ok && data.tripId) {
+        window.location.assign(`/trips/${data.tripId}`);
+      } else {
+        setClaimError(true);
+      }
+    } catch {
+      setClaimError(true);
+    }
+  }, []);
+
+  // /quiz?claim=1: the sign-in callback lands back here after the account
+  // gate. Claim the anonymous session once and route to the new trip.
+  useEffect(() => {
+    if (claimFiredRef.current) return;
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('claim') !== '1') return;
+
+    claimFiredRef.current = true;
+    void runClaim();
+  }, [runClaim]);
+
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
       {showProgress && (
         <ProgressBar step={step} totalSteps={totalSteps} onBack={() => dispatch({ type: 'BACK' })} />
+      )}
+
+      {claimError && (
+        <div className="mb-6 rounded-xl border-2 border-red-200 bg-red-50 p-4 text-center">
+          <p className="text-sm font-semibold text-red-700 mb-2">We could not save your trip. Try again.</p>
+          <button
+            type="button"
+            onClick={() => void runClaim()}
+            className="text-sm font-bold text-red-700 underline hover:no-underline"
+          >
+            Retry
+          </button>
+        </div>
       )}
 
       {step === 0 && <Welcome answers={answers} dispatch={dispatch} />}

@@ -42,15 +42,6 @@ export default function Vibes({ answers, dispatch }: VibesProps) {
     }
   }
 
-  function handleSaveEmail(email: string): Promise<boolean> {
-    return postSession({
-      sessionId: getSessionId(),
-      answers,
-      topMatches: destination ? [{ slug: destination.slug, pct: 100 }] : [],
-      email,
-    });
-  }
-
   return (
     <div>
       <h1 className="text-2xl font-extrabold text-gray-900 mb-1 text-center">
@@ -82,7 +73,7 @@ export default function Vibes({ answers, dispatch }: VibesProps) {
         {isKnown ? `Build My ${destination?.name ?? 'Trip'} Trip` : 'Continue'}
       </button>
 
-      {gateOpen && <SaveGate onClose={() => setGateOpen(false)} onSubmit={handleSaveEmail} />}
+      {gateOpen && <SaveGate onClose={() => setGateOpen(false)} />}
     </div>
   );
 }
