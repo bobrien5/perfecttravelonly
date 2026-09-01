@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabase } from '@/lib/supabase/server';
 import { supabase as serviceSupabase } from '@/lib/supabase/client';
 import { sessionToTripPayload } from '@/lib/trips/mapping';
+import { UUID_RE } from '@/app/api/quiz-session/validate';
 import { QuizAnswers } from '@vacationpro/engine';
 
 interface ClaimSessionBody {
@@ -13,6 +14,7 @@ interface QuizSessionRow {
   answers: QuizAnswers;
   top_matches: { slug: string; pct: number }[];
   claimed_by: string | null;
+  trip_id: string | null;
 }
 
 /**
@@ -22,6 +24,11 @@ interface QuizSessionRow {
  * trip from it. Order matters (per the Task 4 brief): authenticate, read the
  * session, insert the trip AS THE USER, then mark claimed_by last, so a
  * failed insert never leaves the session claimed.
+ *
+ * Idempotent for the owning user: if the session is already claimed by this
+ * user and has a stored trip_id, that trip is returned with no new insert.
+ * This covers a direct revisit of /quiz?claim=1, a back/forward remount, or
+ * the retry banner all firing this route more than once for the same trip.
  */
 export async function POST(req: NextRequest) {
   let body: ClaimSessionBody;
@@ -32,22 +39,23 @@ export async function POST(req: NextRequest) {
   }
 
   const sessionId = body.sessionId;
-  if (typeof sessionId !== 'string' || sessionId.length === 0) {
-    return NextResponse.json({ ok: false, error: 'sessionId is required.' }, { status: 400 });
+  if (typeof sessionId !== 'string' || !UUID_RE.test(sessionId)) {
+    return NextResponse.json({ ok: false, error: 'sessionId must be a valid UUID.' }, { status: 400 });
   }
 
   const serverSupabase = await createServerSupabase();
   const {
     data: { user },
+    error: userError,
   } = await serverSupabase.auth.getUser();
 
-  if (!user) {
+  if (userError || !user) {
     return NextResponse.json({ ok: false, error: 'Not authenticated.' }, { status: 401 });
   }
 
   const { data: session, error: sessionError } = await serviceSupabase
     .from('quiz_sessions')
-    .select('session_id, answers, top_matches, claimed_by')
+    .select('session_id, answers, top_matches, claimed_by, trip_id')
     .eq('session_id', sessionId)
     .maybeSingle<QuizSessionRow>();
 
@@ -62,6 +70,13 @@ export async function POST(req: NextRequest) {
 
   if (session.claimed_by && session.claimed_by !== user.id) {
     return NextResponse.json({ ok: false, error: 'Session already claimed.' }, { status: 409 });
+  }
+
+  // Already claimed by this same user with a trip on record: short-circuit,
+  // no re-insert. Covers a direct revisit, a remount that re-fires the
+  // ref-guarded effect, or the retry banner after a prior success.
+  if (session.claimed_by === user.id && session.trip_id) {
+    return NextResponse.json({ ok: true, tripId: session.trip_id });
   }
 
   const topMatch = session.top_matches?.[0] ?? null;
@@ -86,11 +101,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, error: 'Could not save your trip.' }, { status: 500 });
   }
 
-  // Insert succeeded: mark the session claimed last, so a failed insert
-  // above never leaves the session claimed with no trip to show for it.
+  // Insert succeeded: mark the session claimed and record the trip last, so
+  // a failed insert above never leaves the session claimed with no trip to
+  // show for it, and a future call can short-circuit on trip_id.
   const { error: claimError } = await serviceSupabase
     .from('quiz_sessions')
-    .update({ claimed_by: user.id })
+    .update({ claimed_by: user.id, trip_id: trip.id })
     .eq('session_id', sessionId)
     .is('claimed_by', null);
 

@@ -57,3 +57,4 @@ create policy "trip_alerts update own" on trip_alerts for update to authenticate
 create policy "trip_alerts delete own" on trip_alerts for delete to authenticated using ((select auth.uid()) = user_id);
 
 alter table quiz_sessions add column if not exists claimed_by uuid references auth.users(id);
+alter table quiz_sessions add column if not exists trip_id uuid references trips(id);
