@@ -116,9 +116,18 @@ function parseVibeScores(raw: string | null): ResortAttrs['vibeScores'] {
  * JSON (or Sanity not configured) never throws; it degrades to an empty
  * vibeScores map / an empty resort list respectively so the resort picker
  * page can always fall back to its empty state.
+ *
+ * A Sanity outage (client.fetch rejecting, e.g. a timeout or 5xx) is caught
+ * here too and also degrades to an empty list, so the resort picker page
+ * renders its empty state (advisor CTA) instead of 500ing.
  */
 export async function getResortsByDestination(destinationSlug: string): Promise<ResortAttrs[]> {
   if (!isSanityConfigured) return [];
-  const raw = await client.fetch<RawResort[]>(resortsByDestinationQuery, { destinationSlug });
-  return (raw || []).map((r) => ({ ...r, vibeScores: parseVibeScores(r.vibeScores) }));
+  try {
+    const raw = await client.fetch<RawResort[]>(resortsByDestinationQuery, { destinationSlug });
+    return (raw || []).map((r) => ({ ...r, vibeScores: parseVibeScores(r.vibeScores) }));
+  } catch (err) {
+    console.error('getResortsByDestination: Sanity fetch error:', err);
+    return [];
+  }
 }

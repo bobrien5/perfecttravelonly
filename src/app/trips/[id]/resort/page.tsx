@@ -1,7 +1,8 @@
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 
 import { DESTINATION_PROFILES, rankResorts, type Vibe, type Dealbreaker } from '@vacationpro/engine';
 
+import { getServerUser } from '@/lib/supabase/server';
 import { getTrip } from '@/lib/trips/data';
 import { getResortsByDestination } from '@/sanity/lib/fetch';
 
@@ -20,6 +21,15 @@ function destinationName(slug: string): string {
 
 export default async function ResortPickerPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+
+  // Same guard as /trips/[id]: a signed-out visitor gets bounced to signin
+  // instead of a bare 404, which stays reserved for an authenticated user
+  // hitting a trip that isn't theirs.
+  const user = await getServerUser();
+  if (!user) {
+    redirect('/auth/signin?next=/trips');
+  }
+
   const trip = await getTrip(id);
 
   if (!trip) {

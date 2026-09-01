@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { jwtVerify } from 'jose';
 
+import { updateSession } from '@/lib/supabase/middleware';
+
 const JWT_SECRET = new TextEncoder().encode(
   process.env.JWT_SECRET || 'fallback-dev-secret-change-me'
 );
@@ -10,6 +12,13 @@ const COOKIE_NAME = 'vp-admin-token';
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // Trip Hub: refresh the Supabase session cookies on the way in. Auth
+  // gating itself stays page-level (see src/lib/supabase/middleware.ts);
+  // this branch never touches the /admin logic below.
+  if (pathname.startsWith('/trips')) {
+    return updateSession(request);
+  }
 
   // Skip login page, all admin API routes, and auth API
   if (pathname === '/admin/login' || pathname.startsWith('/api/')) {
@@ -33,5 +42,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: ['/admin/:path*', '/trips/:path*'],
 };

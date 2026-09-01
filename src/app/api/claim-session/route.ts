@@ -72,15 +72,40 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, error: 'Session already claimed.' }, { status: 409 });
   }
 
-  // Already claimed by this same user with a trip on record: short-circuit,
-  // no re-insert. Covers a direct revisit, a remount that re-fires the
-  // ref-guarded effect, or the retry banner after a prior success.
-  if (session.claimed_by === user.id && session.trip_id) {
-    return NextResponse.json({ ok: true, tripId: session.trip_id });
-  }
-
   const topMatch = session.top_matches?.[0] ?? null;
   const destinationSlug = session.answers?.destinationSlug;
+
+  if (session.claimed_by === user.id) {
+    // Already claimed by this same user with a trip on record: short-circuit,
+    // no re-insert. Covers a direct revisit, a remount that re-fires the
+    // ref-guarded effect, or the retry banner after a prior success.
+    if (session.trip_id) {
+      return NextResponse.json({ ok: true, tripId: session.trip_id });
+    }
+
+    // claimed_by got set but trip_id never landed: the earlier call's trip
+    // insert succeeded but the bookkeeping update below failed (or raced
+    // with another call), or the insert itself failed after claimed_by was
+    // already set some other way. Either way, inserting again here would
+    // create a duplicate trip forever on retry. Look up this user's most
+    // recent trip for the session's destination first and reuse it instead
+    // of inserting.
+    const fallbackDestinationSlug = destinationSlug ?? topMatch?.slug ?? null;
+    if (fallbackDestinationSlug) {
+      const { data: existingTrip } = await serverSupabase
+        .from('trips')
+        .select('id')
+        .eq('user_id', user.id)
+        .eq('destination_slug', fallbackDestinationSlug)
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      if (existingTrip) {
+        return NextResponse.json({ ok: true, tripId: existingTrip.id });
+      }
+    }
+  }
 
   let payload;
   try {
@@ -103,12 +128,18 @@ export async function POST(req: NextRequest) {
 
   // Insert succeeded: mark the session claimed and record the trip last, so
   // a failed insert above never leaves the session claimed with no trip to
-  // show for it, and a future call can short-circuit on trip_id.
+  // show for it, and a future call can short-circuit on trip_id. Matches
+  // rows where claimed_by is still null OR already belongs to this same
+  // user (not just null): if an earlier call got as far as setting
+  // claimed_by but failed before trip_id was recorded, this call's insert
+  // above still needs to be able to write trip_id here too, instead of
+  // silently no-opping against the strict "is null" filter and leaving
+  // trip_id empty forever.
   const { error: claimError } = await serviceSupabase
     .from('quiz_sessions')
     .update({ claimed_by: user.id, trip_id: trip.id })
     .eq('session_id', sessionId)
-    .is('claimed_by', null);
+    .or(`claimed_by.is.null,claimed_by.eq.${user.id}`);
 
   if (claimError) {
     // The trip was created; this is a non-fatal bookkeeping failure (a retry

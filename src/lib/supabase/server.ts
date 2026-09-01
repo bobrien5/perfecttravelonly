@@ -1,5 +1,6 @@
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
+import type { User } from '@supabase/supabase-js';
 
 /**
  * Server (Server Component / Route Handler / Server Action) Supabase client,
@@ -44,4 +45,25 @@ export async function createServerSupabase() {
       },
     },
   });
+}
+
+/**
+ * Reads the signed-in user for the current request, the same way every
+ * /trips page needs to. Wraps createServerSupabase() in a try/catch: when
+ * the Supabase anon key env vars are absent (e.g. a preview environment
+ * without Supabase configured yet), createServerSupabase() throws, and
+ * without this guard that throw surfaces as a 500 instead of a normal
+ * signed-out state. Both cases (missing env, no session) come back as null
+ * so callers can redirect to /auth/signin either way.
+ */
+export async function getServerUser(): Promise<User | null> {
+  try {
+    const supabase = await createServerSupabase();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    return user;
+  } catch {
+    return null;
+  }
 }

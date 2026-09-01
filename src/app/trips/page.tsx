@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 
 import { DESTINATION_PROFILES } from '@vacationpro/engine';
 
-import { createServerSupabase } from '@/lib/supabase/server';
+import { getServerUser } from '@/lib/supabase/server';
 import { checklistProgress, getTripsForUser } from '@/lib/trips/data';
 
 export const dynamic = 'force-dynamic';
@@ -28,10 +28,10 @@ function dateOrSeasonChip(trip: { date_start: string | null; date_end: string | 
 }
 
 export default async function TripsPage() {
-  const supabase = await createServerSupabase();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // getServerUser() swallows a missing-Supabase-env throw and just returns
+  // null, so that case redirects to signin like any other signed-out visit
+  // instead of 500ing the page.
+  const user = await getServerUser();
 
   if (!user) {
     redirect('/auth/signin?next=/trips');

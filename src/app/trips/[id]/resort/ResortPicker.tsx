@@ -6,6 +6,8 @@ import { track } from '@vercel/analytics';
 
 import type { RankedResort } from '@vacationpro/engine';
 
+import { stay22Url } from '@/lib/monetization/stay22';
+
 interface ResortPickerProps {
   tripId: string;
   destination: string;
@@ -104,7 +106,7 @@ export default function ResortPicker({ tripId, destination, ranked, initialResor
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 border-t border-gray-100 pt-4">
                   <a
-                    href={resort.expediaUrl}
+                    href={stay22Url(resort.expediaUrl, 'triphub-resort')}
                     target="_blank"
                     rel="noopener sponsored"
                     onClick={() => track('check_rates_click', { resort: slug })}

@@ -1,7 +1,8 @@
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 
 import { DESTINATION_PROFILES } from '@vacationpro/engine';
 
+import { getServerUser } from '@/lib/supabase/server';
 import { checklistProgress, getTrip } from '@/lib/trips/data';
 
 import TripChecklist from './TripChecklist';
@@ -29,6 +30,16 @@ function dateOrSeasonChip(trip: { date_start: string | null; date_end: string | 
 
 export default async function TripPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+
+  // Check auth explicitly first: a signed-out visitor gets bounced to
+  // signin (so a shared /trips/[id] link prompts login) rather than a bare
+  // 404, which is reserved for an authenticated user hitting a trip that
+  // isn't theirs (RLS hides it from getTrip, same as any missing id).
+  const user = await getServerUser();
+  if (!user) {
+    redirect('/auth/signin?next=/trips');
+  }
+
   const trip = await getTrip(id);
 
   if (!trip) {
