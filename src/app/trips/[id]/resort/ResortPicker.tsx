@@ -28,6 +28,7 @@ export default function ResortPicker({ tripId, destination, ranked, initialResor
         body: JSON.stringify({ resortSlug: slug }),
       });
       if (!res.ok) throw new Error('Request failed');
+      track('resort_selected', { resort: slug });
       setPickedSlug(slug);
     } catch {
       setError('Could not save your pick. Please try again.');

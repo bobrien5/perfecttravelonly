@@ -94,6 +94,9 @@ export default function QuizWizard() {
 
       const data = (await res.json()) as { ok: boolean; tripId?: string };
       if (data.ok && data.tripId) {
+        // The claim response carries no destination field, so trip_created
+        // fires with no payload rather than a fabricated one.
+        track('trip_created');
         window.location.assign(`/trips/${data.tripId}`);
       } else {
         setClaimError(true);
