@@ -4,22 +4,19 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { track } from '@vercel/analytics';
 
-import { rankResorts, type ResortAttrs, type ResortTripInput } from '@vacationpro/engine';
+import type { RankedResort } from '@vacationpro/engine';
 
 interface ResortPickerProps {
   tripId: string;
   destination: string;
-  trip: ResortTripInput;
-  resorts: ResortAttrs[];
+  ranked: RankedResort[];
   initialResortSlug: string | null;
 }
 
-export default function ResortPicker({ tripId, destination, trip, resorts, initialResortSlug }: ResortPickerProps) {
+export default function ResortPicker({ tripId, destination, ranked, initialResortSlug }: ResortPickerProps) {
   const [pickedSlug, setPickedSlug] = useState<string | null>(initialResortSlug);
   const [savingSlug, setSavingSlug] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-
-  const ranked = rankResorts(trip, resorts);
 
   async function choose(slug: string) {
     setError(null);

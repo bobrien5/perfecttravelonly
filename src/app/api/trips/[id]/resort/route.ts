@@ -26,7 +26,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   }
 
   const { resortSlug } = body;
-  if (typeof resortSlug !== 'string' || resortSlug.length === 0) {
+  if (typeof resortSlug !== 'string' || resortSlug.length === 0 || resortSlug.length > 100) {
     return NextResponse.json({ ok: false, error: 'Body must include a valid resortSlug.' }, { status: 400 });
   }
 
