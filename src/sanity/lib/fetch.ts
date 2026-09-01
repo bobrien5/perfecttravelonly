@@ -10,8 +10,10 @@ import {
   recentBlogPostsQuery,
   blogPostBySlugQuery,
   allBlogPostParamsQuery,
+  resortsByDestinationQuery,
 } from './queries';
 import type { Destination, Category, BlogPost, FullBlogPost } from '@/types';
+import type { ResortAttrs } from '@vacationpro/engine';
 
 // Static data fallbacks (used when Sanity is not yet configured)
 import * as staticDestinations from '@/data/destinations';
@@ -81,4 +83,42 @@ export async function getBlogPostBySlug(slug: string): Promise<FullBlogPost | nu
 export async function getAllBlogPostParams(): Promise<{ slug: string }[]> {
   if (!isSanityConfigured) return staticBlogPosts.blogPosts.map(p => ({ slug: p.slug }));
   return client.fetch(allBlogPostParamsQuery);
+}
+
+// ============================================================
+// RESORT FUNCTIONS
+// ============================================================
+
+/**
+ * Raw shape returned by resortsByDestinationQuery: identical to ResortAttrs
+ * except vibeScores is still the stringified JSON text field from Sanity.
+ */
+interface RawResort extends Omit<ResortAttrs, 'vibeScores'> {
+  vibeScores: string | null;
+}
+
+function parseVibeScores(raw: string | null): ResortAttrs['vibeScores'] {
+  if (!raw) return {};
+  try {
+    const parsed = JSON.parse(raw);
+    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+      return parsed as ResortAttrs['vibeScores'];
+    }
+    return {};
+  } catch {
+    return {};
+  }
+}
+
+/**
+ * Fetches resorts (Task 6 seed) for a destination and parses vibeScores
+ * from its stringified-JSON Sanity field into a plain object. Malformed
+ * JSON (or Sanity not configured) never throws; it degrades to an empty
+ * vibeScores map / an empty resort list respectively so the resort picker
+ * page can always fall back to its empty state.
+ */
+export async function getResortsByDestination(destinationSlug: string): Promise<ResortAttrs[]> {
+  if (!isSanityConfigured) return [];
+  const raw = await client.fetch<RawResort[]>(resortsByDestinationQuery, { destinationSlug });
+  return (raw || []).map((r) => ({ ...r, vibeScores: parseVibeScores(r.vibeScores) }));
 }

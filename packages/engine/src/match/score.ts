@@ -68,7 +68,7 @@ export function targetMonths(dates: Dates, now: Date = new Date()): number[] {
   return [];
 }
 
-const VIBE_LABELS: Record<string, string> = {
+export const VIBE_LABELS: Record<string, string> = {
   beach: 'Beautiful beaches',
   nightlife: 'Plenty of nightlife',
   food: 'Standout food scene',

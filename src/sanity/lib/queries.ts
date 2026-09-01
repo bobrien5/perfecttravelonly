@@ -114,3 +114,25 @@ export const blogPostBySlugQuery = groq`
 export const allBlogPostParamsQuery = groq`
   *[_type == "blogPost" && (brand == "vacationpro" || !defined(brand))] { "slug": slug.current }
 `;
+
+// ============================================================
+// RESORT QUERIES
+// ============================================================
+
+const resortProjection = groq`{
+  "slug": slug.current,
+  name,
+  destinationSlug,
+  priceBand,
+  styles,
+  vibeScores,
+  adultsOnly,
+  allInclusive,
+  verdict,
+  expediaUrl,
+  heroImageUrl
+}`;
+
+export const resortsByDestinationQuery = groq`
+  *[_type == "resort" && destinationSlug == $destinationSlug] ${resortProjection}
+`;
