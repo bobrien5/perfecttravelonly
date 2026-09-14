@@ -4,6 +4,7 @@ import blogPost from './blogPost';
 import blogCategory from './blogCategory';
 import blogTag from './blogTag';
 import stay22Map from './objects/stay22Map';
+import table from './objects/table';
 import resort from './resort';
 
-export const schemaTypes = [destination, category, blogPost, blogCategory, blogTag, stay22Map, resort];
+export const schemaTypes = [destination, category, blogPost, blogCategory, blogTag, stay22Map, table, resort];

@@ -61,6 +61,37 @@ const portableTextComponents: PortableTextComponents = {
         checkout={value.checkout}
       />
     ),
+    table: ({ value }) => {
+      const rows: Array<{ cells?: string[] }> = value?.rows || [];
+      if (rows.length === 0) return null;
+      const [headerRow, ...bodyRows] = rows;
+      return (
+        <div className="not-prose my-6 overflow-x-auto rounded-lg border border-gray-200">
+          <table className="w-full text-left text-sm">
+            <thead className="bg-gray-50">
+              <tr>
+                {(headerRow.cells || []).map((cell, i) => (
+                  <th key={i} className="px-4 py-3 font-semibold text-gray-900 border-b border-gray-200">
+                    {cell}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {bodyRows.map((row, ri) => (
+                <tr key={ri} className={ri % 2 === 1 ? 'bg-gray-50' : undefined}>
+                  {(row.cells || []).map((cell, ci) => (
+                    <td key={ci} className="px-4 py-3 text-gray-600 align-top border-b border-gray-100">
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    },
   },
   marks: {
     link: ({ value, children }) => {

@@ -13,8 +13,9 @@
 
 // Run with: node --env-file=vacationpro/.env.local --import tsx vacationpro/scripts/publish-blog-drafts.ts <date>
 import { createClient } from '@sanity/client';
-import { readFileSync, readdirSync, writeFileSync, existsSync } from 'fs';
+import { readFileSync, readdirSync, writeFileSync, existsSync, statSync } from 'fs';
 import { join } from 'path';
+import { markdownToBlocks } from './lib/markdown-to-portable-text';
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
@@ -90,110 +91,6 @@ function parseFrontmatter(text: string): { fm: Frontmatter; body: string } {
   return { fm: fm as Frontmatter, body };
 }
 
-// Markdown → Portable Text (minimal: H2, H3, paragraph, bullet list, bold, italic, links)
-type Span = { _type: 'span'; _key: string; text: string; marks: string[] };
-type MarkDef = { _type: 'link'; _key: string; href: string };
-type Block = {
-  _type: 'block';
-  _key: string;
-  style: string;
-  listItem?: 'bullet' | 'number';
-  level?: number;
-  markDefs: MarkDef[];
-  children: Span[];
-};
-
-let keyCounter = 0;
-const k = () => `b${++keyCounter}`;
-
-function parseInline(text: string): { children: Span[]; markDefs: MarkDef[] } {
-  const markDefs: MarkDef[] = [];
-  const children: Span[] = [];
-  // tokenize for [text](url), **bold**, *italic*
-  const tokenRegex = /(\[[^\]]+\]\([^)]+\))|(\*\*[^*]+\*\*)|(\*[^*]+\*)/g;
-  let lastIdx = 0;
-  let match: RegExpExecArray | null;
-  const pushSpan = (t: string, marks: string[] = []) => {
-    if (!t) return;
-    children.push({ _type: 'span', _key: k(), text: t, marks });
-  };
-  while ((match = tokenRegex.exec(text)) !== null) {
-    if (match.index > lastIdx) pushSpan(text.slice(lastIdx, match.index));
-    if (match[1]) {
-      // link
-      const lm = match[1].match(/\[([^\]]+)\]\(([^)]+)\)/)!;
-      const linkKey = k();
-      markDefs.push({ _type: 'link', _key: linkKey, href: lm[2] });
-      pushSpan(lm[1], [linkKey]);
-    } else if (match[2]) {
-      pushSpan(match[2].slice(2, -2), ['strong']);
-    } else if (match[3]) {
-      pushSpan(match[3].slice(1, -1), ['em']);
-    }
-    lastIdx = match.index + match[0].length;
-  }
-  if (lastIdx < text.length) pushSpan(text.slice(lastIdx));
-  return { children, markDefs };
-}
-
-function markdownToBlocks(md: string): Block[] {
-  const blocks: Block[] = [];
-  const lines = md.split('\n');
-  let i = 0;
-  while (i < lines.length) {
-    const line = lines[i];
-    if (line.trim() === '') { i++; continue; }
-    if (line.startsWith('# ')) {
-      // skip top-level H1 since title is in frontmatter
-      i++;
-      continue;
-    }
-    if (line.startsWith('## ')) {
-      const { children, markDefs } = parseInline(line.slice(3).trim());
-      blocks.push({ _type: 'block', _key: k(), style: 'h2', markDefs, children });
-      i++;
-      continue;
-    }
-    if (line.startsWith('### ')) {
-      const { children, markDefs } = parseInline(line.slice(4).trim());
-      blocks.push({ _type: 'block', _key: k(), style: 'h3', markDefs, children });
-      i++;
-      continue;
-    }
-    if (line.match(/^[-*]\s/)) {
-      while (i < lines.length && lines[i].match(/^[-*]\s/)) {
-        const { children, markDefs } = parseInline(lines[i].replace(/^[-*]\s/, ''));
-        blocks.push({ _type: 'block', _key: k(), style: 'normal', listItem: 'bullet', level: 1, markDefs, children });
-        i++;
-      }
-      continue;
-    }
-    if (line.match(/^\d+\.\s/)) {
-      while (i < lines.length && lines[i].match(/^\d+\.\s/)) {
-        const { children, markDefs } = parseInline(lines[i].replace(/^\d+\.\s/, ''));
-        blocks.push({ _type: 'block', _key: k(), style: 'normal', listItem: 'number', level: 1, markDefs, children });
-        i++;
-      }
-      continue;
-    }
-    // paragraph: gather lines until blank or new structural marker
-    const para: string[] = [line];
-    i++;
-    while (
-      i < lines.length &&
-      lines[i].trim() !== '' &&
-      !lines[i].startsWith('#') &&
-      !lines[i].match(/^[-*]\s/) &&
-      !lines[i].match(/^\d+\.\s/)
-    ) {
-      para.push(lines[i]);
-      i++;
-    }
-    const { children, markDefs } = parseInline(para.join(' '));
-    blocks.push({ _type: 'block', _key: k(), style: 'normal', markDefs, children });
-  }
-  return blocks;
-}
 
 function slugify(s: string): string {
   return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -229,9 +126,8 @@ const results: Array<{ file: string; action: string; sanityId?: string; reason?:
       results.push({ file, action: 'skipped', reason: `slug "${slug}" already exists in Sanity (${existing._id})` });
       continue;
     }
-    keyCounter = 0;
     const blocks = markdownToBlocks(body);
-    const doc = {
+    const doc: Record<string, unknown> = {
       _type: 'blogPost',
       brand: 'vacationpro',
       title: fm.title,
@@ -245,7 +141,22 @@ const results: Array<{ file: string; action: string; sanityId?: string; reason?:
       author: 'VacationPro Editorial',
       publishedAt: fm.publishDate ? new Date(fm.publishDate).toISOString() : null,
     };
-    const created = await client.create(doc);
+
+    // Attach a hero image if <slug>-hero.png exists next to the draft
+    const heroPath = join(draftsDir, `${slug}-hero.png`);
+    if (existsSync(heroPath) && statSync(heroPath).size > 10000) {
+      const asset = await client.assets.upload('image', readFileSync(heroPath), {
+        filename: `${slug}-hero.png`,
+      });
+      doc.featuredImage = {
+        _type: 'image',
+        asset: { _type: 'reference', _ref: asset._id },
+        alt: fm.title,
+      };
+      console.log(`  uploaded hero image for ${slug} -> ${asset._id}`);
+    }
+
+    const created = await client.create(doc as unknown as { _type: string; [key: string]: unknown });
     results.push({ file, action: 'created', sanityId: created._id });
     console.log(`  created ${slug} → ${created._id}`);
   }
