@@ -5,13 +5,15 @@ interface BlogCardProps {
   post: BlogPost;
 }
 
+const FALLBACK_IMAGE = '/og-default.png';
+
 export default function BlogCard({ post }: BlogCardProps) {
   return (
     <article className="group bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-300">
       <Link href={`/blog/${post.slug}`}>
-        <div className="aspect-[16/10] overflow-hidden">
+        <div className="aspect-[16/10] overflow-hidden bg-gray-100">
           <img
-            src={post.image}
+            src={post.image || FALLBACK_IMAGE}
             alt={post.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />

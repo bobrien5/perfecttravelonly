@@ -77,7 +77,7 @@ export default async function DestinationPage({ params }: Props) {
 
       {/* FAQ */}
       {destination.faq && destination.faq.length > 0 && (
-        <div className="mt-16">
+        <div className="relative z-10 mt-24 pt-4 bg-white">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">{destination.name} Travel FAQ</h2>
           <FAQ items={destination.faq} />
         </div>
