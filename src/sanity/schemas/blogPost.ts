@@ -96,6 +96,7 @@ const blogPost = {
           ],
         },
         { type: 'stay22Map' },
+        { type: 'table' },
       ],
     },
     {
