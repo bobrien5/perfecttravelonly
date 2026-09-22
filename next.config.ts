@@ -65,6 +65,17 @@ const nextConfig: NextConfig = {
         destination: "/destinations",
         permanent: true,
       },
+      // Jamaica split into Montego Bay and Negril on 2026-09-22, matching the
+      // match engine, which has always treated them separately: they differ
+      // sharply on transfer time (25 minutes vs 90) and on character. The
+      // combined page was live and indexed, so it redirects to Montego Bay,
+      // which is the island's main gateway and the closer match for the
+      // generic "Jamaica vacation" intent the old page ranked for.
+      {
+        source: "/destinations/jamaica",
+        destination: "/destinations/jamaica-montego-bay",
+        permanent: true,
+      },
       {
         source: "/destinations/orlando",
         destination: "/destinations",
