@@ -62,7 +62,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/destinations/miami",
-        destination: "/destinations",
+        destination: "/blog",
         permanent: true,
       },
       // Jamaica split into Montego Bay and Negril on 2026-09-22, matching the
@@ -78,7 +78,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/destinations/orlando",
-        destination: "/destinations",
+        destination: "/blog",
         permanent: true,
       },
       // TODO (deals rebuild): the four /deals rules below date from the
@@ -86,17 +86,17 @@ const nextConfig: NextConfig = {
       // or the new hub redirects to the homepage and is unreachable.
       {
         source: "/deals/:category/:slug",
-        destination: "/destinations",
+        destination: "/blog",
         permanent: true,
       },
       {
         source: "/deals/:category",
-        destination: "/destinations",
+        destination: "/blog",
         permanent: true,
       },
       {
         source: "/deals/:path*",
-        destination: "/destinations",
+        destination: "/blog",
         permanent: true,
       },
       {
