@@ -75,6 +75,30 @@ export default function RootLayout({
             }}
           />
         )}
+        {/*
+          Travelpayouts project verification (project 576797). Rendered here
+          rather than via next/script so the tag is present in the served HTML,
+          which a verification crawler can see without executing React.
+
+          The snippet Travelpayouts supplies carries WordPress-only attributes
+          (nowprocket, data-noptimize, data-cfasync, data-wpfc-render,
+          seraph-accel-crit, data-no-defer) telling WP optimiser plugins not to
+          defer or combine it. None of them mean anything in Next, so they are
+          dropped. data-cmp-ab is kept: it is set on the injected script and is
+          read by Travelpayouts' own code.
+        */}
+        <script
+          data-cmp-ab="2"
+          dangerouslySetInnerHTML={{
+            __html: `(function () {
+  var script = document.createElement("script");
+  script.async = 1;
+  script.setAttribute("data-cmp-ab","2");
+  script.src = 'https://tp-em.com/NTc2Nzk3.js?t=576797';
+  document.head.appendChild(script);
+})();`,
+          }}
+        />
       </head>
       <body className="antialiased overflow-x-hidden">
         <MetaPixelNoScript />
