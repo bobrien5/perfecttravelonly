@@ -1,0 +1,42 @@
+{
+  "_type": "resort",
+  "name": "Hyatt Ziva Cancun",
+  "slug": { "_type": "slug", "current": "hyatt-ziva-cancun" },
+  "destinationSlug": "cancun",
+  "priceBand": 3,
+  "styles": ["allinclusive", "familyresort", "beachfront"],
+  "adultsOnly": false,
+  "allInclusive": true,
+  "vibeScores": "{\"beach\":2,\"pool\":3,\"luxury\":2,\"value\":1,\"food\":3,\"nightlife\":1,\"romantic\":1,\"snorkeling\":2,\"nature\":1,\"relaxing\":2,\"entertainment\":3,\"explore\":2,\"kids\":3,\"kidsclub\":3,\"waterpark\":2,\"easytravel\":3,\"familysuites\":3,\"privatepools\":1,\"seclusion\":1}",
+  "verdict": "A large family resort on the Punta Cancun headland with beaches on two sides, so there is usually swimmable water whatever the surf is doing. Excellent for kids, and the separate adults-only tower means couples are not stuck in the middle of it.",
+  "expediaUrl": "https://www.expedia.com/Cancun-Hotels-Hyatt-Ziva-Cancun.h9127588.Hotel-Information",
+  "heroImageUrl": null,
+
+  "_research": {
+    "verifiedOn": "2026-09-22",
+    "facts": {
+      "location": "Punta Cancun headland, Hotel Zone, beaches on both bay and open-Caribbean sides",
+      "allInclusive": "Yes, full all-inclusive",
+      "adultsOnly": "No. Family resort with a separate adults-only tower (Turquoize) that has its own pool and restaurants",
+      "restaurants": "Seven",
+      "kids": "Dedicated KidZ Club, mini water park with lazy river",
+      "airportTransfer": "Hotel Zone, roughly 20 to 25 minutes from CUN, so easytravel scores high"
+    },
+    "scoringNotes": {
+      "beach": "Scored 2, not 3. Two beaches is a genuine advantage, but see seaweed.",
+      "seaweed_DEALBREAKER": "Punta Cancun is NOT sheltered. Currents sweeping the headland trap sargassum against the artificial breakwaters, making it one of the worst-hit spots in the Hotel Zone. USF predicts 2026 is the worst sargassum year on record. This contradicts the common assumption that the bay side is protected.",
+      "nightlife": "Scored 1. Walkable to the Punta Cancun club strip, but the resort itself is family-oriented.",
+      "romantic": "Scored 1 for the main resort. The Turquoize tower would score higher and is arguably a separate product.",
+      "value": "Scored 1. Premium pricing, priceBand 3."
+    },
+    "sources": [
+      "https://www.forbes.com/sites/forbes-personal-shopper/article/best-all-inclusive-resorts-cancun/",
+      "https://thecancunsun.com/5-cancun-beaches-that-will-have-less-sargassum-in-2026-plus-the-3-worst/",
+      "https://www.howisthesargassum.com/blog/which-cancun-beaches-least-sargassum"
+    ],
+    "needsVerification": [
+      "expediaUrl property id must be confirmed against the live Expedia page",
+      "heroImageUrl pending the Travelpayouts image pipeline"
+    ]
+  }
+}

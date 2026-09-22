@@ -1,0 +1,138 @@
+{
+  "_meta": {
+    "destination": "cancun",
+    "researchedOn": "2026-09-22",
+    "vibeKeys": "beach pool luxury value food nightlife romantic snorkeling nature relaxing entertainment explore kids kidsclub waterpark easytravel familysuites privatepools seclusion",
+    "scale": "0-3 per vibe",
+    "confidence": "HIGH = verified from sources below. MEDIUM = inferred from verified resort character. Every MEDIUM should be spot-checked before publishing.",
+    "sources": [
+      "https://www.forbes.com/sites/forbes-personal-shopper/article/best-all-inclusive-resorts-cancun/",
+      "https://www.oyster.com/cancun/hotels/roundups/best-adults-only-resorts-in-cancun/",
+      "https://travel.usnews.com/features/the-best-adults-only-all-inclusive-resorts-in-cancun",
+      "https://www.thefamilyvoyage.com/moon-palace-cancun-review/",
+      "https://www.tripexpert.com/cancun/hotels/grand-fiesta-americana-coral-beach-cancun-vs-moon-palace-cancun",
+      "https://www.cancuntripinsider.com/guides/cancun/cancun-all-inclusive-family-resorts",
+      "https://thecancunsun.com/5-cancun-beaches-that-will-have-less-sargassum-in-2026-plus-the-3-worst/"
+    ],
+    "sargassumContext": "USF predicts 2026 is the worst sargassum year on record. Within Cancun: the northern tip (Playa Las Perlas, Playa Linda) facing Bahia de Mujeres is most sheltered; Punta Cancun traps sargassum against its breakwaters; the southern Hotel Zone (Km 14-25) is worst hit. Cancun already carries the destination-level seaweed flag, so this nuance belongs in each verdict, not in vibeScores."
+  },
+
+  "resorts": [
+    {
+      "name": "Le Blanc Spa Resort Cancun",
+      "slug": "le-blanc-spa-resort-cancun",
+      "destinationSlug": "cancun",
+      "priceBand": 3,
+      "styles": ["allinclusive", "luxuryresort", "adultsonly", "beachfront"],
+      "adultsOnly": true,
+      "allInclusive": true,
+      "vibeScores": {"beach":3,"pool":3,"luxury":3,"value":0,"food":3,"nightlife":1,"romantic":3,"snorkeling":1,"nature":0,"relaxing":3,"entertainment":1,"explore":1,"kids":0,"kidsclub":0,"waterpark":0,"easytravel":3,"familysuites":0,"privatepools":1,"seclusion":2},
+      "verdict": "The most expensive all-inclusive in Cancun and the one most likely to justify it, built around a genuinely excellent spa and service that stays attentive without hovering. Choose it for a quiet luxury week, not for nightlife.",
+      "confidence": {"price": "HIGH, around $900 per night for two", "luxury": "HIGH", "romantic": "HIGH", "nightlife": "MEDIUM", "seclusion": "MEDIUM"}
+    },
+    {
+      "name": "Hyatt Zilara Cancun",
+      "slug": "hyatt-zilara-cancun",
+      "destinationSlug": "cancun",
+      "priceBand": 3,
+      "styles": ["allinclusive", "adultsonly", "beachfront"],
+      "adultsOnly": true,
+      "allInclusive": true,
+      "vibeScores": {"beach":2,"pool":2,"luxury":2,"value":2,"food":2,"nightlife":2,"romantic":2,"snorkeling":1,"nature":0,"relaxing":2,"entertainment":2,"explore":2,"kids":0,"kidsclub":0,"waterpark":0,"easytravel":3,"familysuites":0,"privatepools":0,"seclusion":1},
+      "verdict": "The safe adults-only choice in Cancun: spacious suites, six restaurants, plenty of organised activity, and a classic beachfront position without the price of the ultra-luxury tier.",
+      "confidence": {"price": "HIGH, $300-500 per night", "restaurants": "HIGH, six", "value": "HIGH relative to Le Blanc", "beach": "MEDIUM, Punta Cancun area sargassum exposure"}
+    },
+    {
+      "name": "Secrets The Vine Cancun",
+      "slug": "secrets-the-vine-cancun",
+      "destinationSlug": "cancun",
+      "priceBand": 3,
+      "styles": ["allinclusive", "adultsonly", "beachfront", "nearnightlife"],
+      "adultsOnly": true,
+      "allInclusive": true,
+      "vibeScores": {"beach":2,"pool":2,"luxury":2,"value":2,"food":3,"nightlife":2,"romantic":2,"snorkeling":1,"nature":0,"relaxing":2,"entertainment":2,"explore":2,"kids":0,"kidsclub":0,"waterpark":0,"easytravel":3,"familysuites":0,"privatepools":0,"seclusion":0},
+      "verdict": "Modern, wine-led and noticeably livelier than its neighbours, with nightly entertainment and a strong food programme. Good for couples who want energy in the evening without leaving the resort.",
+      "confidence": {"price": "HIGH, $300-500", "food": "HIGH, wine culture is the theme", "nightlife": "HIGH, DJs and karaoke, livelier than Live Aqua"}
+    },
+    {
+      "name": "Live Aqua Beach Resort Cancun",
+      "slug": "live-aqua-beach-resort-cancun",
+      "destinationSlug": "cancun",
+      "priceBand": 3,
+      "styles": ["allinclusive", "adultsonly", "luxuryresort", "beachfront"],
+      "adultsOnly": true,
+      "allInclusive": true,
+      "vibeScores": {"beach":2,"pool":2,"luxury":3,"value":1,"food":3,"nightlife":1,"romantic":3,"snorkeling":1,"nature":0,"relaxing":3,"entertainment":1,"explore":2,"kids":0,"kidsclub":0,"waterpark":0,"easytravel":3,"familysuites":0,"privatepools":0,"seclusion":2},
+      "verdict": "The calmest of the Cancun adults-only set, with a deliberately zen tone and refined rather than loud evening entertainment. Most guests are in bed after dinner, which is either the appeal or the problem.",
+      "confidence": {"price": "HIGH, $300-500", "relaxing": "HIGH, sedate and zen is the documented character", "nightlife": "HIGH, explicitly more sedate than peers", "rooms": "HIGH, 371 rooms and suites, most ocean-facing"}
+    },
+    {
+      "name": "Grand Fiesta Americana Coral Beach Cancun",
+      "slug": "grand-fiesta-americana-coral-beach-cancun",
+      "destinationSlug": "cancun",
+      "priceBand": 3,
+      "styles": ["allinclusive", "luxuryresort", "familyresort", "beachfront"],
+      "adultsOnly": false,
+      "allInclusive": true,
+      "vibeScores": {"beach":3,"pool":2,"luxury":3,"value":2,"food":2,"nightlife":1,"romantic":2,"snorkeling":1,"nature":0,"relaxing":3,"entertainment":2,"explore":2,"kids":3,"kidsclub":3,"waterpark":1,"easytravel":3,"familysuites":3,"privatepools":0,"seclusion":1},
+      "verdict": "An all-suite resort with one of the calmest stretches of sand in the Hotel Zone, which matters more than usual in a bad sargassum year. The 40,000 square foot kids club is among the best in Cancun without the resort feeling like a theme park.",
+      "confidence": {"rooms": "HIGH, 602 suites", "rating": "HIGH, 4.6 across 6,452 Google reviews", "beach": "HIGH, documented as calm relative to the rest of the Hotel Zone", "kidsclub": "HIGH, $2m 40,000 sq ft Coral KidZ Club", "price": "HIGH, from around $245 per night"}
+    },
+    {
+      "name": "Moon Palace Cancun",
+      "slug": "moon-palace-cancun",
+      "destinationSlug": "cancun",
+      "priceBand": 2,
+      "styles": ["allinclusive", "familyresort", "beachfront"],
+      "adultsOnly": false,
+      "allInclusive": true,
+      "vibeScores": {"beach":1,"pool":3,"luxury":2,"value":2,"food":2,"nightlife":2,"romantic":1,"snorkeling":0,"nature":0,"relaxing":1,"entertainment":3,"explore":1,"kids":3,"kidsclub":3,"waterpark":3,"easytravel":2,"familysuites":3,"privatepools":1,"seclusion":0},
+      "verdict": "The largest resort in Mexico, and it behaves like it: an enormous kids club, a wave machine, mini golf and free bikes. The catch is the beach, which is narrow, rocky and not really for swimming, so this is a pool-and-activities holiday rather than a beach one.",
+      "confidence": {"size": "HIGH, 2,000+ rooms, 3,000+ with The Grand, largest in Mexico", "rating": "HIGH, 4.4 across 16,850 Google reviews", "beach": "HIGH, documented as narrow, rocky and brownish, fine for sunbathing not swimming", "kidsclub": "HIGH, theater, water slide, wave machine, mini golf", "easytravel": "MEDIUM, south of the Hotel Zone so a longer transfer", "seaweed": "MEDIUM, southern exposure is the worst-hit stretch"}
+    },
+    {
+      "name": "Hard Rock Hotel Cancun",
+      "slug": "hard-rock-hotel-cancun",
+      "destinationSlug": "cancun",
+      "priceBand": 2,
+      "styles": ["allinclusive", "familyresort", "beachfront", "nearnightlife"],
+      "adultsOnly": false,
+      "allInclusive": true,
+      "vibeScores": {"beach":2,"pool":3,"luxury":2,"value":2,"food":2,"nightlife":3,"romantic":1,"snorkeling":1,"nature":0,"relaxing":1,"entertainment":3,"explore":2,"kids":3,"kidsclub":3,"waterpark":1,"easytravel":3,"familysuites":3,"privatepools":0,"seclusion":0},
+      "verdict": "Loud in the way the brand promises, with strong live music and the widest spread of kids club age bands in Cancun. Families who want energy will like it; anyone listing party as a dealbreaker should look elsewhere.",
+      "confidence": {"kidsclub": "HIGH, more age-range options than Moon Palace", "familysuites": "HIGH, suites for up to six", "nightlife": "MEDIUM-HIGH, brand character and Hotel Zone position", "beach": "MEDIUM"},
+      "note": "nightlife scored 3, so the engine excludes this resort for anyone selecting the 'party' dealbreaker. That is the intended behaviour."
+    },
+    {
+      "name": "Dreams Sands Cancun Resort and Spa",
+      "slug": "dreams-sands-cancun",
+      "destinationSlug": "cancun",
+      "priceBand": 2,
+      "styles": ["allinclusive", "familyresort", "beachfront"],
+      "adultsOnly": false,
+      "allInclusive": true,
+      "vibeScores": {"beach":2,"pool":2,"luxury":1,"value":3,"food":2,"nightlife":1,"romantic":1,"snorkeling":1,"nature":0,"relaxing":2,"entertainment":2,"explore":2,"kids":3,"kidsclub":2,"waterpark":0,"easytravel":3,"familysuites":2,"privatepools":0,"seclusion":0},
+      "verdict": "A mid-market family option in a walkable stretch of the Hotel Zone, without the scale or the price of the Palace properties. The best fit for families who want all-inclusive convenience but not a resort the size of a town.",
+      "confidence": {"value": "MEDIUM", "kids": "MEDIUM", "position": "MEDIUM", "overall": "LOWEST of the ten, least third-party detail found; verify before publishing"}
+    },
+    {
+      "name": "Mondrian Cancun",
+      "slug": "mondrian-cancun",
+      "destinationSlug": "cancun",
+      "priceBand": 3,
+      "styles": ["allinclusive", "luxuryresort", "adultsonly", "beachfront", "nearnightlife"],
+      "adultsOnly": true,
+      "allInclusive": true,
+      "vibeScores": {"beach":2,"pool":3,"luxury":3,"value":1,"food":3,"nightlife":3,"romantic":2,"snorkeling":0,"nature":0,"relaxing":1,"entertainment":3,"explore":2,"kids":0,"kidsclub":0,"waterpark":0,"easytravel":3,"familysuites":0,"privatepools":1,"seclusion":0},
+      "verdict": "The brand's first all-inclusive, opened in June 2026, with more than ten bars and restaurants and a design-hotel tone that skews social rather than restful. New enough that the service reputation is still forming.",
+      "confidence": {"opened": "HIGH, June 2026", "rooms": "HIGH, 400 rooms, ocean or lagoon views", "dining": "HIGH, 10+ bars and restaurants", "adultsOnly": "MEDIUM, verify before publishing", "nightlife": "MEDIUM-HIGH, brand character"},
+      "note": "Opened three months ago, so there is little independent review history. Flagged as the highest-risk record in this batch."
+    }
+  ],
+
+  "_notDone": [
+    "expediaUrl is REQUIRED by the schema and is absent from every record here. Each one must be verified against a live Expedia property page before these can be written to Sanity. A wrong property id sends travelers nowhere and earns nothing.",
+    "heroImageUrl absent on all ten, pending the Travelpayouts image pipeline.",
+    "Paradisus Cancun was excluded: it was closed for renovation until April 2026 and its current state is unverified."
+  ]
+}

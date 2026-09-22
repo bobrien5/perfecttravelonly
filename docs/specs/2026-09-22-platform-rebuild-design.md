@@ -99,9 +99,10 @@ imagery, so it cannot be the image source.
 - **Featured:** supplier media libraries via Fora advisor standing, for the
   handful shown as VacationPro Picks.
 
-`resort.ts` has **no image field at all**. Add one, and store provenance
-(source, licence, attribution) alongside every image. Photos will arrive from
-different origins with different rights, and in six months nobody will
+`resort.ts` already has `heroImageUrl`. What it lacks is a gallery and any
+record of provenance. Add both, storing source, licence and attribution
+alongside every image, because photos will arrive from Travelpayouts, supplier
+libraries and creators under different rights, and in six months nobody will
 remember which is which.
 
 All four surviving deals use Unsplash stock. With a four-deal catalog, every
