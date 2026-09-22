@@ -36,6 +36,43 @@ const nextConfig: NextConfig = {
           "https://www.perfecttravelonly.com/products/excellence-punta-cana-guide",
         permanent: false,
       },
+      // Destinations retired 2026-09-22. These five existed to feed the
+      // Tristar timeshare lead funnel, which ended, so they no longer fit a
+      // Caribbean and Mexico site. All five were live and in the sitemap, so
+      // they redirect rather than 404.
+      //
+      // Hawaii, Maui and Vegas point at the surviving article on that place,
+      // which keeps their link equity flowing to live content instead of
+      // dumping it on a hub page. Miami and Orlando have no equivalent
+      // article, so they fall back to the destinations index.
+      {
+        source: "/destinations/hawaii",
+        destination: "/blog/does-hawaii-have-all-inclusive-resorts",
+        permanent: true,
+      },
+      {
+        source: "/destinations/maui",
+        destination: "/blog/best-time-to-visit-maui",
+        permanent: true,
+      },
+      {
+        source: "/destinations/las-vegas",
+        destination: "/blog/best-time-to-visit-las-vegas",
+        permanent: true,
+      },
+      {
+        source: "/destinations/miami",
+        destination: "/destinations",
+        permanent: true,
+      },
+      {
+        source: "/destinations/orlando",
+        destination: "/destinations",
+        permanent: true,
+      },
+      // TODO (deals rebuild): the four /deals rules below date from the
+      // 2026-07 catalog removal. They MUST be deleted when /deals is rebuilt,
+      // or the new hub redirects to the homepage and is unreachable.
       {
         source: "/deals/:category/:slug",
         destination: "/destinations",
