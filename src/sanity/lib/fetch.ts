@@ -11,8 +11,13 @@ import {
   blogPostBySlugQuery,
   allBlogPostParamsQuery,
   resortsByDestinationQuery,
+  allDealsQuery,
+  featuredDealsQuery,
+  dealBySlugQuery,
+  allDealParamsQuery,
 } from './queries';
 import type { Destination, Category, BlogPost, FullBlogPost } from '@/types';
+import type { Deal } from '@/types/deal';
 import type { ResortAttrs } from '@vacationpro/engine';
 
 // Static data fallbacks (used when Sanity is not yet configured)
@@ -130,4 +135,37 @@ export async function getResortsByDestination(destinationSlug: string): Promise<
     console.error('getResortsByDestination: Sanity fetch error:', err);
     return [];
   }
+}
+
+// ============================================================
+// DEAL FUNCTIONS
+// ============================================================
+
+/**
+ * `today` is passed as a parameter rather than computed inside the GROQ query
+ * so the expiry boundary is decided by the server rendering the page, not by
+ * Sanity's clock, and so tests can pin it.
+ */
+function today(): string {
+  return new Date().toISOString().slice(0, 10);
+}
+
+export async function getAllDeals(): Promise<Deal[]> {
+  if (!isSanityConfigured) return [];
+  return client.fetch<Deal[]>(allDealsQuery, { today: today() });
+}
+
+export async function getFeaturedDeals(): Promise<Deal[]> {
+  if (!isSanityConfigured) return [];
+  return client.fetch<Deal[]>(featuredDealsQuery, { today: today() });
+}
+
+export async function getDealBySlug(slug: string): Promise<Deal | null> {
+  if (!isSanityConfigured) return null;
+  return client.fetch<Deal | null>(dealBySlugQuery, { slug });
+}
+
+export async function getAllDealParams(): Promise<{ slug: string }[]> {
+  if (!isSanityConfigured) return [];
+  return client.fetch<{ slug: string }[]>(allDealParamsQuery);
 }
