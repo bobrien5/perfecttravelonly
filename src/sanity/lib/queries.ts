@@ -12,6 +12,7 @@ const categoryProjection = groq`{
   shortDescription,
   icon,
   heroImage,
+  heroImageAsset,
   seoTitle,
   metaDescription
 }`;
@@ -23,6 +24,7 @@ const destinationProjection = groq`{
   country,
   region,
   heroImage,
+  heroImageAsset,
   description,
   shortDescription,
   categories,
@@ -130,7 +132,8 @@ const resortProjection = groq`{
   allInclusive,
   verdict,
   expediaUrl,
-  heroImageUrl
+  heroImageUrl,
+  heroImageAsset
 }`;
 
 export const resortsByDestinationQuery = groq`

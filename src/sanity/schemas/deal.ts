@@ -16,6 +16,13 @@ const deal = {
     { name: 'slug', title: 'Slug', type: 'slug', group: 'content', options: { source: 'title', maxLength: 96 }, validation: (r: any) => r.required() },
     { name: 'shortDescription', title: 'Short Description', type: 'text', group: 'content', rows: 3, validation: (r: any) => r.required() },
     { name: 'fullDescription', title: 'Full Description', type: 'text', group: 'content', rows: 8 },
+    {
+      name: 'heroImageAsset',
+      title: 'Hero Image (upload)',
+      type: 'image',
+      options: { hotspot: true },
+      description: 'Upload an image here. Preferred over the URL field below, which is kept only so existing content keeps working.',
+    },
     { name: 'heroImage', title: 'Hero Image URL', type: 'url', group: 'content', validation: (r: any) => r.required() },
     { name: 'galleryImages', title: 'Gallery Images', type: 'array', group: 'content', of: [{ type: 'url' }] },
     { name: 'provider', title: 'Provider', type: 'string', group: 'content' },

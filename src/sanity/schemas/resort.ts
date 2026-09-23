@@ -36,6 +36,13 @@ const resort = {
     { name: 'allInclusive', title: 'All Inclusive', type: 'boolean', initialValue: false },
     { name: 'verdict', title: 'Verdict', type: 'text', rows: 3, description: '1-2 sentences, traveler-facing, no em/en dashes', validation: (r: any) => r.required() },
     { name: 'expediaUrl', title: 'Expedia URL', type: 'url', validation: (r: any) => r.required() },
+    {
+      name: 'heroImageAsset',
+      title: 'Hero Image (upload)',
+      type: 'image',
+      options: { hotspot: true },
+      description: 'Upload an image here. Preferred over the URL field below, which is kept only so existing content keeps working.',
+    },
     { name: 'heroImageUrl', title: 'Hero Image URL', type: 'url' },
   ],
   preview: {

@@ -1,3 +1,4 @@
+import { heroImageSrc } from '@/sanity/lib/image';
 import Link from 'next/link';
 import { Destination } from '@/types';
 
@@ -12,7 +13,7 @@ export default function DestinationCard({ destination }: DestinationCardProps) {
       className="group relative rounded-xl overflow-hidden aspect-[4/5] block"
     >
       <img
-        src={destination.heroImage}
+        src={heroImageSrc(destination) ?? ''}
         alt={destination.name}
         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
       />

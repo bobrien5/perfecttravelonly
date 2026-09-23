@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { heroImageSrc } from '@/sanity/lib/image';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
@@ -36,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: cleanTitle,
       description: cleanDesc,
-      images: [{ url: destination.heroImage }],
+      images: [{ url: heroImageSrc(destination) ?? '' }],
     },
   };
 }
@@ -56,7 +57,7 @@ export default async function DestinationPage({ params }: Props) {
       {/* Hero */}
       <div className="relative rounded-2xl overflow-hidden mb-10">
         <img
-          src={destination.heroImage}
+          src={heroImageSrc(destination) ?? ''}
           alt={destination.name}
           className="w-full h-72 md:h-96 object-cover"
         />
@@ -115,7 +116,7 @@ export default async function DestinationPage({ params }: Props) {
                 href={`/destinations/${d.slug}`}
                 className="group relative rounded-xl overflow-hidden aspect-[4/3]"
               >
-                <img src={d.heroImage} alt={d.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <img src={heroImageSrc(d) ?? ''} alt={d.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute bottom-3 left-3">
                   <p className="text-white font-semibold">{d.name}</p>

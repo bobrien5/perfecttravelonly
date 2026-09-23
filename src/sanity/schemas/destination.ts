@@ -8,6 +8,13 @@ const destination = {
     { name: 'slug', title: 'Slug', type: 'slug', options: { source: 'name', maxLength: 96 }, validation: (r: any) => r.required() },
     { name: 'country', title: 'Country', type: 'string' },
     { name: 'region', title: 'Region', type: 'string' },
+    {
+      name: 'heroImageAsset',
+      title: 'Hero Image (upload)',
+      type: 'image',
+      options: { hotspot: true },
+      description: 'Upload an image here. Preferred over the URL field below, which is kept only so existing content keeps working.',
+    },
     { name: 'heroImage', title: 'Hero Image URL', type: 'url' },
     { name: 'description', title: 'Description', type: 'text', rows: 6 },
     { name: 'shortDescription', title: 'Short Description', type: 'text', rows: 2 },

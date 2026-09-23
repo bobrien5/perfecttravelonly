@@ -7,6 +7,7 @@ import { track } from '@vercel/analytics';
 import type { RankedResort } from '@vacationpro/engine';
 
 import { stay22Url } from '@/lib/monetization/stay22';
+import { heroImageSrc } from '@/sanity/lib/image';
 
 interface ResortPickerProps {
   tripId: string;
@@ -64,9 +65,9 @@ export default function ResortPicker({ tripId, destination, ranked, initialResor
 
         return (
           <div key={slug} className="border-2 border-gray-200 rounded-2xl bg-white overflow-hidden">
-            {resort.heroImageUrl ? (
+            {heroImageSrc(resort) ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={resort.heroImageUrl} alt={resort.name} className="w-full h-40 object-cover" />
+              <img src={heroImageSrc(resort) ?? ''} alt={resort.name} className="w-full h-40 object-cover" />
             ) : (
               <div className="w-full h-40 bg-brand-500" aria-hidden="true" />
             )}

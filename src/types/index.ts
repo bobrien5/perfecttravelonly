@@ -1,3 +1,5 @@
+import type { SanityImageSource } from '@sanity/image-url';
+
 export interface Destination {
   id: string;
   name: string;
@@ -5,6 +7,8 @@ export interface Destination {
   country: string;
   region: string;
   heroImage: string;
+  /** Uploaded via the Studio. Preferred over heroImage when set. */
+  heroImageAsset?: SanityImageSource | null;
   description: string;
   shortDescription: string;
   categories: string[];
@@ -21,6 +25,8 @@ export interface Category {
   shortDescription: string;
   icon: string;
   heroImage: string;
+  /** Uploaded via the Studio. Preferred over heroImage when set. */
+  heroImageAsset?: SanityImageSource | null;
   seoTitle: string;
   metaDescription: string;
 }
