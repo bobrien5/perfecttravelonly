@@ -10,14 +10,20 @@ const RESORT_STYLES: ResortStyle[] = [
 const EM_EN_DASH = /[–—]/;
 
 describe('RESORTS seed data', () => {
-  it('has exactly 24 entries', () => {
-    expect(RESORTS).toHaveLength(24);
+  // These were exact counts (24 total, 6 per destination) when the seed was
+  // first written. They are minimums now, because the set is meant to grow as
+  // resorts are researched. The invariant worth protecting is not the number,
+  // it is that no destination silently loses its resorts: below roughly six,
+  // the matcher returns the same handful whatever the traveler answers, which
+  // looks like a broken quiz rather than thin data.
+  it('has at least 24 entries', () => {
+    expect(RESORTS.length).toBeGreaterThanOrEqual(24);
   });
 
-  it('has exactly 6 entries per destination', () => {
+  it('has at least 6 entries per destination', () => {
     for (const dest of DESTINATIONS) {
       const count = RESORTS.filter((r) => r.destinationSlug === dest).length;
-      expect(count, `expected 6 resorts for ${dest}`).toBe(6);
+      expect(count, `expected at least 6 resorts for ${dest}`).toBeGreaterThanOrEqual(6);
     }
   });
 
