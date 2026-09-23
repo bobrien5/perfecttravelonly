@@ -81,29 +81,6 @@ const nextConfig: NextConfig = {
         destination: "/blog",
         permanent: true,
       },
-      // TODO (deals rebuild): the four /deals rules below date from the
-      // 2026-07 catalog removal. They MUST be deleted when /deals is rebuilt,
-      // or the new hub redirects to the homepage and is unreachable.
-      {
-        source: "/deals/:category/:slug",
-        destination: "/blog",
-        permanent: true,
-      },
-      {
-        source: "/deals/:category",
-        destination: "/blog",
-        permanent: true,
-      },
-      {
-        source: "/deals/:path*",
-        destination: "/blog",
-        permanent: true,
-      },
-      {
-        source: "/deals",
-        destination: "/",
-        permanent: true,
-      },
     ];
     return rules;
   },

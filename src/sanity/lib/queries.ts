@@ -139,3 +139,71 @@ const resortProjection = groq`{
 export const resortsByDestinationQuery = groq`
   *[_type == "resort" && destinationSlug == $destinationSlug] ${resortProjection}
 `;
+
+// ============================================================
+// DEAL QUERIES
+// ============================================================
+
+// Rebuilt 2026-09-23. The deals catalog was removed in July 2026 and its
+// queries deleted with it; the documents were never touched. isTimeshare is
+// filtered rather than merely unused, because the purged Tristar-era deals
+// must never resurface if any are restored from backup.
+const dealProjection = groq`{
+  "id": _id,
+  title,
+  "slug": slug.current,
+  shortDescription,
+  fullDescription,
+  heroImage,
+  heroImageAsset,
+  galleryImages,
+  destination,
+  destinationSlug,
+  country,
+  region,
+  price,
+  originalPrice,
+  savingsAmount,
+  savingsPercent,
+  duration,
+  travelDates,
+  bookingWindow,
+  expiresAt,
+  whatsIncluded,
+  disclaimer,
+  editorialNotes,
+  faq,
+  category,
+  categorySlug,
+  featured,
+  isFamilyFriendly,
+  isAdultsOnly,
+  isLuxury,
+  isBudget,
+  isAdvisorPackage,
+  affiliateLink,
+  ctaText,
+  provider,
+  tags,
+  seoTitle,
+  metaDescription
+}`;
+
+/** Live deals only: not expired, never timeshare. Cheapest first. */
+export const allDealsQuery = groq`
+  *[_type == "deal" && isTimeshare != true && (!defined(expiresAt) || expiresAt >= $today)]
+    | order(price asc) ${dealProjection}
+`;
+
+export const featuredDealsQuery = groq`
+  *[_type == "deal" && featured == true && isTimeshare != true && (!defined(expiresAt) || expiresAt >= $today)]
+    | order(price asc) ${dealProjection}
+`;
+
+export const dealBySlugQuery = groq`
+  *[_type == "deal" && slug.current == $slug][0] ${dealProjection}
+`;
+
+export const allDealParamsQuery = groq`
+  *[_type == "deal" && isTimeshare != true && defined(slug.current)]{ "slug": slug.current }
+`;
