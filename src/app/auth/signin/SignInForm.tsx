@@ -5,7 +5,10 @@ import { useSearchParams } from 'next/navigation';
 
 import { createBrowserSupabase } from '@/lib/supabase/browser';
 
-type Provider = 'google' | 'apple';
+// Apple was removed 2026-09-24: never configured, and the button errored for
+// anyone who tried it. Kept as a union so a second provider slots back in
+// without touching handleOAuth.
+type Provider = 'google';
 
 function getNextParam(searchParams: URLSearchParams): string {
   return searchParams.get('next') ?? '/trips';
@@ -173,17 +176,6 @@ export function SignInForm() {
           {loading === 'google' ? 'Redirecting...' : 'Continue with Google'}
         </button>
 
-        <button
-          type="button"
-          onClick={() => handleOAuth('apple')}
-          disabled={loading !== null}
-          className="w-full flex items-center justify-center gap-2.5 border border-gray-300 text-gray-700 py-2.5 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M16.365 1.43c0 1.14-.462 2.245-1.208 3.043-.822.876-2.186 1.55-3.32 1.55-.13 0-.26-.02-.354-.033-.017-.11-.03-.24-.03-.372 0-1.096.51-2.24 1.278-3.006C13.51.79 14.99.06 16.05 0c.017.144.03.267.03.394 0 1.037-.462 2.245-1.208 3.043zM20.5 17.2c-.5 1.15-.74 1.66-1.38 2.68-.9 1.43-2.16 3.2-3.72 3.22-1.4.02-1.76-.9-3.66-.9-1.9 0-2.3.88-3.7.92-1.55.05-2.73-1.55-3.63-2.98C2.1 16.86 1.4 13.24 2.34 10.72c.65-1.75 1.9-2.85 3.24-2.87 1.42-.02 2.32.95 3.7.95 1.38 0 2.24-.95 3.7-.95 1.15 0 2.37.62 3.23 1.7-2.84 1.55-2.38 5.58.29 6.65z" />
-          </svg>
-          {loading === 'apple' ? 'Redirecting...' : 'Continue with Apple'}
-        </button>
       </div>
 
       {error && (
@@ -192,9 +184,6 @@ export function SignInForm() {
         </p>
       )}
 
-      <p className="text-xs text-gray-400 text-center">
-        Google and Apple sign-in may not be configured yet. If a button errors, use email instead.
-      </p>
     </div>
   );
 }
