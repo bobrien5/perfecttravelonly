@@ -6,19 +6,19 @@ import { useNewsletterSubscribe } from '@/hooks/useNewsletterSubscribe';
 
 const footerLinks = {
   guides: [
+    { name: 'Vacation Deals', href: '/deals' },
     { name: 'All Guides', href: '/blog' },
     { name: 'Destinations', href: '/destinations/cancun' },
+    { name: 'Find My Vacation', href: '/quiz' },
     { name: 'Plan With Me', href: '/concierge-planning' },
   ],
   destinations: [
     { name: 'Cancun', href: '/destinations/cancun' },
     { name: 'Punta Cana', href: '/destinations/punta-cana' },
-    { name: 'Jamaica', href: '/destinations/jamaica' },
     { name: 'Aruba', href: '/destinations/aruba' },
     { name: 'Cabo San Lucas', href: '/destinations/cabo-san-lucas' },
-    { name: 'Orlando', href: '/destinations/orlando' },
-    { name: 'Las Vegas', href: '/destinations/las-vegas' },
-    { name: 'Maui', href: '/destinations/maui' },
+    { name: 'Montego Bay', href: '/destinations/jamaica-montego-bay' },
+    { name: 'Negril', href: '/destinations/jamaica-negril' },
   ],
   company: [
     { name: 'About VacationPro', href: '/about' },

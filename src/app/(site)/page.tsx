@@ -3,7 +3,8 @@ import DestinationCard from '@/components/ui/DestinationCard';
 import BlogCard from '@/components/ui/BlogCard';
 import NewsletterSignup from '@/components/ui/NewsletterSignup';
 import SectionHeader from '@/components/ui/SectionHeader';
-import { getAllDestinations, getRecentBlogPosts } from '@/sanity/lib/fetch';
+import { getAllDestinations, getRecentBlogPosts, getFeaturedDeals } from '@/sanity/lib/fetch';
+import DealCard from '@/components/deals/DealCard';
 import Stay22Guard from '@/components/monetization/Stay22Guard';
 import type { Metadata } from 'next';
 
@@ -15,9 +16,10 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const [allDestinations, recentPosts] = await Promise.all([
+  const [allDestinations, recentPosts, featuredDeals] = await Promise.all([
     getAllDestinations(),
     getRecentBlogPosts(6),
+    getFeaturedDeals(),
   ]);
   const topDestinations = allDestinations.slice(0, 8);
 
@@ -32,30 +34,73 @@ export default async function HomePage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 md:py-28">
           <div className="max-w-3xl">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6">
-              Your guide to the best tropical trips.
-              <span className="text-brand-300"> Booked with a real advisor.</span>
+              Where should we send you next?
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-brand-100 mb-6 sm:mb-8 max-w-2xl">
-              Honest guides to all-inclusive resorts, Caribbean beaches, and warm-weather escapes.
-              When you are ready to book, plan the whole trip with me.
+              Handpicked vacation deals, personalized recommendations, and everything
+              you need to plan the perfect trip.
             </p>
-            <div className="flex flex-row gap-3 sm:gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Link
-                href="/blog"
+                href="/quiz"
                 className="inline-flex items-center justify-center px-5 sm:px-8 py-3 sm:py-4 bg-white text-brand-700 font-semibold rounded-xl hover:bg-brand-50 transition-colors text-sm sm:text-lg"
               >
-                Browse Guides
+                Find My Vacation
               </Link>
               <Link
-                href="/concierge-planning"
+                href="/trips"
                 className="inline-flex items-center justify-center px-5 sm:px-8 py-3 sm:py-4 bg-brand-700 text-white font-semibold rounded-xl hover:bg-brand-600 transition-colors text-sm sm:text-lg border border-brand-500"
               >
-                Plan With Me
+                Build a Trip
               </Link>
             </div>
+            <p className="mt-4 text-sm text-brand-100">
+              Or{' '}
+              <Link href="/deals" className="font-semibold text-white underline underline-offset-4">
+                browse deals
+              </Link>{' '}
+              we would book ourselves.
+            </p>
           </div>
         </div>
       </section>
+
+
+      {/* VacationPro Picks: the deals rail, immediately after the hero per the
+          brief. Rendered only when there are featured deals, because every
+          deal carries an expiry and the set can legitimately empty out. An
+          empty rail with a heading reads as broken; no rail reads as fine. */}
+      {featuredDeals.length > 0 && (
+        <section className="bg-cream-50 py-12 sm:py-16">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-6 flex items-end justify-between gap-4">
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+                  VacationPro Picks
+                </h2>
+                <p className="mt-1 text-gray-600">
+                  Handpicked trips we would book ourselves.
+                </p>
+              </div>
+              <Link
+                href="/deals"
+                className="shrink-0 text-sm font-semibold text-brand-700 hover:text-brand-600"
+              >
+                All deals
+              </Link>
+            </div>
+
+            {/* Horizontal scroll on mobile, grid on desktop. */}
+            <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-3">
+              {featuredDeals.slice(0, 6).map((deal) => (
+                <div key={deal.id} className="w-[78vw] shrink-0 snap-start sm:w-auto">
+                  <DealCard deal={deal} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Featured guides */}
       {recentPosts.length > 0 && (

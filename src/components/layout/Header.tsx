@@ -4,22 +4,26 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 const navigation = [
-  { name: 'Guides', href: '/blog' },
+  { name: 'Deals', href: '/deals' },
   {
     name: 'Destinations',
     href: '/destinations/cancun',
+    // Mirrors the published destinations in Sanity. Jamaica, Orlando, Las
+    // Vegas and Maui were retired on 2026-09-22 and removed here: they only
+    // resolved because of the 301s added at the time, so leaving them would
+    // have sent every visitor through a redirect to reach a page that is no
+    // longer part of the site.
     children: [
       { name: 'Cancun', href: '/destinations/cancun' },
       { name: 'Punta Cana', href: '/destinations/punta-cana' },
-      { name: 'Jamaica', href: '/destinations/jamaica' },
       { name: 'Aruba', href: '/destinations/aruba' },
       { name: 'Cabo San Lucas', href: '/destinations/cabo-san-lucas' },
-      { name: 'Orlando', href: '/destinations/orlando' },
-      { name: 'Las Vegas', href: '/destinations/las-vegas' },
-      { name: 'Maui', href: '/destinations/maui' },
+      { name: 'Montego Bay', href: '/destinations/jamaica-montego-bay' },
+      { name: 'Negril', href: '/destinations/jamaica-negril' },
     ],
   },
-  { name: 'About', href: '/about' },
+  { name: 'Plan a Trip', href: '/quiz' },
+  { name: 'Guides', href: '/blog' },
 ];
 
 export default function Header() {
@@ -80,10 +84,10 @@ export default function Header() {
           {/* CTA + Mobile Toggle, pushed to the right edge */}
           <div className="flex items-center gap-3 ml-auto shrink-0">
             <Link
-              href="/concierge-planning"
+              href="/trips"
               className="hidden sm:inline-flex items-center px-5 py-2.5 bg-brand-600 text-white text-[0.9375rem] font-semibold rounded-lg hover:bg-brand-700 transition-colors"
             >
-              Plan With Me
+              My Trips
             </Link>
             <button
               className="lg:hidden p-2 text-gray-600 hover:text-gray-900"
@@ -133,11 +137,11 @@ export default function Header() {
             ))}
             <div className="pt-3 px-3">
               <Link
-                href="/concierge-planning"
+                href="/trips"
                 className="block w-full text-center px-4 py-2 bg-brand-600 text-white font-medium rounded-lg hover:bg-brand-700 transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
-                Plan With Me
+                My Trips
               </Link>
             </div>
           </div>
