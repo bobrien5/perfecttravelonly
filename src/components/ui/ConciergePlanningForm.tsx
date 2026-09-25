@@ -280,6 +280,14 @@ export default function ConciergePlanningForm({ defaultDestination, sourceLabel 
         opportunityId?: string;
         error?: string;
       };
+      if (res.status === 402) {
+        // The API refused because concierge is a Vault benefit. The pages
+        // that render this form normally hide it from non-members, so this
+        // only fires if someone reaches the form another way; send them to
+        // the join page rather than showing an error they cannot act on.
+        window.location.href = '/vault?from=concierge';
+        return;
+      }
       if (!res.ok) {
         throw new Error(intakeData.error || 'Something went wrong');
       }

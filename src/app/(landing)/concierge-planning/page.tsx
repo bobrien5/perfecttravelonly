@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import ConciergePlanningForm from '@/components/ui/ConciergePlanningForm';
+import { getVaultMembership } from '@/lib/vault/membership';
 import Stay22Guard from '@/components/monetization/Stay22Guard';
 import {
   CONCIERGE_FEE_ENABLED,
@@ -14,7 +15,11 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
-export default function ConciergePlanningPage() {
+export default async function ConciergePlanningPage() {
+  // Concierge planning is a Vacation Vault benefit. The page itself stays
+  // public and indexable (it is also an ad landing page); only the intake
+  // form is swapped for a join prompt when the visitor is not a member.
+  const { isMember, user } = await getVaultMembership();
   return (
     <main className="min-h-screen bg-cream-50 py-12 px-4 sm:px-6 lg:px-8">
       <Stay22Guard />
@@ -122,7 +127,39 @@ export default function ConciergePlanningPage() {
           </div>
 
           <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
-            <ConciergePlanningForm />
+            {isMember ? (
+              <ConciergePlanningForm />
+            ) : (
+              <div className="rounded-2xl bg-brand-700 p-6 text-white sm:p-8">
+                <p className="text-xs font-bold uppercase tracking-wide text-white/70">
+                  Vacation Vault members
+                </p>
+                <h3 className="mt-1 text-2xl font-bold">
+                  Concierge planning is a member benefit
+                </h3>
+                <p className="mt-2 text-white/85">
+                  Vault members get a licensed advisor building real options around their dates
+                  and budget, plus every deal in the Vault fully unlocked. $5.99 a month or $59 a
+                  year, cancel any time.
+                </p>
+                <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+                  <a
+                    href="/vault?from=concierge"
+                    className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 font-semibold text-brand-700 transition hover:bg-brand-50"
+                  >
+                    Join the Vault
+                  </a>
+                  {!user && (
+                    <a
+                      href="/auth/signin?next=%2Fconcierge-planning"
+                      className="inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold text-white ring-1 ring-white/40 transition hover:bg-white/10"
+                    >
+                      Already a member? Sign in
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Trust strip */}

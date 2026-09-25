@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { contacts, opportunities, GHLError } from '@/lib/ghl';
+import { getVaultMembership } from '@/lib/vault/membership';
 import { CONCIERGE_FEE_ENABLED } from '@/lib/concierge';
 
 // ─── GHL Pipeline & Stage IDs ────────────────────────────────
@@ -121,6 +122,22 @@ function toSourceSlug(source: string): string {
  * 3. Create opportunity in Marketing Pipeline → New Lead stage
  */
 export async function POST(request: NextRequest) {
+  // Concierge planning is a Vacation Vault benefit (decided 2026-09-25).
+  // Enforced here, not only in the form, because the form is client code and
+  // anyone can post to this route directly. 402 rather than 403 so the form
+  // can tell "join to unlock" apart from "not allowed".
+  const { isMember } = await getVaultMembership();
+  if (!isMember) {
+    return NextResponse.json(
+      {
+        error: 'Concierge planning is a Vacation Vault member benefit.',
+        membersOnly: true,
+        joinUrl: '/vault',
+      },
+      { status: 402 }
+    );
+  }
+
   try {
     const body: ConciergeIntakeRequest = await request.json();
 
