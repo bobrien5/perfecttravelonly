@@ -50,9 +50,12 @@ const BLOCKS: Block[] = [
     alt: 'Palm-lined resort pool on the Riviera Maya',
   },
   {
-    href: `/concierge-planning?${UTM}`,
-    label: 'Book a Free Trip Planning Call',
-    description: 'I will plan your trip personally. No booking fees, ever.',
+    // Points at /vault, not /concierge-planning: concierge is a Vault member
+    // benefit, so sending bio traffic straight to the gated page meant a paywall.
+    href: `/vault?${UTM}`,
+    label: 'Let Me Plan Your Trip',
+    description:
+      'Custom vacation packages planned for you personally, included with Vacation Vault. No booking fees, ever.',
     img: '/links/concierge.jpg',
     alt: 'Calm bay and green hills at Montego Bay, Jamaica',
   },
