@@ -45,7 +45,18 @@ export async function getVaultMembership(): Promise<VaultMembership> {
     .maybeSingle();
 
   const status = (data?.vault_status ?? null) as VaultStatus | null;
-  const grantsAccess = status === 'active' || status === 'trialing' || status === 'past_due';
+  const statusGrants = status === 'active' || status === 'trialing' || status === 'past_due';
+
+  // Backstop against a permanently lost webhook. Access normally ends when
+  // customer.subscription.deleted arrives, but if Stripe exhausts its retries
+  // and that event never lands, a cancelled member would keep access forever.
+  // A period end well past its renewal date means something did not arrive, so
+  // stop trusting the stored status. The window is generous because Stripe's
+  // dunning on a failed card legitimately runs for weeks.
+  const periodEnd = data?.vault_period_end ?? null;
+  const graceMs = 14 * 24 * 60 * 60 * 1000;
+  const staleBeyondGrace = periodEnd !== null && Date.now() - new Date(periodEnd).getTime() > graceMs;
+  const grantsAccess = statusGrants && !staleBeyondGrace;
 
   return {
     user,

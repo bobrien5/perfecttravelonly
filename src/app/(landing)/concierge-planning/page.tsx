@@ -3,9 +3,11 @@ import ConciergePlanningForm from '@/components/ui/ConciergePlanningForm';
 import { getVaultMembership } from '@/lib/vault/membership';
 import Stay22Guard from '@/components/monetization/Stay22Guard';
 import {
-  CONCIERGE_FEE_ENABLED,
+  conciergeIsOpenTo,
+  conciergePrice,
+  conciergeRequiresPayment,
   CONCIERGE_META_DESCRIPTION,
-  CONCIERGE_PRICE_LABEL,
+
 } from '@/lib/concierge';
 
 export const metadata: Metadata = {
@@ -16,10 +18,14 @@ export const metadata: Metadata = {
 };
 
 export default async function ConciergePlanningPage() {
-  // Concierge planning is a Vacation Vault benefit. The page itself stays
-  // public and indexable (it is also an ad landing page); only the intake
-  // form is swapped for a join prompt when the visitor is not a member.
+  // Concierge planning is free for Vault members and a paid service for
+  // everyone else (2026-10-14). The page is public and indexable, and the form
+  // is shown to everyone: non-members simply pay the planning fee after intake
+  // rather than being turned away at the door.
   const { isMember, user } = await getVaultMembership();
+  const { label: priceLabel, note: priceNote } = conciergePrice(isMember);
+  const requiresPayment = conciergeRequiresPayment(isMember);
+  const canSubmit = conciergeIsOpenTo(isMember);
   return (
     <main className="min-h-screen bg-cream-50 py-12 px-4 sm:px-6 lg:px-8">
       <Stay22Guard />
@@ -61,17 +67,17 @@ export default async function ConciergePlanningPage() {
               Plan it for me
             </h2>
             <div className="flex items-baseline gap-2 mb-4">
-              <span className="text-4xl font-extrabold text-brand-600">{CONCIERGE_PRICE_LABEL}</span>
-              <span className="text-sm text-gray-500">
-                {CONCIERGE_FEE_ENABLED ? 'research + advisor time' : 'for a limited time'}
-              </span>
+              <span className="text-4xl font-extrabold text-brand-600">{priceLabel}</span>
+              <span className="text-sm text-gray-500">{priceNote}</span>
             </div>
             <p className="text-gray-600 mb-6 leading-relaxed">
               Tell me your dream trip. I find the resort, compare flights, and build a full
               itinerary with rooms, dining, and excursions.{' '}
-              {CONCIERGE_FEE_ENABLED
-                ? `The ${CONCIERGE_PRICE_LABEL} fee covers the research and your travel advisor's time building the plan.`
-                : 'Research and your travel advisor’s time are included, no planning fee while I open up spots.'}
+              {requiresPayment
+                ? `The ${priceLabel} planning fee covers the research and your travel advisor's time building the plan. Vacation Vault members pay nothing.`
+                : isMember
+                  ? 'Research and your travel advisor’s time are included with your Vacation Vault membership. No planning fee.'
+                  : 'Research and your travel advisor’s time are included with Vacation Vault membership. There is no separate planning fee.'}
             </p>
 
             <div className="mb-6">
@@ -110,7 +116,11 @@ export default async function ConciergePlanningPage() {
               href="#plan-my-trip"
               className="mt-auto block w-full text-center bg-brand-500 hover:bg-brand-600 text-white font-bold py-4 px-6 rounded-xl transition-colors"
             >
-              {CONCIERGE_FEE_ENABLED ? `Start Planning (${CONCIERGE_PRICE_LABEL})` : 'Start planning, free'}
+              {requiresPayment
+                ? `Start Planning (${priceLabel})`
+                : isMember
+                  ? 'Start planning, free'
+                  : 'Join the Vault and start planning'}
             </a>
           </div>
         </div>
@@ -127,20 +137,43 @@ export default async function ConciergePlanningPage() {
           </div>
 
           <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
-            {isMember ? (
-              <ConciergePlanningForm />
+            {canSubmit ? (
+              <>
+                {!isMember && (
+                  <div className="mb-6 rounded-2xl bg-brand-700 p-5 text-white sm:p-6">
+                    <p className="text-xs font-bold uppercase tracking-wide text-white/70">
+                      Before you pay the planning fee
+                    </p>
+                    <h3 className="mt-1 text-xl font-bold">
+                      A year in the Vault costs less than one planning fee.
+                    </h3>
+                    <p className="mt-2 text-white/85">
+                      Membership is $5.99 a month or $59 a year, and it includes concierge
+                      planning at no charge plus every deal in the Vault fully unlocked.
+                    </p>
+                    <a
+                      href="/vault?from=concierge"
+                      className="mt-5 inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 font-semibold text-brand-700 transition hover:bg-brand-50"
+                    >
+                      Join the Vault instead
+                    </a>
+                  </div>
+                )}
+                <ConciergePlanningForm isMember={isMember} />
+              </>
             ) : (
               <div className="rounded-2xl bg-brand-700 p-6 text-white sm:p-8">
                 <p className="text-xs font-bold uppercase tracking-wide text-white/70">
                   Vacation Vault members
                 </p>
                 <h3 className="mt-1 text-2xl font-bold">
-                  Concierge planning is a member benefit
+                  A licensed advisor builds your trip, included with membership
                 </h3>
                 <p className="mt-2 text-white/85">
-                  Vault members get a licensed advisor building real options around their dates
-                  and budget, plus every deal in the Vault fully unlocked. $5.99 a month or $59 a
-                  year, cancel any time.
+                  Tell me where and roughly when, and I build real options around your dates
+                  and your budget. Most advisors charge a planning fee for this. Vault members
+                  do not pay one, and you also get every deal in the Vault fully unlocked.
+                  $5.99 a month or $59 a year, cancel any time.
                 </p>
                 <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                   <a
@@ -173,9 +206,9 @@ export default async function ConciergePlanningPage() {
               <div className="text-xs text-gray-600 uppercase tracking-wide">Real travel advisor</div>
             </div>
             <div>
-              <div className="text-2xl font-extrabold text-brand-600">{CONCIERGE_PRICE_LABEL}</div>
+              <div className="text-2xl font-extrabold text-brand-600">{priceLabel}</div>
               <div className="text-xs text-gray-600 uppercase tracking-wide">
-                {CONCIERGE_FEE_ENABLED ? 'Research + advisor time' : 'No planning fee right now'}
+                {requiresPayment ? 'Research + advisor time' : 'Free for members'}
               </div>
             </div>
           </div>

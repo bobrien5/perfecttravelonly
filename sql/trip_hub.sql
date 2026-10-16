@@ -1,3 +1,13 @@
+-- !! MIGRATION ORDER !!
+-- Do NOT re-run this file after sql/vacation_vault.sql.
+-- The "profiles update own" policy created below is permissive: it lets a
+-- signed-in user write any column on their own row, including plan.
+-- vacation_vault.sql drops it and installs "profiles update own non-billing",
+-- which pins the billing columns. Postgres ORs multiple permissive policies
+-- for the same command, so re-creating this one would hand every account free
+-- Vacation Vault access regardless of the restricted policy still existing.
+-- If you must re-run this file, run vacation_vault.sql again afterwards.
+
 -- Trip Hub schema. Run in the Supabase SQL editor AFTER sql/quiz_sessions.sql
 -- and BEFORE deploying /trips. Nothing in the app auto-runs this.
 

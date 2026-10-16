@@ -46,9 +46,22 @@ export async function POST(req: NextRequest) {
   const supabase = await createServerSupabase();
   const { data: profile } = await supabase
     .from('profiles')
-    .select('stripe_customer_id')
+    .select('stripe_customer_id, plan, vault_status')
     .eq('user_id', user.id)
     .maybeSingle();
+
+  // Never let an existing member start a second subscription. /vault hides the
+  // buttons from members, but this route is a plain POST: a stale tab, a double
+  // submission or a direct call would otherwise create a second subscription
+  // and charge them twice. Send them to their membership page instead.
+  const alreadyGranted =
+    profile?.plan === 'plus' &&
+    (profile?.vault_status === 'active' ||
+      profile?.vault_status === 'trialing' ||
+      profile?.vault_status === 'past_due');
+  if (alreadyGranted) {
+    return NextResponse.json({ url: '/vault', alreadyMember: true });
+  }
 
   const stripe = new Stripe(secret);
   const origin =

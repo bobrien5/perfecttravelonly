@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { contacts, opportunities, GHLError } from '@/lib/ghl';
 import { getVaultMembership } from '@/lib/vault/membership';
-import { CONCIERGE_FEE_ENABLED } from '@/lib/concierge';
+import { conciergeIsOpenTo, conciergeRequiresPayment } from '@/lib/concierge';
 
 // ─── GHL Pipeline & Stage IDs ────────────────────────────────
 const PIPELINE_ID = 'p9PU7opJfYkgYvL8mHhU';
@@ -126,8 +126,12 @@ export async function POST(request: NextRequest) {
   // Enforced here, not only in the form, because the form is client code and
   // anyone can post to this route directly. 402 rather than 403 so the form
   // can tell "join to unlock" apart from "not allowed".
+  // Concierge planning is free for Vault members and a paid service for
+  // everyone else (2026-10-14). Non-members are no longer turned away: intake
+  // still captures the lead and the form sends them to Stripe afterwards, so a
+  // non-member who does not pay is a lead we keep rather than one we lose.
   const { isMember } = await getVaultMembership();
-  if (!isMember) {
+  if (!conciergeIsOpenTo(isMember)) {
     return NextResponse.json(
       {
         error: 'Concierge planning is a Vacation Vault member benefit.',
@@ -137,6 +141,7 @@ export async function POST(request: NextRequest) {
       { status: 402 }
     );
   }
+  const requiresPayment = conciergeRequiresPayment(isMember);
 
   try {
     const body: ConciergeIntakeRequest = await request.json();
@@ -150,7 +155,7 @@ export async function POST(request: NextRequest) {
     // Build tags
     const sourceSlug = body.source ? toSourceSlug(body.source) : 'unknown';
     const tags = [
-      CONCIERGE_FEE_ENABLED ? 'concierge-pending-payment' : 'concierge-free-intake',
+      requiresPayment ? 'concierge-pending-payment' : 'concierge-member-free-intake',
       'concierge-vip',
       'vacationpro',
       `concierge-source-${sourceSlug}`,
@@ -269,6 +274,7 @@ export async function POST(request: NextRequest) {
         success: true,
         contactId,
         opportunityId,
+        requiresPayment,
       },
       { status: 201 }
     );

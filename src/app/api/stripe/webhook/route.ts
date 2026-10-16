@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
         if (!userId || !customerId || !subId) break;
 
         const sub = await stripe.subscriptions.retrieve(subId);
-        await upsertMembership({ userId, customerId, sub });
+        await upsertMembership({ userId, customerId, sub, eventCreated: event.created });
         break;
       }
 
@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
         const customerId = typeof sub.customer === 'string' ? sub.customer : sub.customer.id;
         const userId = sub.metadata?.userId || (await userIdForCustomer(customerId));
         if (!userId) break;
-        await upsertMembership({ userId, customerId, sub });
+        await upsertMembership({ userId, customerId, sub, eventCreated: event.created });
         break;
       }
 
@@ -69,10 +69,17 @@ export async function POST(req: NextRequest) {
         const invoice = event.data.object as Stripe.Invoice;
         const customerId = typeof invoice.customer === 'string' ? invoice.customer : invoice.customer?.id;
         if (!customerId) break;
+        // Scope to the Vault subscription. Without this, a failed invoice for
+        // any other product on the same customer (a one-off concierge fee, the
+        // course) would flip a healthy member to past_due.
+        const invSub = (invoice as unknown as { subscription?: string | { id: string } }).subscription;
+        const invSubId = typeof invSub === 'string' ? invSub : invSub?.id;
+        if (!invSubId) break;
         await supabase
           .from('profiles')
           .update({ vault_status: 'past_due' })
-          .eq('stripe_customer_id', customerId);
+          .eq('stripe_customer_id', customerId)
+          .eq('stripe_subscription_id', invSubId);
         break;
       }
 
@@ -108,11 +115,33 @@ async function upsertMembership({
   userId,
   customerId,
   sub,
+  eventCreated,
 }: {
   userId: string;
   customerId: string;
   sub: Stripe.Subscription;
+  /** Stripe event.created, in seconds. Used as a high-water mark. */
+  eventCreated: number;
 }) {
+  // Stripe does not guarantee delivery order, so an older event can land after
+  // a newer one. Anything older than what we have already applied is dropped
+  // rather than written, which would otherwise restore stale status.
+  const eventAt = new Date(eventCreated * 1000).toISOString();
+  const { data: existing } = await supabase
+    .from('profiles')
+    .select('vault_event_at')
+    .eq('user_id', userId)
+    .maybeSingle();
+  // Compared as instants, not strings: Postgres returns "…+00:00" while
+  // toISOString() emits "….000Z", so a lexicographic compare is decided by the
+  // offset format rather than the time whenever two events share a second.
+  if (
+    existing?.vault_event_at &&
+    new Date(existing.vault_event_at).getTime() > eventCreated * 1000
+  ) {
+    return;
+  }
+
   const item = sub.items?.data?.[0];
   const periodEndUnix =
     (item as unknown as { current_period_end?: number })?.current_period_end ??
@@ -131,6 +160,7 @@ async function upsertMembership({
       vault_status: mapStatus(status),
       vault_period_end: periodEndUnix ? new Date(periodEndUnix * 1000).toISOString() : null,
       vault_interval: interval,
+      vault_event_at: eventAt,
     },
     { onConflict: 'user_id' }
   );

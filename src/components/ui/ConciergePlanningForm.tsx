@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { trackLead } from '@/lib/meta-pixel';
-import { CONCIERGE_FEE, CONCIERGE_FEE_ENABLED } from '@/lib/concierge';
+import { conciergeFeeFor } from '@/lib/concierge';
 
 // ─── Dropdown / Checkbox Options ─────────────────────────────
 
@@ -141,9 +141,12 @@ const errorClasses = 'text-xs text-red-600 mt-1';
 interface ConciergePlanningFormProps {
   defaultDestination?: string;
   sourceLabel?: string;
+  /** Vault members plan for free; everyone else pays the planning fee. */
+  isMember?: boolean;
 }
 
-export default function ConciergePlanningForm({ defaultDestination, sourceLabel }: ConciergePlanningFormProps = {}) {
+export default function ConciergePlanningForm({ defaultDestination, sourceLabel, isMember = false }: ConciergePlanningFormProps = {}) {
+  const fee = conciergeFeeFor(isMember);
   const [formData, setFormData] = useState<FormData>({
     ...initialFormData,
     destination: defaultDestination ?? initialFormData.destination,
@@ -155,6 +158,7 @@ export default function ConciergePlanningForm({ defaultDestination, sourceLabel 
   const [intakeResult, setIntakeResult] = useState<{
     contactId?: string;
     opportunityId?: string;
+    requiresPayment?: boolean;
   }>({});
   const hasUnlistedDefault = Boolean(
     defaultDestination && !DESTINATION_OPTIONS.includes(defaultDestination),
@@ -296,7 +300,7 @@ export default function ConciergePlanningForm({ defaultDestination, sourceLabel 
       trackLead({
         content_name: 'Concierge Planning',
         content_category: formData.destination,
-        value: CONCIERGE_FEE ?? 0,
+        value: fee ?? 0,
         currency: 'USD',
       });
     } catch (err) {
@@ -308,6 +312,10 @@ export default function ConciergePlanningForm({ defaultDestination, sourceLabel 
   }
 
   // ─── Success State ───────────────────────────────────────
+
+  // The server decides this, because membership is read server-side; the prop
+  // is only the fallback for the first render before intake has replied.
+  const requiresPayment = intakeResult.requiresPayment ?? fee !== null;
 
   if (status === 'success') {
     async function startCheckout() {
@@ -339,7 +347,7 @@ export default function ConciergePlanningForm({ defaultDestination, sourceLabel 
       }
     }
 
-    if (!CONCIERGE_FEE_ENABLED) {
+    if (!requiresPayment) {
       return (
         <div className="py-4">
           <div className="text-center">
@@ -719,8 +727,8 @@ export default function ConciergePlanningForm({ defaultDestination, sourceLabel 
             </svg>
             Submitting...
           </>
-        ) : CONCIERGE_FEE_ENABLED ? (
-          `Continue to $${CONCIERGE_FEE} Payment`
+        ) : fee !== null ? (
+          `Continue to $${fee} Payment`
         ) : (
           'Get my free trip plan'
         )}
