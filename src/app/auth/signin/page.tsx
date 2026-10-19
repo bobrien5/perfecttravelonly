@@ -3,7 +3,9 @@ import { Suspense } from 'react';
 import { SignInForm } from './SignInForm';
 
 export const metadata = {
-  title: 'Sign in | VacationPro Trip Hub',
+  title: 'Sign in to the Trip Hub',
+  // Private auth page: never belongs in an index.
+  robots: { index: false, follow: false },
 };
 
 export default function SignInPage() {

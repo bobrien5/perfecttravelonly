@@ -10,7 +10,7 @@ import TripChecklist from './TripChecklist';
 export const dynamic = 'force-dynamic';
 
 export const metadata = {
-  title: 'Your Trip | VacationPro Trip Hub',
+  title: 'Your Trip in the Trip Hub',
 };
 
 function destinationName(slug: string): string {

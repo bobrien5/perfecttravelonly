@@ -11,7 +11,7 @@ import ResortPicker from './ResortPicker';
 export const dynamic = 'force-dynamic';
 
 export const metadata = {
-  title: 'Pick Your Resort | VacationPro Trip Hub',
+  title: 'Pick Your Resort in the Trip Hub',
 };
 
 function destinationName(slug: string): string {
