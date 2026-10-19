@@ -99,6 +99,14 @@ export default function RootLayout({
 })();`,
           }}
         />
+        {/* ScriptWrapper tag */}
+        <script
+          type="text/javascript"
+          async
+          data-noptimize="1"
+          data-cfasync="false"
+          src="//scripts.scriptwrapper.com/tags/e826f3a3-1424-4081-9650-1fad60b84735.js"
+        />
       </head>
       <body className="antialiased overflow-x-hidden">
         <MetaPixelNoScript />
