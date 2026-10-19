@@ -45,3 +45,32 @@ export function getSessionId(): string {
     return crypto.randomUUID();
   }
 }
+
+/**
+ * Persists an email against the quiz session and subscribes it to the
+ * newsletter. Used by the SaveGate before it starts any auth flow, so the
+ * lead survives a magic link that is never opened.
+ *
+ * Both calls are best-effort and independent: a Beehiiv failure must not lose
+ * the row in our own database, and neither is allowed to throw into the UI.
+ */
+export async function captureSessionEmail(
+  payload: SessionPayload,
+  email: string
+): Promise<void> {
+  await postSession({ ...payload, email });
+  try {
+    await fetch('/api/newsletter/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email,
+        utmSource: 'vacationpro',
+        utmMedium: 'quiz',
+        utmCampaign: 'quiz-matches',
+      }),
+    });
+  } catch (err) {
+    console.error('newsletter subscribe failed:', err);
+  }
+}

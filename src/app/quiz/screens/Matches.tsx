@@ -2,7 +2,7 @@ import { Dispatch, useEffect, useMemo, useRef, useState } from 'react';
 import { QuizAction, QuizAnswers, rankMatches } from '@vacationpro/engine';
 import MatchCard from '../components/MatchCard';
 import SaveGate from '../components/SaveGate';
-import { getSessionId, postSession } from '../lib/session';
+import { captureSessionEmail, getSessionId, postSession } from '../lib/session';
 
 interface MatchesProps {
   answers: QuizAnswers;
@@ -119,7 +119,14 @@ function MatchReveal({
         onSaveMatches={() => setGateOpen(true)}
       />
 
-      {gateOpen && <SaveGate onClose={() => setGateOpen(false)} />}
+      {gateOpen && (
+        <SaveGate
+          onClose={() => setGateOpen(false)}
+          onCaptureEmail={(email) =>
+            captureSessionEmail({ sessionId: getSessionId(), answers, topMatches }, email)
+          }
+        />
+      )}
 
       {runnerUps.length > 0 && (
         <div className="mt-6">

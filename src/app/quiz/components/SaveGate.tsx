@@ -6,6 +6,12 @@ import { EMAIL_RE } from '@/app/api/quiz-session/validate';
 
 interface SaveGateProps {
   onClose: () => void;
+  /**
+   * Persists the typed email against the quiz session and subscribes it.
+   * Called before any auth happens, so a visitor who never opens the magic
+   * link is still a reachable lead rather than an anonymous row.
+   */
+  onCaptureEmail: (email: string) => Promise<void> | void;
 }
 
 type Provider = 'google' | 'apple';
@@ -23,7 +29,7 @@ function getCallbackUrl(): string {
  * OTP magic link. Either way the callback lands back on /quiz?claim=1,
  * where the quiz wizard claims the anonymous session and creates the trip.
  */
-export default function SaveGate({ onClose }: SaveGateProps) {
+export default function SaveGate({ onClose, onCaptureEmail }: SaveGateProps) {
   const [email, setEmail] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [emailSent, setEmailSent] = useState(false);
@@ -42,6 +48,18 @@ export default function SaveGate({ onClose }: SaveGateProps) {
     setLoading('email');
     track('quiz_save', { hasEmail: true });
     trackLead({ content_name: 'Quiz Save Matches' });
+
+    // Capture first, authenticate second. Until 2026-10-19 the email was only
+    // ever used as an OTP address, so 78 completed quizzes produced 0 reachable
+    // leads: the address was typed, the magic link was sent, and if it was
+    // never opened the row stayed anonymous. Awaited but never allowed to
+    // block sign-in, because a failed capture must not cost the visitor their
+    // account.
+    try {
+      await onCaptureEmail(trimmed);
+    } catch (err) {
+      console.error('quiz email capture failed:', err);
+    }
 
     try {
       const supabase = createBrowserSupabase();
@@ -108,8 +126,9 @@ export default function SaveGate({ onClose }: SaveGateProps) {
           <div className="text-center py-6">
             <h2 className="text-lg font-extrabold text-gray-900 mb-2">Check your inbox</h2>
             <p className="text-sm text-gray-500">
-              We sent a sign-in link to <span className="font-semibold text-gray-700">{email}</span>.
-              Open it on this device to continue.
+              Your matches are saved and we sent a sign-in link to{' '}
+              <span className="font-semibold text-gray-700">{email}</span>. Open it on this
+              device to build the full itinerary.
             </p>
             <button
               type="button"
@@ -121,12 +140,38 @@ export default function SaveGate({ onClose }: SaveGateProps) {
           </div>
         ) : (
           <>
-            <h2 className="text-xl font-extrabold text-gray-900 mb-2">Save your matches</h2>
+            <h2 className="text-xl font-extrabold text-gray-900 mb-2">Get your matches</h2>
             <p className="text-gray-600 mb-5">
-              Create a free VacationPro account to save your trip and build your personalized itinerary.
+              Enter your email and I will send your matches over, plus the deals I find for
+              these destinations. Creating an account is optional.
             </p>
 
-            <div className="space-y-2.5 mb-4">
+            <form onSubmit={handleEmailSubmit} className="mb-4">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                autoComplete="email"
+                className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 mb-2 text-gray-900 focus:border-brand-500 focus:outline-none"
+              />
+              {error && <p className="text-sm text-red-600 mb-2">{error}</p>}
+              <button
+                type="submit"
+                disabled={loading !== null}
+                className="bg-brand-500 hover:bg-brand-600 disabled:opacity-50 text-white rounded-xl py-3.5 font-bold w-full"
+              >
+                {loading === 'email' ? 'Sending...' : 'Send me my matches'}
+              </button>
+            </form>
+
+            <div className="flex items-center gap-3 mb-4">
+              <div className="h-px flex-1 bg-gray-200" />
+              <span className="text-xs text-gray-400 uppercase tracking-wide">Or</span>
+              <div className="h-px flex-1 bg-gray-200" />
+            </div>
+
+            <div className="space-y-2.5">
               <button
                 type="button"
                 onClick={() => handleOAuth('google')}
@@ -155,29 +200,6 @@ export default function SaveGate({ onClose }: SaveGateProps) {
               </button>
             </div>
 
-            <div className="flex items-center gap-3 mb-4">
-              <div className="h-px flex-1 bg-gray-200" />
-              <span className="text-xs text-gray-400 uppercase tracking-wide">Or</span>
-              <div className="h-px flex-1 bg-gray-200" />
-            </div>
-
-            <form onSubmit={handleEmailSubmit}>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
-                className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 mb-2 text-gray-900 focus:border-brand-500 focus:outline-none"
-              />
-              {error && <p className="text-sm text-red-600 mb-2">{error}</p>}
-              <button
-                type="submit"
-                disabled={loading !== null}
-                className="bg-brand-500 hover:bg-brand-600 disabled:opacity-50 text-white rounded-xl py-3.5 font-bold w-full"
-              >
-                {loading === 'email' ? 'Sending...' : 'Continue with email'}
-              </button>
-            </form>
           </>
         )}
       </div>

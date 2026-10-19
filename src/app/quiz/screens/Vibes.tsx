@@ -3,7 +3,7 @@ import { track } from '@vercel/analytics';
 import { QuizAction, QuizAnswers, vibeTilesFor, DESTINATION_PROFILES } from '@vacationpro/engine';
 import OptionCard from '../components/OptionCard';
 import SaveGate from '../components/SaveGate';
-import { getSessionId, postSession } from '../lib/session';
+import { captureSessionEmail, getSessionId, postSession } from '../lib/session';
 
 interface VibesProps {
   answers: QuizAnswers;
@@ -73,7 +73,21 @@ export default function Vibes({ answers, dispatch }: VibesProps) {
         {isKnown ? `Build My ${destination?.name ?? 'Trip'} Trip` : 'Continue'}
       </button>
 
-      {gateOpen && <SaveGate onClose={() => setGateOpen(false)} />}
+      {gateOpen && (
+        <SaveGate
+          onClose={() => setGateOpen(false)}
+          onCaptureEmail={(email) =>
+            captureSessionEmail(
+              {
+                sessionId: getSessionId(),
+                answers,
+                topMatches: destination ? [{ slug: destination.slug, pct: 100 }] : [],
+              },
+              email
+            )
+          }
+        />
+      )}
     </div>
   );
 }
