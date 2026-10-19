@@ -37,7 +37,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: cleanTitle,
       description: cleanDesc,
-      images: post.image ? [{ url: post.image }] : [],
+      // An empty array OVERRIDES the root layout's default og:image, so a post
+      // without a hero shipped with no og:image at all and shared as a bare
+      // link. Falling back to the site default keeps every post shareable.
+      images: [{ url: post.image || '/og-default.png' }],
     },
   };
 }

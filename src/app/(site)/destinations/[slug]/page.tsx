@@ -37,7 +37,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: cleanTitle,
       description: cleanDesc,
-      images: [{ url: heroImageSrc(destination) ?? '' }],
+      // Was `?? ''`, which shipped an empty og:image URL. Same failure as the
+      // blog route: fall back to the site default instead.
+      images: [{ url: heroImageSrc(destination) || '/og-default.png' }],
     },
   };
 }

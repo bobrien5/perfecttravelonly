@@ -7,7 +7,7 @@ import ManageMembershipButton from './ManageMembershipButton';
 export const metadata: Metadata = {
   title: { absolute: 'The Vacation Vault | VacationPro' },
   description:
-    'Members-only access to every handpicked vacation deal with the booking links, plus concierge trip planning from a licensed travel advisor. $5.99 a month or $59 a year.',
+    'Members-only access to every handpicked vacation deal with its booking link, plus concierge trip planning from a licensed advisor. $5.99 a month or $59 a year.',
   alternates: { canonical: '/vault' },
 };
 

@@ -9,7 +9,11 @@ import { checklistProgress, getTripsForUser } from '@/lib/trips/data';
 export const dynamic = 'force-dynamic';
 
 export const metadata = {
-  title: 'Your Trips | VacationPro Trip Hub',
+  // Bare string, so the root layout's "%s | VacationPro" template appends the
+  // brand once. The previous value already contained the brand, producing
+  // "Your Trips | VacationPro Trip Hub | VacationPro" in the tab and the SERP.
+  title: 'Your Trips',
+  alternates: { canonical: '/trips' },
 };
 
 function destinationLabel(slug: string): { name: string; flag: string | null } {

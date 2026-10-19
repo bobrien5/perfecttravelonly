@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: { absolute: 'Find Your Perfect Vacation | VacationPro' },
+  alternates: { canonical: '/quiz' },
 };
 
 export default function QuizLayout({
