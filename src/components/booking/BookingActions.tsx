@@ -30,7 +30,7 @@ export default function BookingActions({ bookHref, quoteHref, placement, resortI
               href={bookHref}
               target="_blank"
               rel="sponsored nofollow noopener"
-              data-vp-affiliate="stay22"
+              data-vp-affiliate="partner"
               onClick={() => trackFunnel('self_book_click', { placement, resort_id: resortId ?? null })}
               className="flex min-h-12 w-full items-center justify-center rounded-xl bg-brand-700 px-5 py-3 text-center font-bold text-white transition hover:bg-brand-800 focus:outline-none focus-visible:ring-4 focus-visible:ring-brand-300"
             >

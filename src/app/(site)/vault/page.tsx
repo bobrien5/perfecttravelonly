@@ -7,7 +7,7 @@ import ManageMembershipButton from './ManageMembershipButton';
 export const metadata: Metadata = {
   title: { absolute: 'The Vacation Vault | VacationPro' },
   description:
-    'Members-only access to every handpicked vacation deal with its booking link, plus concierge trip planning from a licensed advisor. $5.99 a month or $59 a year.',
+    'Vacation Vault members see the exact dates we found each deal price on, our notes on why we picked it, and each deal FAQ. $5.99 a month or $59 a year.',
   alternates: { canonical: '/vault' },
 };
 
@@ -15,8 +15,7 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic';
 
 const INCLUDED = [
-  ['Every deal, fully unlocked', 'The exact resort, the dates we found the price, the flight routes, and the booking link. Non-members see the deal; you get to book it.'],
-  ['Concierge trip planning', 'Tell us where and when, and a licensed advisor builds real options around your budget and dates. Members only.'],
+  ['The dates behind every price', 'The exact travel dates we found each deal price on, and the booking window. Booking links and quotes from Brendan are free for everyone.'],
   ['New deals every week', 'Handpicked all-inclusive, Caribbean and Mexico deals added as we find them, with expired ones taken down.'],
   ['Why we picked it', 'The honest note on each deal: what is genuinely good about it and what to watch for.'],
 ];
@@ -40,7 +39,7 @@ export default async function VaultPage({
         <p className="text-xs font-bold uppercase tracking-wide text-brand-700">Vacation Vault</p>
         <h1 className="mt-2 text-3xl font-bold text-gray-900 sm:text-4xl">You are in.</h1>
         <p className="mt-3 text-lg text-gray-600">
-          Every deal is unlocked and concierge planning is open to you.
+          Every deal&apos;s dates and notes are unlocked for you.
           {renews && status === 'active' && ` Your ${interval === 'year' ? 'annual' : 'monthly'} membership renews on ${renews}.`}
           {status === 'past_due' && ' Your last payment did not go through; update your card to keep access.'}
         </p>
@@ -55,7 +54,7 @@ export default async function VaultPage({
             href="/concierge-planning"
             className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 font-semibold text-brand-700 ring-1 ring-brand-200 transition hover:bg-brand-50"
           >
-            Request concierge planning
+            Get a quote from Brendan
           </Link>
         </div>
         <div className="mt-10 border-t border-gray-100 pt-6">
@@ -77,12 +76,12 @@ export default async function VaultPage({
         <div className="lg:col-span-3">
           <p className="text-xs font-bold uppercase tracking-wide text-brand-700">Vacation Vault</p>
           <h1 className="mt-2 text-3xl font-bold leading-tight text-gray-900 sm:text-5xl">
-            The deals, the booking links, and a real advisor.
+            The details behind every deal.
           </h1>
           <p className="mt-4 text-lg text-gray-600">
-            We search the deals so you do not have to. The Vault is where the whole thing lives:
-            every handpicked vacation with the link to book it, and concierge trip planning when
-            you want a licensed travel advisor to build the trip for you.
+            We search the deals so you do not have to. Anyone can browse and book every deal, and
+            anyone can ask Brendan for a quote. Members also get the exact dates we found each price
+            on, plus our notes and FAQ for each deal.
           </p>
 
           <ul className="mt-8 space-y-5">

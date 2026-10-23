@@ -158,10 +158,10 @@ export function getEmail4Html(firstName?: string): string {
       We publish new <strong>travel guides</strong> every week (destination breakdowns, packing tips, and trip planning advice), so you always know where to look for your next trip.
     </p>
     <p style="color:#4b5563;font-size:15px;line-height:1.6;margin:0 0 16px;">
-      And when you are ready to book, our concierge service builds a personalized itinerary for you, research and advisor time included.
+      And when you are ready to book, Brendan can personally check rates and room options for the resort you want, then help you book it.
     </p>
 
-    ${ctaButton('Plan With Me', `${SITE_URL}/concierge-planning`)}
+    ${ctaButton('Get a Quote', `${SITE_URL}/concierge-planning`)}
 
     <div style="background-color:#f9fafb;border-radius:12px;padding:20px;margin:24px 0;">
       <h4 style="color:#111827;font-size:15px;margin:0 0 8px;font-weight:700;">Quick links:</h4>

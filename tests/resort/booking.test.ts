@@ -32,3 +32,13 @@ describe('affiliate URL generation', () => {
     expect(new URL(wrapped.searchParams.get('link')!).searchParams.get('hotel-name')).toBe('Le Blanc');
   });
 });
+
+describe('article destination context', () => {
+  it('only infers a destination when exactly one is named', async () => {
+    const { inferDestinationSlug } = await import('@/lib/resorts/catalog');
+    expect(inferDestinationSlug('best-adults-only-resorts-in-cancun')).toBe('cancun');
+    expect(inferDestinationSlug('tulum-vs-playa-del-carmen')).toBe('riviera-maya');
+    expect(inferDestinationSlug('cancun-vs-punta-cana')).toBeNull();
+    expect(inferDestinationSlug('cheapest-caribbean-island')).toBeNull();
+  });
+});

@@ -1,10 +1,12 @@
-import { QuizAnswers } from '@vacationpro/engine';
+import type { QuizAnswers, TripAnswers } from '@vacationpro/engine';
 
 const SESSION_STORAGE_KEY = 'vacationpro.quiz.session.v1';
 
 export interface SessionPayload {
   sessionId: string;
-  answers: QuizAnswers;
+  /** Legacy destination quiz answers, or resort quiz answers (version 2). */
+  answers: QuizAnswers | TripAnswers;
+  /** Legacy: slug + match pct. Resort quiz: resort id + rank (stored in pct for schema compatibility). */
   topMatches: { slug: string; pct: number }[];
   email?: string;
 }

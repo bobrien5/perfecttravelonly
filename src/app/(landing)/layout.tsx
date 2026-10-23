@@ -24,7 +24,7 @@ export default function LandingLayout({ children }: { children: ReactNode }) {
             />
           </Link>
           <span className="text-xs text-gray-500 font-medium hidden sm:inline">
-            Verified pricing · 24h response
+            Personal resort and booking help
           </span>
         </div>
       </header>
@@ -37,11 +37,11 @@ export default function LandingLayout({ children }: { children: ReactNode }) {
         <div className="max-w-2xl mx-auto text-center text-xs text-gray-500">
           <p>© {new Date().getFullYear()} VacationPro · Travel like a pro.</p>
           <p className="mt-1">
-            <Link href="/privacy" className="underline hover:text-gray-700">
+            <Link href="/legal/privacy" className="underline hover:text-gray-700">
               Privacy
             </Link>
             {' · '}
-            <Link href="/terms" className="underline hover:text-gray-700">
+            <Link href="/legal/terms" className="underline hover:text-gray-700">
               Terms
             </Link>
             {' · '}

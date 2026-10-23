@@ -31,8 +31,11 @@ interface Opportunity {
 async function getLeadsData() {
   const baseUrl = getBaseUrl();
   try {
+    // Server-side self-fetch: forward the admin cookie, since /api/admin is protected.
+    const { cookies } = await import('next/headers');
     const res = await fetch(`${baseUrl}/api/admin/leads`, {
-      next: { revalidate: 300 },
+      headers: { cookie: (await cookies()).toString() },
+      cache: 'no-store',
     });
     if (!res.ok) return null;
     return res.json();

@@ -20,7 +20,24 @@ export async function middleware(request: NextRequest) {
     return updateSession(request);
   }
 
-  // Skip login page, all admin API routes, and auth API
+  // Admin API routes need the same admin session as the admin pages. They
+  // were previously reachable without it (this branch skipped all of /api/),
+  // which exposed lead data. /api/admin/auth stays open so login can work.
+  if (pathname.startsWith('/api/admin/')) {
+    if (pathname === '/api/admin/auth') return NextResponse.next();
+    const apiToken = request.cookies.get(COOKIE_NAME)?.value;
+    if (apiToken) {
+      try {
+        await jwtVerify(apiToken, JWT_SECRET);
+        return NextResponse.next();
+      } catch {
+        // fall through to 401
+      }
+    }
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  // Skip login page and all other API routes
   if (pathname === '/admin/login' || pathname.startsWith('/api/')) {
     return NextResponse.next();
   }
@@ -42,5 +59,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/admin/:path*', '/trips/:path*'],
+  matcher: ['/admin/:path*', '/trips/:path*', '/api/admin/:path*'],
 };

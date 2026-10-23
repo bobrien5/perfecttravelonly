@@ -1,11 +1,13 @@
 import { Metadata } from 'next';
-import ConciergePlanningForm from '@/components/ui/ConciergePlanningForm';
+import QuoteRequestForm from '@/components/quote/QuoteRequestForm';
+import { QUOTE_RESPONSE_COPY } from '@/lib/quote/config';
+import { normalizeDestination } from '@/lib/resorts/catalog';
 import Stay22Guard from '@/components/monetization/Stay22Guard';
 
 export const metadata: Metadata = {
-  title: 'Get Your Verified Vacation Quote',
+  title: 'Get Your Vacation Quote',
   description:
-    'Tell us about your trip and we will email a verified all-inclusive quote within 24 hours. No spam, no commitment, no surprise fees.',
+    'Tell Brendan about your trip and get a personal all-inclusive quote. Free to request, no commitment.',
   alternates: { canonical: '/quote' },
   robots: { index: false, follow: true }, // ad-only landing page; do not index
 };
@@ -69,65 +71,29 @@ const DESTINATION_LABELS: Record<string, { label: string; title: string }> = {
 export default async function QuotePage({ searchParams }: PageProps) {
   const params = await searchParams;
 
-  // Resolve destination + title from URL params
+  // Resolve destination + title from URL params (existing ad links keep working).
   const destSlug = (params.dest || params.destination || params.deal || '').toLowerCase();
   const lookup = DESTINATION_LABELS[destSlug];
-  const destinationLabel = lookup?.label || params.destination || 'Caribbean Vacation';
-  const priceLabel = params.price ? `from ${params.price}` : 'verified pricing';
+  const destinationLabel = lookup?.label || 'all-inclusive';
+  const known = normalizeDestination(destSlug === 'montego-bay' ? 'jamaica-montego-bay' : destSlug);
 
   return (
-    <main className="min-h-screen bg-cream-50 py-12 px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-cream-50 py-10 px-4 sm:px-6 lg:px-8">
       <Stay22Guard />
       <div className="max-w-2xl mx-auto">
-        {/* Trust badge */}
-        <div className="text-center mb-6">
-          <span className="inline-block bg-brand-50 text-brand-700 text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full">
-            Verified Pricing · Limited Inventory
-          </span>
-        </div>
-
-        {/* Headline */}
-        <div className="text-center mb-8">
+        <div className="mb-8">
           <h1 className="text-3xl sm:text-4xl font-extrabold text-forest mb-3 leading-tight">
             Get your {destinationLabel} quote.
           </h1>
-          <p className="text-lg text-gray-600">
-            Tell us about your trip and we will email a {priceLabel} quote within 24 hours.
-            <br />
-            No spam, no commitment, no surprise fees.
+          <p className="text-lg text-gray-700">
+            Tell me about your trip. I&apos;ll personally check rates, room options, and available offers, then help you book.
+            Free to request, and no commitment.
           </p>
         </div>
 
-        {/* Concierge intake form */}
         <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
-          <ConciergePlanningForm defaultDestination={destinationLabel} sourceLabel="Quote landing page" />
+          <QuoteRequestForm initialDestination={known} source="quote-landing" responseCopy={QUOTE_RESPONSE_COPY} />
         </div>
-
-        {/* Trust strip */}
-        <div className="mt-8 grid grid-cols-3 gap-4 text-center">
-          <div>
-            <div className="text-2xl font-extrabold text-brand-600">24h</div>
-            <div className="text-xs text-gray-600 uppercase tracking-wide">Quote Turnaround</div>
-          </div>
-          <div>
-            <div className="text-2xl font-extrabold text-brand-600">100%</div>
-            <div className="text-xs text-gray-600 uppercase tracking-wide">Verified Pricing</div>
-          </div>
-          <div>
-            <div className="text-2xl font-extrabold text-brand-600">$0</div>
-            <div className="text-xs text-gray-600 uppercase tracking-wide">Hidden Fees</div>
-          </div>
-        </div>
-
-        {/* Privacy note */}
-        <p className="text-xs text-gray-500 text-center mt-6">
-          By submitting, you agree to our{' '}
-          <a href="/privacy" className="underline hover:text-gray-700">
-            Privacy Policy
-          </a>
-          . We will email or call you with your quote and may share your details with our travel
-          partner. You can unsubscribe at any time.
-        </p>
       </div>
     </main>
   );

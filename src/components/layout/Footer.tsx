@@ -6,11 +6,11 @@ import { useNewsletterSubscribe } from '@/hooks/useNewsletterSubscribe';
 
 const footerLinks = {
   guides: [
-    { name: 'Vacation Deals', href: '/deals' },
+    { name: 'Find My Resort', href: '/quiz' },
+    { name: 'Get a Quote from Brendan', href: '/concierge-planning' },
+    { name: 'Resorts', href: '/resorts' },
     { name: 'All Guides', href: '/blog' },
-    { name: 'Destinations', href: '/destinations/cancun' },
-    { name: 'Find My Vacation', href: '/quiz' },
-    { name: 'Plan With Me', href: '/concierge-planning' },
+    { name: 'Vacation Deals', href: '/deals' },
   ],
   destinations: [
     { name: 'Cancun', href: '/destinations/cancun' },

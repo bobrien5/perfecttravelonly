@@ -1,41 +1,50 @@
 import Link from 'next/link';
-import { CONCIERGE_CTA_NOTE } from '@/lib/concierge';
+import { normalizeDestination } from '@/lib/resorts/catalog';
 
 interface AdvisorCtaProps {
   /** Destination name for a personalized headline, e.g. "Aruba". */
   destination?: string;
-  /** Where the click came from, appended as a query param for attribution. */
+  /** Destination slug, passed into the quiz and quote as context when we recognize it. */
+  destinationSlug?: string;
+  /** Where the click came from, for attribution. */
   source?: string;
   className?: string;
 }
 
 /**
- * "Book it with me" advisor call to action. Brendan earns advisor commission on
- * trips booked through the concierge funnel, so every guide, blog post, and
- * destination page should offer this path alongside affiliate links.
+ * The two next steps for guides, blog posts and destination pages: get
+ * matched with a resort, or ask Brendan for a personal quote. Free for
+ * everyone; no membership involved. Makes no price or perk promises.
  */
-export default function AdvisorCta({ destination, source, className = '' }: AdvisorCtaProps) {
-  const heading = destination
-    ? `Want ${destination} booked for you, at agent rates?`
-    : 'Booking a group, or want a rate you will not find on Expedia?';
-  const body = destination
-    ? `I book ${destination} trips as a travel advisor with access to agent-only pricing, resort credits, and perks the booking sites do not show. Tell me your dates and I will price it for you.`
-    : 'I book as a travel advisor with access to agent-only pricing, resort credits, and group perks. Tell me your dates and I will price it against whatever you just saw.';
-  const href = source
-    ? `/concierge-planning?utm_source=site&utm_medium=cta&utm_campaign=${encodeURIComponent(source)}`
-    : '/concierge-planning';
+export default function AdvisorCta({ destination, destinationSlug, source, className = '' }: AdvisorCtaProps) {
+  const dest = normalizeDestination(destinationSlug);
+  const from = source ? `from=${encodeURIComponent(source)}` : '';
+  const quizQs = [dest ? `destination=${dest}` : '', from].filter(Boolean).join('&');
+  const quoteQs = [dest ? `destination=${dest}` : '', from].filter(Boolean).join('&');
+  const heading = destination ? `Which ${destination} resort is right for you?` : 'Which all-inclusive is right for you?';
 
   return (
-    <div className={`bg-brand-50 rounded-2xl p-8 text-center ${className}`}>
+    <div className={`bg-brand-50 rounded-2xl p-6 sm:p-8 text-center ${className}`}>
       <h3 className="text-xl font-bold text-gray-900 mb-2">{heading}</h3>
-      <p className="text-gray-600 mb-4 max-w-2xl mx-auto">{body}</p>
-      <Link
-        href={href}
-        className="inline-block px-6 py-3 bg-brand-600 text-white font-semibold rounded-lg hover:bg-brand-700 transition-colors"
-      >
-        Get my agent rate
-      </Link>
-      <p className="text-xs text-gray-500 mt-3">{CONCIERGE_CTA_NOTE}</p>
+      <p className="text-gray-700 mb-5 max-w-2xl mx-auto">
+        Answer a few questions and get up to three resort picks with honest tradeoffs. Or ask Brendan, VacationPro&apos;s founder, to personally
+        check rates, room options and available offers for your trip.
+      </p>
+      <div className="flex flex-col sm:flex-row gap-3 justify-center">
+        <Link
+          href={`/quiz${quizQs ? `?${quizQs}` : ''}`}
+          className="inline-flex min-h-12 items-center justify-center px-6 py-3 bg-brand-700 text-white font-semibold rounded-xl hover:bg-brand-800 transition-colors"
+        >
+          {destination ? `Find my ${destination} resort` : 'Find My Resort'}
+        </Link>
+        <Link
+          href={`/concierge-planning${quoteQs ? `?${quoteQs}` : ''}#quote`}
+          className="inline-flex min-h-12 items-center justify-center px-6 py-3 border-2 border-brand-700 text-brand-800 font-semibold rounded-xl hover:bg-white transition-colors"
+        >
+          Get a Quote from Brendan
+        </Link>
+      </div>
+      <p className="text-xs text-gray-600 mt-3">Free. Requesting a quote does not reserve a room or commit you to booking.</p>
     </div>
   );
 }

@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: { absolute: 'Find Your Perfect Vacation | VacationPro' },
+  title: { absolute: 'Find Your All-Inclusive Resort | VacationPro' },
+  description:
+    'Answer a few quick questions about your budget and vacation vibe and get up to three all-inclusive resort picks in Mexico and the Caribbean, with honest tradeoffs. Free, no account needed.',
   alternates: { canonical: '/quiz' },
 };
 
@@ -17,7 +19,7 @@ export default function QuizLayout({
         <Link href="/" className="inline-flex items-center gap-2">
           <img src="/logo.svg" alt="VacationPro" className="w-7 h-7" />
           <span className="text-lg font-bold text-gray-900">
-            Vacation<span className="text-brand-600">Pro</span>
+            Vacation<span className="text-brand-700">Pro</span>
           </span>
         </Link>
       </div>

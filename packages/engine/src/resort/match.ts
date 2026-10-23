@@ -336,3 +336,47 @@ export function matchResorts(a: TripAnswers, catalog: ResortRecord[]): MatchResu
     limitations,
   };
 }
+
+// ─── Trip-independent profile (resort pages, comparisons) ────
+
+export interface ResortProfile {
+  strengths: string[];
+  tradeoffs: string[];
+  skipIf: string;
+  bestFor: string;
+}
+
+const RATING_WORD: Record<number, string> = { 3: 'Standout', 2: 'Strong', 1: 'Average', 0: 'Not a focus' };
+
+export function ratingWord(v: number | null): string {
+  return v === null ? 'Not rated yet' : RATING_WORD[v] ?? 'Not rated yet';
+}
+
+/** Strengths, tradeoffs and fit, from stored facts and editorial ratings only. */
+export function describeResort(r: ResortRecord): ResortProfile {
+  const rated = (Object.keys(r.ratings) as Priority[]).filter((p) => r.ratings[p] !== null && !(p === 'family' && r.adultsOnly));
+  const strengths = rated.filter((p) => r.ratings[p] === 3).map((p) => `Standout for ${PRIORITY_LABELS[p]} (VacationPro rating).`);
+  if (strengths.length === 0) {
+    strengths.push(...rated.filter((p) => r.ratings[p] === 2).slice(0, 2).map((p) => `Strong on ${PRIORITY_LABELS[p]} (VacationPro rating).`));
+  }
+  if (r.transfer?.minutes && r.transfer.minutes.max <= 30) strengths.push(`Short transfer, ${transferText(r)}.`);
+  if (r.hasKidsClub && !r.adultsOnly) strengths.push('Has a kids club.');
+
+  const tradeoffs: string[] = [];
+  for (const p of rated) if ((r.ratings[p] as number) <= 1) tradeoffs.push(`Less of a standout for ${PRIORITY_LABELS[p]}.`);
+  if (r.transfer?.minutes && r.transfer.minutes.max > LONG_TRANSFER_MINUTES) tradeoffs.push(`Longer transfer, ${transferText(r)}.`);
+  if (r.roomCount !== null && r.roomCount > MEGA_RESORT_ROOMS) tradeoffs.push(`Large resort with about ${r.roomCount.toLocaleString('en-US')} rooms.`);
+  for (const x of r.exclusions.slice(0, 2)) tradeoffs.push(`Not included: ${x}.`);
+
+  const who = r.adultsOnly
+    ? r.atmosphere === 'social'
+      ? 'Couples and friends who want an adults-only resort with energy'
+      : 'Couples who want an adults-only, calmer stay'
+    : (r.ratings.family ?? 0) >= 2
+      ? 'Families who want kid-friendly amenities'
+      : r.atmosphere === 'social'
+        ? 'Groups who want a busy, social resort'
+        : 'Travelers who want an easygoing all-ages resort';
+
+  return { strengths: strengths.slice(0, 4), tradeoffs: tradeoffs.slice(0, 4), skipIf: skipIf({ childAges: [], adultsOnly: null } as unknown as TripAnswers, r), bestFor: who };
+}

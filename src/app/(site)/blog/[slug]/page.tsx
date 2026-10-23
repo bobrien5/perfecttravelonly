@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import AdvisorCta from '@/components/ui/AdvisorCta';
+import { destinationName, inferDestinationSlug } from '@/lib/resorts/catalog';
 import {
   getBlogPostBySlug,
   getAllBlogPostParams,
@@ -266,7 +267,10 @@ export default async function BlogPostPage({ params }: Props) {
 
           {/* Share / CTA */}
           <div className="mt-14 pt-8 border-t border-gray-200">
-            <AdvisorCta source="blog" />
+            {(() => {
+              const dest = inferDestinationSlug(slug);
+              return <AdvisorCta source="blog" destinationSlug={dest ?? undefined} destination={dest ? destinationName(dest) : undefined} />;
+            })()}
           </div>
         </div>
       </article>

@@ -44,18 +44,17 @@ const BLOCKS: Block[] = [
   },
   {
     href: `/quiz?${UTM}`,
-    label: 'Take the 2-Minute Vacation Quiz',
-    description: 'Answer 6 questions, get matched to the trips that fit you best.',
+    label: 'Find My Resort',
+    description: 'Tell us your budget and vibe. Get up to three all-inclusive resort picks with honest tradeoffs.',
     img: '/links/quiz.jpg',
     alt: 'Palm-lined resort pool on the Riviera Maya',
   },
   {
-    // Points at /vault, not /concierge-planning: concierge is a Vault member
-    // benefit, so sending bio traffic straight to the gated page meant a paywall.
-    href: `/vault?${UTM}`,
-    label: 'Let Me Plan Your Trip',
-    description:
-      'Custom vacation packages planned for you personally, included with Vacation Vault. No booking fees, ever.',
+    // Quotes are free for everyone (2026-10 resort platform), so bio traffic
+    // goes straight to the quote page.
+    href: `/concierge-planning?${UTM}#quote`,
+    label: 'Get a Quote from Brendan',
+    description: 'Tell me the resort or the trip. I will personally check rates, room options and offers, then help you book.',
     img: '/links/concierge.jpg',
     alt: 'Calm bay and green hills at Montego Bay, Jamaica',
   },

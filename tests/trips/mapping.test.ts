@@ -70,3 +70,14 @@ describe('sessionToTripPayload', () => {
     expect(() => sessionToTripPayload(answers, null)).toThrow();
   });
 });
+
+describe('sessionToTripPayload with resort quiz (v2) answers', () => {
+  it('maps a resort top match to its destination', async () => {
+    const { initialTripAnswers } = await import('@vacationpro/engine');
+    const a = { ...initialTripAnswers(), destination: 'open', party: 'couple' as const, priorities: ['beach' as const] };
+    const payload = sessionToTripPayload(a, { slug: 'le-blanc-spa-resort-cancun' });
+    expect(payload.destination_slug).toBe('cancun');
+    expect(payload.vibes).toEqual(['beach']);
+    expect(payload.budget_band).toBeNull();
+  });
+});

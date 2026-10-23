@@ -91,3 +91,23 @@ export const PRICE_TIER_LABELS: Record<1 | 2 | 3, string> = {
   2: 'Mid price range',
   3: 'Upper price range',
 };
+
+const DESTINATION_KEYWORDS: [RegExp, string][] = [
+  [/riviera[- ]maya|tulum|playa[- ]del[- ]carmen|akumal/i, 'riviera-maya'],
+  [/cancun|playa[- ]mujeres/i, 'cancun'],
+  [/punta[- ]cana|cap[- ]cana|bavaro/i, 'punta-cana'],
+  [/aruba/i, 'aruba'],
+  [/montego[- ]bay/i, 'jamaica-montego-bay'],
+  [/negril/i, 'jamaica-negril'],
+  [/cabo/i, 'cabo-san-lucas'],
+];
+
+/**
+ * Destination context for an article, only when exactly one destination is
+ * clearly named (e.g. in the slug). Multi-destination articles get none, so
+ * the quiz is never pointed at the wrong place.
+ */
+export function inferDestinationSlug(text: string): string | null {
+  const hits = new Set(DESTINATION_KEYWORDS.filter(([re]) => re.test(text)).map(([, slug]) => slug));
+  return hits.size === 1 ? [...hits][0] : null;
+}
