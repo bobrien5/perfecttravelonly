@@ -316,22 +316,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 3,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 7406,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults and 2 children",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 2
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Oranjestad%2C+Aruba&hotel-name=Renaissance+Wind+Creek+Aruba"
   },
   {
@@ -461,22 +446,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 2,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 3639,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 0
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Punta+Cana%2C+Dominican+Republic&hotel-name=Excellence+Punta+Cana"
   },
   {
@@ -549,22 +519,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 3,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 6230,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 0
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Cap+Cana%2C+Punta+Cana&hotel-name=Secrets+Cap+Cana"
   },
   {
@@ -713,22 +668,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 3,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 7421,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 0
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Cap+Cana%2C+Punta+Cana&hotel-name=Hyatt+Zilara+Cap+Cana"
   },
   {
@@ -803,22 +743,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 2,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 4662,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults and 2 children",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 2
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Punta+Cana%2C+Dominican+Republic&hotel-name=Dreams+Royal+Beach+Punta+Cana"
   },
   {
@@ -955,22 +880,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 3,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 5293,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 0
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Playa+Mujeres%2C+Cancun&hotel-name=Excellence+Playa+Mujeres"
   },
   {
@@ -1047,22 +957,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 3,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 8190,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 0
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Cancun%2C+Mexico&hotel-name=Le+Blanc+Spa+Resort+Cancun"
   },
   {
@@ -1134,22 +1029,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 3,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 7421,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults and 2 children",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 2
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Cancun%2C+Mexico&hotel-name=Hyatt+Ziva+Cancun"
   },
   {
@@ -1219,22 +1099,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 2,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 3316,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 0
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Cancun+Hotel+Zone%2C+Mexico&hotel-name=Riu+Palace+Las+Americas"
   },
   {
@@ -1385,22 +1250,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 2,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 6930,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults and 2 children",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 2
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Cancun%2C+Mexico&hotel-name=Moon+Palace+The+Grand"
   },
   {
@@ -1469,22 +1319,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 2,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 9654,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 0
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Akumal%2C+Riviera+Maya&hotel-name=Secrets+Akumal+Riviera+Maya"
   },
   {
@@ -1559,22 +1394,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 3,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 12530,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults and 2 children",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 2
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Riviera+Maya%2C+Mexico&hotel-name=Grand+Velas+Riviera+Maya"
   },
   {
@@ -1644,22 +1464,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 2,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 5470,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults and 2 children",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 2
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Riviera+Maya%2C+Mexico&hotel-name=Iberostar+Selection+Paraiso+Lindo"
   },
   {
@@ -1731,22 +1536,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 3,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 9455,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults and 2 children",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 2
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Riviera+Maya%2C+Mexico&hotel-name=Hotel+Xcaret+Mexico"
   },
   {
@@ -1888,22 +1678,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 3,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 3267,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 0
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Riviera+Maya%2C+Mexico&hotel-name=TRS+Yucatan+Hotel"
   },
   {
@@ -1966,22 +1741,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 3,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 6318,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 0
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Cancun%2C+Mexico&hotel-name=Hyatt+Zilara+Cancun"
   },
   {
@@ -2053,22 +1813,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 3,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 3823,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 0
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Cancun%2C+Mexico&hotel-name=Secrets+The+Vine+Cancun"
   },
   {
@@ -2136,22 +1881,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 3,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 8824,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 0
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Cancun%2C+Mexico&hotel-name=Live+Aqua+Beach+Resort+Cancun"
   },
   {
@@ -2222,22 +1952,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 3,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 10887,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults and 2 children",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 2
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Cancun%2C+Mexico&hotel-name=Grand+Fiesta+Americana+Coral+Beach+Cancun"
   },
   {
@@ -2304,22 +2019,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 2,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 4494,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults and 2 children",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 2
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Cancun%2C+Mexico&hotel-name=Moon+Palace+Cancun"
   },
   {
@@ -2396,22 +2096,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 2,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 4831,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults and 2 children",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 2
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Cancun%2C+Mexico&hotel-name=Hard+Rock+Hotel+Cancun"
   },
   {
@@ -2481,22 +2166,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 2,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 3839,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults and 2 children",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 2
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Cancun%2C+Mexico&hotel-name=Dreams+Sands+Cancun+Resort+and+Spa"
   },
   {
@@ -2570,22 +2240,7 @@ export const RESORT_CATALOG: ResortRecord[] = [
     "priceTier": 3,
     "editorialReviewedAt": "2026-09-22",
     "visitStatus": null,
-    "price": {
-      "amount": 6356,
-      "currency": "USD",
-      "nights": 7,
-      "basis": "lowest-priced refundable room, booked direct with the resort",
-      "travelDates": "March 2027 or the nearest available dates",
-      "occupancy": "2 adults and 2 children",
-      "occupancyCounts": {
-        "adults": 2,
-        "children": 2
-      },
-      "includes": "All-inclusive resort stay. Flights not included.",
-      "source": "All Inclusive Resort Ratings (community spreadsheet by u/TheRealGuncho)",
-      "sourceUrl": "https://docs.google.com/spreadsheets/d/1XMiFiugIXzjZaU3bBD4Y2dfwpN9MZLImsMAANEWzc-w",
-      "checkedAt": "2026-04"
-    },
+    "price": null,
     "bookingSearchUrl": "https://www.expedia.com/Hotel-Search?destination=Cancun%2C+Mexico&hotel-name=Mondrian+Cancun"
   }
 ];

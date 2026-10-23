@@ -14,7 +14,7 @@ Recommendations, comparisons, booking links and quotes need no account and no Va
 | --- | --- |
 | Matcher, budget estimate, quiz state machine | `packages/engine/src/resort/` (pure, deterministic, no AI) |
 | Resort catalog (generated, committed) | `packages/engine/src/resort/catalog.generated.ts` |
-| Catalog inputs | `scripts/seed-resorts-data.mjs` (editorial), `data/resort-facts.json` (facts, sources), `data/resort-sheet-extract.json` (reference prices, transfers, room counts) |
+| Catalog inputs | `scripts/seed-resorts-data.mjs` (editorial), `data/resort-facts.json` (facts, sources), `data/resort-sheet-extract.json` (transfer times and room counts from the community sheet; its prices are not used) |
 | Rebuild the catalog | `node scripts/build-resort-catalog.mjs` |
 | Quiz UI | `src/app/quiz/resort/` (legacy wizard still handles `/quiz?claim=1`) |
 | Resort pages, comparison | `src/app/(site)/resorts/`, `src/app/(site)/compare/` |
@@ -29,7 +29,7 @@ Recommendations, comparisons, booking links and quotes need no account and no Va
 - Facts were checked against official resort and brand sites on 2026-10-23, with sources per resort. Unknown facts are `null` and display as "Not confirmed".
 - Ratings (beach, food, pools, rooms, nightlife, value, family) come from the existing resort database seeded into Sanity in September 2026. They are labeled as VacationPro editorial ratings. Hyatt Vivid Cancun (formerly Dreams Vista) is unrated until re-reviewed.
 - Mondrian Cancun's age policy is unknown: booking sites say adults-only, but official material does not publish a policy.
-- Reference prices come from the community "All Inclusive Resort Ratings" sheet. They are for 7 nights in March 2027, booked direct, lowest refundable room, without flights. Adults-only prices are for 2 adults, family prices for 2 adults and 2 children. They were checked in April 2026 and are shown with that basis and source.
+- The community "All Inclusive Resort Ratings" sheet supplies transfer times and room counts where official sources had none, credited on each resort. Its prices are not used (decided 2026-10-23), so price context is the editorial price tier, labeled as an estimate.
 - No resort photos and no "visited" status yet.
 
 ## Configuration
@@ -54,5 +54,4 @@ Existing variables used: `SENDGRID_API_KEY`, `SENDGRID_FROM_EMAIL`, `GHL_API_TOK
 
 - **Vacation Vault.** Booking links and quotes are now free for everyone. Members keep the exact deal dates, editorial notes and deal FAQ, and billing is untouched. The Vault page copy was corrected so it no longer sells free features. Decide whether to keep selling the Vault.
 - **Public bio.** Pages say "Brendan O'Brien, VacationPro's founder, an independent travel advisor with Fora". Confirm you are happy with this wording, and add an approved photo if you want one.
-- **Spreadsheet prices.** The community sheet has no stated license. Ask its author (u/TheRealGuncho) before launch, or remove prices by emptying `directUsd7Nights` in `data/resort-sheet-extract.json` and rebuilding.
 - **Legacy concierge.** The $99 Stripe checkout route, `ConciergePlanningForm` and `/api/ghl/concierge-intake` are unlinked but kept for existing payments.

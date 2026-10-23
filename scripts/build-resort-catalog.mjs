@@ -13,9 +13,9 @@
  *
  * 3. data/resort-sheet-extract.json: the columns we use, for our resorts only,
  *    from the community "All Inclusive Resort Ratings" spreadsheet (shared by
- *    Brendan 2026-10-23). Used as an attributed secondary source: dated
- *    reference prices, and transfer times and room counts where the official
- *    research had none. Where both give a transfer time, the range spans both.
+ *    Brendan 2026-10-23). Used as an attributed secondary source for transfer
+ *    times and room counts where the official research had none. Its prices
+ *    are deliberately not used. Where both give a transfer time, the range spans both.
  *    Official research wins on every other conflict.
  *
  * Run: node scripts/build-resort-catalog.mjs
@@ -30,13 +30,6 @@ const EDITORIAL_DATE = '2026-09-22'; // when the seed entered the resort databas
 
 const sheet = JSON.parse(readFileSync('data/resort-sheet-extract.json', 'utf8'));
 const SHEET_SOURCE = { label: sheet.source.label, url: sheet.source.url };
-
-// Sheet prices that do not describe the resort as it is now.
-const SKIP_SHEET_PRICE = {
-  // Checked April 2026, before the August 2026 rebrand from a family resort
-  // (Dreams Vista) to adults-only Hyatt Vivid.
-  'dreams-vista-cancun': true,
-};
 
 const facts = new Map(JSON.parse(readFileSync('data/resort-facts.json', 'utf8')).map((f) => [f.slug, f]));
 
@@ -109,27 +102,6 @@ function bookingUrl(seed, name) {
   return url.toString();
 }
 
-function sheetPrice(slug, adultsOnly) {
-  const row = sheet.resorts[slug];
-  if (!row || !row.directUsd7Nights || SKIP_SHEET_PRICE[slug]) return null;
-  const adults = row.category === 'Adults Only';
-  // Only use the price when its occupancy basis matches our age-policy fact.
-  if (adultsOnly !== null && adults !== adultsOnly) return null;
-  return {
-    amount: Math.round(row.directUsd7Nights),
-    currency: 'USD',
-    nights: 7,
-    basis: 'lowest-priced refundable room, booked direct with the resort',
-    travelDates: 'March 2027 or the nearest available dates',
-    occupancy: adults ? sheet.source.occupancyAdultsOnly : sheet.source.occupancyFamily,
-    occupancyCounts: adults ? { adults: 2, children: 0 } : { adults: 2, children: 2 },
-    includes: 'All-inclusive resort stay. Flights not included.',
-    source: sheet.source.label,
-    sourceUrl: sheet.source.url,
-    checkedAt: sheet.source.pricesCheckedAt,
-  };
-}
-
 function mergedTransfer(f, row) {
   const airport = f.nearestAirport ?? (row?.airport ? row.airport : null);
   if (!airport) return null;
@@ -146,7 +118,7 @@ const out = RESORTS.map((seed) => {
   const adultsOnly = r(f.adultsOnly);
   const summary = SUMMARY_OVERRIDES[seed.slug] ?? seed.verdict;
   const row = sheet.resorts[seed.slug] ?? null;
-  const usedSheet = Boolean(row && (row.directUsd7Nights || row.transferMinutes || (f.roomCount == null && row.roomCount)));
+  const usedSheet = Boolean(row && (row.transferMinutes || (f.roomCount == null && row.roomCount)));
   const sources = [...(f.sources ?? []), ...(usedSheet ? [SHEET_SOURCE] : [])];
   return {
     id: seed.slug,
@@ -179,7 +151,7 @@ const out = RESORTS.map((seed) => {
     priceTier: seed.priceBand,
     editorialReviewedAt: SUMMARY_OVERRIDES[seed.slug] ? null : EDITORIAL_DATE,
     visitStatus: null,
-    price: sheetPrice(seed.slug, adultsOnly),
+    price: null,
     bookingSearchUrl: bookingUrl(seed, name),
   };
 });
