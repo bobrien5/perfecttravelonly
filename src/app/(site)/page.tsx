@@ -7,7 +7,7 @@ import SectionHeader from '@/components/ui/SectionHeader';
 import DealCard from '@/components/deals/DealCard';
 import Stay22Guard from '@/components/monetization/Stay22Guard';
 import { getRecentBlogPosts, getFeaturedDeals } from '@/sanity/lib/fetch';
-import { resortsForDestination } from '@/lib/resorts/catalog';
+import { DESTINATIONS } from '@/lib/resorts/meta';
 
 export const metadata: Metadata = {
   title: { absolute: 'Find Your All-Inclusive Resort | VacationPro' },
@@ -24,18 +24,17 @@ const PRIORITIES = [
   { icon: '🧒', title: 'Family fun', body: 'Kids clubs, splash areas and rooms that fit everyone.' },
 ];
 
-const DESTINATIONS = [
-  { slug: 'cancun', name: 'Cancun', guide: '/destinations/cancun' },
-  { slug: 'riviera-maya', name: 'Riviera Maya and Tulum', guide: null },
-  { slug: 'punta-cana', name: 'Punta Cana', guide: '/destinations/punta-cana' },
-  { slug: 'aruba', name: 'Aruba', guide: '/destinations/aruba' },
-];
-
-const QUOTE_ONLY = [
-  { name: 'Montego Bay', guide: '/destinations/jamaica-montego-bay', slug: 'jamaica-montego-bay' },
-  { name: 'Negril', guide: '/destinations/jamaica-negril', slug: 'jamaica-negril' },
-  { name: 'Cabo San Lucas', guide: '/destinations/cabo-san-lucas', slug: 'cabo-san-lucas' },
-];
+// Site guide pages that exist for a destination (others link to the quiz only).
+const GUIDES: Record<string, string> = {
+  cancun: '/destinations/cancun',
+  'punta-cana': '/destinations/punta-cana',
+  aruba: '/destinations/aruba',
+  'cabo-san-lucas': '/destinations/cabo-san-lucas',
+  'jamaica-montego-bay': '/destinations/jamaica-montego-bay',
+  'jamaica-negril': '/destinations/jamaica-negril',
+};
+const TOP_DESTINATIONS = DESTINATIONS.slice(0, 8);
+const TOTAL_RESORTS = DESTINATIONS.reduce((n, d) => n + d.count, 0);
 
 const COMPARISONS = [
   { label: 'Adults-only Cancun: Le Blanc vs Excellence Playa Mujeres vs Secrets The Vine', ids: 'le-blanc-spa-resort-cancun,excellence-playa-mujeres,secrets-the-vine-cancun' },
@@ -61,7 +60,7 @@ export default async function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-r from-brand-900/90 via-brand-900/70 to-brand-900/30" aria-hidden="true" />
         <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 md:py-28 lg:px-8">
           <div className="max-w-2xl">
-            <h1 className="mb-4 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">Find your kind of all-inclusive.</h1>
+            <h1 className="mb-4 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">Find your next vacation destination</h1>
             <p className="mb-8 text-lg text-white/90 sm:text-xl">
               Tell us your budget and vacation vibe. Get personalized resort recommendations, then book online or let Brendan help.
             </p>
@@ -119,29 +118,24 @@ export default async function HomePage() {
           <h2 id="destinations" className="text-2xl font-bold text-gray-900 sm:text-3xl">Already know where you are going?</h2>
           <p className="mt-2 text-gray-700">Jump straight to resort picks for your destination.</p>
           <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {DESTINATIONS.map((d) => (
+            {TOP_DESTINATIONS.map((d) => (
               <li key={d.slug} className="rounded-2xl border border-gray-200 bg-white p-5">
                 <h3 className="text-lg font-bold text-gray-900">{d.name}</h3>
-                <p className="text-sm text-gray-600">{resortsForDestination(d.slug).length} resorts researched</p>
+                <p className="text-sm text-gray-600">
+                  {d.country} · {d.count} all-inclusive resorts
+                </p>
                 <div className="mt-4 flex flex-col gap-2">
                   <Link href={`/quiz?destination=${d.slug}&from=home-destinations`} className="inline-flex min-h-11 items-center justify-center rounded-xl bg-brand-700 px-4 font-bold text-white hover:bg-brand-800">
-                    Find my {d.name.split(' ')[0]} resort
+                    Find my resort here
                   </Link>
-                  {d.guide && <Link href={d.guide} className="min-h-11 py-2 text-center text-sm font-semibold text-brand-800 underline">Read the guide</Link>}
+                  {GUIDES[d.slug] && <Link href={GUIDES[d.slug]} className="min-h-11 py-2 text-center text-sm font-semibold text-brand-800 underline">Read the guide</Link>}
                 </div>
               </li>
             ))}
           </ul>
           <p className="mt-5 text-sm text-gray-700">
-            Heading to{' '}
-            {QUOTE_ONLY.map((d, i) => (
-              <span key={d.slug}>
-                {i > 0 && (i === QUOTE_ONLY.length - 1 ? ', or ' : ', ')}
-                <Link href={d.guide} className="font-semibold text-brand-800 underline">{d.name}</Link>
-              </span>
-            ))}
-            ? Resort matching there is coming soon.{' '}
-            <Link href="/concierge-planning?from=home-destinations#quote" className="font-bold text-brand-800 underline">Brendan can quote it now</Link>.
+            We cover {TOTAL_RESORTS.toLocaleString('en-US')} all-inclusive resorts across {DESTINATIONS.length} destinations in Mexico and the Caribbean.{' '}
+            <Link href="/resorts" className="font-bold text-brand-800 underline">See every destination</Link>.
           </p>
         </div>
       </section>

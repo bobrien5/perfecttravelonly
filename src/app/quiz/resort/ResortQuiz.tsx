@@ -17,7 +17,6 @@ import {
   type StepErrors,
 } from '@vacationpro/engine';
 import { trackFunnel } from '@/lib/analytics/journey';
-import { getResortRecord } from '@/lib/resorts/catalog';
 import {
   AdultsOnlyStep,
   AirportStep,
@@ -67,7 +66,7 @@ function withContext(state: ResortQuizState, ctx: QuizContext): ResortQuizState 
   return { ...state, answers: a };
 }
 
-export default function ResortQuiz({ context }: { context: QuizContext }) {
+export default function ResortQuiz({ context, contextResortName = null }: { context: QuizContext; contextResortName?: string | null }) {
   const [state, rawDispatch] = useReducer(resortQuizReducer, context, initialResortQuizState);
   const [hydrated, setHydrated] = useState(false);
   const [errors, setErrors] = useState<StepErrors>({});
@@ -145,7 +144,6 @@ export default function ResortQuiz({ context }: { context: QuizContext }) {
   const props = { answers, dispatch, errors, headingId: HEADING_ID };
   const progress = progressFor(state);
   const showNav = step !== 'results';
-  const contextResort = answers.contextResortId ? getResortRecord(answers.contextResortId) : null;
 
   // Until saved answers are read, show a neutral placeholder rather than the
   // start screen, so a returning visitor does not see a flash of step one.
@@ -195,7 +193,7 @@ export default function ResortQuiz({ context }: { context: QuizContext }) {
           next();
         }}
       >
-        {step === 'start' && <StartStep {...props} contextResortName={contextResort?.name ?? null} />}
+        {step === 'start' && <StartStep {...props} contextResortName={answers.contextResortId === context.resortId ? contextResortName : null} />}
         {step === 'destination' && <DestinationStep {...props} />}
         {step === 'travelers' && <TravelersStep {...props} />}
         {step === 'dates' && <DatesStep {...props} />}

@@ -14,8 +14,8 @@
  *   attached. Budget fit computed from a tier is always described as estimated.
  */
 
-export const DESTINATION_SLUGS = ['aruba', 'cancun', 'punta-cana', 'riviera-maya'] as const;
-export type CatalogDestination = (typeof DESTINATION_SLUGS)[number];
+/** Destination slug, e.g. 'cancun' or 'jamaica-negril'. The catalog defines the set. */
+export type CatalogDestination = string;
 
 export type TravelParty = 'couple' | 'friends' | 'family' | 'solo';
 export type Atmosphere = 'quiet' | 'balanced' | 'social';
@@ -97,10 +97,21 @@ export interface ReferencePrice {
   checkedAt: string;
 }
 
+export interface GuestRating {
+  /** 0-100 average across review sites. */
+  score: number;
+  reviews: number | null;
+  source: string;
+}
+
 export interface ResortRecord {
   id: string;
   name: string;
   destination: CatalogDestination;
+  country: string;
+  area: string | null;
+  /** 'curated': researched by VacationPro. 'sheet': imported from the community resort sheet. */
+  origin: 'curated' | 'sheet';
   /** Hidden records stay in the data for reference but never match. */
   status: 'active' | 'hidden';
   hiddenReason?: string;
@@ -111,7 +122,11 @@ export interface ResortRecord {
   // Verified facts
   allInclusive: boolean | 'optional' | null;
   adultsOnly: boolean | null;
+  /** Minimum guest age, for adults-only and age-restricted family resorts alike. */
   minAge: number | null;
+  couplesOnly: boolean;
+  /** Most people allowed in one room, when the resort restricts it. */
+  maxPerRoom: number | null;
   hasKidsClub: boolean | null;
   hasWaterPark: boolean | null;
   roomCount: number | null;
@@ -124,11 +139,18 @@ export interface ResortRecord {
   factsCheckedAt: string | null;
   factNotes?: string;
 
+  /** Notable amenities and room types worth showing (from the source data). */
+  features: string[];
+  guestRating: GuestRating | null;
+
   // Editorial
   atmosphere: Atmosphere | null;
   ratings: Record<Priority, Rating>;
-  /** 1 = lower cost, 2 = mid, 3 = upper. Editorial estimate, not a price. */
-  priceTier: 1 | 2 | 3;
+  /** Who produced `ratings` and `atmosphere`. */
+  ratingSource: 'vacationpro' | 'community-sheet';
+  /** 1 = lower cost, 2 = mid, 3 = upper. An estimate, never a price. null when unknown. */
+  priceTier: 1 | 2 | 3 | null;
+  priceTierBasis: 'editorial' | 'hotel-class' | null;
   editorialReviewedAt: string | null;
   /** Only set when Brendan has confirmed it. */
   visitStatus: 'visited' | 'researched' | null;
@@ -149,7 +171,7 @@ export interface BudgetAssessment {
   perRoomNightEstimate: number | null;
 }
 
-export type RecommendationRole = 'best-overall' | 'best-value' | 'worth-the-upgrade';
+export type RecommendationRole = 'best-overall' | 'best-value' | 'worth-the-upgrade' | 'also-strong';
 
 export interface Recommendation {
   role: RecommendationRole;

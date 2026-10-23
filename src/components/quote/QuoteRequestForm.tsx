@@ -1,12 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import {
   CURRENCIES,
   RESORT_QUIZ_STORAGE_KEY,
   deserializeQuiz,
-  matchResorts,
   type Currency,
   type Priority,
   type TripAnswers,
@@ -14,12 +13,21 @@ import {
 } from '@vacationpro/engine';
 import { Choice, ChoiceGroup, FieldError, Stepper, inputClass, primaryButton } from '@/app/quiz/resort/ui';
 import { getJourneyId, trackFunnel } from '@/lib/analytics/journey';
-import { ACTIVE_RESORTS, QUIZ_DESTINATIONS, destinationName, getResortRecord } from '@/lib/resorts/catalog';
+import { destinationsByCountry } from '@/lib/resorts/meta';
 import { trackLead } from '@/lib/meta-pixel';
 
+interface ResortRef {
+  id: string;
+  name: string;
+  destination?: string;
+  status?: 'active' | 'hidden';
+  hiddenReason?: string;
+}
+
 interface Props {
-  initialResortId?: string | null;
-  initialAlternatives?: string[];
+  /** Resolved on the server, so the browser never loads the catalog. */
+  initialResort?: ResortRef | null;
+  initialAlternatives?: ResortRef[];
   initialDestination?: string | null;
   source?: string | null;
   responseCopy: string;
@@ -92,12 +100,11 @@ function newKey(): string {
   }
 }
 
-export default function QuoteRequestForm({ initialResortId, initialAlternatives = [], initialDestination, source, responseCopy }: Props) {
-  const initialResort = initialResortId ? getResortRecord(initialResortId) : null;
+export default function QuoteRequestForm({ initialResort = null, initialAlternatives = [], initialDestination, source, responseCopy }: Props) {
   const [f, setF] = useState<FormState>({
     firstName: '', lastName: '', email: '', phone: '', contactPreference: 'email', marketingConsent: false,
     selectedResortId: initialResort?.status === 'active' ? initialResort.id : '',
-    alternativeResortIds: initialAlternatives,
+    alternativeResortIds: initialAlternatives.map((a) => a.id),
     destination: initialDestination ?? initialResort?.destination ?? '',
     dates: null, datesNote: '', adults: 2, childAges: [], rooms: 1, departureAirport: '',
     budgetAmount: '', budgetCurrency: 'USD', budgetIncludesFlights: '', tripScope: '', bookingTimeframe: '',
@@ -111,6 +118,27 @@ export default function QuoteRequestForm({ initialResortId, initialAlternatives 
   const keyRef = useRef<string>('');
   const startedAt = useRef<number>(0);
   const startedTracked = useRef(false);
+  const [names, setNames] = useState<Record<string, string>>(() =>
+    Object.fromEntries([...(initialResort ? [initialResort] : []), ...initialAlternatives].map((r) => [r.id, r.name])),
+  );
+  const [options, setOptions] = useState<{ id: string; name: string }[]>([]);
+
+  // Resorts for the chosen destination, fetched on demand (the full catalog stays on the server).
+  useEffect(() => {
+    if (!f.destination || f.destination === 'open') {
+      setOptions([]);
+      return;
+    }
+    const ctrl = new AbortController();
+    fetch(`/api/resorts?destination=${encodeURIComponent(f.destination)}`, { signal: ctrl.signal })
+      .then((r) => (r.ok ? r.json() : { resorts: [] }))
+      .then((d: { resorts: { id: string; name: string }[] }) => {
+        setOptions(d.resorts);
+        setNames((n) => ({ ...n, ...Object.fromEntries(d.resorts.map((r) => [r.id, r.name])) }));
+      })
+      .catch(() => {});
+    return () => ctrl.abort();
+  }, [f.destination]);
 
   // Prefill from the quiz saved on this device. Never sent anywhere until
   // submit. Read after mount (localStorage is client-only) so the server and
@@ -127,16 +155,33 @@ export default function QuoteRequestForm({ initialResortId, initialAlternatives 
       }
       if (!stored || stored.answers.priorities.length === 0) return;
       const a = stored.answers;
-      const ranked = matchResorts(a, ACTIVE_RESORTS).rankedIds;
       setQuiz(a);
       setF((prev) => {
-        const selected = prev.selectedResortId || '';
-        const alts = prev.alternativeResortIds.length ? prev.alternativeResortIds : ranked.filter((id) => id !== selected).slice(0, 2);
         const q = fromQuiz(a);
-        return { ...prev, ...q, destination: prev.destination || q.destination || '', alternativeResortIds: alts, selectedResortId: selected };
+        // Keep a destination implied by the chosen resort over the quiz's "open".
+        const destination = prev.destination && prev.destination !== 'open' ? prev.destination : q.destination || prev.destination || '';
+        return { ...prev, ...q, destination, alternativeResortIds: prev.alternativeResortIds, selectedResortId: prev.selectedResortId };
       });
+      // Fill alternatives from the visitor's own matches when none were passed in.
+      if (initialAlternatives.length === 0) {
+        fetch('/api/recommendations', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ answers: a }) })
+          .then((r) => (r.ok ? r.json() : null))
+          .then((d: { recommendations: { resort: { id: string; name: string } }[]; others: { id: string; name: string }[] } | null) => {
+            if (!d) return;
+            const ranked = [...d.recommendations.map((x) => x.resort), ...d.others];
+            setNames((n) => ({ ...n, ...Object.fromEntries(ranked.map((r) => [r.id, r.name])) }));
+            setF((prev) => ({
+              ...prev,
+              alternativeResortIds: prev.alternativeResortIds.length
+                ? prev.alternativeResortIds
+                : ranked.map((r) => r.id).filter((id) => id !== prev.selectedResortId).slice(0, 2),
+            }));
+          })
+          .catch(() => {});
+      }
     });
     return () => cancelAnimationFrame(frame);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const set = <K extends keyof FormState>(k: K, v: FormState[K]) => {
@@ -150,7 +195,7 @@ export default function QuoteRequestForm({ initialResortId, initialAlternatives 
     if (errors[k as string]) setErrors((e) => ({ ...e, [k as string]: '' }));
   };
 
-  const alternatives = useMemo(() => f.alternativeResortIds.map((id) => getResortRecord(id)).filter(Boolean), [f.alternativeResortIds]);
+  const alternatives = f.alternativeResortIds.filter((id) => names[id]).map((id) => ({ id, name: names[id] }));
 
   function clientErrors(): Record<string, string> {
     const e: Record<string, string> = {};
@@ -285,18 +330,35 @@ export default function QuoteRequestForm({ initialResortId, initialAlternatives 
 
       <section aria-labelledby="qs-resort">
         <h3 id="qs-resort" className="mb-3 text-lg font-extrabold text-gray-900">Resort</h3>
-        <label htmlFor="qf-resort" className="mb-1.5 block text-sm font-bold text-gray-800">Resort you want a quote for</label>
-        <select id="qf-resort" value={f.selectedResortId} onChange={(e) => set('selectedResortId', e.target.value)} className={inputClass}>
-          <option value="">Not sure yet, help me choose</option>
-          {ACTIVE_RESORTS.slice()
-            .sort((a, b) => a.destination.localeCompare(b.destination) || a.name.localeCompare(b.name))
-            .map((r) => (
-              <option key={r.id} value={r.id}>
-                {r.name} ({destinationName(r.destination)})
-              </option>
-            ))}
+        <label htmlFor="qf-destination" className="mb-1.5 block text-sm font-bold text-gray-800">Destination</label>
+        <select id="qf-destination" value={f.destination} onChange={(e) => set('destination', e.target.value)} className={inputClass}>
+          <option value="">Not sure yet</option>
+          <option value="open">Open to suggestions</option>
+          {destinationsByCountry().map((g) => (
+            <optgroup key={g.country} label={g.country}>
+              {g.destinations.map((d) => (
+                <option key={d.slug} value={d.slug}>{d.name}</option>
+              ))}
+            </optgroup>
+          ))}
         </select>
-        {initialResort && initialResort.status !== 'active' && (
+
+        <div className="mt-4">
+          <label htmlFor="qf-resort" className="mb-1.5 block text-sm font-bold text-gray-800">Resort you want a quote for</label>
+          <select id="qf-resort" value={f.selectedResortId} onChange={(e) => set('selectedResortId', e.target.value)} className={inputClass}>
+            <option value="">Not sure yet, help me choose</option>
+            {f.selectedResortId && !options.some((o) => o.id === f.selectedResortId) && names[f.selectedResortId] && (
+              <option value={f.selectedResortId}>{names[f.selectedResortId]}</option>
+            )}
+            {options.map((r) => (
+              <option key={r.id} value={r.id}>{r.name}</option>
+            ))}
+          </select>
+          {!f.destination || f.destination === 'open' ? (
+            <p className="mt-1 text-xs text-gray-600">Choose a destination to see its resorts, or leave this for Brendan.</p>
+          ) : null}
+        </div>
+        {initialResort && initialResort.status === 'hidden' && (
           <p className="mt-2 text-sm text-amber-900">{initialResort.name} is not currently offered: {initialResort.hiddenReason}</p>
         )}
         {alternatives.length > 0 && (
@@ -304,9 +366,9 @@ export default function QuoteRequestForm({ initialResortId, initialAlternatives 
             <p>
               Also compare:{' '}
               {alternatives.map((r, i) => (
-                <span key={r!.id}>
+                <span key={r.id}>
                   {i > 0 && ', '}
-                  <strong>{r!.name}</strong>
+                  <strong>{r.name}</strong>
                 </span>
               ))}
             </p>
@@ -315,16 +377,6 @@ export default function QuoteRequestForm({ initialResortId, initialAlternatives 
             </button>
           </div>
         )}
-        <div className="mt-4">
-          <label htmlFor="qf-destination" className="mb-1.5 block text-sm font-bold text-gray-800">Destination</label>
-          <select id="qf-destination" value={f.destination} onChange={(e) => set('destination', e.target.value)} className={inputClass}>
-            <option value="">Not sure yet</option>
-            <option value="open">Open to suggestions</option>
-            {QUIZ_DESTINATIONS.map((d) => (
-              <option key={d.slug} value={d.slug}>{d.name}</option>
-            ))}
-          </select>
-        </div>
       </section>
 
       <section aria-labelledby="qs-trip">

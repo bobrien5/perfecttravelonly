@@ -5,12 +5,14 @@ import { describeResort, ratingWord, PRIORITY_LABELS, type Priority } from '@vac
 import BookingActions from '@/components/booking/BookingActions';
 import ResortVisual from '@/components/booking/ResortVisual';
 import Stay22Guard from '@/components/monetization/Stay22Guard';
-import { ACTIVE_RESORTS, PRICE_TIER_LABELS, ageLabel, destinationName, getResortRecord, transferLabel } from '@/lib/resorts/catalog';
+import { ACTIVE_RESORTS, ageLabel, destinationName, getResortRecord, priceRangeLabel, ratingSourceText, transferLabel } from '@/lib/resorts/catalog';
 import { quizHref, quoteHref, resortBookHref } from '@/lib/resorts/links';
 
+// Pre-render researched resorts; the others render on first request and are cached.
 export function generateStaticParams() {
-  return ACTIVE_RESORTS.map((r) => ({ id: r.id }));
+  return ACTIVE_RESORTS.filter((r) => r.origin === 'curated').map((r) => ({ id: r.id }));
 }
+export const revalidate = 86400;
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
@@ -20,6 +22,9 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     title: { absolute: `${r.name}: Who It Suits and Tradeoffs | VacationPro` },
     description: `${r.name} in ${destinationName(r.destination)}: ${ageLabel(r).toLowerCase()}, strengths, tradeoffs and who should skip it, with sources. Book online or get a quote from Brendan.`,
     alternates: { canonical: `/resorts/${r.id}` },
+    // Pages built only from the community sheet are useful to visitors but
+    // templated; keep them out of search until they get editorial review.
+    ...(r.origin === 'sheet' ? { robots: { index: false, follow: true } } : {}),
   };
 }
 
@@ -65,7 +70,7 @@ export default async function ResortPage({ params }: { params: Promise<{ id: str
 
       <h1 className="text-3xl font-extrabold leading-tight text-gray-900 sm:text-4xl">{r.name}</h1>
       <p className="mt-2 font-semibold text-gray-700">
-        {destinationName(r.destination)} · {ageLabel(r)} · All-inclusive
+        {r.area && r.area !== destinationName(r.destination) ? `${r.area}, ` : ''}{destinationName(r.destination)} · {ageLabel(r)} · All-inclusive
       </p>
 
       <div className="mt-6 overflow-hidden rounded-2xl">
@@ -73,7 +78,9 @@ export default async function ResortPage({ params }: { params: Promise<{ id: str
       </div>
 
       <p className="mt-6 text-lg leading-relaxed text-gray-800">{r.summary}</p>
-      <p className="mt-2 text-xs text-gray-500">VacationPro editorial summary{r.visitStatus === 'visited' ? ', from a personal visit' : ''}.</p>
+      <p className="mt-2 text-xs text-gray-500">
+        {r.origin === 'curated' ? `VacationPro editorial summary${r.visitStatus === 'visited' ? ', from a personal visit' : ''}.` : 'Summary generated from the community resort guide data.'}
+      </p>
 
       <div className="mt-6 rounded-2xl bg-white p-5 ring-1 ring-gray-200">
         <h2 className="text-lg font-extrabold text-gray-900">Ready to look at dates?</h2>
@@ -137,6 +144,16 @@ export default async function ResortPage({ params }: { params: Promise<{ id: str
           ))}
         </dl>
         {r.beach.notes && <p className="mt-2 text-sm text-gray-700">Beach: {r.beach.notes}</p>}
+        {r.features.length > 0 && (
+          <div className="mt-5">
+            <h3 className="font-bold text-gray-900">Notable features</h3>
+            <ul className="mt-2 flex flex-wrap gap-2">
+              {r.features.map((x) => (
+                <li key={x} className="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-800">{x}</li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         {(r.inclusions.length > 0 || r.exclusions.length > 0) && (
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
@@ -157,8 +174,19 @@ export default async function ResortPage({ params }: { params: Promise<{ id: str
       </section>
 
       <section className="mt-8" aria-labelledby="ratings">
-        <h2 id="ratings" className="text-xl font-extrabold text-gray-900">VacationPro ratings</h2>
-        <p className="mt-1 text-sm text-gray-600">Our editorial assessment{r.editorialReviewedAt ? `, last reviewed ${r.editorialReviewedAt}` : ', provisional'}. Not a guest review score.</p>
+        <h2 id="ratings" className="text-xl font-extrabold text-gray-900">{r.ratingSource === 'vacationpro' ? 'VacationPro ratings' : 'Ratings'}</h2>
+        <p className="mt-1 text-sm text-gray-600">
+          {r.ratingSource === 'vacationpro'
+            ? `Our editorial assessment${r.editorialReviewedAt ? `, last reviewed ${r.editorialReviewedAt}` : ', provisional'}. Not a guest review score.`
+            : `${ratingSourceText(r)}. Not yet reviewed by VacationPro.`}
+        </p>
+        {r.guestRating && (
+          <p className="mt-2 text-sm text-gray-800">
+            <strong>Guest reviews:</strong> {Math.round(r.guestRating.score)}/100
+            {r.guestRating.reviews ? ` from about ${Math.round(r.guestRating.reviews).toLocaleString('en-US')} reviews` : ''} (average of TripAdvisor, Google,
+            Costco and Expedia, via the community resort guide).
+          </p>
+        )}
         <dl className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
           {PRIORITY_ORDER.filter((p) => !(p === 'family' && r.adultsOnly)).map((p) => (
             <div key={p} className="rounded-xl bg-gray-50 p-3">
@@ -171,14 +199,7 @@ export default async function ResortPage({ params }: { params: Promise<{ id: str
 
       <section className="mt-8" aria-labelledby="price">
         <h2 id="price" className="text-xl font-extrabold text-gray-900">Price context</h2>
-        {r.price ? (
-          <p className="mt-2 text-gray-800">
-            Reference rate: about {r.price.currency} {r.price.amount.toLocaleString('en-US')} for {r.price.nights} nights, {r.price.occupancy},{' '}
-            {r.price.travelDates}, {r.price.basis}. {r.price.includes} Checked {r.price.checkedAt} by {r.price.source}. Rates change, so check current rates.
-          </p>
-        ) : (
-          <p className="mt-2 text-gray-800">{PRICE_TIER_LABELS[r.priceTier]} for the area (our estimate). Check current rates.</p>
-        )}
+        <p className="mt-2 text-gray-800">{priceRangeLabel(r)}</p>
       </section>
 
       <section className="mt-8" aria-labelledby="rooms">
@@ -191,7 +212,13 @@ export default async function ResortPage({ params }: { params: Promise<{ id: str
 
       <section className="mt-8 rounded-2xl bg-gray-50 p-5 text-sm text-gray-700" aria-labelledby="sources">
         <h2 id="sources" className="font-extrabold text-gray-900">Sources</h2>
-        <p className="mt-1">Facts checked {r.factsCheckedAt ?? 'date not recorded'}. Anything marked not confirmed is something to ask about before booking.</p>
+        <p className="mt-1">
+          {r.origin === 'curated'
+            ? `Facts checked ${r.factsCheckedAt ?? 'date not recorded'} against official resort sources.`
+            : `Data from the community All Inclusive Resort Ratings guide, retrieved ${r.factsCheckedAt ?? 'recently'}. Not yet verified by VacationPro.`}{' '}
+          Anything marked not confirmed is something to ask about before booking.
+        </p>
+        {r.factNotes && <p className="mt-2">{r.factNotes}</p>}
         {r.sources.length > 0 && (
           <ul className="mt-2 list-disc space-y-1 pl-5">
             {r.sources.map((s) => (

@@ -1,9 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useMemo, useRef, useState, type Dispatch, type FormEvent } from 'react';
+import { useCallback, useEffect, useRef, useState, type Dispatch, type FormEvent } from 'react';
 import {
-  matchResorts,
   type Recommendation,
   type ResortQuizAction,
   type ResortQuizState,
@@ -13,14 +12,8 @@ import {
 import BookingActions from '@/components/booking/BookingActions';
 import ResortVisual from '@/components/booking/ResortVisual';
 import { trackFunnel } from '@/lib/analytics/journey';
-import {
-  ACTIVE_RESORTS,
-  PRICE_TIER_LABELS,
-  ageLabel,
-  destinationName,
-  getResortRecord,
-  transferLabel,
-} from '@/lib/resorts/catalog';
+import { ageLabel, destinationName, priceRangeLabel, transferLabel } from '@/lib/resorts/meta';
+import type { RecommendationPayload } from '@/lib/resorts/recommend';
 import { quoteHref, resortBookHref } from '@/lib/resorts/links';
 import { getSessionId, postSession } from '../lib/session';
 import { inputClass, primaryButton, secondaryButton } from './ui';
@@ -29,6 +22,7 @@ const ROLE_LABELS: Record<Recommendation['role'], string> = {
   'best-overall': 'Best overall fit',
   'best-value': 'Best value',
   'worth-the-upgrade': 'Worth the upgrade',
+  'also-strong': 'Also a strong fit',
 };
 
 const MAX_COMPARE = 3;
@@ -75,15 +69,42 @@ export default function Results({
   headingId: string;
 }) {
   const answers = state.answers;
-  const result = useMemo(() => matchResorts(answers, ACTIVE_RESORTS), [answers]);
-  const [compare, setCompare] = useState<string[]>(() => result.recommendations.map((r) => r.resort.id).slice(0, MAX_COMPARE));
+  const answersKey = JSON.stringify(answers);
+  const [result, setResult] = useState<RecommendationPayload | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [compare, setCompare] = useState<string[]>([]);
   const viewedKey = useRef<string>('');
 
-  const recIds = result.recommendations.map((r) => r.resort.id);
-  const extraIds = result.rankedIds.filter((id) => !recIds.includes(id)).slice(0, 5);
+  // Matching runs on the server: the catalog is too large to ship to phones.
+  const load = useCallback(async (signal?: AbortSignal) => {
+    setLoadError(null);
+    try {
+      const res = await fetch('/api/recommendations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: answersKey.length ? JSON.stringify({ answers: JSON.parse(answersKey) }) : '{}',
+        signal: signal ?? AbortSignal.timeout(20000),
+      });
+      const data = (await res.json().catch(() => null)) as (RecommendationPayload & { error?: string }) | null;
+      if (!res.ok || !data || !Array.isArray(data.recommendations)) throw new Error(data?.error || 'We could not load your matches.');
+      setResult(data);
+    } catch (err) {
+      if (signal?.aborted) return;
+      setLoadError(err instanceof Error && err.message ? err.message : 'We could not load your matches.');
+    }
+  }, [answersKey]);
+
+  useEffect(() => {
+    const ctrl = new AbortController();
+    void load(ctrl.signal);
+    return () => ctrl.abort();
+  }, [load]);
+
+  const recIds = result ? result.recommendations.map((r) => r.resort.id) : [];
 
   // Persist the session (no personal data) and record the view once per distinct result set.
   useEffect(() => {
+    if (!result) return;
     const key = recIds.join(',');
     if (viewedKey.current === key) return;
     viewedKey.current = key;
@@ -92,20 +113,16 @@ export default function Results({
     void postSession({
       sessionId: getSessionId(),
       answers,
-      topMatches: result.rankedIds.slice(0, 10).map((slug, i) => ({ slug, pct: i + 1 })),
+      topMatches: [...recIds, ...result.others.map((o) => o.id)].slice(0, 10).map((slug, i) => ({ slug, pct: i + 1 })),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [recIds.join(',')]);
+  }, [result]);
 
   function toggleCompare(id: string) {
     setCompare((c) => (c.includes(id) ? c.filter((x) => x !== id) : c.length >= MAX_COMPARE ? c : [...c, id]));
   }
 
   const edit = (step: StepId) => dispatch({ type: 'EDIT', step });
-  const contextId = answers.contextResortId ?? null;
-  const contextResort = contextId ? getResortRecord(contextId) : null;
-  const contextExcluded = contextId ? result.excluded.find((e) => e.resort.id === contextId) : undefined;
-  const contextRank = contextId ? result.rankedIds.indexOf(contextId) : -1;
   const generalQuote = quoteHref({ destination: answers.destination, from: 'results' });
 
   const summary: { label: string; value: string; step: StepId }[] = [
@@ -121,13 +138,41 @@ export default function Results({
     { label: 'Dealbreakers', value: answers.dealbreakers.join(', ').replace(/-/g, ' ') || 'None', step: 'dealbreakers' },
   ];
 
+  if (!result) {
+    return (
+      <div>
+        <h1 id={headingId} tabIndex={-1} className="text-2xl font-extrabold text-gray-900 outline-none sm:text-3xl">
+          {loadError ? 'We hit a snag' : 'Finding your resorts…'}
+        </h1>
+        {loadError ? (
+          <div role="alert" className="mt-4 rounded-xl bg-red-50 p-4 text-sm text-red-900 ring-1 ring-red-200">
+            <p>{loadError} Your answers are saved on this device.</p>
+            <button type="button" onClick={() => void load()} className={`${primaryButton} mt-3`}>
+              Try again
+            </button>
+          </div>
+        ) : (
+          <div aria-busy="true" className="mt-6 space-y-4">
+            <p role="status" className="text-gray-600">Comparing resorts against your answers.</p>
+            {[0, 1, 2].map((i) => (
+              <div key={i} className="h-40 animate-pulse rounded-2xl bg-gray-100" />
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  const others = result.others;
+
   return (
     <div>
       <h1 id={headingId} tabIndex={-1} className="text-2xl font-extrabold text-gray-900 outline-none sm:text-3xl">
         {result.recommendations.length > 0 ? 'Your resort matches' : 'No matches yet'}
       </h1>
       <p className="mt-2 text-gray-600">
-        Ranked on what you told us, using our resort research. We never rank by commission. Prices are estimates, not live rates.
+        Ranked on what you told us across {result.eligibleCount.toLocaleString('en-US')} resorts that fit your requirements. We never rank by commission, and
+        price ranges are estimates, not live rates.
       </p>
 
       <details className="mt-5 rounded-xl border border-gray-200 bg-white p-4">
@@ -169,18 +214,10 @@ export default function Results({
         </div>
       )}
 
-      {contextResort && (
+      {result.context && (
         <div className="mt-5 rounded-xl bg-brand-50 p-4 text-sm text-brand-950">
-          <strong>{contextResort.name}</strong>
-          {contextExcluded
-            ? `: not a match for this trip. ${contextExcluded.reason}`
-            : contextResort.status !== 'active'
-              ? `: not currently offered. ${contextResort.hiddenReason ?? ''}`
-              : recIds.includes(contextResort.id)
-                ? ' made your top picks below.'
-                : contextRank >= 0
-                  ? ` is an eligible option, ranked number ${contextRank + 1} of ${result.rankedIds.length} for your priorities. You can add it to a comparison below.`
-                  : '.'}
+          <strong>{result.context.name}</strong>
+          {result.context.note}
         </div>
       )}
 
@@ -190,7 +227,7 @@ export default function Results({
             key={rec.resort.id}
             rec={rec}
             answers={answers}
-            alternates={result.rankedIds.filter((id) => id !== rec.resort.id).slice(0, 2)}
+            alternates={[...recIds, ...others.map((o) => o.id)].filter((id) => id !== rec.resort.id).slice(0, 2)}
             comparing={compare.includes(rec.resort.id)}
             compareFull={compare.length >= MAX_COMPARE}
             onToggleCompare={() => toggleCompare(rec.resort.id)}
@@ -198,27 +235,26 @@ export default function Results({
         ))}
       </div>
 
-      {(extraIds.length > 0 || (contextId && contextRank >= 0 && !recIds.includes(contextId))) && (
+      {others.length > 0 && (
         <section className="mt-8" aria-labelledby="more-options">
           <h2 id="more-options" className="text-lg font-extrabold text-gray-900">
             Other eligible resorts
           </h2>
           <p className="mb-3 text-sm text-gray-600">These also meet your requirements. Add any to your comparison.</p>
           <ul className="divide-y divide-gray-100 rounded-xl border border-gray-200 bg-white">
-            {Array.from(new Set([...(contextId && contextRank >= 0 && !recIds.includes(contextId) ? [contextId] : []), ...extraIds])).map((id) => {
-              const r = getResortRecord(id)!;
-              const checked = compare.includes(id);
+            {others.map((r) => {
+              const checked = compare.includes(r.id);
               return (
-                <li key={id} className="flex items-center justify-between gap-3 p-3">
+                <li key={r.id} className="flex items-center justify-between gap-3 p-3">
                   <div>
-                    <Link href={`/resorts/${id}`} className="font-bold text-gray-900 underline-offset-2 hover:underline">
+                    <Link href={`/resorts/${r.id}`} className="font-bold text-gray-900 underline-offset-2 hover:underline">
                       {r.name}
                     </Link>
                     <p className="text-xs text-gray-600">
-                      {destinationName(r.destination)} · {ageLabel(r)}
+                      {r.destinationName} · {r.age}
                     </p>
                   </div>
-                  <CompareToggle id={id} name={r.name} checked={checked} disabled={!checked && compare.length >= MAX_COMPARE} onChange={() => toggleCompare(id)} />
+                  <CompareToggle id={r.id} name={r.name} checked={checked} disabled={!checked && compare.length >= MAX_COMPARE} onChange={() => toggleCompare(r.id)} />
                 </li>
               );
             })}
@@ -317,7 +353,7 @@ function RecommendationCard({
           {r.name}
         </h2>
         <p className="text-sm font-semibold text-gray-600">
-          {destinationName(r.destination)} · {ageLabel(r)}
+          {r.area && r.area !== destinationName(r.destination) ? `${r.area}, ` : ''}{destinationName(r.destination)} · {ageLabel(r)}
           {transfer ? ` · ${transfer}` : ''}
         </p>
 
@@ -347,20 +383,16 @@ function RecommendationCard({
           <div className="rounded-xl bg-gray-50 p-3">
             <dt className="font-bold text-gray-900">Price context</dt>
             <dd className="mt-1 text-gray-700">
-              {rec.budget.fit === 'unknown' ? (
-                <>
-                  {r.price
-                    ? `Reference rate ${r.price.currency} ${r.price.amount.toLocaleString('en-US')} for ${r.price.nights} nights (${r.price.occupancy}, ${r.price.travelDates}, checked ${r.price.checkedAt}). `
-                    : `${PRICE_TIER_LABELS[r.priceTier]} for this area (our estimate). `}
-                  Check current rates.
-                </>
-              ) : (
-                <>{rec.budget.explanation} Check current rates.</>
-              )}
-              {r.price && <span className="mt-1 block text-xs text-gray-500">Reference price source: {r.price.source}.</span>}
+              {rec.budget.fit === 'unknown' ? priceRangeLabel(r) : <>{rec.budget.explanation} Check current rates.</>}
             </dd>
           </div>
         </dl>
+
+        {r.features.length > 0 && (
+          <p className="mt-3 text-sm text-gray-700">
+            <strong>Notable:</strong> {r.features.slice(0, 5).join(', ')}.
+          </p>
+        )}
 
         {rec.unknowns.length > 0 && (
           <p className="mt-3 text-sm text-gray-600">

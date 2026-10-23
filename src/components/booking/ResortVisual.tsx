@@ -1,5 +1,5 @@
 import type { ResortRecord } from '@vacationpro/engine';
-import { destinationName, resortImage } from '@/lib/resorts/catalog';
+import { destinationName, resortImage } from '@/lib/resorts/meta';
 
 /** Resort photo when we have a verified one, else a branded panel (never a stand-in photo of somewhere else). */
 export default function ResortVisual({ resort, className = '' }: { resort: ResortRecord; className?: string }) {

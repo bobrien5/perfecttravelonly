@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { exclusionReason, matchResorts } from '@vacationpro/engine';
+import { exclusionReason, guestRatingPoints, matchResorts } from '@vacationpro/engine';
 import { answers, resort } from './fixtures';
 
 describe('hard constraints', () => {
@@ -77,7 +77,7 @@ describe('ranking and roles', () => {
     expect(new Set(ids).size).toBe(ids.length);
     expect(roles[0][0]).toBe('best-overall');
     expect(res.recommendations.find((r) => r.role === 'best-value')?.resort.priceTier).toBeLessThan(
-      res.recommendations[0].resort.priceTier,
+      res.recommendations[0].resort.priceTier!,
     );
     expect(res.rankedIds.at(-1)).toBe('weak');
   });
@@ -129,5 +129,68 @@ describe('value and upgrade picks use reference prices when known', () => {
     const cheap = resort({ id: 'cheap', priceTier: 2, price: ref(3500) });
     const res = matchResorts(answers({ budget: { amount: 20000, currency: 'USD', includesFlights: false } }), [top, cheap]);
     expect(res.recommendations.map((r) => [r.role, r.resort.id])).toEqual([['best-overall', 'top'], ['best-value', 'cheap']]);
+  });
+});
+
+describe('community sheet rules', () => {
+  it('excludes couples-only resorts for families, friends and solo travelers', () => {
+    const r = resort({ id: 'c', adultsOnly: true, couplesOnly: true });
+    expect(exclusionReason(answers({ party: 'couple', adults: 2 }), r)).toBeNull();
+    expect(exclusionReason(answers({ party: 'friends', adults: 3 }), r)).toMatch(/Couples only/);
+    expect(exclusionReason(answers({ party: 'solo', adults: 1 }), r)).toMatch(/Couples only/);
+  });
+
+  it('applies a minimum age at all-ages resorts too', () => {
+    const r = resort({ id: 'm', adultsOnly: false, minAge: 12 });
+    expect(exclusionReason(answers({ party: 'family', childAges: [10] }), r)).toMatch(/12 or older/);
+    expect(exclusionReason(answers({ party: 'family', childAges: [13] }), r)).toBeNull();
+  });
+
+  it('respects a maximum per room', () => {
+    const r = resort({ id: 'p', maxPerRoom: 3 });
+    expect(exclusionReason(answers({ party: 'family', adults: 2, childAges: [5, 7], rooms: 1 }), r)).toMatch(/at most 3/);
+    expect(exclusionReason(answers({ party: 'family', adults: 2, childAges: [5, 7], rooms: 2 }), r)).toBeNull();
+  });
+
+  it('uses guest reviews as a capped quality signal and says so', () => {
+    const base = { ratings: { beach: 2, food: 2, pools: 2, rooms: 2, nightlife: 1, value: null, family: 1 } } as const;
+    const loved = resort({ id: 'loved', ...base, guestRating: { score: 97, reviews: 2000, source: 's' } });
+    const meh = resort({ id: 'meh', ...base, guestRating: { score: 80, reviews: 2000, source: 's' } });
+    const res = matchResorts(answers(), [meh, loved]);
+    expect(res.rankedIds[0]).toBe('loved');
+    expect(res.recommendations[0].whyItFits.join(' ')).toMatch(/Guest reviews average 97\/100/);
+    expect(guestRatingPoints(resort({ id: 'few', guestRating: { score: 100, reviews: 10, source: 's' } }))).toBe(0);
+  });
+
+  it('labels ratings from the community sheet as such', () => {
+    const r = resort({ id: 's', ratingSource: 'community-sheet', ratings: { beach: 3, food: 3, pools: null, rooms: null, nightlife: null, value: null, family: 0 } });
+    const text = matchResorts(answers(), [r]).recommendations[0].whyItFits.join(' ');
+    expect(text).toMatch(/community resort guide/);
+    expect(text).not.toMatch(/VacationPro rating/);
+  });
+
+  it('never treats an unknown price as cheaper or pricier', () => {
+    const top = resort({ id: 'top', priceTier: 2, ratings: { beach: 3, food: 3, pools: 2, rooms: 2, nightlife: 1, value: 1, family: 1 } });
+    const unknown = resort({ id: 'unknown', priceTier: null, priceTierBasis: null });
+    const res = matchResorts(answers(), [top, unknown]);
+    expect(res.recommendations.map((r) => r.role)).toEqual(['best-overall']);
+    const b = matchResorts(answers(), [unknown]).recommendations[0].budget;
+    expect(b.fit).toBe('unknown');
+    expect(b.explanation).toMatch(/do not have price information/);
+  });
+});
+
+describe('also a strong fit', () => {
+  const strong = { beach: 3, food: 3, pools: 2, rooms: 2, nightlife: 1, value: null, family: 0 } as const;
+  it('fills slots with close runners-up when prices cannot justify value or upgrade picks', () => {
+    const top = resort({ id: 'a-top', priceTier: null, priceTierBasis: null, ratings: strong });
+    const close = resort({ id: 'b-close', priceTier: null, priceTierBasis: null, ratings: { ...strong, food: 2 } });
+    const weak = resort({ id: 'c-weak', priceTier: null, priceTierBasis: null, ratings: { beach: 0, food: 0, pools: 0, rooms: 0, nightlife: 0, value: null, family: 0 } });
+    const res = matchResorts(answers(), [top, close, weak]);
+    expect(res.recommendations.map((r) => [r.role, r.resort.id])).toEqual([
+      ['best-overall', 'a-top'],
+      ['also-strong', 'b-close'],
+    ]);
+    expect(res.rankedIds).toContain('c-weak');
   });
 });

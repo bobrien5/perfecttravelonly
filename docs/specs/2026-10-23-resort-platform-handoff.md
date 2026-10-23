@@ -13,9 +13,10 @@ Recommendations, comparisons, booking links and quotes need no account and no Va
 | Piece | Location |
 | --- | --- |
 | Matcher, budget estimate, quiz state machine | `packages/engine/src/resort/` (pure, deterministic, no AI) |
-| Resort catalog (generated, committed) | `packages/engine/src/resort/catalog.generated.ts` |
-| Catalog inputs | `scripts/seed-resorts-data.mjs` (editorial), `data/resort-facts.json` (facts, sources), `data/resort-sheet-extract.json` (transfer times and room counts from the community sheet; its prices are not used) |
-| Rebuild the catalog | `node scripts/build-resort-catalog.mjs` |
+| Resort catalog (generated, committed, server only) | `src/data/resorts/catalog.generated.json`, `src/data/resorts/destinations.generated.json` |
+| Catalog inputs | `scripts/seed-resorts-data.mjs` (editorial), `data/resort-facts.json` (facts, sources), `data/resort-sheet.json` (the community sheet's factual columns, no prices) and `data/resort-sheet-extract.json` (which sheet row is which researched resort) |
+| Refresh the sheet, then rebuild | `node scripts/import-resort-sheet.mjs` then `node scripts/build-resort-catalog.mjs` |
+| Matching API (server) | `src/app/api/recommendations/`, `src/lib/resorts/recommend.ts` |
 | Quiz UI | `src/app/quiz/resort/` (legacy wizard still handles `/quiz?claim=1`) |
 | Resort pages, comparison | `src/app/(site)/resorts/`, `src/app/(site)/compare/` |
 | Quote form, API, storage, emails | `src/components/quote/`, `src/app/api/quote-requests/`, `src/lib/quote/` |
@@ -25,11 +26,14 @@ Recommendations, comparisons, booking links and quotes need no account and no Va
 
 ## Catalog rules
 
-- 32 records, 28 active. Hidden: Hyatt Regency Aruba and Hilton Aruba Caribbean (not all-inclusive), Renaissance Wind Creek Aruba (all-inclusive is optional), and Hard Rock Hotel Cancun (closed for renovation, reopening reported for December 2026).
-- Facts were checked against official resort and brand sites on 2026-10-23, with sources per resort. Unknown facts are `null` and display as "Not confirmed".
-- Ratings (beach, food, pools, rooms, nightlife, value, family) come from the existing resort database seeded into Sanity in September 2026. They are labeled as VacationPro editorial ratings. Hyatt Vivid Cancun (formerly Dreams Vista) is unrated until re-reviewed.
-- Mondrian Cancun's age policy is unknown: booking sites say adults-only, but official material does not publish a policy.
-- The community "All Inclusive Resort Ratings" sheet supplies transfer times and room counts where official sources had none, credited on each resort. Its prices are not used (decided 2026-10-23), so price context is the editorial price tier, labeled as an estimate.
+- 773 records, 672 active, across 36 destinations in Mexico and the Caribbean (Cuba, Haiti, Central and South America excluded).
+- 32 are researched by VacationPro: facts checked against official resort sites on 2026-10-23, editorial ratings from the existing resort database. The other 741 come from the community "All Inclusive Resort Ratings" sheet Brendan shared.
+- Sheet resorts use only the sheet's facts: adults-only or family, couples-only, minimum ages, max people per room, airport and transfer time, room count, amenities, room types, its beach, food, romance and party tags, hotel class, and its average guest rating. Its prices are not imported or used.
+- Ratings for sheet resorts are derived from those fields and labeled "community resort guide", never as VacationPro's. Price range for sheet resorts is estimated from hotel class, or unknown.
+- Guest ratings (average of TripAdvisor, Google, Costco and Expedia, compiled by the sheet) are a capped ranking signal and are shown with their source. Ratings the sheet flags for suspected manipulation are ignored.
+- Hidden from matching: closed, not yet open, not all-inclusive, and clothing-optional resorts (Brendan can still quote them).
+- Sheet resort pages are `noindex` and left out of the sitemap until reviewed. Researched resort pages are indexed.
+- Results show up to three picks: best overall, then best value or worth the upgrade when prices justify it, otherwise "also a strong fit" for close runners-up only.
 - No resort photos and no "visited" status yet.
 
 ## Configuration

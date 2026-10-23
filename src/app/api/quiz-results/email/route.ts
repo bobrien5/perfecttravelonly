@@ -7,7 +7,7 @@ import { supabase } from '@/lib/supabase/client';
 import { EMAIL_RE, UUID_RE } from '@/app/api/quiz-session/validate';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.vacationpro.co';
-const ROLE: Record<string, string> = { 'best-overall': 'Best overall fit', 'best-value': 'Best value', 'worth-the-upgrade': 'Worth the upgrade' };
+const ROLE: Record<string, string> = { 'best-overall': 'Best overall fit', 'best-value': 'Best value', 'worth-the-upgrade': 'Worth the upgrade', 'also-strong': 'Also a strong fit' };
 
 /**
  * POST /api/quiz-results/email

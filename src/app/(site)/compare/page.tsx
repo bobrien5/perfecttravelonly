@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { describeResort, ratingWord, type ResortRecord } from '@vacationpro/engine';
 import BookingActions from '@/components/booking/BookingActions';
 import Stay22Guard from '@/components/monetization/Stay22Guard';
-import { PRICE_TIER_LABELS, ageLabel, destinationName, getActiveResort, transferLabel } from '@/lib/resorts/catalog';
+import { ageLabel, destinationName, getActiveResort, priceRangeLabel, transferLabel } from '@/lib/resorts/catalog';
 import { quoteHref, resortBookHref } from '@/lib/resorts/links';
 import CompareTracker from './CompareTracker';
 
@@ -21,10 +21,7 @@ function beach(r: ResortRecord): string {
 }
 
 function price(r: ResortRecord): string {
-  if (r.price) {
-    return `About ${r.price.currency} ${r.price.amount.toLocaleString('en-US')} for ${r.price.nights} nights (${r.price.occupancy}, ${r.price.travelDates}, checked ${r.price.checkedAt}). Check current rates.`;
-  }
-  return `${PRICE_TIER_LABELS[r.priceTier]} (our estimate). Check current rates.`;
+  return priceRangeLabel(r);
 }
 
 function family(r: ResortRecord): string {
@@ -43,6 +40,10 @@ const CRITERIA: { label: string; value: (r: ResortRecord) => string }[] = [
   { label: 'Family suitability', value: family },
   { label: 'Airport transfer', value: (r) => transferLabel(r) ?? 'Not confirmed' },
   { label: 'Price context', value: price },
+  {
+    label: 'Guest reviews',
+    value: (r) => (r.guestRating ? `${Math.round(r.guestRating.score)}/100${r.guestRating.reviews ? ` from about ${Math.round(r.guestRating.reviews).toLocaleString('en-US')} reviews` : ''}` : 'Not available'),
+  },
   { label: 'Main tradeoff', value: (r) => describeResort(r).tradeoffs[0] ?? 'No major tradeoff on file' },
   { label: 'Best fit', value: (r) => describeResort(r).bestFor },
 ];
@@ -75,7 +76,7 @@ export default async function ComparePage({ searchParams }: { searchParams: Prom
       <CompareTracker ids={resorts.map((r) => r.id)} />
       <h1 className="text-2xl font-extrabold text-gray-900 sm:text-3xl">Compare resorts</h1>
       <p className="mt-2 text-gray-700">
-        Same criteria for each. Ratings are VacationPro&apos;s editorial assessments, and prices are dated references, not live rates.
+        Same criteria for each. Price ranges are estimates, not live rates.
       </p>
 
       {/* Phones: one criterion at a time, every resort listed under it. */}
@@ -132,12 +133,11 @@ export default async function ComparePage({ searchParams }: { searchParams: Prom
         </table>
       </div>
 
-      {resorts.some((r) => r.price) && (
-        <p className="mt-4 text-xs text-gray-600">
-          Reference prices: {Array.from(new Set(resorts.filter((r) => r.price).map((r) => r.price!.source))).join('; ')}. Past prices for the stated dates and
-          occupancy, not quotes.
-        </p>
-      )}
+      <p className="mt-4 text-xs text-gray-600">
+        {resorts.some((r) => r.ratingSource === 'community-sheet')
+          ? 'Ratings for resorts we have not researched ourselves come from the community All Inclusive Resort Ratings guide (its tags, amenities and hotel class). Guest reviews are its average of TripAdvisor, Google, Costco and Expedia.'
+          : 'Ratings are VacationPro editorial assessments.'}
+      </p>
 
       <section className="mt-8 grid gap-4 md:grid-cols-3" aria-label="Booking options">
         {resorts.map((r) => (

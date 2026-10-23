@@ -1,4 +1,5 @@
-import { CURRENCIES, MAX_PRIORITIES, PRIORITIES, RESORT_CATALOG, type Currency, type Priority, type TripDates } from '@vacationpro/engine';
+import { CURRENCIES, MAX_PRIORITIES, PRIORITIES, type Currency, type Priority, type TripDates } from '@vacationpro/engine';
+import { resortIdSet } from '@/lib/resorts/catalog';
 
 /**
  * Server-side validation for quote requests. Pure and shared by the API
@@ -23,7 +24,7 @@ const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 const CARD_RE = /\b(?:\d[ -]?){13,19}\b/;
 
-const RESORT_IDS = new Set(RESORT_CATALOG.map((r) => r.id));
+const RESORT_IDS = resortIdSet();
 
 export interface QuoteInput {
   idempotencyKey: string;

@@ -29,8 +29,10 @@ export default async function ConciergePlanningPage({ searchParams }: PageProps)
   const alts = (p.alts ?? '')
     .split(',')
     .map((s) => s.trim())
-    .filter((id) => id && getResortRecord(id)?.status === 'active')
-    .slice(0, 5);
+    .map((id) => (id ? getResortRecord(id) : null))
+    .filter((r) => r !== null && r.status === 'active')
+    .slice(0, 5)
+    .map((r) => ({ id: r!.id, name: r!.name }));
   const destination = normalizeDestination(p.destination) ?? resort?.destination ?? null;
   const from = p.from && /^[a-z0-9-]{1,60}$/.test(p.from) ? p.from : null;
 
@@ -67,7 +69,7 @@ export default async function ConciergePlanningPage({ searchParams }: PageProps)
           <h2 id="quote-form-title" className="text-2xl font-extrabold text-gray-900">Tell me about your trip</h2>
           <p className="mt-1 mb-6 text-gray-600">{QUOTE_RESPONSE_COPY}</p>
           <QuoteRequestForm
-            initialResortId={resort?.id ?? null}
+            initialResort={resort ? { id: resort.id, name: resort.name, destination: resort.destination, status: resort.status, hiddenReason: resort.hiddenReason } : null}
             initialAlternatives={alts}
             initialDestination={destination}
             source={from}

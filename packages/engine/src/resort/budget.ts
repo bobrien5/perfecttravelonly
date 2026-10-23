@@ -121,11 +121,19 @@ export function assessBudget(answers: TripAnswers, resort: ResortRecord): Budget
     return { fit, explanation: parts.join(' '), perRoomNightEstimate: Math.round(hb.perRoomNight) };
   }
 
+  if (resort.priceTier === null) {
+    return {
+      fit: 'unknown',
+      explanation: `${available}. We do not have price information for this resort, so check current rates.`,
+      perRoomNightEstimate: Math.round(hb.perRoomNight),
+    };
+  }
   const fit = fitAgainstTier(hb.perRoomNight, resort.priceTier);
   const { low, high } = BUDGET_ASSUMPTIONS.tierNightlyUsd[resort.priceTier];
+  const basis = resort.priceTierBasis === 'hotel-class' ? ' (price range estimated from its hotel class)' : '';
   const parts = [
     `${FIT_WORDS[fit]}.`,
-    `${available}, against a typical ${usd(low)} to ${usd(high)} for resorts in this price range.`,
+    `${available}, against a typical ${usd(low)} to ${usd(high)} for resorts in this price range${basis}.`,
     'This is our planning estimate, not a live rate.',
   ];
   return { fit, explanation: parts.join(' '), perRoomNightEstimate: Math.round(hb.perRoomNight) };
@@ -150,9 +158,10 @@ function fitAgainstReference(perRoomNight: number, refNightly: number): BudgetFi
  * Comparable cost index for picking "best value" and "worth the upgrade":
  * the reference nightly price when known, else the tier's midpoint.
  */
-export function priceIndex(resort: ResortRecord): number {
+export function priceIndex(resort: ResortRecord): number | null {
   const ref = referenceNightly(resort);
   if (ref !== null) return ref;
+  if (resort.priceTier === null) return null;
   const { low, high } = BUDGET_ASSUMPTIONS.tierNightlyUsd[resort.priceTier];
   return (low + high) / 2;
 }

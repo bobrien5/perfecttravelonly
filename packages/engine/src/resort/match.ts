@@ -42,6 +42,8 @@ const ATMOSPHERE_LABELS: Record<Atmosphere, string> = {
 };
 
 export const LONG_TRANSFER_MINUTES = 45;
+/** How close (in score points) an extra pick must be to the top pick. */
+export const ALSO_STRONG_MARGIN = 4;
 export const MEGA_RESORT_ROOMS = 600;
 
 const PRIORITY_WEIGHTS = [3, 2];
@@ -64,13 +66,23 @@ export function exclusionReason(a: TripAnswers, r: ResortRecord): string | null 
     return 'Outside your chosen destination.';
   }
 
+  if (r.couplesOnly && (hasChildren(a) || a.adults % 2 !== 0 || a.party === 'family' || a.party === 'solo')) {
+    return 'Couples only.';
+  }
+
+  if (r.maxPerRoom !== null && Math.ceil((a.adults + a.childAges.length) / Math.max(1, a.rooms)) > r.maxPerRoom) {
+    return `Allows at most ${r.maxPerRoom} people per room. Add a room or choose another resort.`;
+  }
+
   if (hasChildren(a)) {
+    const youngest = Math.min(...a.childAges);
     if (r.adultsOnly === null) return 'We could not confirm it accepts children.';
     if (r.adultsOnly) {
-      const youngest = Math.min(...a.childAges);
       if (r.minAge === null || youngest < r.minAge) {
         return r.minAge ? `Adults-only (${r.minAge}+).` : 'Adults-only.';
       }
+    } else if (r.minAge !== null && youngest < r.minAge) {
+      return `Guests must be ${r.minAge} or older.`;
     }
   } else if (a.adultsOnly === 'yes') {
     if (r.adultsOnly === null) return 'We could not confirm it is adults-only.';
@@ -120,6 +132,13 @@ function atmospherePoints(a: TripAnswers, r: ResortRecord): number {
   return -4; // quiet vs social
 }
 
+/** Guest reviews as a quality signal: neutral around 90/100, capped both ways. */
+export function guestRatingPoints(r: ResortRecord): number {
+  const g = r.guestRating;
+  if (!g || (g.reviews !== null && g.reviews < 50)) return 0;
+  return Math.max(-3, Math.min(4, (g.score - 90) / 2));
+}
+
 function partyPoints(a: TripAnswers, r: ResortRecord): number {
   let pts = 0;
   if (hasChildren(a)) pts += rating(r, 'family');
@@ -138,13 +157,13 @@ interface Scored {
 export function scoreResortFit(a: TripAnswers, r: ResortRecord): Scored {
   const budget = assessBudget(a, r);
   const pScore = priorityScore(a, r);
-  const score = pScore + atmospherePoints(a, r) + partyPoints(a, r) + BUDGET_FIT_POINTS[budget.fit];
+  const score = pScore + atmospherePoints(a, r) + partyPoints(a, r) + BUDGET_FIT_POINTS[budget.fit] + guestRatingPoints(r);
   return { resort: r, score, pScore, budget };
 }
 
 function compareScored(x: Scored, y: Scored): number {
   if (y.score !== x.score) return y.score - x.score;
-  if (x.resort.priceTier !== y.resort.priceTier) return x.resort.priceTier - y.resort.priceTier;
+  if ((x.resort.priceTier ?? 2) !== (y.resort.priceTier ?? 2)) return (x.resort.priceTier ?? 2) - (y.resort.priceTier ?? 2);
   return x.resort.id.localeCompare(y.resort.id);
 }
 
@@ -158,14 +177,29 @@ function transferText(r: ResortRecord): string | null {
   return max - min <= 5 ? `about ${max} minutes from ${t.airport}` : `about ${min} to ${max} minutes from ${t.airport}`;
 }
 
+/** Where a rating came from, in words a traveler can read. */
+export function ratingSourceLabel(r: ResortRecord): string {
+  return r.ratingSource === 'vacationpro' ? 'VacationPro rating' : 'community resort guide';
+}
+
+function guestRatingText(r: ResortRecord): string | null {
+  const g = r.guestRating;
+  if (!g || (g.reviews !== null && g.reviews < 50)) return null;
+  const n = g.reviews ? ` from about ${Math.round(g.reviews).toLocaleString('en-US')} reviews` : '';
+  return `Guest reviews average ${Math.round(g.score)}/100${n}.`;
+}
+
 function whyItFits(a: TripAnswers, s: Scored): string[] {
   const r = s.resort;
   const out: string[] = [];
+  const src = ratingSourceLabel(r);
   for (const p of a.priorities) {
     const v = r.ratings[p];
-    if (v === 3) out.push(`A standout for ${PRIORITY_LABELS[p]}, one of your top priorities (VacationPro rating).`);
-    else if (v === 2) out.push(`Strong on ${PRIORITY_LABELS[p]}, one of your top priorities (VacationPro rating).`);
+    if (v === 3) out.push(`A standout for ${PRIORITY_LABELS[p]}, one of your top priorities (${src}).`);
+    else if (v === 2) out.push(`Strong on ${PRIORITY_LABELS[p]}, one of your top priorities (${src}).`);
   }
+  const gr = guestRatingText(r);
+  if (gr && r.guestRating!.score >= 92) out.push(gr);
   if (a.atmosphere && a.atmosphere !== 'unsure' && r.atmosphere === a.atmosphere) {
     out.push(`Its ${ATMOSPHERE_LABELS[r.atmosphere]} atmosphere matches the vibe you asked for.`);
   }
@@ -191,6 +225,9 @@ function tradeoff(a: TripAnswers, s: Scored): string {
     return `Longer airport transfer, ${transferText(r)}.`;
   }
   if (s.budget.fit === 'stretch' || s.budget.fit === 'over') return s.budget.explanation;
+  if (r.guestRating && r.guestRating.score < 85 && (r.guestRating.reviews ?? 0) >= 50) {
+    return `Guest reviews are mixed, averaging ${Math.round(r.guestRating.score)}/100.`;
+  }
   if (r.beach.swimmable === 'mixed') return r.beach.notes ?? 'Beach swimming conditions vary.';
   if (r.exclusions.length > 0) return `Not everything is included: ${r.exclusions[0]}.`;
   const candidates = (Object.keys(r.ratings) as Priority[])
@@ -203,6 +240,7 @@ function tradeoff(a: TripAnswers, s: Scored): string {
 }
 
 function skipIf(a: TripAnswers, r: ResortRecord): string {
+  if (r.couplesOnly) return 'You are not traveling as a couple. It is couples only.';
   if (r.adultsOnly) {
     return r.minAge
       ? `You are traveling with anyone under ${r.minAge}.`
@@ -211,6 +249,7 @@ function skipIf(a: TripAnswers, r: ResortRecord): string {
   if (r.atmosphere === 'social') return 'You want a quiet, low-key week.';
   if (r.atmosphere === 'quiet') return 'You want nightlife and a busy pool scene.';
   if (r.roomCount !== null && r.roomCount > MEGA_RESORT_ROOMS) return 'Big resorts with long walks bother you.';
+  if (r.adultsOnly === false && r.minAge !== null) return `You are traveling with anyone under ${r.minAge}.`;
   if (r.adultsOnly === false && (r.ratings.family ?? 0) >= 2) return 'You want a kid-free atmosphere.';
   const weakest = (Object.keys(r.ratings) as Priority[])
     .filter((p) => r.ratings[p] !== null)
@@ -244,7 +283,8 @@ function unknowns(a: TripAnswers, r: ResortRecord): string[] {
   }
   if (r.roomCount === null && a.dealbreakers.includes('mega-resort')) out.push('Resort size');
   if (r.adultsOnly === null) out.push('Age policy');
-  for (const p of a.priorities) if (r.ratings[p] === null) out.push(`Our rating for ${PRIORITY_LABELS[p]}`);
+  for (const p of a.priorities) if (r.ratings[p] === null) out.push(`How it rates for ${PRIORITY_LABELS[p]}`);
+  if (r.priceTier === null) out.push('Price range');
   return out;
 }
 
@@ -298,12 +338,19 @@ export function matchResorts(a: TripAnswers, catalog: ResortRecord[]): MatchResu
   // Cost comparisons use the dated reference price when we have one, else
   // the editorial tier midpoint (see priceIndex). A 10% gap is required so
   // near-identical prices are not presented as a value or upgrade choice.
+  // Roles that compare cost need a cost estimate on both sides; unknown
+  // prices never count as "cheaper" or "pricier".
   const overallCost = priceIndex(overall.resort);
-  const cheaper = eligible.find((s) => !used.has(s.resort.id) && priceIndex(s.resort) < overallCost * 0.9 && notOver(s));
-  const betterValue = eligible.find(
-    (s) => !used.has(s.resort.id) && priceIndex(s.resort) <= overallCost &&
-      (s.resort.ratings.value ?? 0) > (overall.resort.ratings.value ?? 0) && notOver(s),
-  );
+  const cost = (s: Scored) => priceIndex(s.resort);
+  const cheaper = overallCost === null ? undefined : eligible.find((s) => {
+    const c = cost(s);
+    return !used.has(s.resort.id) && c !== null && c < overallCost * 0.9 && notOver(s);
+  });
+  const betterValue = overallCost === null ? undefined : eligible.find((s) => {
+    const c = cost(s);
+    return !used.has(s.resort.id) && c !== null && c <= overallCost &&
+      (s.resort.ratings.value ?? 0) > (overall.resort.ratings.value ?? 0) && notOver(s);
+  });
   const value = cheaper ?? betterValue;
   if (value) {
     recommendations.push(toRecommendation('best-value', a, value));
@@ -312,21 +359,30 @@ export function matchResorts(a: TripAnswers, catalog: ResortRecord[]): MatchResu
 
   // An upgrade is only "worth it" when it is stronger on what the traveler
   // said matters and is not estimated to blow the budget.
-  const upgrade = eligible.find(
-    (s) => !used.has(s.resort.id) && priceIndex(s.resort) > overallCost * 1.1 &&
-      s.pScore > overall.pScore && notOver(s),
-  );
+  const upgrade = overallCost === null ? undefined : eligible.find((s) => {
+    const c = cost(s);
+    return !used.has(s.resort.id) && c !== null && c > overallCost * 1.1 && s.pScore > overall.pScore && notOver(s);
+  });
   if (upgrade) {
     recommendations.push(toRecommendation('worth-the-upgrade', a, upgrade));
     used.add(upgrade.resort.id);
+  }
+
+  // Remaining slots go to the next-best distinct resorts, but only when they
+  // genuinely score close to the top pick. Not forced: a weak fourth-place
+  // resort is left out rather than padded in.
+  for (const s of eligible) {
+    if (recommendations.length >= 3) break;
+    if (used.has(s.resort.id) || s.score < overall.score - ALSO_STRONG_MARGIN) continue;
+    recommendations.push(toRecommendation('also-strong', a, s));
+    used.add(s.resort.id);
   }
 
   if (recommendations.length < 3) {
     if (eligible.length === 1) {
       limitations.push('Only one resort in our catalog meets all of your requirements.');
     } else {
-      if (!value) limitations.push('No lower-priced resort matched as well, so there is no separate best-value pick.');
-      if (!upgrade) limitations.push('No pricier resort was clearly stronger on your priorities, so we did not suggest an upgrade.');
+      limitations.push('Other eligible resorts were a noticeably weaker fit, so we kept the list short. You can still compare them below.');
     }
   }
 
@@ -356,10 +412,13 @@ export function ratingWord(v: number | null): string {
 /** Strengths, tradeoffs and fit, from stored facts and editorial ratings only. */
 export function describeResort(r: ResortRecord): ResortProfile {
   const rated = (Object.keys(r.ratings) as Priority[]).filter((p) => r.ratings[p] !== null && !(p === 'family' && r.adultsOnly));
-  const strengths = rated.filter((p) => r.ratings[p] === 3).map((p) => `Standout for ${PRIORITY_LABELS[p]} (VacationPro rating).`);
+  const src = ratingSourceLabel(r);
+  const strengths = rated.filter((p) => r.ratings[p] === 3).map((p) => `Standout for ${PRIORITY_LABELS[p]} (${src}).`);
   if (strengths.length === 0) {
-    strengths.push(...rated.filter((p) => r.ratings[p] === 2).slice(0, 2).map((p) => `Strong on ${PRIORITY_LABELS[p]} (VacationPro rating).`));
+    strengths.push(...rated.filter((p) => r.ratings[p] === 2).slice(0, 2).map((p) => `Strong on ${PRIORITY_LABELS[p]} (${src}).`));
   }
+  const gr = guestRatingText(r);
+  if (gr && r.guestRating!.score >= 92) strengths.push(gr);
   if (r.transfer?.minutes && r.transfer.minutes.max <= 30) strengths.push(`Short transfer, ${transferText(r)}.`);
   if (r.hasKidsClub && !r.adultsOnly) strengths.push('Has a kids club.');
 
@@ -368,8 +427,11 @@ export function describeResort(r: ResortRecord): ResortProfile {
   if (r.transfer?.minutes && r.transfer.minutes.max > LONG_TRANSFER_MINUTES) tradeoffs.push(`Longer transfer, ${transferText(r)}.`);
   if (r.roomCount !== null && r.roomCount > MEGA_RESORT_ROOMS) tradeoffs.push(`Large resort with about ${r.roomCount.toLocaleString('en-US')} rooms.`);
   for (const x of r.exclusions.slice(0, 2)) tradeoffs.push(`Not included: ${x}.`);
+  if (r.guestRating && r.guestRating.score < 85 && (r.guestRating.reviews ?? 0) >= 50) tradeoffs.push(`Guest reviews are mixed, averaging ${Math.round(r.guestRating.score)}/100.`);
 
-  const who = r.adultsOnly
+  const who = r.couplesOnly
+    ? 'Couples who want a couples-only resort'
+    : r.adultsOnly
     ? r.atmosphere === 'social'
       ? 'Couples and friends who want an adults-only resort with energy'
       : 'Couples who want an adults-only, calmer stay'

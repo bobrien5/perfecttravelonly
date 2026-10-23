@@ -17,5 +17,5 @@ export default async function QuizPage({ searchParams }: QuizPageProps) {
   // Only pass context we recognize: a known destination slug or resort id.
   const resort = params.resort ? getResortRecord(params.resort) : null;
   const destination = normalizeDestination(params.destination) ?? resort?.destination ?? null;
-  return <ResortQuiz context={{ destination, resortId: resort?.id ?? null }} />;
+  return <ResortQuiz context={{ destination, resortId: resort?.id ?? null }} contextResortName={resort?.name ?? null} />;
 }

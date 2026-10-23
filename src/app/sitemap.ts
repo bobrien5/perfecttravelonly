@@ -61,7 +61,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     }));
 
-  const resortEntries: MetadataRoute.Sitemap = ACTIVE_RESORTS.map(r => ({
+  // Researched resorts only; community-sheet pages are noindex for now.
+  const resortEntries: MetadataRoute.Sitemap = ACTIVE_RESORTS.filter(r => r.origin === 'curated').map(r => ({
     url: `${BASE_URL}/resorts/${r.id}`,
     lastModified: r.factsCheckedAt ? new Date(r.factsCheckedAt) : now,
     changeFrequency: 'monthly' as const,

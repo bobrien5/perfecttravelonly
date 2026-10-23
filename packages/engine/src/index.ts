@@ -34,4 +34,3 @@ export {
   deserializeQuiz,
 } from './resort/quiz';
 export * from './resort/booking';
-export { RESORT_CATALOG } from './resort/catalog.generated';

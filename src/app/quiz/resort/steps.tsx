@@ -14,7 +14,7 @@ import {
   type StepErrors,
   type TripAnswers,
 } from '@vacationpro/engine';
-import { QUIZ_DESTINATIONS, destinationName } from '@/lib/resorts/catalog';
+import { DESTINATIONS, destinationName, destinationsByCountry } from '@/lib/resorts/meta';
 import { Choice, ChoiceGroup, FieldError, StepHeading, Stepper, inputClass } from './ui';
 
 export interface StepProps {
@@ -48,7 +48,7 @@ export function StartStep({ answers, dispatch, errors, headingId, contextResortN
           checked={answers.entry === 'discover'}
           onChange={() => dispatch({ type: 'CHOOSE_ENTRY', entry: 'discover' })}
           label="Help me choose where to go"
-          description="We will compare resorts across Cancun, Riviera Maya, Punta Cana and Aruba."
+          description={`We will compare ${DESTINATIONS.reduce((n, d) => n + d.count, 0).toLocaleString('en-US')} all-inclusive resorts across Mexico and the Caribbean.`}
           icon="🧭"
         />
         <Choice
@@ -68,12 +68,16 @@ export function StartStep({ answers, dispatch, errors, headingId, contextResortN
 
 // ─── Destination ─────────────────────────────────────────────
 
+const FEATURED_DESTINATIONS = DESTINATIONS.slice(0, 8);
+
 export function DestinationStep({ answers, dispatch, errors, headingId }: StepProps) {
+  const featured = FEATURED_DESTINATIONS.some((d) => d.slug === answers.destination);
+  const other = answers.destination && answers.destination !== 'open' && !featured ? answers.destination : '';
   return (
     <div>
       <StepHeading id={headingId} title="Where are you headed?" />
-      <ChoiceGroup legend="Destination" errorId="err-destination" error={errors.destination}>
-        {QUIZ_DESTINATIONS.map((d) => (
+      <ChoiceGroup legend="Popular destinations" errorId="err-destination" error={errors.destination} columns={2}>
+        {FEATURED_DESTINATIONS.map((d) => (
           <Choice
             key={d.slug}
             type="radio"
@@ -82,9 +86,33 @@ export function DestinationStep({ answers, dispatch, errors, headingId }: StepPr
             checked={answers.destination === d.slug}
             onChange={() => dispatch({ type: 'SET', patch: { destination: d.slug } })}
             label={d.name}
-            description={d.hasResorts ? undefined : 'Resort matching is coming soon here. Brendan can quote it now.'}
+            description={`${d.count} resorts`}
           />
         ))}
+      </ChoiceGroup>
+      <label htmlFor="q-destination-other" className="mb-1.5 block text-sm font-bold text-gray-800">
+        Somewhere else
+      </label>
+      <select
+        id="q-destination-other"
+        value={other}
+        onChange={(e) => dispatch({ type: 'SET', patch: { destination: e.target.value || null } })}
+        className={inputClass}
+      >
+        <option value="">Choose a destination</option>
+        {destinationsByCountry().map((g) => (
+          <optgroup key={g.country} label={g.country}>
+            {g.destinations
+              .filter((d) => !FEATURED_DESTINATIONS.includes(d))
+              .map((d) => (
+                <option key={d.slug} value={d.slug}>
+                  {d.name} ({d.count} {d.count === 1 ? 'resort' : 'resorts'})
+                </option>
+              ))}
+          </optgroup>
+        ))}
+      </select>
+      <div className="mt-5">
         <Choice
           type="radio"
           name="destination"
@@ -92,8 +120,9 @@ export function DestinationStep({ answers, dispatch, errors, headingId }: StepPr
           checked={answers.destination === 'open'}
           onChange={() => dispatch({ type: 'SET', patch: { destination: 'open' } })}
           label="Open to suggestions"
+          description="Compare resorts everywhere we cover."
         />
-      </ChoiceGroup>
+      </div>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { normalizeDestination } from '@/lib/resorts/catalog';
+import { normalizeDestination } from '@/lib/resorts/meta';
 
 interface AdvisorCtaProps {
   /** Destination name for a personalized headline, e.g. "Aruba". */

@@ -1,4 +1,5 @@
-import { RESORT_CATALOG, type QuizAnswers, type TripAnswers } from '@vacationpro/engine';
+import type { QuizAnswers, TripAnswers } from '@vacationpro/engine';
+import { getResortRecord } from '@/lib/resorts/catalog';
 
 /**
  * Mirrors the trips table columns (sql/trip_hub.sql). Pure mapping, no I/O:
@@ -69,7 +70,7 @@ function legacyToTripPayload(
  * so the trip's destination is that resort's destination (or the chosen one).
  */
 function resortQuizToTripPayload(a: TripAnswers, topMatch: { slug: string } | null): TripInsert {
-  const fromResort = topMatch ? RESORT_CATALOG.find((r) => r.id === topMatch.slug)?.destination : undefined;
+  const fromResort = topMatch ? getResortRecord(topMatch.slug)?.destination : undefined;
   const chosen = a.destination && a.destination !== 'open' ? a.destination : undefined;
   const resolvedSlug = chosen ?? fromResort;
   if (!resolvedSlug) {

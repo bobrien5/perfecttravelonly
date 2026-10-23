@@ -1,0 +1,254 @@
+[
+ {
+  "slug": "riviera-maya",
+  "name": "Riviera Maya and Tulum",
+  "country": "Mexico",
+  "count": 118,
+  "researched": 6
+ },
+ {
+  "slug": "cancun",
+  "name": "Cancun and Costa Mujeres",
+  "country": "Mexico",
+  "count": 103,
+  "researched": 13
+ },
+ {
+  "slug": "punta-cana",
+  "name": "Punta Cana",
+  "country": "Dominican Republic",
+  "count": 93,
+  "researched": 6
+ },
+ {
+  "slug": "puerto-vallarta",
+  "name": "Puerto Vallarta and Riviera Nayarit",
+  "country": "Mexico",
+  "count": 49,
+  "researched": 0
+ },
+ {
+  "slug": "cabo-san-lucas",
+  "name": "Los Cabos",
+  "country": "Mexico",
+  "count": 37,
+  "researched": 0
+ },
+ {
+  "slug": "saint-lucia",
+  "name": "St. Lucia",
+  "country": "St. Lucia",
+  "count": 28,
+  "researched": 0
+ },
+ {
+  "slug": "barbados",
+  "name": "Barbados",
+  "country": "Barbados",
+  "count": 24,
+  "researched": 0
+ },
+ {
+  "slug": "puerto-plata",
+  "name": "Puerto Plata",
+  "country": "Dominican Republic",
+  "count": 23,
+  "researched": 0
+ },
+ {
+  "slug": "jamaica-montego-bay",
+  "name": "Montego Bay",
+  "country": "Jamaica",
+  "count": 21,
+  "researched": 0
+ },
+ {
+  "slug": "la-romana",
+  "name": "La Romana and Bayahibe",
+  "country": "Dominican Republic",
+  "count": 19,
+  "researched": 0
+ },
+ {
+  "slug": "antigua",
+  "name": "Antigua",
+  "country": "Antigua and Barbuda",
+  "count": 19,
+  "researched": 0
+ },
+ {
+  "slug": "jamaica-negril",
+  "name": "Negril",
+  "country": "Jamaica",
+  "count": 16,
+  "researched": 0
+ },
+ {
+  "slug": "cozumel",
+  "name": "Cozumel",
+  "country": "Mexico",
+  "count": 12,
+  "researched": 0
+ },
+ {
+  "slug": "aruba",
+  "name": "Aruba",
+  "country": "Aruba",
+  "count": 12,
+  "researched": 3
+ },
+ {
+  "slug": "ixtapa",
+  "name": "Ixtapa and Zihuatanejo",
+  "country": "Mexico",
+  "count": 11,
+  "researched": 0
+ },
+ {
+  "slug": "mazatlan",
+  "name": "Mazatlan",
+  "country": "Mexico",
+  "count": 10,
+  "researched": 0
+ },
+ {
+  "slug": "jamaica-ocho-rios",
+  "name": "Ocho Rios and Runaway Bay",
+  "country": "Jamaica",
+  "count": 10,
+  "researched": 0
+ },
+ {
+  "slug": "curacao",
+  "name": "Curacao",
+  "country": "Curacao",
+  "count": 9,
+  "researched": 0
+ },
+ {
+  "slug": "turks-and-caicos",
+  "name": "Turks and Caicos",
+  "country": "Turks and Caicos",
+  "count": 8,
+  "researched": 0
+ },
+ {
+  "slug": "bahamas",
+  "name": "Bahamas",
+  "country": "Bahamas",
+  "count": 7,
+  "researched": 0
+ },
+ {
+  "slug": "samana",
+  "name": "Samana",
+  "country": "Dominican Republic",
+  "count": 6,
+  "researched": 0
+ },
+ {
+  "slug": "grenada",
+  "name": "Grenada",
+  "country": "Grenada",
+  "count": 6,
+  "researched": 0
+ },
+ {
+  "slug": "huatulco",
+  "name": "Huatulco",
+  "country": "Mexico",
+  "count": 5,
+  "researched": 0
+ },
+ {
+  "slug": "acapulco",
+  "name": "Acapulco",
+  "country": "Mexico",
+  "count": 4,
+  "researched": 0
+ },
+ {
+  "slug": "st-maarten",
+  "name": "St. Martin and Sint Maarten",
+  "country": "St. Martin",
+  "count": 4,
+  "researched": 0
+ },
+ {
+  "slug": "manzanillo",
+  "name": "Manzanillo",
+  "country": "Mexico",
+  "count": 3,
+  "researched": 0
+ },
+ {
+  "slug": "british-virgin-islands",
+  "name": "British Virgin Islands",
+  "country": "British Virgin Islands",
+  "count": 3,
+  "researched": 0
+ },
+ {
+  "slug": "us-virgin-islands",
+  "name": "US Virgin Islands",
+  "country": "US Virgin Islands",
+  "count": 3,
+  "researched": 0
+ },
+ {
+  "slug": "dominica",
+  "name": "Dominica",
+  "country": "Dominica",
+  "count": 2,
+  "researched": 0
+ },
+ {
+  "slug": "costa-maya",
+  "name": "Costa Maya",
+  "country": "Mexico",
+  "count": 1,
+  "researched": 0
+ },
+ {
+  "slug": "loreto",
+  "name": "Loreto",
+  "country": "Mexico",
+  "count": 1,
+  "researched": 0
+ },
+ {
+  "slug": "jamaica-south-coast",
+  "name": "Jamaica South Coast",
+  "country": "Jamaica",
+  "count": 1,
+  "researched": 0
+ },
+ {
+  "slug": "st-vincent",
+  "name": "St. Vincent and the Grenadines",
+  "country": "St. Vincent and the Grenadines",
+  "count": 1,
+  "researched": 0
+ },
+ {
+  "slug": "martinique",
+  "name": "Martinique",
+  "country": "Martinique",
+  "count": 1,
+  "researched": 0
+ },
+ {
+  "slug": "cayman-islands",
+  "name": "Cayman Islands",
+  "country": "Cayman Islands",
+  "count": 1,
+  "researched": 0
+ },
+ {
+  "slug": "bonaire",
+  "name": "Bonaire",
+  "country": "Bonaire",
+  "count": 1,
+  "researched": 0
+ }
+]
