@@ -23,6 +23,8 @@ export async function postSession(payload: SessionPayload): Promise<boolean> {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
+      // Let the save finish if the visitor navigates away right after results.
+      keepalive: true,
     });
     return res.ok;
   } catch (err) {

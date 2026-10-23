@@ -147,6 +147,16 @@ export default function ResortQuiz({ context }: { context: QuizContext }) {
   const showNav = step !== 'results';
   const contextResort = answers.contextResortId ? getResortRecord(answers.contextResortId) : null;
 
+  // Until saved answers are read, show a neutral placeholder rather than the
+  // start screen, so a returning visitor does not see a flash of step one.
+  if (!hydrated) {
+    return (
+      <div className="mx-auto max-w-2xl px-4 py-10" aria-busy="true">
+        <p className="text-gray-600" role="status">Loading your trip…</p>
+      </div>
+    );
+  }
+
   if (step === 'results') {
     return (
       <div className="mx-auto max-w-3xl px-4 py-6 sm:py-10">

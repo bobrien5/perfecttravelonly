@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase/client';
+import { createClient } from '@supabase/supabase-js';
 import type { QuoteInput } from './validate';
 
 /**
@@ -6,6 +6,21 @@ import type { QuoteInput } from './validate';
  * testable without a database; the Supabase implementation uses the
  * service-role client (the table has RLS on and no policies).
  */
+
+/**
+ * Dedicated service-role client with a request timeout. A hung database call
+ * must turn into an honest, retryable error for the traveler rather than a
+ * request that never finishes.
+ */
+const STORE_TIMEOUT_MS = 8000;
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co',
+  process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder-key',
+  {
+    auth: { persistSession: false, autoRefreshToken: false },
+    global: { fetch: (input, init) => fetch(input, { ...init, signal: AbortSignal.timeout(STORE_TIMEOUT_MS) }) },
+  },
+);
 
 export interface StoredQuote {
   id: string;

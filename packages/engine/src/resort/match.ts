@@ -154,7 +154,8 @@ function transferText(r: ResortRecord): string | null {
   const t = r.transfer;
   if (!t?.minutes) return null;
   const { min, max } = t.minutes;
-  return min === max ? `about ${min} minutes from ${t.airport}` : `about ${min} to ${max} minutes from ${t.airport}`;
+  // Sources rarely agree to the minute; a near-identical range reads as false precision.
+  return max - min <= 5 ? `about ${max} minutes from ${t.airport}` : `about ${min} to ${max} minutes from ${t.airport}`;
 }
 
 function whyItFits(a: TripAnswers, s: Scored): string[] {
@@ -378,5 +379,12 @@ export function describeResort(r: ResortRecord): ResortProfile {
         ? 'Groups who want a busy, social resort'
         : 'Travelers who want an easygoing all-ages resort';
 
-  return { strengths: strengths.slice(0, 4), tradeoffs: tradeoffs.slice(0, 4), skipIf: skipIf({ childAges: [], adultsOnly: null } as unknown as TripAnswers, r), bestFor: who };
+  const standouts = rated
+    .filter((p) => p !== 'family' && (r.ratings[p] as number) >= 2)
+    .sort((x, y) => (r.ratings[y] as number) - (r.ratings[x] as number))
+    .slice(0, 2)
+    .map((p) => PRIORITY_LABELS[p]);
+  const bestFor = standouts.length ? `${who}, with strong ${standouts.join(' and ')}` : who;
+
+  return { strengths: strengths.slice(0, 4), tradeoffs: tradeoffs.slice(0, 4), skipIf: skipIf({ childAges: [], adultsOnly: null } as unknown as TripAnswers, r), bestFor };
 }

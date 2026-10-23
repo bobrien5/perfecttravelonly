@@ -216,7 +216,12 @@ export default function QuoteRequestForm({ initialResortId, initialAlternatives 
       quizSessionId: sessionId,
     };
     try {
-      const res = await fetch('/api/quote-requests', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const res = await fetch('/api/quote-requests', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        signal: AbortSignal.timeout(30000),
+      });
       const data = (await res.json().catch(() => null)) as { ok?: boolean; reference?: string; error?: string; fields?: Record<string, string> } | null;
       if (res.ok && data?.ok && data.reference) {
         setReference(data.reference);
@@ -233,7 +238,9 @@ export default function QuoteRequestForm({ initialResortId, initialAlternatives 
       focusFirstError();
     } catch {
       setStatus('error');
-      setServerError('We could not reach VacationPro. Check your connection and try again. Nothing was submitted.');
+      // Timeout or network failure. The idempotency key is kept, so a retry can
+      // never create a second request even if the first one did land.
+      setServerError('We could not confirm your request was saved. Please try again; you will not be sent a duplicate.');
       trackFunnel('quote_failed', { http_status: 0 });
     }
   }

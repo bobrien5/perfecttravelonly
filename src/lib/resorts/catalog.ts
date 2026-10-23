@@ -77,7 +77,7 @@ export function transferLabel(r: ResortRecord): string | null {
   if (!t) return null;
   if (!t.minutes) return `Nearest airport ${t.airport}, transfer time not confirmed`;
   const { min, max } = t.minutes;
-  return min === max ? `About ${min} min from ${t.airport}` : `About ${min} to ${max} min from ${t.airport}`;
+  return max - min <= 5 ? `About ${max} min from ${t.airport}` : `About ${min} to ${max} min from ${t.airport}`;
 }
 
 export function ageLabel(r: ResortRecord): string {

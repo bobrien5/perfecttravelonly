@@ -357,6 +357,7 @@ function RecommendationCard({
               ) : (
                 <>{rec.budget.explanation} Check current rates.</>
               )}
+              {r.price && <span className="mt-1 block text-xs text-gray-500">Reference price source: {r.price.source}.</span>}
             </dd>
           </div>
         </dl>

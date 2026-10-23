@@ -132,6 +132,13 @@ export default async function ComparePage({ searchParams }: { searchParams: Prom
         </table>
       </div>
 
+      {resorts.some((r) => r.price) && (
+        <p className="mt-4 text-xs text-gray-600">
+          Reference prices: {Array.from(new Set(resorts.filter((r) => r.price).map((r) => r.price!.source))).join('; ')}. Past prices for the stated dates and
+          occupancy, not quotes.
+        </p>
+      )}
+
       <section className="mt-8 grid gap-4 md:grid-cols-3" aria-label="Booking options">
         {resorts.map((r) => (
           <div key={r.id} className="rounded-2xl border border-gray-200 bg-white p-4">

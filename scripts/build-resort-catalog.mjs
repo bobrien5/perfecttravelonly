@@ -59,9 +59,12 @@ const FACT_OVERRIDES = {
 // Summary text replacing a seed verdict that no longer describes the resort.
 const SUMMARY_OVERRIDES = {
   'dreams-vista-cancun':
-    'Formerly Dreams Vista Cancun, rebranded in August 2026 as Hyatt Vivid, an adults-only all-inclusive. Our ratings predate the rebrand, so treat them as provisional and ask for a current read before booking.',
+    'Formerly Dreams Vista Cancun, rebranded in August 2026 as Hyatt Vivid, an adults-only all-inclusive. We have not re-rated it since the rebrand, so ask for a current read before booking.',
   'bahia-principe-grand-punta-cana': null, // seed verdict still accurate; name updated only
 };
+
+// Seed ratings that no longer describe the resort.
+const PROVISIONAL = { 'dreams-vista-cancun': true };
 
 const HIDE = {
   'hyatt-regency-aruba': 'Not an all-inclusive resort.',
@@ -167,8 +170,12 @@ const out = RESORTS.map((seed) => {
     sources,
     factsCheckedAt: FACTS_CHECKED_AT,
     ...(f.notes ? { factNotes: f.notes } : {}),
-    atmosphere: atmosphere(seed),
-    ratings: ratings(seed, adultsOnly),
+    // A rebranded resort's seed ratings describe the old concept, so they
+    // are treated as unknown (neutral in ranking) until re-reviewed.
+    atmosphere: PROVISIONAL[seed.slug] ? null : atmosphere(seed),
+    ratings: PROVISIONAL[seed.slug]
+      ? { beach: null, food: null, pools: null, rooms: null, nightlife: null, value: null, family: adultsOnly ? 0 : null }
+      : ratings(seed, adultsOnly),
     priceTier: seed.priceBand,
     editorialReviewedAt: SUMMARY_OVERRIDES[seed.slug] ? null : EDITORIAL_DATE,
     visitStatus: null,
