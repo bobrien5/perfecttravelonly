@@ -29,21 +29,15 @@ describe('affiliate URL generation', () => {
     expect(hasExactBookingLink(inexact)).toBe(false);
   });
 
-  it('passes dates and party with Stay22 parameters, not invented ones', () => {
+  it('does not send dates or party, which make Stay22 open a search instead of the resort page', () => {
     const u = new URL(resortBookHref(exact, 'p', answers({ dates: { mode: 'exact', checkIn: '2027-02-10', checkOut: '2027-02-15' }, childAges: [6, 9] })));
-    expect(u.searchParams.get('checkin')).toBe('2027-02-10');
-    expect(u.searchParams.get('checkout')).toBe('2027-02-15');
-    expect(u.searchParams.get('adults')).toBe('2');
-    expect(u.searchParams.get('children')).toBe('2');
-    expect(u.searchParams.get('childrenAges')).toBe('6,9');
-    const allowed = ['aid', 'campaign', 'link', 'hotelname', 'address', 'checkin', 'checkout', 'adults', 'children', 'childrenAges'];
-    expect([...u.searchParams.keys()].every((k) => allowed.includes(k))).toBe(true);
+    for (const k of ['checkin', 'checkout', 'adults', 'children', 'childrenAges']) expect(u.searchParams.has(k)).toBe(false);
+    expect([...u.searchParams.keys()].sort()).toEqual(['aid', 'campaign', 'link']);
   });
 
-  it('omits party size for multiple rooms and dates for flexible trips', () => {
-    const u = new URL(resortBookHref(exact, 'p', answers({ adults: 4, rooms: 2 })));
-    expect(u.searchParams.has('adults')).toBe(false);
-    expect(u.searchParams.has('checkin')).toBe(false);
+  it('builds a real account id, never a placeholder', () => {
+    const aid = new URL(resortBookHref(exact, 'p')).searchParams.get('aid');
+    expect(aid).toMatch(/^[0-9a-f]{24}$/);
   });
 
   it('uses underscore campaign labels (Stay22 splits on hyphens)', () => {

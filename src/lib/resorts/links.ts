@@ -16,17 +16,13 @@ export function resortBookHref(resort: ResortRecord, placement: string, answers?
   const place = [resort.area, destinationName(resort.destination), resort.country]
     .filter((x, i, all) => x && all.indexOf(x) === i)
     .join(', ');
-  const stay: Parameters<typeof stay22HotelUrl>[2] = {};
-  if (answers?.dates?.mode === 'exact') {
-    stay.checkin = answers.dates.checkIn;
-    stay.checkout = answers.dates.checkOut;
-  }
-  // Stay22 has no rooms parameter, so party size is only sent for one room.
-  if (answers && answers.rooms === 1) {
-    stay.adults = answers.adults;
-    if (answers.childAges.length) stay.childrenAges = answers.childAges.filter((a) => a >= 0);
-  }
-  return stay22HotelUrl({ name: resort.name, address: place, expediaId: resort.expediaId }, `vp_${placement}`, stay);
+  // Dates and party size are deliberately not sent. Tested 2026-10-26: with
+  // checkin/checkout or children, Stay22 always rewrites the link into an
+  // Expedia search with the resort pre-selected instead of the resort's own
+  // page. Without them it opens the resort page most of the time (Stay22
+  // still routes some clicks to the pre-selected search on its own).
+  void answers;
+  return stay22HotelUrl({ name: resort.name, address: place, expediaId: resort.expediaId }, `vp_${placement}`);
 }
 
 /** Internal quote link. Carries only non-personal context (resort id, source). */

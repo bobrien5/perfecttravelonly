@@ -72,3 +72,20 @@ describe('browser bundle', () => {
     expect(offenders).toEqual([]);
   });
 });
+
+describe('server-safe imports', () => {
+  it('server and shared modules never import values from a use client file', () => {
+    // A value imported from a 'use client' module becomes a client reference
+    // on the server (this broke the Stay22 aid once). Only components may.
+    const files = ['src/lib/monetization/stay22.ts', 'src/lib/monetization/stay22-account.ts', 'src/lib/resorts/links.ts', 'src/lib/resorts/meta.ts'];
+    for (const f of files) {
+      const src = readFileSync(f, 'utf8');
+      const imports = [...src.matchAll(/from '(@\/[^']+|\.[^']+)'/g)].map((m) => m[1]);
+      for (const imp of imports) {
+        const base = imp.startsWith('@/') ? `src/${imp.slice(2)}` : path.join(path.dirname(f), imp);
+        const file = ['.ts', '.tsx', '/index.ts'].map((ext) => base + ext).find((p) => { try { return statSync(p).isFile(); } catch { return false; } });
+        if (file) expect(readFileSync(file, 'utf8')).not.toMatch(/^['"]use client['"]/m);
+      }
+    }
+  });
+});

@@ -1,10 +1,6 @@
-import { LMA_ID } from '@/components/monetization/Stay22Scripts';
+import { STAY22_AID } from './stay22-account';
 
-/**
- * Brendan's Stay22 account id (aid), re-exported from the single source of
- * truth in Stay22Scripts.tsx so link builders do not need to know where it lives.
- */
-export const STAY22_AID = LMA_ID;
+export { STAY22_AID };
 
 const ALLEZ = 'https://www.stay22.com/allez';
 
