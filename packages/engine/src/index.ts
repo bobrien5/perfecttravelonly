@@ -33,4 +33,3 @@ export {
   serializeQuiz,
   deserializeQuiz,
 } from './resort/quiz';
-export * from './resort/booking';

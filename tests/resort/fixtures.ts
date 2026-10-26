@@ -15,6 +15,7 @@ export function resort(overrides: Partial<ResortRecord> & { id: string }): Resor
     guestRating: null,
     ratingSource: 'vacationpro',
     priceTierBasis: 'editorial',
+    expediaId: null,
     status: 'active',
     images: [],
     summary: 'Fixture resort.',

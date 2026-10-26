@@ -1,35 +1,59 @@
 import { describe, it, expect } from 'vitest';
-import { bookingTargetUrl } from '@vacationpro/engine';
-import { stay22Url } from '@/lib/monetization/stay22';
+import { STAY22_AID, stay22Campaign, stay22HotelUrl } from '@/lib/monetization/stay22';
+import { hasExactBookingLink, resortBookHref } from '@/lib/resorts/links';
 import { answers, resort } from './fixtures';
 
 describe('affiliate URL generation', () => {
-  const r = resort({ id: 'x', bookingSearchUrl: 'https://www.expedia.com/Hotel-Search?destination=Cancun&hotel-name=Le+Blanc' });
+  const exact = resort({ id: 'sunset', name: 'Sunset at the Palms', destination: 'jamaica-negril', country: 'Jamaica', area: 'Negril', expediaId: '1095763' });
+  const inexact = resort({ id: 'x', name: 'Some Resort', destination: 'cancun', country: 'Mexico', area: 'Playa Mujeres', expediaId: null });
 
-  it('keeps the intended resort and adds exact dates', () => {
-    const u = new URL(bookingTargetUrl(r, answers({ dates: { mode: 'exact', checkIn: '2027-01-10', checkOut: '2027-01-15' } })));
-    expect(u.searchParams.get('hotel-name')).toBe('Le Blanc');
-    expect(u.searchParams.get('startDate')).toBe('2027-01-10');
-    expect(u.searchParams.get('endDate')).toBe('2027-01-15');
+  it('links the exact Expedia property through the Stay22 expedia endpoint', () => {
+    const u = new URL(resortBookHref(exact, 'results-best-overall'));
+    expect(u.origin + u.pathname).toBe('https://www.stay22.com/allez/expedia');
+    expect(u.searchParams.get('aid')).toBe(STAY22_AID);
+    expect(u.searchParams.get('link')).toBe('https://www.expedia.com/h1095763.Hotel-Information');
+    expect(u.searchParams.has('hotelname')).toBe(false);
+    expect(hasExactBookingLink(exact)).toBe(true);
+  });
+
+  it('never uses the roam endpoint, which lands on OTA homepages with link=', () => {
+    expect(resortBookHref(exact, 'p')).not.toContain('/allez/roam');
+    expect(resortBookHref(inexact, 'p')).not.toContain('/allez/roam');
+  });
+
+  it('falls back to Stay22 name and location matching without an id', () => {
+    const u = new URL(resortBookHref(inexact, 'compare'));
+    expect(u.searchParams.get('hotelname')).toBe('Some Resort');
+    expect(u.searchParams.get('address')).toBe('Playa Mujeres, Cancun and Costa Mujeres, Mexico');
+    expect(u.searchParams.has('link')).toBe(false);
+    expect(hasExactBookingLink(inexact)).toBe(false);
+  });
+
+  it('passes dates and party with Stay22 parameters, not invented ones', () => {
+    const u = new URL(resortBookHref(exact, 'p', answers({ dates: { mode: 'exact', checkIn: '2027-02-10', checkOut: '2027-02-15' }, childAges: [6, 9] })));
+    expect(u.searchParams.get('checkin')).toBe('2027-02-10');
+    expect(u.searchParams.get('checkout')).toBe('2027-02-15');
     expect(u.searchParams.get('adults')).toBe('2');
+    expect(u.searchParams.get('children')).toBe('2');
+    expect(u.searchParams.get('childrenAges')).toBe('6,9');
+    const allowed = ['aid', 'campaign', 'link', 'hotelname', 'address', 'checkin', 'checkout', 'adults', 'children', 'childrenAges'];
+    expect([...u.searchParams.keys()].every((k) => allowed.includes(k))).toBe(true);
   });
 
-  it('does not guess party formats for children or multiple rooms', () => {
-    const u = new URL(bookingTargetUrl(r, answers({ childAges: [6] })));
+  it('omits party size for multiple rooms and dates for flexible trips', () => {
+    const u = new URL(resortBookHref(exact, 'p', answers({ adults: 4, rooms: 2 })));
     expect(u.searchParams.has('adults')).toBe(false);
-    expect(u.searchParams.has('startDate')).toBe(false); // flexible dates
+    expect(u.searchParams.has('checkin')).toBe(false);
   });
 
-  it('leaves non-Expedia URLs untouched', () => {
-    const other = resort({ id: 'y', bookingSearchUrl: 'https://www.example-ota.com/hotel/123' });
-    expect(bookingTargetUrl(other, answers())).toBe('https://www.example-ota.com/hotel/123');
+  it('uses underscore campaign labels (Stay22 splits on hyphens)', () => {
+    expect(stay22Campaign('vp_results-best-overall')).toBe('vp_results_best_overall');
+    expect(new URL(resortBookHref(exact, 'results-best-overall')).searchParams.get('campaign')).toBe('vp_results_best_overall');
   });
 
-  it('wraps in Stay22 allez with no invented parameters', () => {
-    const wrapped = new URL(stay22Url(bookingTargetUrl(r, answers()), 'results-best-overall'));
-    expect(wrapped.hostname).toBe('www.stay22.com');
-    expect([...wrapped.searchParams.keys()].sort()).toEqual(['aid', 'campaign', 'link']);
-    expect(new URL(wrapped.searchParams.get('link')!).searchParams.get('hotel-name')).toBe('Le Blanc');
+  it('ignores a malformed property id', () => {
+    const u = new URL(stay22HotelUrl({ name: 'A', address: 'B', expediaId: '12ab' }, 'x'));
+    expect(u.searchParams.has('link')).toBe(false);
   });
 });
 

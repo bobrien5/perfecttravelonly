@@ -6,7 +6,7 @@ import BookingActions from '@/components/booking/BookingActions';
 import ResortVisual from '@/components/booking/ResortVisual';
 import Stay22Guard from '@/components/monetization/Stay22Guard';
 import { ACTIVE_RESORTS, ageLabel, destinationName, getResortRecord, priceRangeLabel, ratingSourceText, transferLabel } from '@/lib/resorts/catalog';
-import { quizHref, quoteHref, resortBookHref } from '@/lib/resorts/links';
+import { hasExactBookingLink, quizHref, quoteHref, resortBookHref } from '@/lib/resorts/links';
 
 // Pre-render researched resorts; the others render on first request and are cached.
 export function generateStaticParams() {
@@ -87,6 +87,8 @@ export default async function ResortPage({ params }: { params: Promise<{ id: str
         <div className="mt-4">
           <BookingActions
             bookHref={resortBookHref(r, 'resort-page')}
+            exact={hasExactBookingLink(r)}
+            resortName={r.name}
             quoteHref={quoteHref({ resortId: r.id, from: 'resort-page' })}
             placement="resort-page"
             resortId={r.id}
@@ -233,6 +235,8 @@ export default async function ResortPage({ params }: { params: Promise<{ id: str
       <div className="mt-10">
         <BookingActions
           bookHref={resortBookHref(r, 'resort-page-footer')}
+            exact={hasExactBookingLink(r)}
+            resortName={r.name}
           quoteHref={quoteHref({ resortId: r.id, from: 'resort-page' })}
           placement="resort-page-footer"
           resortId={r.id}

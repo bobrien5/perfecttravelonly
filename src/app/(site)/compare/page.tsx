@@ -4,7 +4,7 @@ import { describeResort, ratingWord, type ResortRecord } from '@vacationpro/engi
 import BookingActions from '@/components/booking/BookingActions';
 import Stay22Guard from '@/components/monetization/Stay22Guard';
 import { ageLabel, destinationName, getActiveResort, priceRangeLabel, transferLabel } from '@/lib/resorts/catalog';
-import { quoteHref, resortBookHref } from '@/lib/resorts/links';
+import { hasExactBookingLink, quoteHref, resortBookHref } from '@/lib/resorts/links';
 import CompareTracker from './CompareTracker';
 
 export const metadata: Metadata = {
@@ -145,6 +145,8 @@ export default async function ComparePage({ searchParams }: { searchParams: Prom
             <h2 className="mb-3 font-extrabold text-gray-900">{r.name}</h2>
             <BookingActions
               bookHref={resortBookHref(r, 'compare')}
+            exact={hasExactBookingLink(r)}
+            resortName={r.name}
               quoteHref={`/concierge-planning?${new URLSearchParams({ resort: r.id, alts: alts(r.id), from: 'compare' }).toString()}#quote`}
               placement="compare"
               resortId={r.id}

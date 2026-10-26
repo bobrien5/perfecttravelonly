@@ -11,6 +11,10 @@ interface BookingActionsProps {
   /** Where the buttons sit, e.g. "results-best-overall". Used for analytics only. */
   placement: string;
   resortId?: string;
+  /** Resort name, used to explain a non-exact booking link. */
+  resortName?: string;
+  /** False when the link is a partner search rather than the resort's own page. */
+  exact?: boolean;
   compact?: boolean;
 }
 
@@ -20,7 +24,7 @@ interface BookingActionsProps {
  * (never fixed or sticky). The quote action is a plain internal link so it can
  * never be picked up by affiliate link processing.
  */
-export default function BookingActions({ bookHref, quoteHref, placement, resortId, compact = false }: BookingActionsProps) {
+export default function BookingActions({ bookHref, quoteHref, placement, resortId, resortName, exact = true, compact = false }: BookingActionsProps) {
   return (
     <div className={compact ? 'space-y-3' : 'space-y-4'}>
       <div className={`grid gap-3 ${bookHref ? 'sm:grid-cols-2' : ''}`}>
@@ -38,7 +42,11 @@ export default function BookingActions({ bookHref, quoteHref, placement, resortI
               <span className="sr-only"> (opens a booking partner site in a new tab)</span>
             </a>
             {!compact && (
-              <p className="mt-1.5 text-xs text-gray-600">Check availability and book through our booking partners.</p>
+              <p className="mt-1.5 text-xs text-gray-600">
+                {exact
+                  ? 'Check availability and book through our booking partners.'
+                  : `Opens a search on our booking partner. If ${resortName ?? 'this resort'} is not at the top, search for it by name.`}
+              </p>
             )}
           </div>
         )}

@@ -17,13 +17,17 @@
  *    prices are never imported or used.
  * 4. data/resort-sheet-extract.json: which sheet row matches each researched
  *    resort, so they are not duplicated.
+ * 5. data/resort-expedia-ids.json: Expedia property id per resort id, each
+ *    verified from a public Expedia (or sister-site) listing URL that names the
+ *    resort. Drives exact Stay22 booking links; missing ids fall back to
+ *    Stay22's name match, and the UI says so.
  *
  * Unknown stays unknown (null). Ratings derived from the sheet are labeled
  * 'community-sheet', never presented as VacationPro's own.
  *
  * Run: node scripts/build-resort-catalog.mjs
  */
-import { mkdirSync, readFileSync, writeFileSync } from 'fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { RESORTS } from './seed-resorts-data.mjs';
 
 const FACTS_CHECKED_AT = '2026-10-23';
@@ -35,6 +39,9 @@ const extract = JSON.parse(readFileSync('data/resort-sheet-extract.json', 'utf8'
 const SHEET_SOURCE = { label: sheet.source.label, url: sheet.source.url };
 const SHEET_DATE = sheet.source.retrievedAt;
 const sheetByName = new Map(sheet.resorts.map((r) => [r.name, r]));
+const EXPEDIA_IDS = existsSync('data/resort-expedia-ids.json')
+  ? JSON.parse(readFileSync('data/resort-expedia-ids.json', 'utf8')).ids
+  : {};
 
 // ─── Destinations ────────────────────────────────────────────
 
@@ -497,7 +504,7 @@ for (const row of sheet.resorts) {
   });
 }
 
-const all = [...curated, ...imported];
+const all = [...curated, ...imported].map((r) => ({ ...r, expediaId: EXPEDIA_IDS[r.id]?.expediaId ?? null }));
 const bad = all.filter((r) => /[–—]/.test(JSON.stringify(r)));
 if (bad.length) console.warn(`Note: ${bad.length} records contain an en or em dash in source text (sources or names).`);
 
@@ -513,6 +520,7 @@ mkdirSync('src/data/resorts', { recursive: true });
 writeFileSync('src/data/resorts/catalog.generated.json', JSON.stringify(all) + '\n');
 writeFileSync('src/data/resorts/destinations.generated.json', JSON.stringify(destinations, null, 1) + '\n');
 console.log(
-  `Wrote ${all.length} resorts (${all.filter((r) => r.status === 'active').length} active; ${curated.length} researched, ${imported.length} from the sheet). ` +
+  `Wrote ${all.length} resorts (${all.filter((r) => r.status === 'active').length} active; ${curated.length} researched, ${imported.length} from the sheet; ` +
+    `${all.filter((r) => r.status === 'active' && r.expediaId).length} active with exact booking links). ` +
     `Skipped ${skippedScope} out of scope and ${skippedPlace} without a placeable destination. ${destinations.length} destinations.`,
 );

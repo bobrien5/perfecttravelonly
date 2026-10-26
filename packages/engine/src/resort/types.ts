@@ -157,7 +157,9 @@ export interface ResortRecord {
   price: ReferencePrice | null;
 
   // Booking
-  /** OTA search or property URL that the Stay22 allez link wraps. */
+  /** Expedia property id, verified from a public Expedia listing URL. null when not found. */
+  expediaId: string | null;
+  /** Legacy OTA search URL from the seed data. Not used for booking links. */
   bookingSearchUrl: string;
 }
 

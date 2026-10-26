@@ -14,7 +14,7 @@ import ResortVisual from '@/components/booking/ResortVisual';
 import { trackFunnel } from '@/lib/analytics/journey';
 import { ageLabel, destinationName, priceRangeLabel, transferLabel } from '@/lib/resorts/meta';
 import type { RecommendationPayload } from '@/lib/resorts/recommend';
-import { quoteHref, resortBookHref } from '@/lib/resorts/links';
+import { hasExactBookingLink, quoteHref, resortBookHref } from '@/lib/resorts/links';
 import { getSessionId, postSession } from '../lib/session';
 import { inputClass, primaryButton, secondaryButton } from './ui';
 
@@ -410,6 +410,8 @@ function RecommendationCard({
         <div className="mt-4">
           <BookingActions
             bookHref={resortBookHref(r, `results-${rec.role}`, answers)}
+            exact={hasExactBookingLink(r)}
+            resortName={r.name}
             quoteHref={quote}
             placement={`results-${rec.role}`}
             resortId={r.id}

@@ -1,0 +1,1258 @@
+{
+ "about": "Expedia property ids, each taken from a public Expedia or sister-site listing URL (found via web search) whose slug or title names the resort. Never guessed. Checked 2026-10-26.",
+ "ids": {
+  "riu-palace-antillas": {
+   "expediaId": "28648",
+   "evidence": "https://www.expedia.com/Noord-Hotels-Riu-Palace-Antillas-All-Inclusive-Adult-Only.h28648.Hotel-Information"
+  },
+  "barcelo-aruba": {
+   "expediaId": "424923",
+   "evidence": "https://www.orbitz.com/Noord-Hotels-Barcelo-Aruba-All-Inclusive.h424923.Hotel-Information"
+  },
+  "excellence-punta-cana": {
+   "expediaId": "982733",
+   "evidence": "https://www.expedia.com/Punta-Cana-Hotels-Excellence-Punta-Cana-Adults-Only-All-Inclusive.h982733.Hotel-Information"
+  },
+  "secrets-cap-cana": {
+   "expediaId": "15009329",
+   "evidence": "https://www.expedia.com/Punta-Cana-Hotels-Secrets-Cap-Cana-Resort-Spa-Adults-Only.h15009329.Hotel-Information"
+  },
+  "riu-republica": {
+   "expediaId": "12848883",
+   "evidence": "https://www.expedia.com/Punta-Cana-Hotels-Riu-Republica-Adults-Only-All-Inclusive.h12848883.Hotel-Information"
+  },
+  "family-selection-at-grand-palladium-select-bavaro-all-inclusive": {
+   "expediaId": "119429894",
+   "evidence": "https://www.expedia.com/Punta-Cana-Hotels-Family-Selection-At-Grand-Palladium-Select-Bavaro-All-Inclusive.h119429894.Hotel-Information"
+  },
+  "emerald-estates-luxury-villas": {
+   "expediaId": "2787624",
+   "evidence": "https://www.expedia.com/Mazatlan-Hotels-Pueblo-Bonito-Emerald-Luxury-Villas-Spa-All-Inclusive.h2787624.Hotel-Information",
+   "note": "Listed as Pueblo Bonito Emerald Luxury Villas & Spa; Emerald Estates appears as alias name. Not to be confused with Emerald Bay h843081."
+  },
+  "cap-maison-resort-and-spa": {
+   "expediaId": "2133534",
+   "evidence": "https://www.expedia.com/Gros-Islet-Hotels-Cap-Maison-Resort-Spa.h2133534.Hotel-Information"
+  },
+  "secrets-playa-blanca-costa-mujeres": {
+   "expediaId": "96116315",
+   "evidence": "https://www.expedia.com/Isla-Mujeres-Hotels-Secrets-Playa-Blanca-Costa-Mujeres-Adults-Only.h96116315.Hotel-Information"
+  },
+  "baoase-luxury-resort": {
+   "expediaId": "3033040",
+   "evidence": "https://www.expedia.com/Willemstad-Hotels-Baoase-Luxury-Resort.h3033040.Hotel-Information"
+  },
+  "zemi-miches-punta-cana-all-inclusive-resort-curio-collection-by-hilton": {
+   "expediaId": "104244461",
+   "evidence": "https://www.expedia.com/Miches-Hotels-Zemi-Miches-All-Inclusive-Resort.h104244461.Hotel-Information"
+  },
+  "anse-chastanet-resort-not-all-rooms-have-air-conditioning-and-there-is-no-main-p": {
+   "expediaId": "854223",
+   "evidence": "https://www.expedia.com/Soufriere-Hotels-Anse-Chastanet-Resort.h854223.Hotel-Information"
+  },
+  "fairmont-mayakoba": {
+   "expediaId": "1273486",
+   "evidence": "https://www.expedia.com/Riviera-Maya-Hotels-Fairmont-Mayakoba.h1273486.Hotel-Information",
+   "note": "Two Expedia listings exist: h1273486 (Fairmont Mayakoba) and h10364193 (Fairmont Mayakoba Riviera Maya - All Inclusive). Chose the plain-name listing."
+  },
+  "barcelo-maya-riviera-non-refundable": {
+   "expediaId": "36023215",
+   "evidence": "https://www.expedia.com/Xpu-Ha-Hotels-Barcelo-Maya-Riviera-Adults-Only.h36023215.Hotel-Information"
+  },
+  "the-explorean-selva-maya-kohunlich-no-tv": {
+   "expediaId": "519024",
+   "evidence": "https://www.expedia.com/Chetumal-Hotels-Explorean-Kohunlich-All-Inclusive.h519024.Hotel-Information",
+   "note": "Ignored separate apartment listing h108160649."
+  },
+  "iberostar-selection-coral-cancun": {
+   "expediaId": "28763088",
+   "evidence": "https://www.expedia.com/Cancun-Hotels-Coral-Level-At-Iberostar-Selection-Cancun-Adults-Only-All-Inclusive.h28763088.Hotel-Information"
+  },
+  "excellence-carmen-punta-cana": {
+   "expediaId": "12570728",
+   "evidence": "https://www.expedia.com/Punta-Cana-Hotels-Excellence-El-Carmen-Adults-Only-All-Inclusive.h12570728.Hotel-Information"
+  },
+  "calabash-cove-resort-and-spa": {
+   "expediaId": "2470747",
+   "evidence": "https://www.expedia.com/St-Lucia-Hotels-Calabash-Cove-Resort-And-Spa.h2470747.Hotel-Information"
+  },
+  "majestic-mirage-costa-mujeres-all-suite-resort": {
+   "expediaId": "116546242",
+   "evidence": "https://www.expedia.com/Costa-Mujeres-Hotels-Majestic-Mirage-Costa-Mujeres.h116546242.Hotel-Information"
+  },
+  "waldorf-astoria-riviera-maya": {
+   "expediaId": "61523736",
+   "evidence": "https://www.expedia.com/Cancun-Hotels-Waldorf-Astoria-Riviera-Maya.h61523736.Hotel-Information"
+  },
+  "naviva-a-four-seasons-resort-punta-mita-mexico": {
+   "expediaId": "105615868",
+   "evidence": "https://www.expedia.com/Punta-De-Mita-Hotels-Naviva.h105615868.Hotel-Information"
+  },
+  "family-selection-at-grand-palladium-kantenah-resort-and-spa": {
+   "expediaId": "95893460",
+   "evidence": "https://www.expedia.ca/Kantenah-Hotels-Family-Selection-At-Grand-Palladium-Kantenah-Resort-Spa.h95893460.Hotel-Information",
+   "note": "A second listing exists, h120164685 (Family Selection At Grand Palladium Kantenah (Hotel)); chose the one whose name includes Resort & Spa."
+  },
+  "haven-riviera-cancun": {
+   "expediaId": "23092201",
+   "evidence": "https://www.expedia.com/Cancun-Hotels-Haven-Riviera-Cancun-All-Inclusive-Adults-Only.h23092201.Hotel-Information"
+  },
+  "excellence-oyster-bay": {
+   "expediaId": "19647353",
+   "evidence": "https://www.expedia.ca/Montego-Bay-Hotels-Excellence-Oyster-Bay-Adults-Only-All-Inclusive.h19647353.Hotel-Information",
+   "note": "Not the Beach Villas listing h38521686."
+  },
+  "finest-playa-mujeres": {
+   "expediaId": "8673168",
+   "evidence": "https://www.expedia.com/Punta-Sam-Hotels-Finest-Playa-Mujeres-By-The-Excellence-Collection-All-Inclusive.h8673168.Hotel-Information"
+  },
+  "the-towers-at-pacifica-at-pueblo-bonito-pacifica-golf-and-spa-resort": {
+   "expediaId": "15614980",
+   "evidence": "https://www.expedia.com/Los-Cabos-Hotels-The-Towers-At-Pueblo-Bonito-Pacifica-All-Inclusive.h15614980.Hotel-Information"
+  },
+  "manchebo-beach-resort-and-spa": {
+   "expediaId": "20162",
+   "evidence": "https://www.expedia.com/Oranjestad-Hotels-Manchebo-Beach-Resort-And-Spa.h20162.Hotel-Information"
+  },
+  "sanctuary-cap-cana-a-luxury-collection-resort-dominican-republic-adult-all-inclu": {
+   "expediaId": "1950513",
+   "evidence": "https://www.travelocity.com/Punta-Cana-Hotels-Sanctuary-Cap-Cana.h1950513.Hotel-Information"
+  },
+  "ti-kaye-resort-and-spa": {
+   "expediaId": "19835031",
+   "evidence": "https://www.expedia.com/cn/Anse-La-Raye-Hotels-Ti-Kaye-Resort-Spa-All-Inclusive.h19835031.Hotel-Information"
+  },
+  "playa-grande-resort": {
+   "expediaId": "794532",
+   "evidence": "https://www.expedia.com/Cabo-San-Lucas-Hotels-Playa-Grande-Resort-Grand-Spa.h794532.Hotel-Information",
+   "note": "Listed as Playa Grande Resort & Grand Spa; other h IDs are individual owner/rental units"
+  },
+  "pueblo-bonito-pacifica-golf-and-spa-resort": {
+   "expediaId": "1172873",
+   "evidence": "https://www.travelocity.com/Cabo-San-Lucas-Hotels-Pueblo-Bonito-Pacifica-Golf-Spa-Resort-All-Inclusive-Adult-Only.h1172873.Hotel-Information",
+   "note": "Separate listings h114738758 (Pacifica Adults Only) and h104859538 also exist; 1172873 is the one titled Pacifica Golf & Spa Resort"
+  },
+  "villa-la-estancia-beach-resort-and-spa-riviera-nayarit": {
+   "expediaId": "1737201",
+   "evidence": "https://www.travelocity.com/Puerto-Vallarta-Hotels-Villa-La-Estancia-Beach-Resort-Spa-Riviera-Nayarit.h1737201.Hotel-Information",
+   "note": "A separate All Inclusive listing h24193228 also exists"
+  },
+  "majestic-elegance-punta-cana": {
+   "expediaId": "2191836",
+   "evidence": "https://www.expedia.com/Punta-Cana-Hotels-Majestic-Elegance-Punta-Cana-All-Inclusive.h2191836.Hotel-Information"
+  },
+  "live-aqua-punta-cana": {
+   "expediaId": "34297468",
+   "evidence": "https://www.travelocity.com/Punta-Cana-Hotels-Infiniti-Punta-Cana.h34297468.Hotel-Information",
+   "note": "URL slug is legacy name Infiniti Punta Cana; result title is Live Aqua Punta Cana"
+  },
+  "blue-haven-resort-all-inclusive": {
+   "expediaId": "6326300",
+   "evidence": "https://www.expedia.com/Providenciales-Hotels-Blue-Haven-Resort-All-Inclusive.h6326300.Hotel-Information"
+  },
+  "pueblo-bonito-blanco-los-cabos-beach-resort": {
+   "expediaId": "400787",
+   "evidence": "https://www.expedia.com/Los-Cabos-Hotels-Pueblo-Bonito-Los-Cabos-Blanco-All-Inclusive.h400787.Hotel-Information"
+  },
+  "secrets-mirabel-cancun-resort-and-spa": {
+   "expediaId": "3147",
+   "evidence": "https://www.travelocity.com/Cancun-Hotels-Secrets-Mirabel-Resort-Spa-Adults-Only-All-Inclusive.h3147.Hotel-Information"
+  },
+  "sugar-cane-club-hotel-and-spa": {
+   "expediaId": "1273913",
+   "evidence": "https://www.expedia.com/Speightstown-Hotels-Sugar-Cane-Club-Hotel-And-Spa-Adults-Only.h1273913.Hotel-Information"
+  },
+  "barcelo-maya-caribe": {
+   "expediaId": "1771738",
+   "evidence": "https://www.travelocity.com/es/Xpu-Ha-Hoteles-Barcelo-Maya-Caribe-All-Inclusive.h1771738.Informacion-Hotel"
+  },
+  "dreams-la-romana-resort-and-spa": {
+   "expediaId": "662588",
+   "evidence": "https://www.travelocity.com/Bayahibe-Hotels-Dreams-La-Romana-Luxury-All-Inclusive.h662588.Hotel-Information"
+  },
+  "paradisus-cancun": {
+   "expediaId": "525789",
+   "evidence": "https://www.expedia.com/Cancun-Hotels-Paradisus-By-Melia-Cancun-All-Inclusive.h525789.Hotel-Information"
+  },
+  "grand-palladium-bavaro-suites-all-inclusive-resort-and-spa": {
+   "expediaId": "879936",
+   "evidence": "https://www.expedia.com/Punta-Cana-Hotels-Grand-Palladium-Bavaro-Suites-Resort-Spa-All-Inclusive.h879936.Hotel-Information",
+   "note": "Expedia title now reads Grand Palladium Select Bavaro (rebrand); slug matches Bavaro Suites"
+  },
+  "marival-distinct-residences-and-spa-handwritten-collection-riviera-nayarit": {
+   "expediaId": "3030483",
+   "evidence": "https://expedia.com/Nuevo-Vallarta-hotels-Marival-Distinct-Residences-&-Spa-Handwritten-Collection.h3030483.Hotel-information"
+  },
+  "hotel-riu-palace-riviera-maya": {
+   "expediaId": "1370022",
+   "evidence": "https://www.travelocity.com/Riviera-Maya-Hotels-Riu-Palace-Riviera-Maya-All-Inclusive.h1370022.Hotel-Information"
+  },
+  "laluna-boutique-hotel-and-villas-12": {
+   "expediaId": "903452",
+   "evidence": "https://www.expedia.co.jp/St-Georges-Hotels-Laluna-Hotel.h903452.Hotel-Information"
+  },
+  "garza-blanca-preserve-resort-and-spa": {
+   "expediaId": "2614708",
+   "evidence": "https://www.expedia.com.my/ms/Puerto-Vallarta-Hotels-Garza-Blanca-Preserve-Resort-Spa.h2614708.Hotel-Information",
+   "note": "Uncertain: Travelocity h6668455 (slug Garza Blanca Residences) is also titled Garza Blanca Preserve Resort & Spa - All Inclusive"
+  },
+  "devossion-by-live-aqua-playa-del-carmen": {
+   "expediaId": "9062475",
+   "evidence": "https://www.expedia.com/Playa-Del-Carmen-Hotels-Devossion-By-Live-Aqua-Playa-Del-Carmen-All-Inclusive-Adults-Only.h9062475.Hotel-Information"
+  },
+  "bahia-principe-escape-sian-ka-an": {
+   "expediaId": "4093165",
+   "evidence": "https://www.travelocity.com/Akumal-Hotels-Luxury-Bahia-Principe-Sian-Kaan-Adults-Only-All-Inclusive.h4093165.Hotel-Information",
+   "note": "Slug uses former name Luxury Bahia Principe Sian Kaan; title is Escape Sian Ka'an"
+  },
+  "hotel-riu-palace-mexico-all-inclusive": {
+   "expediaId": "487012",
+   "evidence": "https://www.travelocity.com/Playacar-Golf-Club-Hotels-Riu-Palace-Mexico-All-Inclusive.h487012.Hotel-Information"
+  },
+  "pueblo-bonito-emerald-bay-resort-and-spa": {
+   "expediaId": "843081",
+   "evidence": "https://www.expedia.com/cn/Mazatlan-Hotels-Pueblo-Bonito-Emerald-Bay-Resort-Spa-All-Inclusive.h843081.Hotel-Information"
+  },
+  "conrad-tulum-riviera-maya": {
+   "expediaId": "70501666",
+   "evidence": "https://www.expedia.com/Akumal-Hotels-Conrad-Tulum.h70501666.Hotel-Information"
+  },
+  "trs-coral-hotel": {
+   "expediaId": "23056533",
+   "evidence": "https://www.travelocity.com/Costa-Mujeres-Hotels-TRS-Coral-Hotel-Adults-Only-All-Inclusive.h23056533.Hotel-Information"
+  },
+  "family-selection-at-grand-palladium-select-costa-mujeres": {
+   "expediaId": "29093099",
+   "evidence": "https://www.expedia.com/Cancun-Hotels-Family-Selection-At-Grand-Palladium-Costa-Mujeres-Resort-Spa-All-Inclusive.h29093099.Hotel-Information"
+  },
+  "the-royal-cancun-by-holiday-inn-club-vacations": {
+   "expediaId": "18904781",
+   "evidence": "https://www.expedia-aarp.com/Cancun-Hotels-The-Royal-Cancun-All-Suites-Resort-All-Inclusive.h18904781.Hotel-Information",
+   "note": "Slug is the old name The Royal Cancun All Suites Resort; title is Holiday Inn Club Vacations The Royal Cancun"
+  },
+  "marriott-cancun-an-all-inclusive-resort": {
+   "expediaId": "8385",
+   "evidence": "https://www.expedia.com.my/Cancun-Hotels-Marriott-Cancun-Resort.h8385.Hotel-Information"
+  },
+  "the-royal-haciendas-by-holiday-inn-club-vacations": {
+   "expediaId": "3205175",
+   "evidence": "https://www.travelocity.com/Playa-Del-Carmen-Hotels-The-Royal-Haciendas-All-Inclusive-Resort-Spa.h3205175.Hotel-Information",
+   "note": "Separate listing h76430250 'The Royal Haciendas All Suites Resort & Spa' also exists; chose the long-standing main listing"
+  },
+  "turquoize-at-hyatt-ziva-cancun": {
+   "expediaId": "15533065",
+   "evidence": "https://www.expedia.com/Cancun-Hotels-Turquoize-At-Hyatt-Ziva-Cancun-Adults-Only-All-Inclusive.h15533065.Hotel-Information"
+  },
+  "barcelo-ixtapa-non-refundable": {
+   "expediaId": "690642",
+   "evidence": "https://www.expedia.com/Ixtapa-Hotels-Barcelo-Ixtapa-All-Inclusive.h690642.Hotel-Information"
+  },
+  "the-reef-28": {
+   "expediaId": "18722766",
+   "evidence": "https://www.travelocity.com/Playa-Del-Carmen-Hotels-The-Reef-28-Hotel-Spa-Luxury-Adults-Only-All-Suites.h18722766.Hotel-Information"
+  },
+  "secrets-vallarta-bay-puerto-vallarta": {
+   "expediaId": "4892432",
+   "evidence": "https://www.expedia.com.my/Puerto-Vallarta-Hotels-Secrets-Vallarta-Bay-Puerto-Vallarta-Adults-Only-All-Inclusive.h4892432.Hotel-Information"
+  },
+  "grand-palladium-white-sand-resort-and-spa": {
+   "expediaId": "1449832",
+   "evidence": "https://www.expedia.com/Solidaridad-Hotels-Grand-Palladium-White-Sand-Resort-Spa-All-Inclusive.h1449832.Hotel-Information"
+  },
+  "hotel-riu-playacar": {
+   "expediaId": "580668",
+   "evidence": "https://expedia.com/Playacar-hotels-Hotel-Riu-Playacar-All-Inclusive.h580668.Hotel-information"
+  },
+  "fiesta-americana-condesa-cancun-all-inclusive": {
+   "expediaId": "1112",
+   "evidence": "https://www.expedia.com/Cancun-Hotels-Fiesta-Americana-Condesa-Cancun-All-Inclusive.h1112.Hotel-Information"
+  },
+  "princess-mundo-imperial": {
+   "expediaId": "60428064",
+   "evidence": "https://www.expedia.com/Acapulco-Hotels-Princess-Mundo-Imperial.h60428064.Hotel-Information",
+   "note": "Uncertain: separate listing h125160123 'Princess Mundo Imperial All Inclusive' also exists; chose the exact-name listing"
+  },
+  "mahekal-beach-resort-no-tv": {
+   "expediaId": "992175",
+   "evidence": "https://www.expedia.com/Playa-Del-Carmen-Hotels-Mahekal-Beach-Front-Resort-Spa.h992175.Hotel-Information"
+  },
+  "hyatt-ziva-los-cabos": {
+   "expediaId": "1085899",
+   "evidence": "https://www.expedia.com/San-Jose-Del-Cabo-Hotels-Hyatt-Ziva-Los-Cabos-All-Inclusive.h1085899.Hotel-Information"
+  },
+  "the-royal-sands-all-suites-resort-and-spa": {
+   "expediaId": "25149569",
+   "evidence": "https://www.expedia.com/Cancun-Hotels-The-Royal-Sands-All-Suites-Resort-Spa.h25149569.Hotel-Information"
+  },
+  "royal-hideaway-playacar-adults-only-all-inclusive": {
+   "expediaId": "470879",
+   "evidence": "https://www.expedia.com/Playa-Del-Carmen-Hotels-Royal-Hideaway-Playacar-All-Inclusive-Adults-Only.h470879.Hotel-Information"
+  },
+  "fiesta-americana-puerto-vallarta-all-inclusive-and-spa": {
+   "expediaId": "19131",
+   "evidence": "https://www.travelocity.com/Puerto-Vallarta-Hotels-Fiesta-Americana-Puerto-Vallarta-All-Inclusive-Spa.h19131.Hotel-Information"
+  },
+  "dreams-flora-resort-and-spa": {
+   "expediaId": "83709942",
+   "evidence": "https://www.expedia.com/Punta-Cana-Hotels-Dreams-Flora-Resort-Spa.h83709942.Hotel-Information",
+   "note": "Older listing h1526875 (Natura Park slug) also carries the Dreams Flora name; chose the Dreams Flora-slug listing"
+  },
+  "dreams-onyx-resort-and-spa": {
+   "expediaId": "14822885",
+   "evidence": "https://www.expedia.com/es/Punta-Cana-Hoteles-Dreams-Onyx-Resort-Spa-All-Inclusive.h14822885.Informacion-Hotel"
+  },
+  "iberostar-selection-rose-hall-suites": {
+   "expediaId": "2802585",
+   "evidence": "https://www.expedia.com.my/Montego-Bay-Hotels-Iberostar-Selection-Rose-Hall-Suites-All-Inclusive.h2802585.Hotel-Information"
+  },
+  "nickelodeon-hotels-and-resorts-riviera-maya-gourmet-all-inclusive-by-karisma": {
+   "expediaId": "64410194",
+   "evidence": "https://www.expedia.com/Playa-Del-Carmen-Hotels-Nickelodeon-Hotels-Resorts-Riviera-Maya-Gourmet-By-Karisma-All-Inclusive.h64410194.Hotel-Information"
+  },
+  "escape-at-nonsuch-bay-antigua-adults-only-all-inclusive": {
+   "expediaId": "32452553",
+   "evidence": "https://expedia.co.uk/Freetown-hotels-The-Escape-at-Nonsuch-Bay--Adults-Only.h32452553.Hotel-information"
+  },
+  "sunset-plaza-beach-resort": {
+   "expediaId": "3817000",
+   "evidence": "https://www.expedia.com/Puerto-Vallarta-Hotels-Sunset-Plaza-Beach-Resort-Spa-Pto-Vallarta-All-Inclusive.h3817000.Hotel-Information"
+  },
+  "breathless-cabo-san-lucas-resort-and-spa": {
+   "expediaId": "11837973",
+   "evidence": "https://expedia.com/Los-Cabos-hotels-Breathless-Cabo-San-Lucas-Adults-Only-All-Inclusive.h11837973.Hotel-information",
+   "note": "A second listing h94981208 ('...Hotel On The Marina') also exists; chose the main listing"
+  },
+  "hotel-riu-palace-peninsula": {
+   "expediaId": "4862726",
+   "evidence": "https://www.travelocity.com/Cancun-Hotels-Riu-Palace-Peninsula-All-Inclusive.h4862726.Hotel-Information"
+  },
+  "catalonia-grand-costa-mujeres-all-suites-and-spa": {
+   "expediaId": "39132531",
+   "evidence": "https://www.expedia.com/Cancun-Hotels-Catalonia-Costa-Mujeres-All-Suites-Spa.h39132531.Hotel-Information"
+  },
+  "pierre-mundo-imperial": {
+   "expediaId": "12605366",
+   "evidence": "https://www.travelocity.com/es/Acapulco-Hoteles-Pierre-Mundo-Imperial.h12605366.Informacion-Hotel",
+   "note": "Uncertain: separate listing h125180939 'Pierre Mundo Imperial All Inclusive' also exists; chose the exact-name listing"
+  },
+  "generations-riviera-maya-resort": {
+   "expediaId": "6585596",
+   "evidence": "https://www.expedia.com/Playa-Del-Carmen-Hotels-Generations-Riviera-Maya.h6585596.Hotel-Information"
+  },
+  "wyndham-alltra-punta-cana": {
+   "expediaId": "1151641",
+   "evidence": "https://www.travelocity.com/Punta-Cana-Hotels-Dreams-Punta-Cana-Resort-Spa-All-Inclusive.h1151641.Hotel-Information",
+   "note": "Result title is Wyndham Alltra Punta Cana; slug carries former name Dreams Punta Cana (Uvero Alto). Also expedia.com.my slug Wyndham-Alltra-Punta-Cana h1151641."
+  },
+  "hard-rock-hotel-riviera-maya": {
+   "expediaId": "447258",
+   "evidence": "https://www.travelocity.com/Riviera-Maya-Hotels-Hard-Rock-Hotel-Riviera-Maya-All-Inclusive.h447258.Hotel-Information"
+  },
+  "breathless-punta-cana-resort-and-spa": {
+   "expediaId": "6411385",
+   "evidence": "https://www.travelocity.com/Punta-Cana-Hotels-Breathless-Punta-Cana-Resort-Spa-Adults-Only-All-Inclusive.h6411385.Hotel-Information"
+  },
+  "hard-rock-hotel-los-cabos-all-inclusive": {
+   "expediaId": "34183472",
+   "evidence": "https://www.expedia.com/Los-Cabos-Hotels-Hard-Rock-Hotel-Los-Cabos-All-Inclusive.h34183472.Hotel-Information"
+  },
+  "hilton-cancun-mar-caribe-all-inclusive-resort": {
+   "expediaId": "41491098",
+   "evidence": "https://www.expedia.com/Cancun-Hotels-Hilton-Cancun-Mar-Caribe-All-Inclusive-Resort.h41491098.Hotel-Information"
+  },
+  "wyndham-alltra-playa-del-carmen-adults-only-all-inclusive": {
+   "expediaId": "522220",
+   "evidence": "https://expedia.co.uk/Playa-Del-Carmen-Hotels-Wyndham-Alltra-Playa-Del-Carmen-Adults-Only-All-Inclusive.h522220.Hotel-Information"
+  },
+  "delta-hotels-riviera-nayarit-an-all-inclusive-resort": {
+   "expediaId": "70035775",
+   "evidence": "https://www.expedia.com/Puerto-Vallarta-Hotels-Delta-Hotels-Marriott-Riviera-Nayarit.h70035775.Hotel-Information"
+  },
+  "marina-fiesta-resort-and-spa-non-refundable": {
+   "expediaId": "789745",
+   "evidence": "https://www.expedia.com/Cabo-San-Lucas-Hotels-Marina-Fiesta-Resort-Spa.h789745.Hotel-Information"
+  },
+  "dreams-dominicus-la-romana": {
+   "expediaId": "15407597",
+   "evidence": "https://www.travelocity.com/Punta-Cana-Hotels-Dreams-Dominicus-La-Romana-All-Inclusive.h15407597.Hotel-Information"
+  },
+  "ocean-eden-bay-adults-only": {
+   "expediaId": "44266101",
+   "evidence": "https://www.expedia.com/cn/Montego-Bay-Hotels-Ocean-Eden-Bay-Adults-Only.h44266101.Hotel-Information",
+   "note": "Property announced to rebrand as Ocean Allure Eden Bay in Nov 2026."
+  },
+  "bahia-principe-explore-esmeralda": {
+   "expediaId": "3814135",
+   "evidence": "https://www.travelocity.com/Punta-Cana-Hotels-Luxury-Bahia-Principe-Esmeralda-All-Inclusive.h3814135.Hotel-Information",
+   "note": "Title Bahia Principe Explore Esmeralda; slug carries former name Luxury Esmeralda."
+  },
+  "dreams-macao-beach-punta-cana": {
+   "expediaId": "38966191",
+   "evidence": "https://www.expedia.com/cn/Punta-Cana-Hotels-Dreams-Macao-Punta-Cana.h38966191.Hotel-Information"
+  },
+  "hacienda-del-mar-los-cabos-autograph-collection": {
+   "expediaId": "65860",
+   "evidence": "https://www.expedia.com/cn/Los-Cabos-Hotels-Hacienda-Del-Mar.h65860.Hotel-Information",
+   "note": "Uncertain: a Travelocity result titled Hacienda Del Mar Los Cabos, Autograph Collection uses h460378 (slug Resort-Villas-Golf, possibly the vacation club side). Chose 65860, titled the Autograph Collection All-Inclusive Resort."
+  },
+  "iberostar-selection-riviera-cancun": {
+   "expediaId": "107292520",
+   "evidence": "https://www.travelocity.com/es/Puerto-Morelos-Hoteles-Selection-Riviera-Cancun.h107292520.Informacion-Hotel"
+  },
+  "tamarijn-aruba-all-inclusive": {
+   "expediaId": "563906",
+   "evidence": "https://www.expedia.com.my/Oranjestad-Hotels-Tamarijn-Aruba-All-Inclusive.h563906.Hotel-Information"
+  },
+  "las-hadas-by-brisas": {
+   "expediaId": "559226",
+   "evidence": "https://www.expedia.com.my/Manzanillo-Hotels-Las-Hadas-By-Brisas.h559226.Hotel-Information"
+  },
+  "barcelo-karmina": {
+   "expediaId": "526689",
+   "evidence": "https://www.expedia.com/Manzanillo-Hotels-Barcelo-Karmina-All-Inclusive.h526689.Hotel-Information"
+  },
+  "decameron-la-marina-guayabitos-ramada-all-inclusive-resort": {
+   "expediaId": "36754452",
+   "evidence": "https://www.travelocity.com/Rincon-De-Guayabitos-Hotels-Decameron-La-Marina-All-Inclusive.h36754452.Hotel-Information"
+  },
+  "emotions-all-inclusive-puerto-plata": {
+   "expediaId": "19507485",
+   "evidence": "https://www.travelocity.com/Puerto-Plata-Hotels-Emotions-By-Hodelpa-Puerto-Plata.h19507485.Hotel-Information",
+   "note": "Listed as Emotions by Hodelpa Puerto Plata."
+  },
+  "occidental-at-xcaret-destination": {
+   "expediaId": "882765",
+   "evidence": "https://www.expedia.com/Playa-Del-Carmen-Hotels-Occidental-At-Xcaret-Destination-All-Inclusive.h882765.Hotel-Information"
+  },
+  "barcelo-maya-beach-all-inclusive": {
+   "expediaId": "804595",
+   "evidence": "https://www.expedia.com/Xpu-Ha-Hotels-Barcelo-Maya-Beach-All-Inclusive.h804595.Hotel-Information"
+  },
+  "island-inn-hotel": {
+   "expediaId": "21854",
+   "evidence": "https://www.travelocity.com/Worthing-Hotels-Island-Inn-All-Inclusive-Hotel.h21854.Hotel-Information",
+   "note": "Listed as Island Inn All Inclusive Hotel, Aquatic Gap, The Garrison."
+  },
+  "breathless-riviera-cancun-resort-and-spa": {
+   "expediaId": "11868477",
+   "evidence": "https://www.expedia.com/Cancun-Hotels-Breathless-Riviera-Cancun-Resort-Spa-Adults-Only.h11868477.Hotel-Information"
+  },
+  "villa-del-palmar-cancun-luxury-beach-resort-and-spa": {
+   "expediaId": "3915480",
+   "evidence": "https://www.expedia.com/Cancun-Hotels-Villa-Del-Palmar-Cancun-Luxury-Beach-Resort-Spa.h3915480.Hotel-Information",
+   "note": "Distinct from Villa del Palmar Cancun All Inclusive Beach Resort h7542201 and several vacation-rental listings."
+  },
+  "grand-palladium-select-costa-mujeres": {
+   "expediaId": "23056532",
+   "evidence": "https://www.travelocity.com/Cancun-Hotels-Grand-Palladium-Costa-Mujeres-Resort-Spa-All-Inclusive.h23056532.Hotel-Information",
+   "note": "Not the Family Selection listing h29093099."
+  },
+  "villa-del-palmar-flamingos-beach-resort-and-spa": {
+   "expediaId": "1071939",
+   "evidence": "https://expedia.com/Nuevo-Vallarta-hotels-Villa-Del-Palmar-Flamingos-Beach-Resort-and-Spa.h1071939.Hotel-information",
+   "note": "Uncertain: many Flamingos listings exist (h24171367 All Inclusive variant, h110443913, h119611562, rentals). Chose h1071939, the exact-name 277-room hotel listing."
+  },
+  "eurostars-grand-cayacoa": {
+   "expediaId": "127179",
+   "evidence": "https://www.travelocity.com/Samana-Hotels-Eurostars-Grand-Cayacoa.h127179.Hotel-Information"
+  },
+  "oleo-cancun-playa": {
+   "expediaId": "16419073",
+   "evidence": "https://www.travelocity.com/Cancun-Hotels-Oleo-Cancun-Playa-All-Inclusive-Boutique-Resort.h16419073.Hotel-Information"
+  },
+  "coco-palm": {
+   "expediaId": "1182710",
+   "evidence": "https://expedia.com/Rodney-Bay-hotels-Coco-Palm.h1182710.Hotel-information"
+  },
+  "grand-palladium-vallarta-resort-and-spa": {
+   "expediaId": "569235",
+   "evidence": "https://www.expedia.com/cn/Puerto-Vallarta-Hotels-Grand-Palladium-Vallarta-Resort-Spa-All-Inclusive.h569235.Hotel-Information"
+  },
+  "iberostar-waves-punta-cana": {
+   "expediaId": "487018",
+   "evidence": "https://www.expedia.com/Punta-Cana-Hotels-Iberostar-Punta-Cana-All-Inclusive.h487018.Hotel-Information",
+   "note": "Title Iberostar Waves Punta Cana - All Inclusive; slug uses former name. A separate h127156579 titled Iberostar Waves Punta Cana also appeared on expedia.com.au."
+  },
+  "iberostar-waves-dominicana": {
+   "expediaId": "487019",
+   "evidence": "https://www.travelocity.com/Punta-Cana-Hotels-Iberostar-Dominicana-All-Inclusive.h487019.Hotel-Information",
+   "note": "Found incidentally in the Iberostar Waves Punta Cana search; title Iberostar Waves Dominicana - All Inclusive."
+  },
+  "mia-reef-isla-mujeres": {
+   "expediaId": "896465",
+   "evidence": "https://www.travelocity.com/Isla-Mujeres-Hotels-Mia-Reef-Isla-Mujeres-All-Inclusive.h896465.Hotel-Information"
+  },
+  "hotel-grand-sunset-princess": {
+   "expediaId": "12612318",
+   "evidence": "https://www.travelocity.com/Playa-Del-Carmen-Hotels-Grand-Sunset-Princess-All-Inclusive.h12612318.Hotel-Information",
+   "note": "A second listing exists: Grand Sunset Princess All Suites Resort h49260249 (travelocity); chose the older main listing"
+  },
+  "zoetry-marigot-bay-st-lucia": {
+   "expediaId": "1355200",
+   "evidence": "https://www.travelocity.com/es/Marigot-Bay-Hoteles-Marigot-Bay-Resort-And-Marina.h1355200.Informacion-Hotel",
+   "note": "Slug is the old Marigot Bay Resort And Marina name; result title is Zoetry Marigot Bay - All Inclusive"
+  },
+  "tamarind-barbados-an-autograph-collection-all-inclusive-resort": {
+   "expediaId": "24890",
+   "evidence": "https://www.travelocity.com/Paynes-Bay-Hotels-Tamarind-By-Elegant-Hotels.h24890.Hotel-Information",
+   "note": "Slug says Tamarind By Elegant Hotels; title is the Autograph Collection name"
+  },
+  "the-reef-beach-resort": {
+   "expediaId": "480789",
+   "evidence": "https://www.expedia.com/East-End-Hotels-Wyndham-Reef-Resort-Grand-Cayman.h480789.Hotel-Information",
+   "note": "Now branded Wyndham Reef Resort Grand Cayman; a second listing Wyndham Reef Resort h59468336 also exists (possibly all-inclusive variant)"
+  },
+  "ocean-el-faro": {
+   "expediaId": "27395552",
+   "evidence": "https://www.expedia.com/Punta-Cana-Hotels-Ocean-El-Faro-Resort-All-Inclusive.h27395552.Hotel-Information"
+  },
+  "el-cid-granada-hotel": {
+   "expediaId": "425185",
+   "evidence": "https://www.expedia.com/Mazatlan-Hotels-El-Cid-Granada.h425185.Hotel-Information"
+  },
+  "decameron-los-cocos-guayabitos-ramada-all-inclusive-resort": {
+   "expediaId": "64417",
+   "evidence": "https://www.expedia.com/Rincon-De-Guayabitos-Hotels-Decameron-Los-Cocos-All-Inclusive.h64417.Hotel-Information"
+  },
+  "el-beso-adults-only-at-ocean-el-faro-all-inclusive": {
+   "expediaId": "33992050",
+   "evidence": "https://www.expedia.com/Punta-Cana-Hotels-Ocean-El-Faro-El-Beso-Adults-Only-All-Inclusive.h33992050.Hotel-Information"
+  },
+  "hawksbill-resort-antigua-12": {
+   "expediaId": "24813",
+   "evidence": "https://www.expedia.com/St-Johns-Hotels-Hawksbill-By-Rex-Resorts.h24813.Hotel-Information",
+   "note": "Slug uses older Hawksbill By Rex Resorts name"
+  },
+  "paradise-village-beach-resort-and-spa": {
+   "expediaId": "1729",
+   "evidence": "https://www.travelocity.com/Nuevo-Vallarta-Hotels-Paradise-Village-Beach-Resort-And-Spa.h1729.Hotel-Information"
+  },
+  "azul-ixtapa-hotels-beach-resort-and-convention-center": {
+   "expediaId": "579360",
+   "evidence": "https://www.expedia.com/Ixtapa-Hotels-Azul-Ixtapa-Beach-Resort-And-Convention-Center-All-Inclusive.h579360.Hotel-Information"
+  },
+  "planet-hollywood-cancun-adult-scene-an-autograph-collection": {
+   "expediaId": "38656023",
+   "evidence": "https://www.expedia.com/Cancun-Hotels-Planet-Hollywood-Adult-Scene-Cancun.h38656023.Hotel-Information"
+  },
+  "grand-sirenis-punta-cana-resort-and-aquagames": {
+   "expediaId": "1691881",
+   "evidence": "https://www.expedia.com/Punta-Cana-Hotels-Grand-Sirenis-Punta-Cana-Resort-Aquagames-All-Inclusive.h1691881.Hotel-Information"
+  },
+  "hotel-riu-dunamar": {
+   "expediaId": "18133944",
+   "evidence": "https://www.travelocity.com/Cancun-Hotels-Riu-Dunamar-All-Inclusive.h18133944.Hotel-Information"
+  },
+  "breathless-cancun-soul-resort-and-spa": {
+   "expediaId": "69562378",
+   "evidence": "https://www.expedia.com/Cancun-Hotels-Breathless-Cancun-Soul-Resort-Spa-Adults-Only-All-Inclusive.h69562378.Hotel-Information",
+   "note": "Duplicate low-review listing h118991568 also exists; chose main listing"
+  },
+  "divi-village-golf-and-beach-resort": {
+   "expediaId": "454080",
+   "evidence": "https://www.expedia.com/Oranjestad-Hotels-Divi-Village-Golf-Beach-Resort.h454080.Hotel-Information"
+  },
+  "w-punta-cana-adult-all-inclusive": {
+   "expediaId": "110510680",
+   "evidence": "https://www.travelocity.com/Punta-Cana-Hotels-W-Punta-Cana.h110510680.Hotel-Information"
+  },
+  "emporio-cancun": {
+   "expediaId": "571397",
+   "evidence": "https://www.expedia.com/Cancun-Hotels-Emporio-Cancun-Optional-All-Inclusive.h571397.Hotel-Information"
+  },
+  "hotel-riu-cancun": {
+   "expediaId": "1087292",
+   "evidence": "https://www.travelocity.com/Cancun-Hotels-Riu-Cancun-All-Inclusive.h1087292.Hotel-Information"
+  },
+  "barcelo-puerto-vallarta": {
+   "expediaId": "4617829",
+   "evidence": "https://www.expedia.com/es/Puerto-Vallarta-Hoteles-Barcelo-Puerto-Vallarta-All-Inclusive.h4617829.Informacion-Hotel"
+  },
+  "royalton-riviera-cancun": {
+   "expediaId": "8655945",
+   "evidence": "https://www.expedia.com/Cancun-Hotels-Royalton-Riviera-Cancun-Resort-Spa-All-Inclusive.h8655945.Hotel-Information"
+  },
+  "ritz-acapulco": {
+   "expediaId": "460536",
+   "evidence": "https://www.expedia.com/Acapulco-Hotels-Ritz-Acapulco-Hotel-De-Playa.h460536.Hotel-Information"
+  },
+  "dreams-estrella-del-mar-mazatlan-golf-and-spa-resort": {
+   "expediaId": "98707058",
+   "evidence": "https://www.expedia.com/Mazatlan-Hotels-Dreams-Estrella-Del-Mar-Mazatlan.h98707058.Hotel-Information"
+  },
+  "lopesan-splash-cove-resort-spa-and-casino": {
+   "expediaId": "125551502",
+   "evidence": "https://www.expedia.com/Punta-Cana-Hotels-Lopesan-Splash-Cove-Resort-Spa-Casino.h125551502.Hotel-Information"
+  },
+  "cancun-bay-resort-all-inclusive": {
+   "expediaId": "5806712",
+   "evidence": "https://www.expedia.com/Cancun-Hotels-Cancun-Bay-Resort-All-Inclusive.h5806712.Hotel-Information"
+  },
+  "bolongo-bay-beach-resort": {
+   "expediaId": "26734",
+   "evidence": "https://www.expedia.com/St-Thomas-Hotels-Bolongo-Bay-Beach-Resort.h26734.Hotel-Information"
+  },
+  "hacienda-buenaventura-hotel-and-mexican-charm-all-inclusive": {
+   "expediaId": "16380",
+   "evidence": "https://www.expedia.com/Puerto-Vallarta-Hotels-Hacienda-Buenaventura-Hotel-Mexican-Charm-All-Inclusive.h16380.Hotel-Information"
+  },
+  "hotel-riu-lupita": {
+   "expediaId": "470878",
+   "evidence": "https://www.expedia.com/Playa-Del-Carmen-Hotels-Riu-Lupita-All-Inclusive.h470878.Hotel-Information"
+  },
+  "royal-villas-cofresi-5": {
+   "expediaId": "26831698",
+   "evidence": "https://www.orbitz.com/Puerto-Plata-Hotels-Royal-Villas-Cofresi-5-All-Inclusive.h26831698.Hotel-Information"
+  },
+  "occidental-punta-cana": {
+   "expediaId": "693601",
+   "evidence": "https://www.expedia.com/Punta-Cana-Hotels-Occidental-Punta-Cana-All-Inclusive.h693601.Hotel-Information",
+   "note": "A second older non-all-inclusive listing h51267421 also exists; h693601 is the all-inclusive resort."
+  },
+  "gr-solaris-cancun": {
+   "expediaId": "1110099",
+   "evidence": "https://www.expedia.com/Cancun-Hotels-GR-Solaris-Cancun-Spa-All-Inclusive.h1110099.Hotel-Information"
+  },
+  "sandos-caracol-eco-resort": {
+   "expediaId": "919643",
+   "evidence": "https://www.expedia.com/Playa-Del-Carmen-Hotels-Sandos-Caracol-Eco-Resort-All-Inclusive.h919643.Hotel-Information",
+   "note": "Now titled Sandos Caracol Nature Resort & Water Park; a duplicate listing h36315398 also exists."
+  },
+  "senator-puerto-plata-spa-resort": {
+   "expediaId": "29826620",
+   "evidence": "https://www.expedia.com/Puerto-Plata-Hotels-Senator-Puerto-Plata-Spa-Resort-All-Inclusive.h29826620.Hotel-Information"
+  },
+  "sunset-fishermen-beach-resort": {
+   "expediaId": "884898",
+   "evidence": "https://www.expedia.com/Playa-Del-Carmen-Hotels-Sunset-Fishermen-Beach-Resort-Playa-Del-Carmen.h884898.Hotel-Information"
+  },
+  "the-westin-playa-vallarta-an-all-inclusive-resort": {
+   "expediaId": "118832691",
+   "evidence": "https://www.expedia.com/Puerto-Vallarta-Hotels-The-Westin-Playa-Vallarta.h118832691.Hotel-Information",
+   "note": "Distinct from Westin Resort & Spa Puerto Vallarta h22052."
+  },
+  "vik-hotel-cayena-beach": {
+   "expediaId": "91909246",
+   "evidence": "https://www.expedia.com/Punta-Cana-Hotels-VIK-Hotel-Cayena-Beach.h91909246.Hotel-Information"
+  },
+  "dreams-los-cabos-suites-golf-resort-and-spa": {
+   "expediaId": "117968",
+   "evidence": "https://www.expedia.com/Los-Cabos-Hotels-Dreams-Los-Cabos-Suites-Golf-Resort-Spa.h117968.Hotel-Information",
+   "note": "Main listing across all sister sites; a second expedia.ca listing h102151780 with the same name also exists."
+  },
+  "st-james-club-and-villas": {
+   "expediaId": "874142",
+   "evidence": "https://www.expedia.com/Mamora-Bay-Hotels-St-Jamess-Club-Antigua-All-Inclusive.h874142.Hotel-Information",
+   "note": "Main resort listing. A separate 'Villas at St. James's Club' listing h19413618 also exists; uncertain which the input means."
+  },
+  "the-club-barbados-resort-and-spa": {
+   "expediaId": "13750",
+   "evidence": "https://www.expedia.com/Holetown-Hotels-The-Club.h13750.Hotel-Information"
+  },
+  "villa-del-palmar-beach-resort-and-spa-cabo-san-lucas": {
+   "expediaId": "64724",
+   "evidence": "https://www.expedia.com/Los-Cabos-Hotels-Villa-Del-Palmar-Beach-Resort-Cabo-San-Lucas.h64724.Hotel-Information",
+   "note": "A separate all-inclusive listing h11287856 (Residences slug) also carries the name."
+  },
+  "allegro-cozumel": {
+   "expediaId": "460408",
+   "evidence": "https://www.expedia.com/Cozumel-Hotels-Allegro-Cozumel-All-Inclusive.h460408.Hotel-Information"
+  },
+  "sandals-barbados-couples-only": {
+   "expediaId": "7062172",
+   "evidence": "https://www.expedia.com/Maxwell-Hotels-Sandals-Barbados-ALL-INCLUSIVE-Couples-Only.h7062172.Hotel-Information",
+   "note": "Distinct from Sandals Royal Barbados h18126483."
+  },
+  "viva-maya-by-wyndham-a-trademark-all-inclusive-resort": {
+   "expediaId": "569232",
+   "evidence": "https://www.expedia.co.uk/Playa-Del-Carmen-Hotels-Viva-Wyndham-Maya-All-Inclusive.h569232.Hotel-Information"
+  },
+  "royalton-hideaway-negril-an-autograph-collection-all-inclusive-resort-adults-onl": {
+   "expediaId": "15920957",
+   "evidence": "https://www.expedia.com/Negril-Hotels-Hideaway-At-Royalton-Negril-Resort-Spa-Adults-Only-All-Inclusive.h15920957.Hotel-Information"
+  },
+  "secrets-st-lucia-resort-and-spa": {
+   "expediaId": "16440",
+   "evidence": "https://www.expedia.com/Gros-Islet-Hotels-St-Jamess-Club-Morgan-Bay-All-Inclusive.h16440.Hotel-Information",
+   "note": "Slug is legacy St James's Club Morgan Bay but title names Secrets St. Lucia Resort & Spa at Choc Bay."
+  },
+  "allegro-playacar": {
+   "expediaId": "328185",
+   "evidence": "https://www.expedia.com/Playa-Del-Carmen-Hotels-Allegro-Playacar-All-Inclusive.h328185.Hotel-Information"
+  },
+  "azul-beach-resort-negril-by-karisma": {
+   "expediaId": "6572748",
+   "evidence": "https://www.expedia.com/Negril-Hotels-Azul-Beach-Resort-Negril.h6572748.Hotel-Information",
+   "note": "Main listing on all sister sites; a newer duplicate listing h120164483 also exists."
+  },
+  "catalonia-yucatan-beach": {
+   "expediaId": "9627292",
+   "evidence": "https://www.expedia.com/Puerto-Aventuras-Hotels-Catalonia-Yucatan-Beach-All-Inclusive.h9627292.Hotel-Information"
+  },
+  "azulik-tulum": {
+   "expediaId": "4515733",
+   "evidence": "https://www.expedia.com/Tulum-Hotels-Azulik.h4515733.Hotel-Information"
+  },
+  "royalton-splash-punta-cana-an-autograph-collection-resort-and-casino": {
+   "expediaId": "6480724",
+   "evidence": "https://www.expedia.com/Punta-Cana-Hotels-Royalton-Splash-Punta-Cana-Resort-Spa-All-Inclusive.h6480724.Hotel-Information"
+  },
+  "tesoro-ixtapa": {
+   "expediaId": "68210",
+   "evidence": "https://www.expedia.com/Ixtapa-Hotels-Tesoro-Ixtapa.h68210.Hotel-Information"
+  },
+  "vista-sol-punta-cana-beach-resort-and-spa": {
+   "expediaId": "1305553",
+   "evidence": "https://www.expedia.com/Punta-Cana-Hotels-Vista-Sol-Punta-Cana-Beach-Resort-Spa-All-Inclusive.h1305553.Hotel-Information"
+  },
+  "occidental-caribe": {
+   "expediaId": "897662",
+   "evidence": "https://www.expedia.com/Punta-Cana-Hotels-Occidental-Caribe-All-Inclusive.h897662.Hotel-Information",
+   "note": "A second Expedia listing h908508 also uses this name; 897662 appears across all sister sites"
+  },
+  "ocean-spa-hotel": {
+   "expediaId": "986131",
+   "evidence": "https://www.expedia.com/Cancun-Hotels-Ocean-Spa-Hotel-Cancun.h986131.Hotel-Information"
+  },
+  "le-blanc-spa-resort-cancun": {
+   "expediaId": "27301",
+   "evidence": "https://www.travelocity.com/Cancun-Hotels-Le-Blanc-Spa-Resort-Cancun-Adults-Only-All-Inclusive.h27301.Hotel-Information",
+   "note": "Also the property Stay22 matched by name in testing."
+  }
+ },
+ "pending": [
+  "divi-tamarijn-aruba",
+  "hyatt-zilara-cap-cana",
+  "dreams-royal-beach-punta-cana",
+  "bahia-principe-grand-punta-cana",
+  "excellence-playa-mujeres",
+  "hyatt-ziva-cancun",
+  "riu-palace-las-americas",
+  "dreams-vista-cancun",
+  "moon-palace-the-grand-cancun",
+  "secrets-akumal-riviera-maya",
+  "grand-velas-riviera-maya",
+  "iberostar-selection-paraiso",
+  "hotel-xcaret-mexico",
+  "dreams-tulum-resort-spa",
+  "trs-yucatan-hotel",
+  "hyatt-zilara-cancun",
+  "secrets-the-vine-cancun",
+  "live-aqua-beach-resort-cancun",
+  "grand-fiesta-americana-coral-beach-cancun",
+  "moon-palace-cancun",
+  "dreams-sands-cancun",
+  "mondrian-cancun",
+  "fairmont-heritage-place-mayakoba",
+  "serenity-at-coconut-bay",
+  "the-aerial-bvi",
+  "guana-island",
+  "small-hope-bay-lodge-no-tv-ac-costs-extra",
+  "calabash-hotel-jan-5-to-mar-15-12-allowed-mar-16-to-dec-20-6-allowed-dec-21-to-j",
+  "the-caves",
+  "east-winds-saint-lucia",
+  "palafitos-overwater-bungalows",
+  "pine-cay-13-allowed-alcohol-not-included",
+  "grand-velas-boutique-hotel-los-cabos",
+  "grand-velas-los-cabos",
+  "beloved-playa-mujeres-couples-only",
+  "palmaia-the-house-of-aia-all-inclusive-wellness-resort-vegan",
+  "ambergris-cay-private-island-all-inclusive",
+  "jade-mountain-resort",
+  "casa-velas",
+  "atelier-playa-mujeres-16",
+  "hammock-cove-antigua",
+  "grand-velas-riviera-nayarit",
+  "cayo-levantado-resort",
+  "spice-island-beach-resort",
+  "hermitage-bay-14-allowed",
+  "the-cliff-hotel",
+  "excellence-riviera-cancun",
+  "unico-hotel-riviera-nayarit-adults-only-all-inclusive",
+  "joia-paraiso-by-iberostar",
+  "jumby-bay-island",
+  "la-casa-de-la-playa-16-allowed",
+  "the-beachfront-by-the-fives-hotels",
+  "joia-bavaro-by-iberostar",
+  "keyonna-beach",
+  "bodyholiday-saint-lucia-12",
+  "the-tower-by-temptation-cancun-resort-optional-topless-areas",
+  "excellence-coral-playa-mujeres",
+  "hotel-mousai-cancun",
+  "secrets-maroma-beach-riviera-cancun",
+  "ladera-resort",
+  "jamaica-inn",
+  "curtain-bluff",
+  "hotel-el-dorado-maroma",
+  "hyatt-ziva-cap-cana",
+  "sugar-mill-hotel",
+  "cocos-hotel-couples-only-no-tv",
+  "sailrock-south-caicos",
+  "jungle-bay-dominica-alcohol-not-included",
+  "le-blanc-spa-resort-los-cabos-adults-only-all-inclusive",
+  "galley-bay-resort-and-spa",
+  "joia-aruba-by-iberostar",
+  "sugar-beach-a-viceroy-resort",
+  "valentin-imperial-riviera-maya",
+  "s-hotel-montego-bay-8",
+  "petite-anse-hotel",
+  "sandals-jamaica-royal-plantation-couples-only",
+  "round-hill-hotel-and-villas",
+  "casa-de-campo-resort-and-villas",
+  "eden-roc-cap-cana-alcohol-not-included",
+  "cozumel-palace",
+  "grand-residences-riviera-cancun",
+  "sandals-jamaica-dunn-s-river-couples-only",
+  "stolentime-st-lucia",
+  "viceroy-riviera-maya-a-luxury-villa-resort",
+  "club-med-miches-playa-esmeralda-dominican-republic",
+  "blue-waters-resort-and-spa-antigua",
+  "bluefields-bay-villas-and-suites",
+  "zoetry-casa-del-mar-los-cabos",
+  "secrets-tides-punta-cana",
+  "the-landings-resort-and-spa-st-lucia",
+  "trs-turquesa-hotel",
+  "paraiso-de-la-bonita-a-luxury-collection-resort-riviera-maya-adult-all-inclusive",
+  "sandals-st-vincent-couples-only",
+  "zel-punta-cana",
+  "impression-isla-mujeres-by-secrets",
+  "villa-premiere-boutique-hotel-and-romantic-getaway",
+  "unico-20-87-hotel-riviera-maya",
+  "sun-palace-cancun",
+  "hotel-xcaret-arte-16",
+  "majestic-mirage-punta-cana",
+  "grand-solmar-land-s-end-resort-and-spa",
+  "akumal-bay-beach-and-wellness-resort",
+  "sandos-finisterra",
+  "ocean-allure-costa-mujeres-adults-only-all-inclusive",
+  "cocobay-resort-no-tv",
+  "crown-suites-at-lifestyle-holidays-vacation-resort",
+  "sandals-grenada-couples-only",
+  "impression-moxche-by-secrets",
+  "hotel-privilege-aluxes-isla-mujeres",
+  "el-dorado-seaside-palms",
+  "the-explorean-cozumel-no-tv",
+  "premium-level-at-barcelo-maya-palace",
+  "paradisus-la-perla-adults-only",
+  "villa-la-estancia-beach-resort-and-spa",
+  "zoetry-agua-punta-cana",
+  "finest-punta-cana",
+  "stonefield-villa-resort-17",
+  "kempinski-hotel-cancun",
+  "sunset-at-the-palms",
+  "velas-vallarta",
+  "hotel-mousai-puerto-vallarta",
+  "majestic-elegance-costa-mujeres",
+  "catalonia-royal-tulum",
+  "barcelo-maya-palace",
+  "pueblo-bonito-montecristo-estates-luxury-villas",
+  "lopesan-caoba-lagoon-resort-spa-and-casino",
+  "princess-senses-the-mangrove",
+  "villa-del-palmar-at-the-islands-of-loreto-by-danzante-bay",
+  "iberostar-selection-hacienda-dominicus",
+  "rabot-hotel-from-hotel-chocolat-no-tv",
+  "marquis-los-cabos",
+  "club-med-cancun",
+  "hyatt-vivid-playa-del-carmen",
+  "el-cid-marina-beach-hotel",
+  "paradisus-playa-del-carmen-riviera-maya",
+  "pueblo-bonito-mazatlan-beach-resort",
+  "hyatt-vivid-punta-cana",
+  "avila-beach-hotel",
+  "grand-palladium-kantenah-resort-and-spa",
+  "secrets-la-romana-resort-and-spa",
+  "bel-jou-hotel-st-lucia",
+  "catalonia-royal-la-romana-adults-only",
+  "sls-playa-mujeres",
+  "secrets-moxche-playa-del-carmen",
+  "secrets-puerto-los-cabos-golf-and-spa-resort",
+  "club-med-punta-cana",
+  "bahia-principe-escape-bouganville",
+  "family-selection-at-grand-palladium-vallarta-resort-and-spa",
+  "blue-diamond-luxury-boutique-hotel",
+  "paradisus-los-cabos-adults-only-the-leading-hotels-of-the-world",
+  "villa-del-arco-beach-resort-and-spa",
+  "pueblo-bonito-sunset-beach-golf-and-spa-resort",
+  "windjammer-landing-resort-and-residences",
+  "carlisle-bay-antigua",
+  "bahia-principe-escape-samana",
+  "temptation-cancun-resort-optional-topless-areas",
+  "bakour-punta-cana-suites",
+  "ocean-maya-royale-adults-only",
+  "las-brisas-huatulco",
+  "barcelo-maya-tropical-all-inclusive",
+  "secrets-royal-beach-punta-cana",
+  "dreams-cap-cana-resort-and-spa",
+  "charela-inn-children-not-included-in-all-inclusive",
+  "hyatt-ziva-puerto-vallarta",
+  "paradisus-palma-real-golf-and-spa-resort",
+  "iberostar-selection-paraiso-maya-suites",
+  "iberostar-waves-cozumel",
+  "marriott-puerto-vallarta-resort-and-spa",
+  "treasure-beach-art-hotel-barbados-an-autograph-collection-all-inclusive-resort",
+  "grand-solmar-pacific-dunes-golf-and-spa",
+  "casa-dorada-los-cabos-resort-and-spa",
+  "sugar-bay-barbados",
+  "grand-fiesta-americana-los-cabos-all-inclusive-golf-and-spa",
+  "ventus-ha-at-marina-el-cid-spa-and-beach-resort",
+  "heaven-at-the-hard-rock-hotel-riviera-maya",
+  "secrets-playa-esmeralda-resort-and-spa",
+  "majestic-colonial-punta-cana",
+  "barcelo-huatulco",
+  "hotel-riu-palace-pacifico",
+  "margaritaville-island-reserve-riviera-maya-by-karisma-adults-only",
+  "serenade-all-suites-adults-only-resort-all-inclusive",
+  "hotel-riu-palace-kukulkan",
+  "couples-swept-away-couples-only",
+  "margaritaville-island-reserve-riviera-cancun-by-karisma",
+  "waves-resort-and-spa-an-autograph-collection-all-inclusive-resort",
+  "iberostar-selection-coral-bavaro",
+  "the-ocean-club-a-luxury-collection-resort-costa-norte",
+  "club-med-columbus-bahamas",
+  "melia-punta-cana-beach",
+  "hotel-riu-latino",
+  "bahia-principe-escape-ambar",
+  "barcelo-maya-colonial-all-inclusive",
+  "hotel-riu-tequila",
+  "moon-palace-nizuc-cancun",
+  "el-dorado-seaside-suites-by-karisma-adults-only",
+  "hodelpa-garden-suites-golf-and-convention-centre",
+  "iberostar-selection-playa-mita",
+  "coconut-bay-beach-resort-and-spa",
+  "sandals-st-lucia-grand-bay-couples-only",
+  "sandals-curacao-couples-only",
+  "the-house-barbados-an-autograph-collection-all-inclusive-resort-adults-only",
+  "el-dorado-casitas-royale",
+  "secrets-bahia-mita-surf-and-spa-resort",
+  "secrets-playa-mujeres-golf-and-spa-all-inclusive-adults-only",
+  "dreams-vallarta-bay-resort-and-spa",
+  "dreams-riviera-cancun-resort-and-spa",
+  "beach-palace-all-inclusive",
+  "garza-blanca-resort-and-spa-los-cabos",
+  "hotel-nyx-cancun",
+  "binniguenda-huatulco-non-refundable",
+  "sandos-cancun",
+  "ventus-at-marina-el-cid-spa-and-beach-resort",
+  "iberostar-waves-paraiso-beach",
+  "iberostar-waves-paraiso-del-mar",
+  "grand-palladium-palace-resort-spa-and-casino",
+  "secrets-huatulco-resort-and-spa",
+  "ava-resort-cancun",
+  "ocean-coral-riviera-cancun-riviera-maya",
+  "the-fives-oceanfront-puerto-morelos",
+  "ocean-riviera-paradise",
+  "hotel-riu-caribe",
+  "sandals-st-lucia-halcyon-beach-couples-only",
+  "hacienda-encantada-resort-and-residences",
+  "grand-palladium-colonial-resort-and-spa-all-inclusive",
+  "catalonia-royal-bavaro",
+  "solmar-resort",
+  "azul-ixtapa-grand-beach-resort-spa-and-convention-center",
+  "el-dorado-royale",
+  "ocean-blue-and-sand",
+  "bahia-principe-explore-akumal",
+  "catalonia-playa-maroma",
+  "sunscape-cancun-resort-and-spa",
+  "hotel-riu-palace-costa-mujeres",
+  "iberostar-selection-cancun",
+  "the-fives-beach-hotel-and-residences",
+  "dreams-huatulco-resort-and-spa",
+  "grand-sirenis-riviera-maya-resort",
+  "caribe-park-royal-grand",
+  "hotel-riu-palace-aquarelle",
+  "paradisus-grand-cana-all-suites",
+  "hilton-cancun-an-all-inclusive-resort",
+  "sandals-jamaica-negril-couples-only",
+  "barcelo-bavaro-beach",
+  "hilton-puerto-vallarta-resort-all-inclusive",
+  "hotel-playa-mazatlan-non-refundable",
+  "bahia-principe-escape-tequila",
+  "bahia-principe-explore-el-portillo",
+  "sheraton-buganvilias-puerto-vallarta-children-not-included-in-all-inclusive",
+  "dreams-jade-resort-and-spa",
+  "marival-emotions-resort-and-suites-riviera-nayarit-by-mercure",
+  "hotel-riu-yucatan",
+  "hotel-riu-palace-cabo-san-lucas",
+  "sandals-st-lucia-la-toc-couples-only",
+  "beaches-jamaica-negril",
+  "beaches-turks-and-caicos",
+  "iberostar-selection-bavaro-suites",
+  "villa-la-valencia-beach-resort-and-spa-los-cabos",
+  "almare-a-luxury-collection-resort-isla-mujeres-cancun-adult-all-inclusive",
+  "dreams-playa-mujeres-golf-and-spa-resort",
+  "club-med-les-boucaniers-martinique",
+  "decameron-isla-coral-guayabitos-ramada-all-inclusive-resort",
+  "bay-gardens-beach-resort",
+  "hotel-marina-el-cid-spa-and-beach-resort",
+  "grand-palladium-punta-cana-resort-and-spa",
+  "sandos-playacar",
+  "secrets-riviera-cancun-resort-and-spa",
+  "punta-cana-princess",
+  "iberostar-waves-rose-hall-beach",
+  "coral-costa-caribe-beach-resort",
+  "franklyn-d-resort-and-spa",
+  "divi-aruba",
+  "villas-hm-palapas-del-mar",
+  "mango-bay-hotel",
+  "emporio-ixtapa",
+  "star-palace-beach-hotel",
+  "melia-casa-maya-cancun-all-inclusive",
+  "hotel-riu-palace-macao",
+  "the-soco-hotel",
+  "bahia-principe-explore-coba",
+  "viva-azteca-by-wyndham-a-trademark-all-inclusive-resort",
+  "melia-puerto-vallarta",
+  "hyatt-zilara-riviera-maya",
+  "hotel-riu-ventura",
+  "corazon-cabo-resort-and-spa",
+  "the-verandah-antigua",
+  "bahia-principe-explore-tulum",
+  "club-med-turkoise-turks-and-caicos",
+  "laguna-suites",
+  "hotel-riu-palace-tropical-bay",
+  "marriott-miches-beach-an-all-inclusive-resort",
+  "occidental-nuevo-vallarta-all-inclusive",
+  "hard-rock-hotel-and-casino-punta-cana-all-inclusive",
+  "secrets-baby-beach-aruba",
+  "bahia-principe-escape-aquamarine",
+  "royalton-chic-cancun-an-autograph-collection-all-inclusive-resort-adults-only",
+  "bahia-principe-escape-runaway-bay",
+  "royalton-hideaway-riviera-cancun-an-autograph-collection-all-inclusive-resort-an",
+  "bluebay-villas-doradas",
+  "sandals-antigua-couples-only",
+  "bahia-principe-explore-la-romana",
+  "serenade-punta-cana-beach-and-spa-resort",
+  "fort-young-hotel-and-dive-resort",
+  "sensira-resort-and-spa-riviera-maya",
+  "caribe-deluxe-princess",
+  "pineapple-beach-club-antigua-all-inclusive-16-allowed",
+  "dreams-aventuras-riviera-maya",
+  "wyndham-grand-cancun-all-inclusive-resort-and-villas",
+  "hotel-riu-vallarta",
+  "moon-palace-jamaica",
+  "catalonia-bayahibe",
+  "hotel-riu-palace-punta-cana",
+  "warwick-paradise-island-bahamas",
+  "lopesan-costa-bavaro-resort-spa-and-casino",
+  "divi-dutch-village-beach-resort",
+  "sonesta-ocean-point-resort-st-maarten",
+  "moon-palace-the-grand-punta-cana",
+  "princess-family-club-riviera",
+  "la-quinta-gran-bahia-cuastecomates",
+  "alexandra-resort-all-inclusive",
+  "wyndham-alltra-samana-all-inclusive-resort",
+  "catalonia-riviera-maya",
+  "platinum-yucatan-princess-adults-only",
+  "sunset-marina-resort-and-yacht-club",
+  "gr-solaris-caribe",
+  "pacifica-resort-ixtapa",
+  "grand-bavaro-princess",
+  "sandals-jamaica-ochos-rios-couples-only",
+  "secrets-tulum-resort-and-beach-club",
+  "dreams-sapphire-resort-and-spa-non-refundable",
+  "hilton-tulum-riviera-maya-all-inclusive-resort",
+  "esplendor-by-wyndham-isla-mujeres-all-inclusive-resort-hotel-boutique",
+  "bahia-principe-explore-turquesa",
+  "costa-sur-all-inclusive-resort-puerto-vallarta",
+  "el-cid-el-moro-beach-hotel",
+  "hotel-riu-reggae",
+  "sunscape-dorado-pacifico-ixtapa",
+  "hm-alma-de-bayahibe",
+  "occidental-costa-cancun",
+  "dreams-playa-esmeralda-resort-and-spa",
+  "ocean-coral-spring",
+  "oasis-at-sunset-montego-bay",
+  "royal-solaris-cancun",
+  "dreams-bahia-mita-surf-and-spa-resort",
+  "holiday-inn-resort-ixtapa-all-inclusive-an-ihg-hotel",
+  "gr-solaris-lighthouse-los-cabos",
+  "grand-park-royal-cozumel",
+  "royalton-splash-riviera-cancun-an-autograph-collection-all-inclusive-resort",
+  "fiesta-americana-cozumel-all-inclusive",
+  "barcelo-bavaro-palace",
+  "holiday-inn-resort-aruba-beach-resort-and-casino",
+  "tropical-deluxe-princess",
+  "oceans-at-divi-little-bay-beach-resort",
+  "royal-level-at-occidental-cozumel",
+  "samba-vallarta-all-inclusive",
+  "sunscape-dominicus-la-romana",
+  "the-abidah-by-accra",
+  "qualton-club-ixtapa-all-inclusive",
+  "emotions-by-hodelpa-all-inclusive-juan-dolio",
+  "dreams-natura-resort-and-spa",
+  "hotel-riu-palace-bavaro",
+  "residence-suite-resort",
+  "viva-v-samana-by-wyndham-a-trademark-adults-all-inclusive",
+  "hotel-riu-palace-aruba",
+  "divi-flamingo-beach-resort-and-casino",
+  "hotel-riu-montego-bay",
+  "occidental-cozumel",
+  "grand-palladium-lady-hamilton-resort-and-spa",
+  "grand-decameron-los-cabos-a-trademark-all-inclusive-resort",
+  "grand-riviera-princess",
+  "the-club-barbados-resort-and-spa-2",
+  "the-royal-suites",
+  "occidental-tucancun",
+  "sunscape-coco-punta-cana",
+  "hotel-riu-ocho-rios",
+  "royalton-chic-punta-cana-an-autograph-collection-resort-and-casino-adults-only",
+  "sandals-bahamas-nassau-couples-only",
+  "the-reef-playacar",
+  "turtle-beach-by-elegant-hotels-all-inclusive",
+  "park-royal-beach-cancun",
+  "fiesta-americana-riviera-nayarit",
+  "bay-gardens-marina-haven-hotel",
+  "krystal-grand-nuevo-vallarta",
+  "seadust-cancun-family-resort",
+  "hotel-dos-playas-faranda-cancun",
+  "crystal-cove-barbados-a-tribute-portfolio-all-inclusive-resort",
+  "krystal-grand-puerto-vallarta",
+  "royalton-punta-cana-an-autograph-collection-resort-and-casino",
+  "viva-wyndham-v-heavens",
+  "hotel-riu-negril",
+  "canto-del-sol-puerto-vallarta",
+  "nickelodeon-hotels-and-resorts-punta-cana",
+  "sunset-royal-beach-resort",
+  "melia-caribe-beach-resort",
+  "planet-hollywood-cancun-an-autograph-collection-all-inclusive-resort",
+  "the-sands-barbados",
+  "cozumel-hotel-and-resort-trademark-collection-by-wyndham",
+  "grand-decameron-complex-bucerias-a-trademark-all-inclusive",
+  "oceano-palace-beach-hotel",
+  "savannah-beach-club-hotel-and-spa",
+  "the-reef-coco-beach",
+  "hotel-krystal-cancun",
+  "crown-paradise-club-cancun",
+  "gran-ventana-beach-resort",
+  "royalton-hideaway-saint-lucia-an-autograph-collection-all-inclusive-resort-adult",
+  "grand-palladium-jamaica-resort-and-spa",
+  "royal-solaris-los-cabos",
+  "crown-paradise-golden-puerto-vallarta",
+  "krystal-grand-cancun",
+  "oceans-at-divi-little-bay",
+  "the-sens-cancun",
+  "hotel-krystal-ixtapa",
+  "tan-resorts-marina-cap-cana-all-inclusive",
+  "deja-resort",
+  "impressive-punta-cana",
+  "sandals-royal-barbados-couples-only",
+  "royalton-hideaway-punta-cana-an-autograph-collection-all-inclusive-resort-and-ca",
+  "zoetry-curacao-resort-and-spa",
+  "royalton-bavaro-an-autograph-collection-all-inclusive-resort-and-casino",
+  "viva-dominicus-palace-by-wyndham-a-trademark-all-inclusive",
+  "royalton-blue-waters-montego-bay-an-autograph-collection-all-inclusive-resort",
+  "marien-puerto-plata",
+  "royalton-grenada-an-autograph-collection-all-inclusive-resort",
+  "the-rif-at-mangrove-beach-corendon-curacao-all-inclusive-curio-by-hilton",
+  "the-soco-house",
+  "viva-miches-by-wyndham",
+  "krystal-beach-acapulco",
+  "royalton-saint-lucia-an-autograph-collection",
+  "royalton-vessence-barbados-an-autograph-collection-all-inclusive-resort-adult-or",
+  "wyndham-grand-barbados-sam-lords-castle-all-inclusive-resort",
+  "dreams-puerto-morelos-resort-and-spa",
+  "royalton-negril-an-autograph-collection-all-inclusive-resort",
+  "kore-tulum-retreat-and-spa-resort",
+  "the-crown-villas-at-lifestyle-holidays-vacation-resort",
+  "presidential-suites-by-lifestyle-all-inclusive",
+  "senses-riviera-maya-by-artisan",
+  "vamar-vallarta-all-inclusive-marina-and-beach-resort",
+  "royalton-chic-antigua-an-autograph-collection-all-inclusive-resort-adults-only",
+  "kimpton-tres-rios-all-inclusive",
+  "grand-matlali-suites-and-villas-riviera-nayarit",
+  "hotel-riu-bambu",
+  "the-royal-suites-2",
+  "maya-tulum-by-g-hotels",
+  "the-pyramid-cancun",
+  "hotel-fontan-ixtapa",
+  "kunuku-resort-all-inclusive-curacao-trademark-by-wyndham",
+  "oceans-at-carina-bay",
+  "royalton-hideaway-blue-waters-an-autograph-collection-all-inclusive-resort-adult",
+  "hotel-riu-palace-paradise-island",
+  "playabachata-spa-resort",
+  "bluebay-grand-esmeralda",
+  "mangrove-beach-corendon-curacao-all-inclusive-resort-curio-by-hilton",
+  "viva-tangerine-by-wyndham",
+  "golden-parnassus-all-inclusive-resort-and-spa-cancun",
+  "breezes-bahamas-resort-and-spa",
+  "sonesta-maho-beach-resort-casino-and-spa-st-maarten",
+  "whala-bocachica",
+  "casa-marina-sosua-trademark-by-wyndham-all-inclusive",
+  "sunscape-puerto-vallarta-resort-and-spa",
+  "samsara-cliffs-resort",
+  "grand-oasis-palm",
+  "seagarden-beach-resort",
+  "all-ritmo-cancun-resort-and-waterpark",
+  "hotel-el-cozumeleno-beach-resort",
+  "lifestyle-tropical-beach-resort-and-spa",
+  "accra-beach-hotel-and-spa",
+  "dreams-cozumel-cape-resort-and-spa",
+  "carina-bay-boutique-resort-and-casino",
+  "flamingo-cancun-all-inclusive",
+  "grand-decameron-cornwall-beach-a-trademark-all-inclusive-resort",
+  "grand-muthu-runaway-bay",
+  "legends-beach-hotel",
+  "vik-hotel-arena-blanca",
+  "secrets-aura-cozumel",
+  "barbados-beach-club",
+  "jolly-beach-antigua",
+  "crown-suites-at-lifestyle-holidays-vacation-resort-2",
+  "royalton-antigua-an-autograph-collection",
+  "club-ambiance",
+  "lopesan-serenity-bay-resort-spa-and-casino",
+  "sunscape-curacao-resort-spa-and-casino",
+  "grand-decameron-montego-beach-a-trademark-all-inclusive",
+  "cofresi-palm-beach-and-spa-resort",
+  "viva-fortuna-beach-by-wyndham-an-all-inclusive-resort",
+  "negril-escape-resort-and-spa",
+  "tribe-resorts",
+  "whala-bavaro",
+  "lifestyle-tropical-beach-resort-and-spa-2",
+  "ocean-view-cancun-arenas",
+  "be-live-experience-hamaca-garden",
+  "grand-oasis-cancun",
+  "dreams-curacao-resort-spa-and-casino",
+  "fun-holiday-beach-resort",
+  "lifestyle-crown-and-residence-suites",
+  "hotel-beach-house-playa-dorada",
+  "be-live-experience-hamaca-suites"
+ ],
+ "noMatch": [
+  {
+   "id": "bahia-principe-explore-legend",
+   "note": "Likely renamed from Bahia Principe Fantasia Punta Cana (h15466753, https://www.expedia.com/Punta-Cana-Hotels-Bahia-Principe-Fantasia-Punta-Cana-All-Inclusive.h15466753.Hotel-Information), but no Expedia result names Explore Legend; verify"
+  },
+  {
+   "id": "o2-beach-club-and-spa",
+   "note": "Ambiguous: three listings found (h126388841 O2 Beach Club and Spa, h53894415 O2 Beach Club & Spa by Ocean Hotels All Inclusive, h90165847 Concierge Collection)"
+  },
+  {
+   "id": "garza-blanca",
+   "note": "Ambiguous: several resort-level listings (h101285166 Garza Blanca Cancun, h104216225, h107442028) plus many condo units"
+  },
+  {
+   "id": "amanyara-beverages-not-included",
+   "note": "No Expedia-family listing found in 2 searches"
+  },
+  {
+   "id": "pueblo-bonito-rose-resort-and-spa",
+   "note": "Only individual timeshare-unit listings found, no main resort listing"
+  },
+  {
+   "id": "princess-grand-jamaica",
+   "note": "No Expedia-family listing found"
+  },
+  {
+   "id": "armony-marival-resort-and-spa-punta-de-mita-mgallery-collection",
+   "note": "Two searches found only Hotels.com (ho IDs) and tour operator pages, no Expedia-family Hotel-Information URL."
+  },
+  {
+   "id": "luxury-collection-at-sea-breeze-beach-house-by-ocean-hotels",
+   "note": "Two searches found only an Expedia affiliate short link and BA/tour operator pages; no Hotel-Information URL."
+  },
+  {
+   "id": "catalonia-bavaro-beach-golf-and-casino-resort",
+   "note": "No result named this resort. Possibly renamed Catalonia Punta Cana (h546878) but not confirmed by results; Catalonia Royal Bavaro (h1759390) is a different adults-only property."
+  }
+ ]
+}
