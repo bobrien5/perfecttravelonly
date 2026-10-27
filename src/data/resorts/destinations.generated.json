@@ -45,13 +45,6 @@
   "slug": "barbados",
   "name": "Barbados",
   "country": "Barbados",
-  "count": 24,
-  "researched": 0
- },
- {
-  "slug": "puerto-plata",
-  "name": "Puerto Plata",
-  "country": "Dominican Republic",
   "count": 23,
   "researched": 0
  },
@@ -60,6 +53,13 @@
   "name": "Montego Bay",
   "country": "Jamaica",
   "count": 21,
+  "researched": 0
+ },
+ {
+  "slug": "puerto-plata",
+  "name": "Puerto Plata",
+  "country": "Dominican Republic",
+  "count": 20,
   "researched": 0
  },
  {
@@ -91,13 +91,6 @@
   "researched": 0
  },
  {
-  "slug": "aruba",
-  "name": "Aruba",
-  "country": "Aruba",
-  "count": 12,
-  "researched": 3
- },
- {
   "slug": "ixtapa",
   "name": "Ixtapa and Zihuatanejo",
   "country": "Mexico",
@@ -117,6 +110,13 @@
   "country": "Jamaica",
   "count": 10,
   "researched": 0
+ },
+ {
+  "slug": "aruba",
+  "name": "Aruba",
+  "country": "Aruba",
+  "count": 10,
+  "researched": 3
  },
  {
   "slug": "curacao",
@@ -168,16 +168,16 @@
   "researched": 0
  },
  {
-  "slug": "st-maarten",
-  "name": "St. Martin and Sint Maarten",
-  "country": "St. Martin",
-  "count": 4,
-  "researched": 0
- },
- {
   "slug": "manzanillo",
   "name": "Manzanillo",
   "country": "Mexico",
+  "count": 3,
+  "researched": 0
+ },
+ {
+  "slug": "st-maarten",
+  "name": "St. Martin and Sint Maarten",
+  "country": "St. Martin",
   "count": 3,
   "researched": 0
  },

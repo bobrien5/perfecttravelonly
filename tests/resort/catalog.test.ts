@@ -14,6 +14,15 @@ describe('generated catalog', () => {
     expect(ACTIVE_RESORTS.length).toBeGreaterThan(500);
   });
 
+  it('lists each resort once and never shares an Expedia id between resorts', () => {
+    const key = (n: string) => n.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '');
+    const names = ACTIVE_RESORTS.map((r) => `${r.country}|${key(r.name)}`);
+    expect(names.length - new Set(names).size).toBe(0);
+    const eids = ACTIVE_RESORTS.map((r) => r.expediaId).filter(Boolean);
+    expect(eids.length - new Set(eids).size).toBe(0);
+    expect(eids.every((e) => /^\d+$/.test(e!))).toBe(true);
+  });
+
   it('carries no prices from the community sheet', () => {
     expect(RESORT_CATALOG.every((r) => r.price === null)).toBe(true);
     const raw = readFileSync('data/resort-sheet.json', 'utf8');

@@ -435,12 +435,34 @@ const curated = RESORTS.map((seed) => {
 
 // ─── Community sheet resorts ─────────────────────────────────
 
+// Sheet rows that duplicate a resort already in the catalog under another name.
+const DUPLICATE_SHEET_NAMES = new Set([
+  'Divi Aruba', // half of the researched divi-tamarijn-aruba record
+  'Tamarijn Aruba All Inclusive', // the other half
+  'Oceans At Divi Little Bay', // same resort as "Oceans at Divi Little Bay Beach Resort"
+]);
+
+// The sheet lists some resorts twice under the same name. Keep the row with
+// the most reviews so each resort appears once.
+const normName = (n) => cleanName(n).toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '');
+const bestRow = new Map();
+for (const row of sheet.resorts) {
+  const key = `${row.country}|${normName(row.name)}`;
+  const prev = bestRow.get(key);
+  if (!prev || (row.reviews ?? 0) > (prev.reviews ?? 0)) bestRow.set(key, row);
+}
+let skippedDuplicate = 0;
+
 const ids = new Set(curated.map((r) => r.id));
 let skippedScope = 0;
 let skippedPlace = 0;
 const imported = [];
 for (const row of sheet.resorts) {
   if (usedSheetNames.has(row.name)) continue;
+  if (DUPLICATE_SHEET_NAMES.has(row.name) || bestRow.get(`${row.country}|${normName(row.name)}`) !== row) {
+    skippedDuplicate++;
+    continue;
+  }
   if (!row.country || OUT_OF_SCOPE.has(row.country)) {
     skippedScope++;
     continue;
@@ -522,5 +544,5 @@ writeFileSync('src/data/resorts/destinations.generated.json', JSON.stringify(des
 console.log(
   `Wrote ${all.length} resorts (${all.filter((r) => r.status === 'active').length} active; ${curated.length} researched, ${imported.length} from the sheet; ` +
     `${all.filter((r) => r.status === 'active' && r.expediaId).length} active with exact booking links). ` +
-    `Skipped ${skippedScope} out of scope and ${skippedPlace} without a placeable destination. ${destinations.length} destinations.`,
+    `Skipped ${skippedScope} out of scope, ${skippedPlace} without a placeable destination, ${skippedDuplicate} duplicates. ${destinations.length} destinations.`,
 );
