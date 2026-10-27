@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { getServerUser, createServerSupabase } from '@/lib/supabase/server';
+import { VAULT_ACCEPTING_NEW_MEMBERS } from '@/lib/vault/config';
 
 /**
  * POST /api/stripe/vault-checkout
@@ -15,6 +16,10 @@ import { getServerUser, createServerSupabase } from '@/lib/supabase/server';
  * how memberships end up attached to the wrong account.
  */
 export async function POST(req: NextRequest) {
+  // Sales closed 2026-10-27. Checked first so no Stripe session can be created.
+  if (!VAULT_ACCEPTING_NEW_MEMBERS) {
+    return NextResponse.json({ error: 'The Vacation Vault is no longer accepting new members.' }, { status: 410 });
+  }
   const secret = process.env.STRIPE_SECRET_KEY;
   const prices = {
     month: process.env.STRIPE_VAULT_PRICE_MONTHLY,

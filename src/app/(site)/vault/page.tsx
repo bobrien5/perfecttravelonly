@@ -2,13 +2,15 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getVaultMembership } from '@/lib/vault/membership';
 import JoinVaultButtons from './JoinVaultButtons';
+import { VAULT_ACCEPTING_NEW_MEMBERS } from '@/lib/vault/config';
 import ManageMembershipButton from './ManageMembershipButton';
 
 export const metadata: Metadata = {
   title: { absolute: 'The Vacation Vault | VacationPro' },
   description:
-    'Vacation Vault members see the exact dates we found each deal price on, our notes on why we picked it, and each deal FAQ. $5.99 a month or $59 a year.',
+    'The Vacation Vault is closed to new members. Resort matching, booking links and personal quotes from Brendan are free for everyone.',
   alternates: { canonical: '/vault' },
+  robots: { index: false, follow: true },
 };
 
 // Reads the session cookie, so this page is rendered per request.
@@ -25,7 +27,7 @@ export default async function VaultPage({
 }: {
   searchParams: Promise<{ canceled?: string }>;
 }) {
-  const [{ isMember, user, status, periodEnd, interval }, params] = await Promise.all([
+  const [{ isMember, user, status, periodEnd, interval, stripeCustomerId }, params] = await Promise.all([
     getVaultMembership(),
     searchParams,
   ]);
@@ -60,6 +62,45 @@ export default async function VaultPage({
         <div className="mt-10 border-t border-gray-100 pt-6">
           <ManageMembershipButton />
         </div>
+      </div>
+    );
+  }
+
+  // Sales closed 2026-10-27: non-members see the free alternatives instead of
+  // a join offer. Anyone with a past Stripe customer record can still reach
+  // the billing portal for invoices.
+  if (!VAULT_ACCEPTING_NEW_MEMBERS) {
+    return (
+      <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
+        <p className="text-xs font-bold uppercase tracking-wide text-brand-700">Vacation Vault</p>
+        <h1 className="mt-2 text-3xl font-bold leading-tight text-gray-900 sm:text-4xl">The Vault is closed to new members.</h1>
+        <p className="mt-4 text-lg text-gray-600">
+          Everything that helps you choose and book is now free: personalized resort matches, booking links for every
+          resort and deal, and a personal quote from Brendan.
+        </p>
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <Link
+            href="/quiz?from=vault"
+            className="inline-flex min-h-12 items-center justify-center rounded-xl bg-brand-700 px-6 py-3 font-semibold text-white transition hover:bg-brand-800"
+          >
+            Find My Resort
+          </Link>
+          <Link
+            href="/concierge-planning?from=vault#quote"
+            className="inline-flex min-h-12 items-center justify-center rounded-xl bg-white px-6 py-3 font-semibold text-brand-800 ring-1 ring-brand-200 transition hover:bg-brand-50"
+          >
+            Get a Quote from Brendan
+          </Link>
+          <Link href="/deals" className="inline-flex min-h-12 items-center justify-center px-4 font-semibold text-brand-800 underline">
+            Browse deals
+          </Link>
+        </div>
+        {user && stripeCustomerId && (
+          <div className="mt-10 border-t border-gray-100 pt-6">
+            <p className="mb-3 text-sm text-gray-600">Past member? Manage billing and invoices here.</p>
+            <ManageMembershipButton />
+          </div>
+        )}
       </div>
     );
   }
