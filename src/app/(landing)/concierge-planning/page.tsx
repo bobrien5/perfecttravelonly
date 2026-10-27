@@ -1,226 +1,88 @@
-import { Metadata } from 'next';
-import ConciergePlanningForm from '@/components/ui/ConciergePlanningForm';
-import { getVaultMembership } from '@/lib/vault/membership';
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import QuoteRequestForm from '@/components/quote/QuoteRequestForm';
 import Stay22Guard from '@/components/monetization/Stay22Guard';
-import {
-  conciergeIsOpenTo,
-  conciergePrice,
-  conciergeRequiresPayment,
-  CONCIERGE_META_DESCRIPTION,
-
-} from '@/lib/concierge';
+import { QUOTE_RESPONSE_COPY } from '@/lib/quote/config';
+import { getResortRecord, normalizeDestination } from '@/lib/resorts/catalog';
 
 export const metadata: Metadata = {
-  title: { absolute: 'Plan My Trip, VacationPro Concierge' },
-  description: CONCIERGE_META_DESCRIPTION,
+  title: { absolute: 'Get a Personal Resort Quote from Brendan | VacationPro' },
+  description:
+    'Tell Brendan, VacationPro’s founder and travel advisor, about your trip. He will personally check rates, room options and available offers, then help you book. Free to request.',
   alternates: { canonical: '/concierge-planning' },
   robots: { index: false, follow: true },
 };
 
-export default async function ConciergePlanningPage() {
-  // Concierge planning is free for Vault members and a paid service for
-  // everyone else (2026-10-14). The page is public and indexable, and the form
-  // is shown to everyone: non-members simply pay the planning fee after intake
-  // rather than being turned away at the door.
-  const { isMember, user } = await getVaultMembership();
-  const { label: priceLabel, note: priceNote } = conciergePrice(isMember);
-  const requiresPayment = conciergeRequiresPayment(isMember);
-  const canSubmit = conciergeIsOpenTo(isMember);
+interface PageProps {
+  searchParams: Promise<{ resort?: string; alts?: string; destination?: string; from?: string }>;
+}
+
+/**
+ * The personal quote experience. Kept at /concierge-planning so existing
+ * links, ads and bio links keep working. Free for everyone: no Vault gate and
+ * no planning fee in this flow (the paid Stripe concierge route still exists
+ * for existing payments but is no longer linked from here).
+ */
+export default async function ConciergePlanningPage({ searchParams }: PageProps) {
+  const p = await searchParams;
+  const resort = p.resort ? getResortRecord(p.resort) : null;
+  const alts = (p.alts ?? '')
+    .split(',')
+    .map((s) => s.trim())
+    .map((id) => (id ? getResortRecord(id) : null))
+    .filter((r) => r !== null && r.status === 'active')
+    .slice(0, 5)
+    .map((r) => ({ id: r!.id, name: r!.name }));
+  const destination = normalizeDestination(p.destination) ?? resort?.destination ?? null;
+  const from = p.from && /^[a-z0-9-]{1,60}$/.test(p.from) ? p.from : null;
+
   return (
-    <main className="min-h-screen bg-cream-50 py-12 px-4 sm:px-6 lg:px-8">
+    <main className="bg-cream-50 px-4 py-10 sm:px-6 sm:py-14">
       <Stay22Guard />
-      <div className="max-w-5xl mx-auto">
+      <div className="mx-auto max-w-2xl">
+        <p className="text-xs font-bold uppercase tracking-widest text-brand-800">Personal quote</p>
+        <h1 className="mt-2 text-3xl font-extrabold leading-tight text-forest sm:text-4xl">
+          {resort && resort.status === 'active' ? `Get a quote for ${resort.name}` : 'Get a quote from Brendan'}
+        </h1>
+        <p className="mt-3 text-lg leading-relaxed text-gray-700">
+          I&apos;ll personally check rates, room options, and available offers for your trip, then help you book.
+        </p>
 
-        {/* Eyebrow */}
-        <div className="text-center mb-6">
-          <span className="inline-block bg-brand-50 text-brand-700 text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full">
-            VacationPro Concierge
-          </span>
-        </div>
-
-        {/* Headline */}
-        <div className="text-center mb-12 max-w-3xl mx-auto">
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-forest mb-4 leading-tight">
-            Let&apos;s plan your next vacation.
-          </h1>
-          <p className="text-lg text-gray-600 leading-relaxed">
-            Plan and book your trip with me. Custom itineraries available.
+        <section className="mt-8 rounded-2xl bg-white p-5 ring-1 ring-gray-100 sm:p-6" aria-labelledby="about-brendan">
+          <h2 id="about-brendan" className="text-lg font-extrabold text-gray-900">Who handles your booking</h2>
+          <p className="mt-2 text-gray-700">
+            I&apos;m Brendan O&apos;Brien, VacationPro&apos;s founder. I book trips myself as an independent travel advisor with Fora,
+            so the person reading your request is the person who prices and books it.
           </p>
-        </div>
-
-        {/* Tier cards */}
-        <div className="grid gap-6 mb-16 max-w-xl mx-auto">
-
-          {/* PAID PATH */}
-          <div className="bg-white rounded-2xl shadow-xl p-8 border-2 border-brand-500 flex flex-col relative">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-              <span className="inline-block bg-brand-500 text-white text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full shadow">
-                Most Popular
-              </span>
-            </div>
-            <div className="mb-4">
-              <span className="inline-block bg-brand-50 text-brand-700 text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full">
-                Custom
-              </span>
-            </div>
-            <h2 className="text-2xl font-extrabold text-forest mb-2">
-              Plan it for me
-            </h2>
-            <div className="flex items-baseline gap-2 mb-4">
-              <span className="text-4xl font-extrabold text-brand-600">{priceLabel}</span>
-              <span className="text-sm text-gray-500">{priceNote}</span>
-            </div>
-            <p className="text-gray-600 mb-6 leading-relaxed">
-              Tell me your dream trip. I find the resort, compare flights, and build a full
-              itinerary with rooms, dining, and excursions.{' '}
-              {requiresPayment
-                ? `The ${priceLabel} planning fee covers the research and your travel advisor's time building the plan. Vacation Vault members pay nothing.`
-                : isMember
-                  ? 'Research and your travel advisor’s time are included with your Vacation Vault membership. No planning fee.'
-                  : 'Research and your travel advisor’s time are included with Vacation Vault membership. There is no separate planning fee.'}
-            </p>
-
-            <div className="mb-6">
-              <p className="text-sm font-bold text-forest mb-3 uppercase tracking-wide">
-                Perfect if:
-              </p>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex items-start gap-2">
-                  <span className="text-brand-600 font-bold mt-0.5">+</span>
-                  <span>Specific destination, dates, or room type in mind</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-brand-600 font-bold mt-0.5">+</span>
-                  <span>Special occasion (honeymoon, anniversary, milestone birthday)</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-brand-600 font-bold mt-0.5">+</span>
-                  <span>Multi-stop or group trip with kids</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="mb-8">
-              <p className="text-sm font-bold text-forest mb-3 uppercase tracking-wide">
-                Includes:
-              </p>
-              <ul className="space-y-2 text-gray-700 text-sm">
-                <li>Resort and flight comparison</li>
-                <li>Full itinerary with dining and activities</li>
-                <li>Direct WhatsApp access for trip questions</li>
-                <li>Research and advisor time included</li>
-              </ul>
-            </div>
-
-            <a
-              href="#plan-my-trip"
-              className="mt-auto block w-full text-center bg-brand-500 hover:bg-brand-600 text-white font-bold py-4 px-6 rounded-xl transition-colors"
-            >
-              {requiresPayment
-                ? `Start Planning (${priceLabel})`
-                : isMember
-                  ? 'Start planning, free'
-                  : 'Join the Vault and start planning'}
-            </a>
-          </div>
-        </div>
-
-        {/* Form section (paid path) */}
-        <div id="plan-my-trip" className="max-w-2xl mx-auto scroll-mt-8">
-          <div className="text-center mb-6">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-forest mb-2">
-              Tell me about your dream trip.
-            </h2>
-            <p className="text-gray-600">
-              The more detail you share, the better the plan I send back within 24 hours.
-            </p>
-          </div>
-
-          <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
-            {canSubmit ? (
-              <>
-                {!isMember && (
-                  <div className="mb-6 rounded-2xl bg-brand-700 p-5 text-white sm:p-6">
-                    <p className="text-xs font-bold uppercase tracking-wide text-white/70">
-                      Before you pay the planning fee
-                    </p>
-                    <h3 className="mt-1 text-xl font-bold">
-                      A year in the Vault costs less than one planning fee.
-                    </h3>
-                    <p className="mt-2 text-white/85">
-                      Membership is $5.99 a month or $59 a year, and it includes concierge
-                      planning at no charge plus every deal in the Vault fully unlocked.
-                    </p>
-                    <a
-                      href="/vault?from=concierge"
-                      className="mt-5 inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 font-semibold text-brand-700 transition hover:bg-brand-50"
-                    >
-                      Join the Vault instead
-                    </a>
-                  </div>
-                )}
-                <ConciergePlanningForm isMember={isMember} />
-              </>
-            ) : (
-              <div className="rounded-2xl bg-brand-700 p-6 text-white sm:p-8">
-                <p className="text-xs font-bold uppercase tracking-wide text-white/70">
-                  Vacation Vault members
-                </p>
-                <h3 className="mt-1 text-2xl font-bold">
-                  A licensed advisor builds your trip, included with membership
-                </h3>
-                <p className="mt-2 text-white/85">
-                  Tell me where and roughly when, and I build real options around your dates
-                  and your budget. Most advisors charge a planning fee for this. Vault members
-                  do not pay one, and you also get every deal in the Vault fully unlocked.
-                  $5.99 a month or $59 a year, cancel any time.
-                </p>
-                <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-                  <a
-                    href="/vault?from=concierge"
-                    className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 font-semibold text-brand-700 transition hover:bg-brand-50"
-                  >
-                    Join the Vault
-                  </a>
-                  {!user && (
-                    <a
-                      href="/auth/signin?next=%2Fconcierge-planning"
-                      className="inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold text-white ring-1 ring-white/40 transition hover:bg-white/10"
-                    >
-                      Already a member? Sign in
-                    </a>
-                  )}
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Trust strip */}
-          <div className="mt-8 grid grid-cols-3 gap-4 text-center">
-            <div>
-              <div className="text-2xl font-extrabold text-brand-600">24h</div>
-              <div className="text-xs text-gray-600 uppercase tracking-wide">Response time</div>
-            </div>
-            <div>
-              <div className="text-2xl font-extrabold text-brand-600">1:1</div>
-              <div className="text-xs text-gray-600 uppercase tracking-wide">Real travel advisor</div>
-            </div>
-            <div>
-              <div className="text-2xl font-extrabold text-brand-600">{priceLabel}</div>
-              <div className="text-xs text-gray-600 uppercase tracking-wide">
-                {requiresPayment ? 'Research + advisor time' : 'Free for members'}
-              </div>
-            </div>
-          </div>
-
-          <p className="text-xs text-gray-500 text-center mt-6">
-            By submitting, you agree to our{' '}
-            <a href="/privacy" className="underline hover:text-gray-700">
-              Privacy Policy
-            </a>
-            . Your info is used only to plan and confirm your trip. We will never sell your details.
+          <ul className="mt-4 space-y-2 text-gray-700">
+            <li className="flex gap-2"><span aria-hidden="true" className="font-bold text-brand-700">✓</span>Personal guidance on the resort and the right room category for your group.</li>
+            <li className="flex gap-2"><span aria-hidden="true" className="font-bold text-brand-700">✓</span>I check the offers and package options that apply to your dates, which can include perks or savings. Whether they do depends on the actual quote.</li>
+            <li className="flex gap-2"><span aria-hidden="true" className="font-bold text-brand-700">✓</span>Help completing the booking once you decide.</li>
+          </ul>
+          <p className="mt-4 text-sm text-gray-600">
+            This is help choosing and booking a resort, not unlimited itinerary planning. Requesting a quote is free, and it does not
+            reserve a room or complete a booking. Rates, availability and extras depend on the actual quote.
           </p>
-        </div>
+        </section>
+
+        <section id="quote" className="mt-8 scroll-mt-6 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 sm:p-8" aria-labelledby="quote-form-title">
+          <h2 id="quote-form-title" className="text-2xl font-extrabold text-gray-900">Tell me about your trip</h2>
+          <p className="mt-1 mb-6 text-gray-600">{QUOTE_RESPONSE_COPY}</p>
+          <QuoteRequestForm
+            initialResort={resort ? { id: resort.id, name: resort.name, destination: resort.destination, status: resort.status, hiddenReason: resort.hiddenReason } : null}
+            initialAlternatives={alts}
+            initialDestination={destination}
+            source={from}
+            responseCopy={QUOTE_RESPONSE_COPY}
+          />
+        </section>
+
+        <p className="mt-8 text-center text-sm text-gray-600">
+          Prefer to book yourself?{' '}
+          <Link href={resort ? `/resorts/${resort.id}` : '/quiz'} className="font-bold text-brand-800 underline">
+            {resort ? 'See booking options for this resort' : 'Find your resort and book online'}
+          </Link>
+        </p>
       </div>
     </main>
   );

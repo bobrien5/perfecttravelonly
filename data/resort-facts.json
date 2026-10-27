@@ -1,0 +1,1364 @@
+[
+  {
+    "slug": "bahia-principe-grand-punta-cana",
+    "officialName": "Bahia Principe Explore Punta Cana (formerly Bahia Principe Grand Punta Cana)",
+    "status": "renamed",
+    "allInclusive": true,
+    "adultsOnly": false,
+    "minAge": null,
+    "hasKidsClub": true,
+    "hasWaterPark": null,
+    "roomCount": 1428,
+    "nearestAirport": "PUJ",
+    "transferMinutes": null,
+    "beachSwimmable": null,
+    "beachNotes": "Beachfront resort with a family beach area; no swimming conditions stated.",
+    "restaurantsCount": 7,
+    "notableInclusions": [
+      "kids club and teens space",
+      "free 24-hour Wi-Fi",
+      "La Isla food court with food trucks"
+    ],
+    "notableExclusions": [
+      "laundry extra",
+      "premium Wi-Fi extra",
+      "medical services extra",
+      "external phone calls extra",
+      "airport transfers sold separately"
+    ],
+    "sources": [
+      {
+        "label": "Bahia Principe official page",
+        "url": "https://www.bahia-principe.com/en/dominican-republic/punta-cana/resort-punta-cana/"
+      },
+      {
+        "label": "Air Canada Vacations listing (room count, kids club 4 to 12)",
+        "url": "https://vacations.aircanada.com/en/accommodation-details/PUJGPC/bahia-principe-grand-punta-cana"
+      }
+    ],
+    "notes": "Renamed Bahia Principe Explore Punta Cana. Official page lists 7 restaurants, 8 bars, 5 pools, and a 'Water Park' in hotel services with no slide details, so hasWaterPark left null. PUJ is 25 km per official page, but no transfer time given. Room count 1,428 is from Air Canada Vacations, not the official site. Guests may also use some restaurants at the neighboring Bahia Principe complex."
+  },
+  {
+    "slug": "barcelo-aruba",
+    "officialName": "Barcelo Aruba (All Inclusive)",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": false,
+    "minAge": null,
+    "hasKidsClub": true,
+    "hasWaterPark": null,
+    "roomCount": 373,
+    "nearestAirport": "AUA",
+    "transferMinutes": {
+      "min": 16,
+      "max": 16
+    },
+    "beachSwimmable": null,
+    "beachNotes": "On Palm Beach with direct beach access, white sand.",
+    "restaurantsCount": null,
+    "notableInclusions": [
+      "kids club ages 4 to 12",
+      "free Wi-Fi",
+      "free parking"
+    ],
+    "notableExclusions": [
+      "spa access extra (18+)",
+      "Royal Level requires Royal Level room booking"
+    ],
+    "sources": [
+      {
+        "label": "Barcelo official hotel page",
+        "url": "https://www.barcelo.com/en-us/barcelo-aruba/"
+      }
+    ],
+    "notes": "Official page gives conflicting restaurant counts (6, 7 specialty, 9 dining venues), so restaurantsCount left null. 3 bars. Airport 6.8 mi, about 16 minutes by car per official directions section. No water park or slides mentioned. Some third-party listings wrongly place it on Eagle Beach; official page says Palm Beach."
+  },
+  {
+    "slug": "divi-tamarijn-aruba",
+    "officialName": "Divi Aruba All Inclusive and Tamarijn Aruba All Inclusive (two adjacent sister resorts)",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": false,
+    "minAge": null,
+    "hasKidsClub": null,
+    "hasWaterPark": null,
+    "roomCount": null,
+    "nearestAirport": "AUA",
+    "transferMinutes": null,
+    "beachSwimmable": null,
+    "beachNotes": "Druif Beach.",
+    "restaurantsCount": 12,
+    "notableInclusions": [
+      "shared access to both Divi Aruba and Tamarijn facilities",
+      "unlimited drinks at 8 bars",
+      "meals and snacks"
+    ],
+    "notableExclusions": [],
+    "sources": [
+      {
+        "label": "Divi and Tamarijn official site (search snippet)",
+        "url": "https://www.diviandtamarijnaruba.com/"
+      },
+      {
+        "label": "Divi and Tamarijn FAQs (search snippet, min check-in age 21)",
+        "url": "https://www.diviandtamarijnaruba.com/faqs.htm"
+      },
+      {
+        "label": "Divi Resorts all-inclusive tiers",
+        "url": "https://www.diviresorts.com/all-inclusive-tiers.htm"
+      },
+      {
+        "label": "Air Canada Vacations, Tamarijn",
+        "url": "https://vacations.aircanada.com/en/accommodation-details/AUATAM/tamarijn-aruba-all-inclusive"
+      }
+    ],
+    "notes": "Slug combines two separate properties; consider splitting. Official site fetch was truncated; facts from official-domain snippets. Official snippet says 12 restaurants and grills and 8 bars across both; other official/older pages say 10 or 11, so count is approximate. Minimum check-in age 21 is for the registering adult, not an adults-only policy. Third-party listings give Tamarijn 236 rooms and Divi 265 rooms; not verified on official site so roomCount null. Divi Resorts also sells MEGA (all four Divi resorts, 18 restaurants) and Signature tiers. Do not confuse with Divi Aruba Phoenix Beach Resort, which is not all-inclusive."
+  },
+  {
+    "slug": "dreams-royal-beach-punta-cana",
+    "officialName": "Dreams Royal Beach Punta Cana",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": false,
+    "minAge": null,
+    "hasKidsClub": true,
+    "hasWaterPark": true,
+    "roomCount": 486,
+    "nearestAirport": "PUJ",
+    "transferMinutes": {
+      "min": 23,
+      "max": 23
+    },
+    "beachSwimmable": null,
+    "beachNotes": "On Bavaro Beach (El Cortecito area).",
+    "restaurantsCount": 14,
+    "notableInclusions": [
+      "water park with seven slides and kids splash park",
+      "Explorer's Club ages 3 to 12",
+      "Core Zone Teens Club ages 13 to 17",
+      "non-motorized water sports",
+      "access to spa and gym at adjacent Secrets Royal Beach"
+    ],
+    "notableExclusions": [
+      "airport transfers not included"
+    ],
+    "sources": [
+      {
+        "label": "Hyatt official page (search snippet)",
+        "url": "https://www.hyatt.com/dreams/en-US/drrpc-dreams-royal-beach"
+      },
+      {
+        "label": "Hyatt Inclusive Collection dining page",
+        "url": "https://www.hyattinclusivecollection.com/en/resorts-hotels/dreams/dominican-republic/royal-beach-punta-cana/dining-drinks/"
+      },
+      {
+        "label": "Hyatt Inclusive Collection meetings page (23 min to PUJ)",
+        "url": "https://www.hyattinclusivecollection.com/en/resorts-hotels/dreams/dominican-republic/royal-beach-punta-cana/events/meetings-incentives/"
+      },
+      {
+        "label": "British Airways hotel listing",
+        "url": "https://www.britishairways.com/en-gb/destinations/hotel-information/Dominican-Republic/Dreams-Royal-Beach/DO-PUJ-2214646"
+      }
+    ],
+    "notes": "Official sites block fetch; facts from official-domain search snippets. Older Dreams page listed 373 rooms and 7 dining options; newer Hyatt pages say 486 rooms and 14 dining venues (plus 12 bars), used here. Kids club hours differ across Hyatt pages."
+  },
+  {
+    "slug": "dreams-sands-cancun",
+    "officialName": "Dreams Sands Cancun Resort & Spa",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": false,
+    "minAge": null,
+    "hasKidsClub": true,
+    "hasWaterPark": null,
+    "roomCount": 414,
+    "nearestAirport": "CUN",
+    "transferMinutes": null,
+    "beachSwimmable": "yes",
+    "beachNotes": "Reviews describe calm, shallow water in the Punta Cancun area where guests can walk far out. Secondary sources only.",
+    "restaurantsCount": 6,
+    "notableInclusions": [
+      "Unlimited Luxury all-inclusive dining and drinks",
+      "no dinner reservations required",
+      "Explorer's Club for kids 3 to 12",
+      "Core Zone teen club"
+    ],
+    "notableExclusions": [
+      "babysitting extra"
+    ],
+    "sources": [
+      {
+        "label": "Hyatt official page (search snippet; fetch blocked 403)",
+        "url": "https://www.hyatt.com/dreams/en-US/dresc-dreams-sands-cancun"
+      },
+      {
+        "label": "Dreams Resorts rooms page (search snippet)",
+        "url": "https://dreamsresorts.com/en_us/resorts/mexico/sands-cancun/accommodations.html"
+      },
+      {
+        "label": "Oyster review (beach conditions)",
+        "url": "https://www.oyster.com/cancun/hotels/dreams-sands-cancun-resort-and-spa/"
+      }
+    ],
+    "notes": "Official Hyatt and Hyatt Inclusive Collection pages return 403; figures (414 rooms, six restaurants, Explorer's Club 3 to 12) come from official-domain search snippets. Some aggregators cite a dozen restaurants and bars combined. No water park found. Airport drive time only from a blog (25 min), so left null; distance roughly 14 to 15 miles per British Airways listing. Beach swimmability is from reviews, not the resort."
+  },
+  {
+    "slug": "dreams-tulum-resort-spa",
+    "officialName": "Dreams Tulum Resort & Spa",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": false,
+    "minAge": null,
+    "hasKidsClub": true,
+    "hasWaterPark": null,
+    "roomCount": 432,
+    "nearestAirport": "TQO",
+    "transferMinutes": null,
+    "beachSwimmable": "mixed",
+    "beachNotes": "Resort markets a long white-sand beach with the reef just offshore; at least one review calls the entry very rocky and hard to swim out.",
+    "restaurantsCount": 9,
+    "notableInclusions": [
+      "Unlimited Luxury dining and drinks",
+      "Explorer's Club for kids 3 to 12",
+      "adults-only section and adults-only Bordeaux restaurant",
+      "Preferred Club upgrade with private lounge"
+    ],
+    "notableExclusions": [
+      "airport shuttle extra",
+      "separate childcare extra"
+    ],
+    "sources": [
+      {
+        "label": "Hyatt Inclusive Collection official page (search snippet; fetch blocked 403)",
+        "url": "https://www.hyattinclusivecollection.com/en/resorts-hotels/dreams/mexico/tulum-resort-spa/"
+      },
+      {
+        "label": "Official dining page (search snippet)",
+        "url": "https://www.hyattinclusivecollection.com/en/resorts-hotels/dreams/mexico/tulum-resort-spa/dining-drinks/"
+      },
+      {
+        "label": "Luxury Link listing (airport and beach)",
+        "url": "https://www.luxurylink.com/5star/all-inclusive-resorts/tulum-mexico/dreams-tulum-resort-and-spa?rooms=0"
+      }
+    ],
+    "notes": "Official pages block fetch; 432 rooms and nine dining experiences (six a la carte, buffet, grill, cafe) from official-domain snippets. Nearest airport is Tulum (TQO), about 30 miles away; Cancun is about 90 minutes per a secondary listing. No stated TQO drive time, so transferMinutes null. Beach rating from mixed secondary sources."
+  },
+  {
+    "slug": "dreams-vista-cancun",
+    "officialName": "Hyatt Vivid Cancun (formerly Dreams Vista Cancun Golf & Spa Resort)",
+    "status": "renamed",
+    "allInclusive": true,
+    "adultsOnly": true,
+    "minAge": 18,
+    "hasKidsClub": null,
+    "hasWaterPark": null,
+    "roomCount": 416,
+    "nearestAirport": "CUN",
+    "transferMinutes": null,
+    "beachSwimmable": null,
+    "beachNotes": "Oceanfront in the gated Puerta del Mar community, overlooking the Caribbean Sea and Puerto Cancun marina; resort also has two surf pools.",
+    "restaurantsCount": 7,
+    "notableInclusions": [
+      "unlimited a la carte dining",
+      "24-hour dining options",
+      "premium domestic and imported spirits",
+      "stocked minibar",
+      "Wi-Fi",
+      "pool and beach waitstaff",
+      "no restaurant reservations required"
+    ],
+    "notableExclusions": [
+      "Vantage Club is a paid upgrade tier"
+    ],
+    "sources": [
+      {
+        "label": "Hospitality Net: Hyatt Vivid Cancun debut announcement",
+        "url": "https://www.hospitalitynet.org/announcement/41014977/hyatt-expands-hyatt-vivid-hotels-resorts-brand-with-the-debut-of-hyatt-vivid-cancun"
+      },
+      {
+        "label": "Hyatt Vivid Cancun official page (fetch blocked, search snippet only)",
+        "url": "https://www.hyatt.com/hyatt-vivid/en-US/drevc-hyatt-vivid-cancun"
+      },
+      {
+        "label": "Travel Market Report: Hyatt Vivid Cancun now open",
+        "url": "https://www.travelmarketreport.com/hotels-resorts/articles/hyatt-vivid-cancun-an-adults-only-all-inclusive-resort-is-now-open"
+      },
+      {
+        "label": "Travelweek: Dreams Vista transforms into adults-only Hyatt Vivid Cancun",
+        "url": "https://www.travelweek.ca/?p=195541"
+      }
+    ],
+    "notes": "Rebranded from family-oriented Dreams Vista to adults-only Hyatt Vivid Cancun on August 14, 2026 (trade press). Min age 18 comes from trade press, not the Hyatt release. Seed AO=false is now wrong. Former kids club, splash park and climbing wall are from pre-rebrand Dreams pages; current status under the adults-only concept not confirmed, so left null. Release says 7 restaurants but names only 6. Hyatt sites block fetch; official facts via search snippets and the press release."
+  },
+  {
+    "slug": "excellence-playa-mujeres",
+    "officialName": "Excellence Playa Mujeres",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": true,
+    "minAge": 18,
+    "hasKidsClub": false,
+    "hasWaterPark": false,
+    "roomCount": null,
+    "nearestAirport": "CUN",
+    "transferMinutes": {
+      "min": 40,
+      "max": 45
+    },
+    "beachSwimmable": null,
+    "beachNotes": "Beachfront in Playa Mujeres, north of Cancun, next to a golf course.",
+    "restaurantsCount": 10,
+    "notableInclusions": [
+      "suites with private Jacuzzi",
+      "Excellence Club upgrade with exclusive dining at Magna"
+    ],
+    "notableExclusions": [
+      "Miile Spa treatments extra"
+    ],
+    "sources": [
+      {
+        "label": "Excellence Resorts official page",
+        "url": "https://www.excellenceresorts.com/cancun/excellence-playa-mujeres/"
+      },
+      {
+        "label": "Excellence Coral Playa Mujeres FAQ (brand 18+ policy, about 40 min to CUN)",
+        "url": "https://www.excellenceresorts.com/cancun/excellence-coral-playa-mujeres/frequently-asked-questions/"
+      },
+      {
+        "label": "Excellence blog (just over 40 min to CUN)",
+        "url": "https://www.excellenceresorts.com/blog/is-it-a-good-idea-to-have-a-map-of-cancun/"
+      }
+    ],
+    "notes": "Official page lists ten restaurants and eleven bars (page may be dated; some third-party listings say 11). 18+ minimum age stated in the sister Excellence Coral FAQ as a brand rule. Suite count not stated officially. No water park mentioned; hasWaterPark false and hasKidsClub false inferred from adults-only. Transfer max of 45 is a rounding of 'just over 40 minutes'."
+  },
+  {
+    "slug": "excellence-punta-cana",
+    "officialName": "Excellence Punta Cana",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": true,
+    "minAge": null,
+    "hasKidsClub": false,
+    "hasWaterPark": null,
+    "roomCount": null,
+    "nearestAirport": "PUJ",
+    "transferMinutes": {
+      "min": 44,
+      "max": 46
+    },
+    "beachSwimmable": null,
+    "beachNotes": "Golden sand beach in Uvero Alto; Excellence Club guests get a private beach area.",
+    "restaurantsCount": null,
+    "notableInclusions": [
+      "premium beverages",
+      "Excellence Club private beach area (Club suites)"
+    ],
+    "notableExclusions": [
+      "spa treatments extra"
+    ],
+    "sources": [
+      {
+        "label": "Excellence Resorts official page",
+        "url": "https://www.excellenceresorts.com/punta-cana/excellence-punta-cana/"
+      },
+      {
+        "label": "Expedia listing (44 min drive to PUJ, 11 restaurants)",
+        "url": "https://www.expedia.com/Punta-Cana-And-Vicinity-Hotels-Excellence-Punta-Cana-Adults-Only-All-Inclusive.h982733.Hotel-Reviews"
+      },
+      {
+        "label": "Air Canada Vacations (Uvero Alto, all suites)",
+        "url": "https://vacations.aircanada.com/fr/accommodation-details/PUJEPC/excellence-punta-cana"
+      }
+    ],
+    "notes": "Official site confirms adults only and all inclusive but states no minimum age, suite count, or restaurant count. Third-party restaurant counts conflict (9 to 11), left null. Transfer 44 min (Expedia) to 46 min (Hotels.com). Spa treatments extra is inferred from spa offers on the official page; confirm. Do not confuse with Excellence El Carmen."
+  },
+  {
+    "slug": "grand-fiesta-americana-coral-beach-cancun",
+    "officialName": "Grand Fiesta Americana Coral Beach Cancun All Inclusive Spa Resort",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": false,
+    "minAge": null,
+    "hasKidsClub": true,
+    "hasWaterPark": null,
+    "roomCount": 602,
+    "nearestAirport": "CUN",
+    "transferMinutes": {
+      "min": 25,
+      "max": 25
+    },
+    "beachSwimmable": null,
+    "beachNotes": null,
+    "restaurantsCount": null,
+    "notableInclusions": [
+      "premium beverages",
+      "Coral KidZ Club",
+      "nightly entertainment",
+      "airport transfer free on direct bookings of 4+ nights per room"
+    ],
+    "notableExclusions": [
+      "Le Basilic surcharge",
+      "The Table surcharge"
+    ],
+    "sources": [
+      {
+        "label": "Grand Fiesta Americana Coral Beach official page (Fiesta Americana Travelty)",
+        "url": "https://www.fiestamericanatravelty.com/en/grand-fiesta-americana/hotels/grand-fiesta-americana-coral-beach-cancun-all-inclusive-spa-resort"
+      },
+      {
+        "label": "Coral KidZ Club / Kids Lounge page",
+        "url": "https://www.fiestamericanatravelty.com/en/grand-fiesta-americana/hotels/grand-fiesta-americana-coral-beach-cancun-all-inclusive-spa-resort/kids-lounge"
+      },
+      {
+        "label": "Posadas property fact sheet (602 suites)",
+        "url": "https://directorio.posadas.com/fshoteles/grand/FACB.pdf"
+      }
+    ],
+    "notes": "Formerly not all-inclusive; the official name now includes 'All Inclusive' and the site describes an all-inclusive plan. Official page says 'over eight restaurants and locations', so count left null. Airport about 25 minutes per official page. Surcharges for Le Basilic and The Table from official-domain search snippets; confirm current policy. Coral KidZ Club is roughly ages 3 to 12."
+  },
+  {
+    "slug": "grand-velas-riviera-maya",
+    "officialName": "Grand Velas Riviera Maya",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": false,
+    "minAge": null,
+    "hasKidsClub": true,
+    "hasWaterPark": false,
+    "roomCount": 539,
+    "nearestAirport": "CUN",
+    "transferMinutes": {
+      "min": 35,
+      "max": 45
+    },
+    "beachSwimmable": null,
+    "beachNotes": "Private beach; snorkeling and diving offered. No official description of swimming conditions.",
+    "restaurantsCount": 8,
+    "notableInclusions": [
+      "24-hour room service",
+      "kids club and teens club",
+      "Michelin-starred Cocina de Autor on site",
+      "non-motorized water sports"
+    ],
+    "notableExclusions": [
+      "airport transportation extra",
+      "Cocina de Autor no-show fee"
+    ],
+    "sources": [
+      {
+        "label": "Grand Velas Riviera Maya official site",
+        "url": "https://rivieramaya.grandvelas.com/"
+      },
+      {
+        "label": "Grand Velas location page (search snippet)",
+        "url": "https://rivieramaya.grandvelas.com/location"
+      },
+      {
+        "label": "Velas Resorts property page",
+        "url": "https://www.velasresorts.com/grand-velas-riviera-maya"
+      },
+      {
+        "label": "Velas Resorts blog (539 suites)",
+        "url": "https://www.velasresorts.com/blog/redefining-fine-dining-grand-velas-riviera-maya"
+      }
+    ],
+    "notes": "Official location page says 38 miles / 35 minutes from CUN; another Velas FAQ says 45 minutes, hence range. Official pages list 8 restaurants (Piaf, Azul, Frida, Bistro, Chaka, Sen Lin, Cocina de Autor, Lucca), though one Velas page lists only 7. Whether Cocina de Autor carries a surcharge for guests was not confirmed; only a no-show fee is stated. No water park; the Water Journey is a spa hydrotherapy circuit, not slides."
+  },
+  {
+    "slug": "hard-rock-hotel-cancun",
+    "officialName": "Hard Rock Hotel Cancun",
+    "status": "closed",
+    "allInclusive": true,
+    "adultsOnly": false,
+    "minAge": null,
+    "hasKidsClub": true,
+    "hasWaterPark": null,
+    "roomCount": null,
+    "nearestAirport": "CUN",
+    "transferMinutes": {
+      "min": 30,
+      "max": 30
+    },
+    "beachSwimmable": null,
+    "beachNotes": null,
+    "restaurantsCount": null,
+    "notableInclusions": [
+      "24-hour in-room service",
+      "gratuities included",
+      "Roxity Kids Club",
+      "unlimited calls to continental US and Canada",
+      "Wi-Fi"
+    ],
+    "notableExclusions": [
+      "spa treatments extra",
+      "airport transportation extra",
+      "laundry extra",
+      "Bali bed rentals extra",
+      "Turn It Up premium dining extra",
+      "motorized water sports extra"
+    ],
+    "sources": [
+      {
+        "label": "Hard Rock Hotel Cancun official FAQ",
+        "url": "https://hotel.hardrock.com/cancun/frequently-asked-questions.aspx"
+      },
+      {
+        "label": "Hospitality Net: Hard Rock Cancun and Vallarta transformation",
+        "url": "https://www.hospitalitynet.org/news/4133773/hard-rock-hotel-cancun-and-hard-rock-hotel-vallarta-announce-an-unprecedented-transformation-and-open-reservations-for-winter-debut"
+      },
+      {
+        "label": "TravelPulse: Hard Rock pauses operations at two Mexican resorts",
+        "url": "https://www.travelpulse.com/news/hotels-and-resorts/reopening-in-december-2-hard-rock-all-inclusive-resorts-close-for-renovations"
+      }
+    ],
+    "notes": "TEMPORARILY CLOSED for a roughly five-month renovation starting around August 3, 2026; reopening reported as December 15 or late December 2026. Not renamed. Pre-renovation facts shown; renovation adds new kids and teen zones and redesigned rooms, so details may change. Restaurant count conflicts (official FAQ: 5 specialty restaurants; Hard Rock article: nine restaurants), left null. Airport about 30 minutes per official FAQ. No water park found."
+  },
+  {
+    "slug": "hilton-aruba-caribbean",
+    "officialName": "Hilton Aruba Caribbean Resort and Casino",
+    "status": "operating",
+    "allInclusive": false,
+    "adultsOnly": false,
+    "minAge": null,
+    "hasKidsClub": null,
+    "hasWaterPark": null,
+    "roomCount": null,
+    "nearestAirport": "AUA",
+    "transferMinutes": {
+      "min": 20,
+      "max": 20
+    },
+    "beachSwimmable": null,
+    "beachNotes": "On Palm Beach; resort describes its stretch as the widest of Palm Beach, with beachside food and drink service.",
+    "restaurantsCount": 6,
+    "notableInclusions": [],
+    "notableExclusions": [
+      "daily resort charge applies"
+    ],
+    "sources": [
+      {
+        "label": "Hilton Aruba official resort page",
+        "url": "https://hiltonaruba.com/resort/"
+      },
+      {
+        "label": "Hilton.com hotel page",
+        "url": "https://www.hilton.com/en/hotels/auahhhh-hilton-aruba-caribbean-resort-and-casino/"
+      },
+      {
+        "label": "Costco Travel listing (room count, airport time)",
+        "url": "https://costcotravel.com/Hotels/Caribbean/Aruba/ArubaHiltonArubaCaribbeanResortCasino"
+      }
+    ],
+    "notes": "No all-inclusive plan found on official pages. Official site says six recently updated restaurants. Room count conflicts (357 vs 358 on Costco listings), left null. Supervised kids activities are mentioned but no named kids club, so hasKidsClub null. 20 minute airport time from Costco Travel."
+  },
+  {
+    "slug": "hotel-xcaret-mexico",
+    "officialName": "Hotel Xcaret Mexico (All-Fun Inclusive)",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": false,
+    "minAge": null,
+    "hasKidsClub": true,
+    "hasWaterPark": null,
+    "roomCount": 900,
+    "nearestAirport": "CUN",
+    "transferMinutes": {
+      "min": 60,
+      "max": 60
+    },
+    "beachSwimmable": null,
+    "beachNotes": null,
+    "restaurantsCount": null,
+    "notableInclusions": [
+      "unlimited access to Grupo Xcaret parks (Xcaret, Xel-Ha, Xplor and others)",
+      "round-trip airport and park transportation",
+      "Xcaret Xailing ferry tickets",
+      "kids clubs plus Xcaret Teens program",
+      "adults-only Casa Fuego section (18+)"
+    ],
+    "notableExclusions": [
+      "Beyond All-Fun Inclusive packages extra",
+      "supervised childcare / babysitting surcharge"
+    ],
+    "sources": [
+      {
+        "label": "Hoteles Xcaret official site",
+        "url": "https://www.hotelxcaret.com/en/"
+      },
+      {
+        "label": "Casa Fuego official page (search snippet)",
+        "url": "https://www.hotelxcaretmexico.com/en/casa-fuego/"
+      },
+      {
+        "label": "Riviera Maya guide (transfer time)",
+        "url": "https://rivieramaya.mx/en/hotel-xcaret-mexico/"
+      }
+    ],
+    "notes": "Family resort with an adults-only section (Casa Fuego, 18+). Official site says 900 suites and 'up to 20 restaurants', so restaurantsCount left null as imprecise. Kids clubs (Lunateca 0 to 4, Xiquit Inn 5 to 9) from official-domain snippets. Teen area has slides but no confirmed on-site water park; park access is included instead. Transfer about one hour from CUN (about 64 km) per a secondary guide; airport transfers included in rate."
+  },
+  {
+    "slug": "hyatt-regency-aruba",
+    "officialName": "Hyatt Regency Aruba Resort Spa and Casino",
+    "status": "operating",
+    "allInclusive": false,
+    "adultsOnly": false,
+    "minAge": null,
+    "hasKidsClub": true,
+    "hasWaterPark": true,
+    "roomCount": 364,
+    "nearestAirport": "AUA",
+    "transferMinutes": null,
+    "beachSwimmable": null,
+    "beachNotes": "On Palm Beach; Piet's Pier Bar over the water.",
+    "restaurantsCount": null,
+    "notableInclusions": [],
+    "notableExclusions": [],
+    "sources": [
+      {
+        "label": "Hyatt official resort activities page (search snippet)",
+        "url": "https://www.hyatt.com/hyatt-regency/en-US/aruba-hyatt-regency-aruba-resort-spa-and-casino/resort-activities"
+      },
+      {
+        "label": "Hyatt official overview (search snippet)",
+        "url": "https://www.hyatt.com/hyatt-regency/en-US/aruba-hyatt-regency-aruba-resort-spa-and-casino"
+      },
+      {
+        "label": "WestJet Vacations (European Plan)",
+        "url": "https://www.westjetvacations.com/en/hotels/aruba/hyatt-regency-aruba-resort-spa--casino"
+      }
+    ],
+    "notes": "hyatt.com blocks fetch (403); facts from official-domain search snippets. Not all-inclusive (European Plan per WestJet; no AI plan found). Hyatt says 9 bars and restaurants combined, so restaurantsCount null. Camp Hyatt Watapana for ages 4 to 12. Activity Pool has Aruba's tallest resort waterslide (counted as hasWaterPark true; it is a slide, not a full water park). Separate adults-only Trankilo Pool."
+  },
+  {
+    "slug": "hyatt-zilara-cancun",
+    "officialName": "Hyatt Zilara Cancun",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": true,
+    "minAge": 18,
+    "hasKidsClub": false,
+    "hasWaterPark": false,
+    "roomCount": 310,
+    "nearestAirport": "CUN",
+    "transferMinutes": null,
+    "beachSwimmable": null,
+    "beachNotes": "Hotel Zone beachfront at Km 11.5, described by Hyatt as the widest stretch of beach in the Zona Hotelera; beach area redesigned in the 2026 renovation.",
+    "restaurantsCount": null,
+    "notableInclusions": [
+      "all-suite resort",
+      "drinks at lounges and swim-up bars",
+      "gratuities included"
+    ],
+    "notableExclusions": [],
+    "sources": [
+      {
+        "label": "Hyatt newsroom: renovated Hyatt Zilara Cancun debuts (May 5, 2026)",
+        "url": "https://newsroom.hyatt.com/2026-may-5-hyattzilaracancun"
+      },
+      {
+        "label": "Hyatt Zilara Cancun official page (fetch blocked, search snippet)",
+        "url": "https://www.hyatt.com/zilara/en-US/cunia-hyatt-zilara-cancun"
+      }
+    ],
+    "notes": "Fully renovated, relaunched May 2026 with 310 suites. Restaurant count conflicts: hyatt.com snippet says six restaurants, the May 2026 release says 12 dining venues (likely includes bars and lounges), so left null. Kids club and water park set false because the resort is adults-only with no such facilities described. Gratuities inclusion is from third-party listings."
+  },
+  {
+    "slug": "hyatt-zilara-cap-cana",
+    "officialName": "Hyatt Zilara Cap Cana",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": true,
+    "minAge": 18,
+    "hasKidsClub": false,
+    "hasWaterPark": null,
+    "roomCount": 375,
+    "nearestAirport": "PUJ",
+    "transferMinutes": {
+      "min": 15,
+      "max": 15
+    },
+    "beachSwimmable": null,
+    "beachNotes": "On Juanillo Beach in Cap Cana.",
+    "restaurantsCount": null,
+    "notableInclusions": [
+      "unlimited dining and drinks",
+      "access to adjacent Hyatt Ziva Cap Cana facilities",
+      "24-hour room service"
+    ],
+    "notableExclusions": [
+      "cabanas extra",
+      "some dining carries an additional charge (e.g. The Blind Butcher)"
+    ],
+    "sources": [
+      {
+        "label": "Hyatt official page (search snippet)",
+        "url": "https://www.hyatt.com/zilara/en-US/pujia-hyatt-zilara-cap-cana"
+      },
+      {
+        "label": "Hyatt FAQs (18+ check-in)",
+        "url": "https://www.hyatt.com/zilara/en-US/pujia-hyatt-zilara-cap-cana/faqs"
+      },
+      {
+        "label": "Hyatt hotel info (7.5 miles, about 15 min to PUJ)",
+        "url": "https://www.hyatt.com/zilara/en-US/pujia-hyatt-zilara-cap-cana/hotel-info"
+      },
+      {
+        "label": "Hyatt dining page",
+        "url": "https://www.hyatt.com/zilara/en-US/pujia-hyatt-zilara-cap-cana/dining"
+      }
+    ],
+    "notes": "hyatt.com blocks fetch (403); facts taken from official-domain search snippets. Hyatt cites 13 restaurants, bars and lounges combined, so restaurant count left null (third-party listings say 6 or 7). Water park with lazy river is at the shared Ziva/Zilara complex per brand page; unclear if accessible to Zilara guests, so null. 24-hour room service is from a third-party listing only. Kids club false inferred from 18+ policy."
+  },
+  {
+    "slug": "hyatt-ziva-cancun",
+    "officialName": "Hyatt Ziva Cancun",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": false,
+    "minAge": null,
+    "hasKidsClub": true,
+    "hasWaterPark": null,
+    "roomCount": 547,
+    "nearestAirport": "CUN",
+    "transferMinutes": {
+      "min": 30,
+      "max": 30
+    },
+    "beachSwimmable": null,
+    "beachNotes": "At Punta Cancun at the tip of the Hotel Zone.",
+    "restaurantsCount": null,
+    "notableInclusions": [
+      "KidZ Club",
+      "teen lounge",
+      "adults-only Turquoize tower (18+) with rooftop infinity pool",
+      "microbrewery"
+    ],
+    "notableExclusions": [],
+    "sources": [
+      {
+        "label": "Hyatt official page (search snippet)",
+        "url": "https://www.hyatt.com/ziva/en-US/canif-hyatt-ziva-cancun"
+      },
+      {
+        "label": "Hyatt FAQs (30 min to CUN, Turquoize 18+)",
+        "url": "https://www.hyatt.com/ziva/en-US/canif-hyatt-ziva-cancun/faqs"
+      },
+      {
+        "label": "Hyatt dining page",
+        "url": "https://www.hyatt.com/en-US/hotel/mexico/hyatt-ziva-cancun/canif/dining"
+      },
+      {
+        "label": "Costco Travel listing",
+        "url": "https://www.costcotravel.com/hotels/mexico/CancunHyattZivaCancun"
+      }
+    ],
+    "notes": "hyatt.com blocks fetch; facts from official-domain snippets. Hyatt cites about 17 restaurants, lounges and bars combined, so restaurant count null. Costco Travel says 'kids club with a water park', but official snippets do not confirm a water park with slides at this property (the large water park belongs to the separate Hyatt Ziva Riviera Cancun, now marketed as Dreams Puerto Morelos), so hasWaterPark null. Do not confuse with Hyatt Ziva Riviera Cancun in Puerto Morelos."
+  },
+  {
+    "slug": "iberostar-selection-paraiso",
+    "officialName": "Iberostar Selection Paraiso Lindo (part of the Iberostar Playa Paraiso complex)",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": false,
+    "minAge": null,
+    "hasKidsClub": null,
+    "hasWaterPark": true,
+    "roomCount": 448,
+    "nearestAirport": "CUN",
+    "transferMinutes": null,
+    "beachSwimmable": null,
+    "beachNotes": null,
+    "restaurantsCount": 7,
+    "notableInclusions": [
+      "aquatic park with wave pool, lazy river and water slides",
+      "access to common areas of sister Paraiso hotels"
+    ],
+    "notableExclusions": [],
+    "sources": [
+      {
+        "label": "Iberostar official Paraiso Lindo page (search snippet; fetch blocked 403)",
+        "url": "https://www.iberostar.com/en/hotels/riviera-maya/iberostar-selection-paraiso-lindo/"
+      },
+      {
+        "label": "Iberostar official Paraiso Maya page (search snippet)",
+        "url": "https://www.iberostar.com/en/hotels/riviera-maya/iberostar-selection-paraiso-maya/"
+      },
+      {
+        "label": "Iberostar Paraiso complex page (search snippet)",
+        "url": "https://www.iberostar.com/en/paraiso-complex/"
+      },
+      {
+        "label": "Air Canada Vacations listing (room count)",
+        "url": "https://dreamofsun.aircanadavacations.com/hotel/iberostar-selection-paraiso-lindo"
+      }
+    ],
+    "notes": "AMBIGUOUS SLUG: there is no single 'Iberostar Selection Paraiso'. Two Selection hotels exist in the Playa Paraiso complex: Paraiso Lindo and Paraiso Maya (Suites). This entry uses Paraiso Lindo; Paraiso Maya is also family-oriented, all-inclusive, with 6 pools, wave pool, lazy river and slides. Room count 448 is from Air Canada Vacations (secondary); 7 all-inclusive restaurants per official snippet (Air Canada says 10 dining options). Complex has shared children's areas, but a named kids club was not verified. Iberostar site blocks fetch."
+  },
+  {
+    "slug": "le-blanc-spa-resort-cancun",
+    "officialName": "Le Blanc Spa Resort Cancun",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": true,
+    "minAge": 18,
+    "hasKidsClub": false,
+    "hasWaterPark": false,
+    "roomCount": 259,
+    "nearestAirport": "CUN",
+    "transferMinutes": {
+      "min": 25,
+      "max": 25
+    },
+    "beachSwimmable": null,
+    "beachNotes": "On a tranquil beach in the Cancun Hotel Zone per the resort.",
+    "restaurantsCount": 6,
+    "notableInclusions": [
+      "butler service",
+      "in-suite whirlpool tub",
+      "shared airport transfers on 4+ night stays (promotion)"
+    ],
+    "notableExclusions": [
+      "spa treatments extra"
+    ],
+    "sources": [
+      {
+        "label": "Le Blanc official Cancun page (search snippet)",
+        "url": "https://www.leblancsparesorts.com/cancun/en"
+      },
+      {
+        "label": "Le Blanc travel deals (6 restaurants, 5 bars)",
+        "url": "https://www.leblancsparesorts.com/travel-deals-le-blanc"
+      },
+      {
+        "label": "Palace Resorts meetings page (259 rooms)",
+        "url": "https://meetings.palaceresorts.com/destinations-resorts/le-blanc-spa-resort-cancun"
+      },
+      {
+        "label": "Costco Travel listing (min age 18)",
+        "url": "https://www.costcotravel.com/Hotels/Mexico/cancun/CancunLeBlancSpa"
+      },
+      {
+        "label": "Le Blanc complimentary transfer offer",
+        "url": "https://cancun.leblancsparesorts.com/offers/complimentary-airport-transfer"
+      }
+    ],
+    "notes": "Official site blocks fetch (403); facts from official-domain search snippets. Minimum guest age 18 is from Costco Travel; official spa page says spa is 18+. Spa treatments extra is inferred from the spa being marketed separately; verify. Transfer promotion terms may change."
+  },
+  {
+    "slug": "live-aqua-beach-resort-cancun",
+    "officialName": "Live Aqua Beach Resort Cancun (Adults Only)",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": true,
+    "minAge": 18,
+    "hasKidsClub": false,
+    "hasWaterPark": false,
+    "roomCount": 371,
+    "nearestAirport": "CUN",
+    "transferMinutes": null,
+    "beachSwimmable": null,
+    "beachNotes": "Hotel Zone Km 12.5; official page cites Blue Flag certification for its beach. No swimming conditions described.",
+    "restaurantsCount": 8,
+    "notableInclusions": [
+      "national and international alcohol",
+      "minibar replenished daily",
+      "Wi-Fi",
+      "butler service on Aqua Club level"
+    ],
+    "notableExclusions": [
+      "airport transfers extra (free on direct bookings of 4+ nights)",
+      "Balinese bed rental extra for non-suite guests",
+      "early check-in extra"
+    ],
+    "sources": [
+      {
+        "label": "Live Aqua Cancun official page (Fiesta Americana Travelty)",
+        "url": "https://www.fiestamericanatravelty.com/en/live-aqua/hotels/live-aqua-cancun"
+      },
+      {
+        "label": "Conference Hotel Group listing (room count)",
+        "url": "https://conferencehotelgroup.com/hotels/6551/Live-Aqua-Beach-Resort-Cancun"
+      }
+    ],
+    "notes": "Restaurant count is the 8 venues named on the official FAQ (Siete, Azur, Varena, Hidden Garden, MB, Sea Corner, Sushi Station, La Taqueria); some secondary sources say 7. Room count 371 is from secondary listings only."
+  },
+  {
+    "slug": "mondrian-cancun",
+    "officialName": "Mondrian Cancun, All-Inclusive (Ennismore / Accor)",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": false,
+    "minAge": null,
+    "hasKidsClub": null,
+    "hasWaterPark": null,
+    "roomCount": 400,
+    "nearestAirport": "CUN",
+    "transferMinutes": {
+      "min": 15,
+      "max": 15
+    },
+    "beachSwimmable": null,
+    "beachNotes": "Sits on Grand Island between Nichupte Lagoon and the sea; beach access is via a beach club (ennea / Bungalow Beach Club at Playa Delfines) with a complimentary shuttle.",
+    "restaurantsCount": 10,
+    "notableInclusions": [
+      "all dining and beverages",
+      "entertainment and programming",
+      "24-hour fitness studio and daily movement classes",
+      "beach club access with complimentary shuttle"
+    ],
+    "notableExclusions": [
+      "Mondrian+ tier (butler, adults-only rooftop pool and bar, enhanced beverages)",
+      "golf club access",
+      "private pool cabanas",
+      "excursions",
+      "romantic dinners and celebrations"
+    ],
+    "sources": [
+      {
+        "label": "Ennismore / Hospitality Net opening announcement",
+        "url": "https://www.hospitalitynet.org/announcement/41015031/mondrians-debut-all-inclusive-experience-opens-in-cancun"
+      },
+      {
+        "label": "Mondrian Cancun official site",
+        "url": "https://mondrianhotels.com/cancun/"
+      },
+      {
+        "label": "Ennismore story",
+        "url": "https://ennismore.com/stories/mondrian-opens-in-cancun/"
+      }
+    ],
+    "notes": "Seed flag AO=true appears wrong: official materials describe only an adults-only rooftop pool (The Observatory) and rooftop bar within the Mondrian+ tier, and say a teens club is planned, implying all ages are welcome. Travelocity and ResortPass label it adults-only; conflict unresolved by an official child policy, so treat with care. Opened August 20 (2026 per one source). Kids and teens clubs are confirmed only for branded-residence owners. 10 restaurants and six bars per the opening release; the official site lists five named venues. Not directly beachfront."
+  },
+  {
+    "slug": "moon-palace-cancun",
+    "officialName": "Moon Palace Cancun",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": false,
+    "minAge": null,
+    "hasKidsClub": null,
+    "hasWaterPark": null,
+    "roomCount": null,
+    "nearestAirport": "CUN",
+    "transferMinutes": null,
+    "beachSwimmable": null,
+    "beachNotes": null,
+    "restaurantsCount": null,
+    "notableInclusions": [
+      "restaurants, bars and room service included"
+    ],
+    "notableExclusions": [
+      "some restaurants require reservations"
+    ],
+    "sources": [
+      {
+        "label": "Moon Palace Cancun destination page (fetch blocked, search snippet)",
+        "url": "https://www.moonpalace.com/destinations-resorts/cancun"
+      },
+      {
+        "label": "Moon Palace help center: services and amenities",
+        "url": "https://www.moonpalace.com/help-center/services-amenities"
+      },
+      {
+        "label": "Palace Resorts packages: Moon Palace Cancun All Inclusive",
+        "url": "https://package.palaceresorts.com/en_us/accommodation/105978/moon-palace-cancun-all-inclusive"
+      }
+    ],
+    "notes": "Separate property from Moon Palace The Grand on the same complex (Carretera Cancun-Chetumal Km 340). moonpalace.com snippet advertises 17 dining options, 13 bars and 7 pools for Moon Palace Cancun but it was unclear whether that counts restaurants only, so left null. The water park is at The Grand; whether Moon Palace Cancun guests can use it was not confirmed. Kids club attribution on official pages was unclear between the two properties. moonpalace.com blocks fetch."
+  },
+  {
+    "slug": "moon-palace-the-grand-cancun",
+    "officialName": "Moon Palace The Grand Cancun",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": false,
+    "minAge": null,
+    "hasKidsClub": true,
+    "hasWaterPark": true,
+    "roomCount": null,
+    "nearestAirport": "CUN",
+    "transferMinutes": null,
+    "beachSwimmable": null,
+    "beachNotes": null,
+    "restaurantsCount": null,
+    "notableInclusions": [
+      "water park with waterslides, lazy river, wave pool and kids splash zone",
+      "24-hour room service",
+      "access to Moon Palace Cancun and Moon Palace Nizuc facilities (conditions apply)"
+    ],
+    "notableExclusions": [
+      "bowling alley extra",
+      "some restaurants require reservations"
+    ],
+    "sources": [
+      {
+        "label": "Moon Palace The Grand official site (fetch blocked, search snippets)",
+        "url": "https://thegrand.moonpalace.com/"
+      },
+      {
+        "label": "Moon Palace The Grand restaurants",
+        "url": "https://thegrand.moonpalace.com/restaurants"
+      },
+      {
+        "label": "Moon Palace blog: water park resort Cancun",
+        "url": "https://www.moonpalace.com/blog/water-park-resort-cancun"
+      },
+      {
+        "label": "Moon Palace help center: services and amenities",
+        "url": "https://www.moonpalace.com/help-center/services-amenities"
+      }
+    ],
+    "notes": "Official site says 'more than 10 restaurants'; Hotels.com lists 12 restaurants and 1,304 rooms but no official room count was found, so both left null. Kids club is The Playroom (ages 4+, under 4 with an adult). Pool counts conflict on official pages (9 vs 19). moonpalace.com blocks fetch."
+  },
+  {
+    "slug": "renaissance-wind-creek-aruba",
+    "officialName": "Renaissance Wind Creek Aruba Resort (Marina Hotel, adults only, plus Ocean Suites)",
+    "status": "renamed",
+    "allInclusive": "optional",
+    "adultsOnly": false,
+    "minAge": null,
+    "hasKidsClub": null,
+    "hasWaterPark": null,
+    "roomCount": 555,
+    "nearestAirport": "AUA",
+    "transferMinutes": null,
+    "beachSwimmable": null,
+    "beachNotes": "No beach at the hotels themselves; guests use Renaissance Island, a private island reached by complimentary water taxi (Flamingo Beach area).",
+    "restaurantsCount": null,
+    "notableInclusions": [
+      "Renaissance Island access via free water taxi",
+      "Inclusive Getaway package: unlimited premium brand drinks, breakfast, lunch, dinner at Renaissance outlets, non-motorized watersports"
+    ],
+    "notableExclusions": [
+      "Renaissance Island cabanas extra",
+      "all-inclusive only via Inclusive Getaway package"
+    ],
+    "sources": [
+      {
+        "label": "Marriott official overview (search snippet)",
+        "url": "https://www.marriott.com/en-us/hotels/auabr-renaissance-wind-creek-aruba-resort/overview/"
+      },
+      {
+        "label": "Marriott Renaissance Inclusive Getaway offer",
+        "url": "https://www.marriott.com/offers/renaissance-inclusive-getaway-OFF-197728/AUABR-auabr-renaissance-wind-creek-aruba-resort"
+      },
+      {
+        "label": "Costco Travel listing",
+        "url": "https://costcotravel.com/Hotels/Caribbean/Aruba/ArubaRenaissanceArubaResort"
+      }
+    ],
+    "notes": "Formerly Renaissance Aruba Resort and Casino; now Renaissance Wind Creek Aruba Resort. marriott.com blocks fetch (403); facts from official-domain snippets. Two towers: Marina Hotel is adults only (18+ per Costco Travel), Ocean Suites welcomes families, so whole resort is not adults only. Room count 555 per Marriott (Costco says 556). Airport roughly 3 mi / 4.8 km per Costco, no stated drive time."
+  },
+  {
+    "slug": "riu-palace-antillas",
+    "officialName": "Hotel Riu Palace Antillas (Adults Only)",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": true,
+    "minAge": 18,
+    "hasKidsClub": false,
+    "hasWaterPark": null,
+    "roomCount": 482,
+    "nearestAirport": "AUA",
+    "transferMinutes": null,
+    "beachSwimmable": null,
+    "beachNotes": "Beachfront on Palm Beach, next to Riu Palace Aruba.",
+    "restaurantsCount": 5,
+    "notableInclusions": [
+      "24-hour all-inclusive",
+      "room service 24h",
+      "swim-up pool bar"
+    ],
+    "notableExclusions": [
+      "spa treatments extra",
+      "Elite Club perks (premium drinks, exclusive pool) require Elite Club room"
+    ],
+    "sources": [
+      {
+        "label": "RIU official hotel page",
+        "url": "https://www.riu.com/en/hotel/aruba/palmbeach/hotel-riu-palace-antillas"
+      },
+      {
+        "label": "RIU official gastronomy page (search snippet)",
+        "url": "https://www.riu.com/en/hotel/aruba/palmbeach/hotel-riu-palace-antillas/gastronomy"
+      },
+      {
+        "label": "Hotel-Online, RIU opening release (482 rooms, adults only)",
+        "url": "https://www.hotel-online.com/news/the-482-room-adults-only-riu-palace-antillas-to-open-in-aruba-in-winter-14"
+      },
+      {
+        "label": "Caribbean Journal (18+)",
+        "url": "https://www.caribjournal.com/?p=44098"
+      }
+    ],
+    "notes": "Official page confirms Adults Only and 24h all-inclusive but states no minimum age; 18+ and 482 rooms come from 2014 opening coverage and RIU press release. Restaurant count 5 from current gastronomy page (Atlantis, Krystal, Rimini, Malmok, Palm Beach); older RIU blog said six. Airport is AUA but no transfer time stated on official page."
+  },
+  {
+    "slug": "riu-palace-las-americas",
+    "officialName": "Hotel Riu Palace Las Americas",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": true,
+    "minAge": 18,
+    "hasKidsClub": false,
+    "hasWaterPark": false,
+    "roomCount": 372,
+    "nearestAirport": "CUN",
+    "transferMinutes": {
+      "min": 30,
+      "max": 45
+    },
+    "beachSwimmable": null,
+    "beachNotes": "Directly on the beach at the tip of Punta Cancun; no swimming conditions stated.",
+    "restaurantsCount": 6,
+    "notableInclusions": [
+      "24-hour all-inclusive",
+      "premium liquors including in-room dispensers",
+      "free Wi-Fi",
+      "introductory scuba lesson in pool",
+      "kayaking and snorkeling gear"
+    ],
+    "notableExclusions": [
+      "massages extra",
+      "beauty salon extra",
+      "romantic beach dinners extra",
+      "some specialty dinners and beverages extra"
+    ],
+    "sources": [
+      {
+        "label": "RIU official hotel page",
+        "url": "https://www.riu.com/en/hotel/mexico/cancun/hotel-riu-palace-las-americas/"
+      },
+      {
+        "label": "Travel Week reopening coverage (372 rooms, 18+)",
+        "url": "https://www.travelweek.ca/news/riu-palace-las-americas-reopens-cancun-fully-renovated-adult-hotel/"
+      }
+    ],
+    "notes": "Official FAQ says 18+. Official page conflicts on restaurants (7 vs 6); six named venues used. Official says over 350 rooms; 372 from reopening coverage. Transfer time 30 to 45 min from official page."
+  },
+  {
+    "slug": "riu-republica",
+    "officialName": "Hotel Riu Republica",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": true,
+    "minAge": 18,
+    "hasKidsClub": false,
+    "hasWaterPark": true,
+    "roomCount": null,
+    "nearestAirport": "PUJ",
+    "transferMinutes": {
+      "min": 30,
+      "max": 40
+    },
+    "beachSwimmable": null,
+    "beachNotes": "Directly on Arena Gorda Beach in Punta Cana, with direct access from the property.",
+    "restaurantsCount": 11,
+    "notableInclusions": [
+      "24-hour all-inclusive",
+      "unlimited local and imported drinks",
+      "Splash Water World water park with slides",
+      "free Wi-Fi",
+      "introductory diving class"
+    ],
+    "notableExclusions": [
+      "diving school extra"
+    ],
+    "sources": [
+      {
+        "label": "RIU official hotel page",
+        "url": "https://www.riu.com/en/hotel/dominican-republic/punta-cana/hotel-riu-republica/"
+      },
+      {
+        "label": "Oyster (18+ policy)",
+        "url": "https://oyster.com/dominican-republic/hotels/hotel-riu-republica"
+      },
+      {
+        "label": "Travel Week opening coverage",
+        "url": "https://www.travelweek.ca/news/adults-riu-republica-opens-drs-arena-gorda-beach/"
+      },
+      {
+        "label": "Caribbean Journal (501-room wing)",
+        "url": "https://www.caribjournal.com/?p=72143"
+      }
+    ],
+    "notes": "Official RIU page says adults only but gives no general minimum age (only 21+ for student/spring-break groups); 18 comes from Oyster. Room count conflicts: 1,007 at opening (Travel Week), plus a 501-room adults-only wing reported by Caribbean Journal (completion not confirmed), and one Expedia snippet says 1,382; left null. Restaurant count (11) and transfer time are from the official FAQ. No kids club mentioned, consistent with adults-only."
+  },
+  {
+    "slug": "secrets-akumal-riviera-maya",
+    "officialName": "Secrets Akumal Riviera Maya",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": true,
+    "minAge": null,
+    "hasKidsClub": false,
+    "hasWaterPark": null,
+    "roomCount": 434,
+    "nearestAirport": "CUN",
+    "transferMinutes": {
+      "min": 60,
+      "max": 70
+    },
+    "beachSwimmable": null,
+    "beachNotes": null,
+    "restaurantsCount": 9,
+    "notableInclusions": [
+      "Unlimited-Luxury dining and drinks at on-site restaurants and bars",
+      "Preferred Club suite options",
+      "swim-out and plunge pool suites available"
+    ],
+    "notableExclusions": [
+      "airport shuttle extra"
+    ],
+    "sources": [
+      {
+        "label": "Secrets Resorts official page (search snippet; fetch blocked 403)",
+        "url": "https://www.secretsresorts.com/en_us/resorts/mexico/akumal-riviera-maya.html"
+      },
+      {
+        "label": "Hyatt official page (search snippet)",
+        "url": "https://www.hyatt.com/secrets/en-US/searm-secrets-akumal-riviera-maya"
+      },
+      {
+        "label": "Hotels.com listing (airport times)",
+        "url": "https://hotels.com/ho509398/secrets-akumal-riviera-maya-adults-only-all-inclusive-akumal-mexico"
+      }
+    ],
+    "notes": "Official pages block fetch; facts from official-domain search snippets. Adults-only confirmed but no minimum age number found on official pages, so minAge null. Nine dining options counted as six a la carte, buffet, cafe, grill. Transfer: official says approximately one hour south of CUN; Hotels.com says about 71 minutes. Tulum airport (TQO) also nearby but drive times conflict (63 vs 119 min). hasKidsClub false inferred from adults-only status."
+  },
+  {
+    "slug": "secrets-cap-cana",
+    "officialName": "Secrets Cap Cana Resort and Spa",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": true,
+    "minAge": 18,
+    "hasKidsClub": false,
+    "hasWaterPark": null,
+    "roomCount": 457,
+    "nearestAirport": "PUJ",
+    "transferMinutes": {
+      "min": 20,
+      "max": 20
+    },
+    "beachSwimmable": null,
+    "beachNotes": "On Juanillo Beach in the gated Cap Cana community.",
+    "restaurantsCount": 10,
+    "notableInclusions": [
+      "Unlimited-Luxury: a la carte dining with no reservations required",
+      "top-shelf spirits",
+      "nightly live entertainment"
+    ],
+    "notableExclusions": [
+      "Preferred Club lounge and beach access require Preferred Club suite"
+    ],
+    "sources": [
+      {
+        "label": "Hyatt Inclusive Collection official page (search snippet)",
+        "url": "https://www.hyattinclusivecollection.com/en/resorts-hotels/secrets/dominican-republic/cap-cana-resort-spa/"
+      },
+      {
+        "label": "Hyatt.com Secrets Cap Cana (search snippet)",
+        "url": "https://www.hyatt.com/en-US/hotel/dominican-republic/secrets-cap-cana/seccc"
+      },
+      {
+        "label": "Costco Travel listing (18+, 20 min from PUJ)",
+        "url": "https://www.costcotravel.com/hotels/caribbean/dominican-republic/PuntaCanaSecretsCapCana"
+      },
+      {
+        "label": "Air Canada Vacations (15 km from PUJ)",
+        "url": "https://vacations.aircanada.com/en/accommodation-details/PUJSCC/secrets-cap-cana-resort-spa"
+      }
+    ],
+    "notes": "Hyatt sites block fetch (403); facts from official-domain snippets. 457 suites and 10 dining options (7 a la carte, buffet, grill, cafe) per Hyatt. 18+ and 20 min transfer from Costco Travel. Official URL slug is cap-cana-resort-spa."
+  },
+  {
+    "slug": "secrets-the-vine-cancun",
+    "officialName": "Secrets The Vine Cancun",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": true,
+    "minAge": 18,
+    "hasKidsClub": false,
+    "hasWaterPark": false,
+    "roomCount": 497,
+    "nearestAirport": "CUN",
+    "transferMinutes": {
+      "min": 20,
+      "max": 20
+    },
+    "beachSwimmable": null,
+    "beachNotes": "Hotel Zone beachfront with views of the Caribbean Sea and Nichupte Lagoon; official copy describes a powder-white beach.",
+    "restaurantsCount": 8,
+    "notableInclusions": [
+      "Unlimited-Luxury dining and drinks",
+      "24-hour room service",
+      "minibar",
+      "daily wine tastings",
+      "snorkeling and water aerobics"
+    ],
+    "notableExclusions": [
+      "airport transfers extra",
+      "Preferred Club is a paid upgrade tier"
+    ],
+    "sources": [
+      {
+        "label": "Secrets The Vine Cancun on Hyatt (fetch blocked, search snippet)",
+        "url": "https://www.hyatt.com/secrets/en-US/sevcu-vine-cancun"
+      },
+      {
+        "label": "Hyatt Inclusive Collection: Secrets The Vine meetings page",
+        "url": "https://www.hyattinclusivecollection.com/en/resorts-hotels/secrets/mexico/vine-cancun/events/meetings-incentives/"
+      },
+      {
+        "label": "Hyatt Inclusive Collection: Secrets The Vine Cancun",
+        "url": "https://www.hyattinclusivecollection.com/en/resorts-hotels/secrets/mexico/vine-cancun"
+      }
+    ],
+    "notes": "Official meetings page says 'within 20 minutes' of CUN, recorded as 20. Restaurant count of 8 is 'eight dining venues' per official snippet, which may include a cafe. Min age 18 from booking listings. Official sites block fetch."
+  },
+  {
+    "slug": "trs-yucatan-hotel",
+    "officialName": "TRS Yucatan Hotel",
+    "status": "operating",
+    "allInclusive": true,
+    "adultsOnly": true,
+    "minAge": 18,
+    "hasKidsClub": false,
+    "hasWaterPark": null,
+    "roomCount": 454,
+    "nearestAirport": "CUN",
+    "transferMinutes": {
+      "min": 90,
+      "max": 90
+    },
+    "beachSwimmable": null,
+    "beachNotes": "Private beach with VIP area and non-motorized water sports; swimming conditions not described.",
+    "restaurantsCount": null,
+    "notableInclusions": [
+      "24-hour butler service",
+      "premium drinks",
+      "minibar restocked",
+      "access to Grand Palladium complex restaurants and bars (35+)",
+      "TRS-only beach club"
+    ],
+    "notableExclusions": [
+      "Zentropia spa treatments",
+      "CHIC Cabaret fee",
+      "airport shuttle extra (except Palladium Rewards members)",
+      "excursions",
+      "diving and some activities"
+    ],
+    "sources": [
+      {
+        "label": "Palladium Hotel Group official page",
+        "url": "https://www.palladiumhotelgroup.com/en/hotels/mexico/rivieramaya/trs-yucatan-hotel"
+      },
+      {
+        "label": "Official fact sheet (Aug 2026)",
+        "url": "https://www.palladiumhotelgroup.com/content/dam/palladium/content-fragments/hoteles/en/trs-yucatan-hotel/trs-yucatan-hotel-ficha-tecnica.pdf"
+      }
+    ],
+    "notes": "Adults-only 18+ per official Palladium pages. Restaurant count conflicts on the official page (3 a la carte plus show-cooking plus beach bar vs 10 in FAQ), so left null. Room service: official page says both 24-hour free and night charges may apply. Part of the Grand Palladium Riviera Maya complex near Akumal."
+  }
+]

@@ -5,6 +5,9 @@ import { getDealBySlug } from '@/sanity/lib/fetch';
 import { heroImageSrc } from '@/sanity/lib/image';
 import { getVaultMembership } from '@/lib/vault/membership';
 import FAQ from '@/components/ui/FAQ';
+import BookingActions from '@/components/booking/BookingActions';
+import { inferDestinationSlug } from '@/lib/resorts/catalog';
+import { quoteHref } from '@/lib/resorts/links';
 
 // Membership is read from the session cookie, so this page renders per
 // request. It was ISR with generateStaticParams before the Vault; that
@@ -50,7 +53,7 @@ export default async function DealDetailPage({
     <article className="mx-auto max-w-4xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
       <nav className="mb-5 text-sm text-gray-500">
         <Link href="/deals" className="hover:text-brand-700">
-          Vacation Vault
+          Deals
         </Link>
         <span className="mx-2">/</span>
         <span>{deal.destination}</span>
@@ -113,20 +116,21 @@ export default async function DealDetailPage({
             <dd className="mt-1 text-sm font-medium text-gray-900">{deal.duration}</dd>
           </div>
         )}
-        {/* The dates we found the price on, and the booking window, are the
-            part of a deal that is actually hard to find. Members only. */}
-        <div>
-          <dt className="text-xs uppercase tracking-wide text-gray-500">Travel dates</dt>
-          <dd className="mt-1 text-sm font-medium text-gray-900">
-            {isMember ? deal.travelDates || 'See booking link' : <Locked />}
-          </dd>
-        </div>
-        <div>
-          <dt className="text-xs uppercase tracking-wide text-gray-500">Booking</dt>
-          <dd className="mt-1 text-sm font-medium text-gray-900">
-            {isMember ? deal.bookingWindow || 'While available' : <Locked />}
-          </dd>
-        </div>
+        {/* Existing Vault members keep seeing the exact dates and booking
+            window (an entitlement we preserve). Everyone else books from the
+            same link below, which shows live dates and availability. */}
+        {isMember && (
+          <>
+            <div>
+              <dt className="text-xs uppercase tracking-wide text-gray-500">Travel dates</dt>
+              <dd className="mt-1 text-sm font-medium text-gray-900">{deal.travelDates || 'See booking link'}</dd>
+            </div>
+            <div>
+              <dt className="text-xs uppercase tracking-wide text-gray-500">Booking</dt>
+              <dd className="mt-1 text-sm font-medium text-gray-900">{deal.bookingWindow || 'While available'}</dd>
+            </div>
+          </>
+        )}
       </dl>
 
       {deal.whatsIncluded && deal.whatsIncluded.length > 0 && (
@@ -154,80 +158,31 @@ export default async function DealDetailPage({
         </section>
       )}
 
-      {isMember ? (
-        <>
-          {deal.editorialNotes && (
-            <section className="mt-8">
-              <h2 className="text-xl font-bold text-gray-900">Why we picked it</h2>
-              <p className="mt-2 leading-relaxed text-gray-700">{deal.editorialNotes}</p>
-            </section>
-          )}
-
-          {deal.faq && deal.faq.length > 0 && (
-            <section className="mt-10">
-              <h2 className="mb-3 text-xl font-bold text-gray-900">Questions</h2>
-              <FAQ items={deal.faq} />
-            </section>
-          )}
-
-          {/* Used as-is, not wrapped in Stay22: these links already carry
-              Awin tracking, and a second affiliate hop risks breaking it. */}
-          {deal.affiliateLink && !expired && (
-            <div className="sticky bottom-4 mt-10">
-              <a
-                href={deal.affiliateLink}
-                target="_blank"
-                rel="nofollow sponsored noopener"
-                className="flex w-full items-center justify-center rounded-xl bg-brand-700 px-6 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-brand-600"
-              >
-                {deal.ctaText || 'Check availability'}
-              </a>
-              <p className="mt-2 text-center text-xs text-gray-500">
-                We may earn a commission if you book through this link, at no extra cost to you.
-              </p>
-            </div>
-          )}
-        </>
-      ) : (
-        <VaultPrompt hasNotes={!!deal.editorialNotes} />
+      {isMember && deal.editorialNotes && (
+        <section className="mt-8">
+          <h2 className="text-xl font-bold text-gray-900">Why we picked it</h2>
+          <p className="mt-2 leading-relaxed text-gray-700">{deal.editorialNotes}</p>
+        </section>
       )}
+
+      {isMember && deal.faq && deal.faq.length > 0 && (
+        <section className="mt-10">
+          <h2 className="mb-3 text-xl font-bold text-gray-900">Questions</h2>
+          <FAQ items={deal.faq} />
+        </section>
+      )}
+
+      {/* Both booking paths, open to everyone. The deal's own link is used
+          as-is (not wrapped in Stay22): it already carries Awin tracking, and
+          a second affiliate hop risks breaking it. */}
+      <section className="mt-10 rounded-2xl bg-white p-5 ring-1 ring-gray-100 sm:p-6" aria-label="Book this deal">
+        {expired && <p className="mb-4 text-sm text-gray-700">This deal has expired, but Brendan can check what is available now.</p>}
+        <BookingActions
+          bookHref={deal.affiliateLink && !expired ? deal.affiliateLink : null}
+          quoteHref={quoteHref({ destination: inferDestinationSlug(`${deal.destinationSlug ?? ''} ${deal.destination ?? ''}`), from: 'deal' })}
+          placement={`deal-${deal.slug}`.slice(0, 60)}
+        />
+      </section>
     </article>
-  );
-}
-
-function Locked() {
-  return (
-    <span className="inline-flex items-center gap-1 text-gray-400">
-      <span aria-hidden>&#128274;</span> Members
-    </span>
-  );
-}
-
-/** The teaser's call to action. Sits where the booking button would be. */
-function VaultPrompt({ hasNotes }: { hasNotes: boolean }) {
-  return (
-    <div className="mt-10 rounded-2xl bg-brand-700 p-6 text-white sm:p-8">
-      <p className="text-xs font-bold uppercase tracking-wide text-white/70">Vacation Vault</p>
-      <h2 className="mt-1 text-2xl font-bold">Unlock this deal</h2>
-      <p className="mt-2 text-white/85">
-        Members get the exact travel dates we found this price on, the booking link
-        {hasNotes ? ', our honest note on why we picked it,' : ','} and concierge planning from a
-        licensed advisor. $5.99 a month or $59 a year, cancel any time.
-      </p>
-      <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-        <Link
-          href="/vault"
-          className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 font-semibold text-brand-700 transition hover:bg-brand-50"
-        >
-          Join the Vault
-        </Link>
-        <Link
-          href={`/auth/signin?next=${encodeURIComponent('/deals')}`}
-          className="inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold text-white ring-1 ring-white/40 transition hover:bg-white/10"
-        >
-          Already a member? Sign in
-        </Link>
-      </div>
-    </div>
   );
 }

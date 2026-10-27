@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { getAllBlogPosts, getAllDestinations } from '@/sanity/lib/fetch';
+import { ACTIVE_RESORTS } from '@/lib/resorts/catalog';
 
 const BASE_URL = 'https://www.vacationpro.co';
 
@@ -8,6 +9,8 @@ const BASE_URL = 'https://www.vacationpro.co';
 const STATIC_ROUTES: { path: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency'] }[] = [
   { path: '/', priority: 1.0, changeFrequency: 'weekly' },
   { path: '/blog', priority: 0.9, changeFrequency: 'daily' },
+  { path: '/quiz', priority: 0.9, changeFrequency: 'monthly' },
+  { path: '/resorts', priority: 0.8, changeFrequency: 'weekly' },
   { path: '/quote', priority: 0.9, changeFrequency: 'monthly' },
   { path: '/concierge-planning', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/about', priority: 0.5, changeFrequency: 'yearly' },
@@ -58,5 +61,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     }));
 
-  return [...staticEntries, ...postEntries, ...destinationEntries];
+  // Researched resorts only; community-sheet pages are noindex for now.
+  const resortEntries: MetadataRoute.Sitemap = ACTIVE_RESORTS.filter(r => r.origin === 'curated').map(r => ({
+    url: `${BASE_URL}/resorts/${r.id}`,
+    lastModified: r.factsCheckedAt ? new Date(r.factsCheckedAt) : now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
+  return [...staticEntries, ...postEntries, ...destinationEntries, ...resortEntries];
 }

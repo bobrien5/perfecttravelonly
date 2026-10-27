@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 const navigation = [
-  { name: 'Vacation Vault', href: '/deals' },
+  { name: 'Find a Resort', href: '/quiz' },
   {
     name: 'Destinations',
     href: '/destinations/cancun',
@@ -22,8 +22,9 @@ const navigation = [
       { name: 'Negril', href: '/destinations/jamaica-negril' },
     ],
   },
-  { name: 'Plan a Trip', href: '/quiz' },
+  { name: 'Resorts', href: '/resorts' },
   { name: 'Guides', href: '/blog' },
+  { name: 'Deals', href: '/deals' },
 ];
 
 export default function Header() {
@@ -39,7 +40,7 @@ export default function Header() {
           <Link href="/" className="flex items-center gap-2 shrink-0">
             <img src="/logo.svg" alt="VacationPro" className="w-9 h-9" />
             <span className="text-xl font-bold text-gray-900">
-              Vacation<span className="text-brand-600">Pro</span>
+              Vacation<span className="text-brand-700">Pro</span>
             </span>
           </Link>
 
@@ -49,7 +50,7 @@ export default function Header() {
             {navigation.map((item) => (
               <div
                 key={item.name}
-                className="relative"
+                className="group relative"
                 onMouseEnter={() => setActiveDropdown(item.name)}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
@@ -64,8 +65,8 @@ export default function Header() {
                     </svg>
                   )}
                 </Link>
-                {item.children && activeDropdown === item.name && (
-                  <div className="absolute top-full left-0 mt-0 w-56 bg-white rounded-lg shadow-lg border border-gray-100 py-2 z-50">
+                {item.children && (
+                  <div className={`absolute top-full left-0 mt-0 w-56 bg-white rounded-lg shadow-lg border border-gray-100 py-2 z-50 group-focus-within:block ${activeDropdown === item.name ? 'block' : 'hidden'}`}>
                     {item.children.map((child) => (
                       <Link
                         key={child.name}
@@ -84,15 +85,16 @@ export default function Header() {
           {/* CTA + Mobile Toggle, pushed to the right edge */}
           <div className="flex items-center gap-3 ml-auto shrink-0">
             <Link
-              href="/trips"
-              className="hidden sm:inline-flex items-center px-5 py-2.5 bg-brand-600 text-white text-[0.9375rem] font-semibold rounded-lg hover:bg-brand-700 transition-colors"
+              href="/concierge-planning?from=header#quote"
+              className="hidden sm:inline-flex items-center px-5 py-2.5 bg-brand-700 text-white text-[0.9375rem] font-semibold rounded-lg hover:bg-brand-800 transition-colors"
             >
-              My Trips
+              Get a Quote
             </Link>
             <button
               className="lg:hidden p-2 text-gray-600 hover:text-gray-900"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
             >
               {mobileOpen ? (
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -135,10 +137,17 @@ export default function Header() {
                 )}
               </div>
             ))}
-            <div className="pt-3 px-3">
+            <div className="pt-3 px-3 space-y-2">
+              <Link
+                href="/concierge-planning?from=header#quote"
+                className="block w-full text-center px-4 py-3 bg-brand-700 text-white font-semibold rounded-lg hover:bg-brand-800 transition-colors"
+                onClick={() => setMobileOpen(false)}
+              >
+                Get a Quote from Brendan
+              </Link>
               <Link
                 href="/trips"
-                className="block w-full text-center px-4 py-2 bg-brand-600 text-white font-medium rounded-lg hover:bg-brand-700 transition-colors"
+                className="block w-full text-center px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900"
                 onClick={() => setMobileOpen(false)}
               >
                 My Trips

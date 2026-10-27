@@ -6,7 +6,6 @@ import { track } from '@vercel/analytics';
 
 import type { RankedResort } from '@vacationpro/engine';
 
-import { stay22Url } from '@/lib/monetization/stay22';
 import { heroImageSrc } from '@/sanity/lib/image';
 
 interface ResortPickerProps {
@@ -14,9 +13,11 @@ interface ResortPickerProps {
   destination: string;
   ranked: RankedResort[];
   initialResortSlug: string | null;
+  /** Booking links built on the server (exact resort pages where verified). */
+  bookHrefs: Record<string, string>;
 }
 
-export default function ResortPicker({ tripId, destination, ranked, initialResortSlug }: ResortPickerProps) {
+export default function ResortPicker({ tripId, destination, ranked, initialResortSlug, bookHrefs }: ResortPickerProps) {
   const [pickedSlug, setPickedSlug] = useState<string | null>(initialResortSlug);
   const [savingSlug, setSavingSlug] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -107,9 +108,9 @@ export default function ResortPicker({ tripId, destination, ranked, initialResor
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 border-t border-gray-100 pt-4">
                   <a
-                    href={stay22Url(resort.expediaUrl, 'triphub-resort')}
+                    href={bookHrefs[slug]}
                     target="_blank"
-                    rel="noopener sponsored"
+                    rel="sponsored nofollow noopener"
                     onClick={() => track('check_rates_click', { resort: slug })}
                     className="text-center bg-brand-500 hover:bg-brand-600 text-white rounded-xl py-3 font-bold"
                   >

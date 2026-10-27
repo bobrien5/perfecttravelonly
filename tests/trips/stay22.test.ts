@@ -1,29 +1,15 @@
 import { describe, it, expect } from 'vitest';
+import { STAY22_AID, stay22HotelUrl } from '@/lib/monetization/stay22';
 
-import { stay22Url, STAY22_AID } from '@/lib/monetization/stay22';
-
-describe('stay22Url', () => {
-  it('wraps a target url in the allez format and encodes it', () => {
-    const url = stay22Url('https://www.expedia.com/resort?id=123&ref=vp', 'triphub-resort');
-
-    expect(url).toBe(
-      `https://www.stay22.com/allez/roam?aid=${STAY22_AID}&campaign=triphub-resort&link=${encodeURIComponent(
-        'https://www.expedia.com/resort?id=123&ref=vp'
-      )}`
-    );
-  });
-
+describe('stay22HotelUrl (Trip Hub and resort links)', () => {
   it('preserves the same aid used by Stay22Scripts', () => {
-    const url = stay22Url('https://example.com/book', 'triphub-resort');
-    expect(url).toContain(`aid=${STAY22_AID}`);
+    expect(stay22HotelUrl({ name: 'A', address: 'B' }, 'triphub_resort')).toContain(`aid=${STAY22_AID}`);
   });
 
-  it('encodes the campaign parameter too', () => {
-    const url = stay22Url('https://example.com/book', 'trip hub');
-    expect(url).toContain(`campaign=${encodeURIComponent('trip hub')}`);
-  });
-
-  it('rejects an empty target url', () => {
-    expect(() => stay22Url('', 'triphub-resort')).toThrow(Error);
+  it('encodes hotel name and address', () => {
+    const u = new URL(stay22HotelUrl({ name: 'Couples Swept Away', address: 'Negril, Jamaica' }, 'trip hub'));
+    expect(u.searchParams.get('hotelname')).toBe('Couples Swept Away');
+    expect(u.searchParams.get('address')).toBe('Negril, Jamaica');
+    expect(u.searchParams.get('campaign')).toBe('trip_hub');
   });
 });

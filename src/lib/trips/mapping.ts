@@ -1,4 +1,5 @@
-import { QuizAnswers } from '@vacationpro/engine';
+import type { QuizAnswers, TripAnswers } from '@vacationpro/engine';
+import { getResortRecord } from '@/lib/resorts/catalog';
 
 /**
  * Mirrors the trips table columns (sql/trip_hub.sql). Pure mapping, no I/O:
@@ -24,6 +25,19 @@ export interface TripInsert {
  * claimed once it actually has a destination to save).
  */
 export function sessionToTripPayload(
+  answers: QuizAnswers | TripAnswers,
+  topMatch: { slug: string } | null,
+  destinationSlug?: string
+): TripInsert {
+  if (isResortQuizAnswers(answers)) return resortQuizToTripPayload(answers, topMatch);
+  return legacyToTripPayload(answers, topMatch, destinationSlug);
+}
+
+function isResortQuizAnswers(a: QuizAnswers | TripAnswers): a is TripAnswers {
+  return (a as { version?: unknown }).version === 2;
+}
+
+function legacyToTripPayload(
   answers: QuizAnswers,
   topMatch: { slug: string } | null,
   destinationSlug?: string
@@ -47,5 +61,31 @@ export function sessionToTripPayload(
     budget_band: answers.budget?.band ?? null,
     vibes: answers.vibes,
     dealbreakers: answers.dealbreakers,
+  };
+}
+
+/**
+ * Resort quiz (version 2) sessions share the anonymous session id with the
+ * legacy quiz, so a Trip Hub claim can meet one. Its top match is a resort id,
+ * so the trip's destination is that resort's destination (or the chosen one).
+ */
+function resortQuizToTripPayload(a: TripAnswers, topMatch: { slug: string } | null): TripInsert {
+  const fromResort = topMatch ? getResortRecord(topMatch.slug)?.destination : undefined;
+  const chosen = a.destination && a.destination !== 'open' ? a.destination : undefined;
+  const resolvedSlug = chosen ?? fromResort;
+  if (!resolvedSlug) {
+    throw new Error('sessionToTripPayload: resort quiz session has no destination.');
+  }
+  const d = a.dates;
+  const party = a.childAges.length > 0 ? 'family' : a.party;
+  return {
+    destination_slug: resolvedSlug,
+    season: null,
+    date_start: d && d.mode === 'exact' ? d.checkIn : null,
+    date_end: d && d.mode === 'exact' ? d.checkOut : null,
+    party: party ?? null,
+    budget_band: null,
+    vibes: [...a.priorities],
+    dealbreakers: [...a.dealbreakers],
   };
 }

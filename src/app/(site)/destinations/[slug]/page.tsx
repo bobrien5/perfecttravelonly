@@ -102,7 +102,7 @@ export default async function DestinationPage({ params }: Props) {
 
       {/* Book it with me (advisor commission path) */}
       <div className="mt-16">
-        <AdvisorCta destination={destination.name} source="destination" />
+        <AdvisorCta destination={destination.name} destinationSlug={slug} source="destination-page" />
       </div>
 
       {/* Other Destinations */}

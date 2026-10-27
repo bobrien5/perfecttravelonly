@@ -13,11 +13,7 @@ export { COOKIE_NAME };
 export async function verifyPassword(password: string): Promise<boolean> {
   const hash = process.env.ADMIN_PASSWORD_HASH;
   if (!hash) throw new Error('ADMIN_PASSWORD_HASH is not set');
-  console.log('[auth] hash length:', hash.length, 'starts with:', hash.substring(0, 4));
-  console.log('[auth] password length:', password.length);
-  const result = await bcrypt.compare(password, hash);
-  console.log('[auth] compare result:', result);
-  return result;
+  return bcrypt.compare(password, hash);
 }
 
 export async function createToken(): Promise<string> {
@@ -35,4 +31,16 @@ export async function verifyToken(token: string): Promise<boolean> {
   } catch {
     return false;
   }
+}
+
+/**
+ * Server-side admin check for server components, server actions and route
+ * handlers. Middleware already guards /admin and /api/admin; this is the
+ * second lock for code that reads or writes traveler data directly.
+ */
+export async function isAdminSession(): Promise<boolean> {
+  if (process.env.NODE_ENV === 'production' && !process.env.JWT_SECRET) return false;
+  const { cookies } = await import('next/headers');
+  const token = (await cookies()).get(COOKIE_NAME)?.value;
+  return token ? verifyToken(token) : false;
 }

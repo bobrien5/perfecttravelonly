@@ -7,6 +7,20 @@ import { getTrip } from '@/lib/trips/data';
 import { getResortsByDestination } from '@/sanity/lib/fetch';
 
 import ResortPicker from './ResortPicker';
+import { getResortRecord } from '@/lib/resorts/catalog';
+import { resortBookHref } from '@/lib/resorts/links';
+import { stay22HotelUrl } from '@/lib/monetization/stay22';
+
+/**
+ * Exact Stay22 link for a Trip Hub resort. Resorts share slugs with the
+ * catalog, so the verified Expedia id applies; anything else falls back to
+ * Stay22's name and location match.
+ */
+function tripHubBookHref(slug: string, name: string, destination: string): string {
+  const record = getResortRecord(slug);
+  if (record) return resortBookHref(record, 'triphub_resort');
+  return stay22HotelUrl({ name, address: destination }, 'vp_triphub_resort');
+}
 
 export const dynamic = 'force-dynamic';
 
@@ -61,6 +75,7 @@ export default async function ResortPickerPage({ params }: { params: Promise<{ i
           destination={destination}
           ranked={ranked}
           initialResortSlug={trip.resort_slug}
+          bookHrefs={Object.fromEntries(ranked.map((r) => [r.slug, tripHubBookHref(r.slug, r.resort.name, destination)]))}
         />
       </div>
     </div>

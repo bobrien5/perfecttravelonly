@@ -1,11 +1,11 @@
 'use client';
 
 import Script from 'next/script';
+import { STAY22_AID } from '@/lib/monetization/stay22-account';
 
-// The single source of truth for Brendan's Stay22 account id (aid). Also
-// imported by src/lib/monetization/stay22.ts (the allez link helper used on
-// the Trip Hub resort picker) so the id is never duplicated.
-export const LMA_ID = '6a4fa10b1b2dc574185e339d';
+// Stay22 calls the account id the lmaID in this script. Defined once in
+// src/lib/monetization/stay22-account.ts (a plain module, so server code can use it too).
+export const LMA_ID = STAY22_AID;
 
 /**
  * Loads Stay22's letmeallez.js, which activates LMA (auto-monetize accommodation
