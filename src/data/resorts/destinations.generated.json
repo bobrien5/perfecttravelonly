@@ -3,7 +3,7 @@
   "slug": "riviera-maya",
   "name": "Riviera Maya and Tulum",
   "country": "Mexico",
-  "count": 118,
+  "count": 117,
   "researched": 6
  },
  {
@@ -63,17 +63,17 @@
   "researched": 0
  },
  {
-  "slug": "la-romana",
-  "name": "La Romana and Bayahibe",
-  "country": "Dominican Republic",
-  "count": 19,
-  "researched": 0
- },
- {
   "slug": "antigua",
   "name": "Antigua",
   "country": "Antigua and Barbuda",
   "count": 19,
+  "researched": 0
+ },
+ {
+  "slug": "la-romana",
+  "name": "La Romana and Bayahibe",
+  "country": "Dominican Republic",
+  "count": 18,
   "researched": 0
  },
  {
@@ -87,7 +87,7 @@
   "slug": "cozumel",
   "name": "Cozumel",
   "country": "Mexico",
-  "count": 12,
+  "count": 11,
   "researched": 0
  },
  {

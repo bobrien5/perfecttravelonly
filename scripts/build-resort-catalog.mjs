@@ -526,6 +526,20 @@ for (const row of sheet.resorts) {
   });
 }
 
+// Sheet entries that are not separate resorts, or are not open, found during
+// booking-link research (2026-10-27).
+const SHEET_HIDE = {
+  'premium-level-at-barcelo-maya-palace': 'A room category inside Barcelo Maya Palace, not a separate resort.',
+  'royal-level-at-occidental-cozumel': 'A room category inside Occidental Cozumel, not a separate resort.',
+  'tribe-resorts': 'Reported closed from February 2026 to January 2027.',
+};
+for (const r of imported) {
+  if (SHEET_HIDE[r.id]) {
+    r.status = 'hidden';
+    r.hiddenReason = SHEET_HIDE[r.id];
+  }
+}
+
 const all = [...curated, ...imported].map((r) => ({ ...r, expediaId: EXPEDIA_IDS[r.id]?.expediaId ?? null }));
 const bad = all.filter((r) => /[–—]/.test(JSON.stringify(r)));
 if (bad.length) console.warn(`Note: ${bad.length} records contain an en or em dash in source text (sources or names).`);
