@@ -6,6 +6,17 @@ type RedirectRule = Awaited<
   ReturnType<NonNullable<NextConfig["redirects"]>>
 >[number];
 
+// Year-stamped blog slugs that older posts link to but that never existed,
+// mapped to the live post (each target verified 200 on 2026-11-10).
+export const DEAD_BLOG_SLUG_REDIRECTS: [from: string, to: string][] = [
+  ["best-adults-only-all-inclusive-resorts-cancun-2026", "best-adults-only-all-inclusive-resorts"],
+  ["best-all-inclusive-honeymoon-resorts-2026", "best-all-inclusive-honeymoon-resorts"],
+  ["best-couples-all-inclusive-resorts-2026", "best-couples-all-inclusive-resorts"],
+  ["best-all-inclusive-resorts-dominican-republic-2026", "best-all-inclusive-resorts-dominican-republic"],
+  ["best-family-all-inclusive-resorts-2026", "best-family-all-inclusive-resorts"],
+  ["cheapest-all-inclusive-resorts-2026", "cheapest-all-inclusive-resorts"],
+];
+
 const nextConfig: NextConfig = {
   transpilePackages: ["@vacationpro/engine"],
   // Branded short URLs for our paid guide products (now on Beehiiv, Stripe).
@@ -81,6 +92,29 @@ const nextConfig: NextConfig = {
         destination: "/blog",
         permanent: true,
       },
+      // QA 2026-11-09: dead internal links found in live blog posts. There is
+      // no /destinations index page, so the bare path goes to the resort
+      // catalog. Exact match only: every /destinations/<slug> page is untouched.
+      {
+        source: "/destinations",
+        destination: "/resorts",
+        permanent: true,
+      },
+      // Riviera Maya has no destination page; Cancun is the closest live hub.
+      {
+        source: "/destinations/riviera-maya",
+        destination: "/destinations/cancun",
+        permanent: true,
+      },
+      // Old year-stamped slugs that blog bodies still link to. Explicit pairs
+      // rather than a pattern, so only slugs with a confirmed live post move.
+      ...DEAD_BLOG_SLUG_REDIRECTS.map(
+        ([from, to]): RedirectRule => ({
+          source: `/blog/${from}`,
+          destination: `/blog/${to}`,
+          permanent: true,
+        }),
+      ),
     ];
     return rules;
   },

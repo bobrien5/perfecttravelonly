@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: { absolute: 'Find Your All-Inclusive Resort | VacationPro' },
+  title: { absolute: 'All-Inclusive Resort Quiz: Get 3 Matched Picks | VacationPro' },
   description:
-    'Answer a few quick questions about your budget and vacation vibe and get up to three all-inclusive resort picks in Mexico and the Caribbean, with honest tradeoffs. Free, no account needed.',
+    'Take a free quiz on your budget and travel style and get up to three all-inclusive resort picks in Mexico and the Caribbean, with honest tradeoffs.',
   alternates: { canonical: '/quiz' },
 };
 

@@ -6,6 +6,7 @@ import BookingActions from '@/components/booking/BookingActions';
 import ResortVisual from '@/components/booking/ResortVisual';
 import Stay22Guard from '@/components/monetization/Stay22Guard';
 import { ACTIVE_RESORTS, ageLabel, destinationName, getResortRecord, priceRangeLabel, ratingSourceText, transferLabel } from '@/lib/resorts/catalog';
+import { resortDescription, resortTitle } from '@/lib/seo/meta';
 import { hasExactBookingLink, quizHref, quoteHref, resortBookHref } from '@/lib/resorts/links';
 
 // Pre-render researched resorts; the others render on first request and are cached.
@@ -19,8 +20,8 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const r = getResortRecord(id);
   if (!r || r.status !== 'active') return { robots: { index: false } };
   return {
-    title: { absolute: `${r.name}: Who It Suits and Tradeoffs | VacationPro` },
-    description: `${r.name} in ${destinationName(r.destination)}: ${ageLabel(r).toLowerCase()}, strengths, tradeoffs and who should skip it, with sources. Book online or get a quote from Brendan.`,
+    title: { absolute: resortTitle(r.name) },
+    description: resortDescription(r.name, destinationName(r.destination), ageLabel(r).toLowerCase()),
     alternates: { canonical: `/resorts/${r.id}` },
     // Pages built only from the community sheet are useful to visitors but
     // templated; keep them out of search until they get editorial review.

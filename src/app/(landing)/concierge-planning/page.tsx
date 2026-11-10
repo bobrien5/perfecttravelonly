@@ -8,7 +8,7 @@ import { getResortRecord, normalizeDestination } from '@/lib/resorts/catalog';
 export const metadata: Metadata = {
   title: { absolute: 'Get a Personal Resort Quote from Brendan | VacationPro' },
   description:
-    'Tell Brendan, VacationPro’s founder and travel advisor, about your trip. He will personally check rates, room options and available offers, then help you book. Free to request.',
+    'Tell Brendan, VacationPro’s founder and travel advisor, about your trip. He will check rates, rooms and offers, then help you book. Free to request.',
   alternates: { canonical: '/concierge-planning' },
   robots: { index: false, follow: true },
 };

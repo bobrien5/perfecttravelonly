@@ -5,14 +5,13 @@ import { ACTIVE_RESORTS } from '@/lib/resorts/catalog';
 const BASE_URL = 'https://www.vacationpro.co';
 
 // Public, indexable routes. Deliberately excludes /go (affiliate redirects),
-// /studio, /admin, and the concierge thank-you page.
+// /studio, /admin, and the concierge thank-you page. /quote and
+// /concierge-planning are noindex quote forms, so they stay out too.
 const STATIC_ROUTES: { path: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency'] }[] = [
   { path: '/', priority: 1.0, changeFrequency: 'weekly' },
   { path: '/blog', priority: 0.9, changeFrequency: 'daily' },
   { path: '/quiz', priority: 0.9, changeFrequency: 'monthly' },
   { path: '/resorts', priority: 0.8, changeFrequency: 'weekly' },
-  { path: '/quote', priority: 0.9, changeFrequency: 'monthly' },
-  { path: '/concierge-planning', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/about', priority: 0.5, changeFrequency: 'yearly' },
   { path: '/contact', priority: 0.5, changeFrequency: 'yearly' },
   { path: '/newsletter', priority: 0.5, changeFrequency: 'monthly' },

@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { heroImageSrc } from '@/sanity/lib/image';
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { clampText, DESCRIPTION_MAX, TITLE_MAX } from '@/lib/seo/meta';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import FAQ from '@/components/ui/FAQ';
 import NewsletterSignup from '@/components/ui/NewsletterSignup';
@@ -24,19 +25,32 @@ export async function generateStaticParams() {
   return getAllDestinationParams();
 }
 
+// Code-side snippet fixes for destinations whose Sanity SEO fields run past
+// search limits. Everything else still comes from Sanity, clamped as a backstop.
+const DESTINATION_META_OVERRIDES: Record<string, { title?: string; description?: string }> = {
+  'jamaica-montego-bay': {
+    title: 'Montego Bay Vacations 2026: All-Inclusive Resorts and Guide',
+    description:
+      "Plan a Montego Bay vacation: short airport transfers, Jamaica's widest choice of all-inclusive resorts and a lively beach strip, plus when to go.",
+  },
+};
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const destination = await getDestinationBySlug(slug);
   if (!destination) return {};
-  const cleanTitle = destination.seoTitle.replace(/\s*\|\s*VacationPro\s*$/i, '').replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
-  const cleanDesc = destination.metaDescription.replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
+  const override = DESTINATION_META_OVERRIDES[slug];
+  const rawTitle = override?.title ?? destination.seoTitle;
+  const rawDesc = override?.description ?? destination.metaDescription;
+  const cleanTitle = rawTitle.replace(/\s*\|\s*VacationPro\s*$/i, '').replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
+  const cleanDesc = rawDesc.replace(/\s*[—–]\s*/g, ', ').replace(/\s+,/g, ',').trim();
   return {
-    title: { absolute: cleanTitle },
-    description: cleanDesc,
+    title: { absolute: clampText(cleanTitle, TITLE_MAX) },
+    description: clampText(cleanDesc, DESCRIPTION_MAX),
     alternates: { canonical: `/destinations/${slug}` },
     openGraph: {
-      title: cleanTitle,
-      description: cleanDesc,
+      title: clampText(cleanTitle, TITLE_MAX),
+      description: clampText(cleanDesc, DESCRIPTION_MAX),
       // Was `?? ''`, which shipped an empty og:image URL. Same failure as the
       // blog route: fall back to the site default instead.
       images: [{ url: heroImageSrc(destination) || '/og-default.png' }],

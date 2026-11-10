@@ -25,6 +25,7 @@ import {
   DealbreakersStep,
   DestinationStep,
   PrioritiesStep,
+  START_TITLE,
   StartStep,
   TravelersStep,
   VibeStep,
@@ -150,6 +151,11 @@ export default function ResortQuiz({ context, contextResortName = null }: { cont
   if (!hydrated) {
     return (
       <div className="mx-auto max-w-2xl px-4 py-10" aria-busy="true">
+        {/* Server HTML has no step yet; this keeps one H1 for crawlers and
+            screen readers without changing what sighted visitors see. The
+            visible step heading replaces it after hydration, so the page
+            never holds two H1s. */}
+        <h1 className="sr-only">{START_TITLE}</h1>
         <p className="text-gray-600" role="status">Loading your trip…</p>
       </div>
     );

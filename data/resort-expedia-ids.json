@@ -2487,6 +2487,14 @@
   "be-live-experience-hamaca-suites": {
    "expediaId": "3806387",
    "evidence": "https://www.expedia.com/Santo-Domingo-Hotels-Be-Live-Experience-Hamaca-Suites.h3806387.Hotel-Information"
+  },
+  "dreams-vista-cancun": {
+   "expediaId": "23304849",
+   "evidence": "https://www.expedia.com/Cancun-Hotels-Dreams-Vista-Cancun-Golf-Spa-Resort-All-Inclusive.h23304849.Hotel-Information (also travelocity.com h23304849; same 416-room Puerta del Mar listing, rebranded Hyatt Vivid Cancun 2026-08-14). Checked 2026-11-10."
+  },
+  "mondrian-cancun": {
+   "expediaId": "101124286",
+   "evidence": "https://www.travelocity.com/Cancun-Hotels-Mondrian-Cancun.h101124286.Hotel-Information (also wotif.com Mondrian-Cancun.h101124286; listing formerly titled Hyatt Vivid Grand Island). Checked 2026-11-10."
   }
  },
  "pending": [
@@ -2531,14 +2539,6 @@
   {
    "id": "catalonia-bavaro-beach-golf-and-casino-resort",
    "note": "No result named this resort. Possibly renamed Catalonia Punta Cana (h546878) but not confirmed by results; Catalonia Royal Bavaro (h1759390) is a different adults-only property."
-  },
-  {
-   "id": "mondrian-cancun",
-   "note": "Ambiguous: h101124286 slug is Mondrian-Cancun but its expedia.com title reads Hyatt Vivid Grand Island Cancun; h123344920 slug is Hyatt-Vivid-Grand-Island but title reads Mondrian Cancun All Inclusive"
-  },
-  {
-   "id": "dreams-vista-cancun",
-   "note": "Only found Hyatt Vivid Grand Island Cancun (h101124286), a different property; Hyatt Vivid Cancun (ex Dreams Vista) not found"
   },
   {
    "id": "pueblo-bonito-sunset-beach-golf-and-spa-resort",

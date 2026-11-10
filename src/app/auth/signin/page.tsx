@@ -4,6 +4,7 @@ import { SignInForm } from './SignInForm';
 
 export const metadata = {
   title: 'Sign in to the Trip Hub',
+  alternates: { canonical: '/auth/signin' },
   // Private auth page: never belongs in an index.
   robots: { index: false, follow: false },
 };

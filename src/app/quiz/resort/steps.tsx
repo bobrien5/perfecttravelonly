@@ -26,13 +26,16 @@ export interface StepProps {
 
 // ─── Start ───────────────────────────────────────────────────
 
+/** Start step heading; also the server-rendered H1 while saved answers load. */
+export const START_TITLE = 'Find your kind of all-inclusive.';
+
 export function StartStep({ answers, dispatch, errors, headingId, contextResortName }: StepProps & { contextResortName?: string | null }) {
   const knownDest = answers.destination && answers.destination !== 'open' ? destinationName(answers.destination) : null;
   return (
     <div>
       <StepHeading
         id={headingId}
-        title="Find your kind of all-inclusive."
+        title={START_TITLE}
         hint="A few quick questions about your trip, then up to three resort picks with honest tradeoffs. Free, and no account needed."
       />
       {contextResortName && (
